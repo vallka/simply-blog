@@ -1,0 +1,50 @@
+footer {
+    color: white;  
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 2rem 3rem;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  footer img {
+    margin-top: -15px;
+    margin-left: -5px;
+  }
+  
+  footer .fa {
+    margin: 10px 4px 0 0;
+  }
+  
+  footer a, footer a:hover, 
+  h3.footer, h4.footer,
+  hr.footer {
+    color: white !important;
+    text-align: left;
+  }
+  
+  footer h4.footer {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  
+  footer .copy {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  footer .terms {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  footer .about {
+    margin-top: 5px;
+  }
+  
+  hr.solid {
+    border-top: 1px solid #fff;
+    margin: 1rem;
+  }
+  

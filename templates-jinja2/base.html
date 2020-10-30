@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<meta name="description" content="{% block description %}Cleanifiq Meta Description{% endblock description %}">
+<meta name="keywords" content="{% block keywords %}Cleanifiq Meta keywords{% endblock keywords %}">
+
+
+<title>{% block title %}GellifiQue Blog{% endblock title %}</title>
+
+{% block json_ld %}
+{% endblock json_ld %}
+
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+
+{% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/csshake-slow.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+{% endblock %}
+</head>
+
+<body>
+        {% block content_container %}
+        <div class="container" id="content-container">
+            <section>
+                {% include 'messages.html' %}
+            </section>
+
+
+
+            {% block header %} 
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#"><img src="{% static 'images/logo-professional-263.png' %}"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+                </div>
+              </nav>
+
+
+            {% block breadcrumb %}
+            {% endblock breadcrumb %}
+            {% endblock header %} 
+    
+
+            <div class="content">
+                {% block content %}
+                <h1 class="text-center mt-2 mb-0">Some content</h1>
+                {% endblock content %}
+            </div>
+
+
+            {% block footer %}
+            <footer>
+
+                <div class="container-fluid">
+                    <div class="row justify-content-start align-items-start">
+                      <div class="col-12 col-md-4 col-lg-3">
+                          <div class="about"><a href="">About Us</a></div>
+                      </div>
+                      <div class="col-12 col-md-4 col-lg-3">
+                        <h4 class="footer">Customers</h4>
+                        <ul class="list-unstyled">
+                          <li><a href="/">Private Customers</a></li>
+                          <li><a href="">Business Customers</a></li>
+                          <li><a href="">FAQ</a></li>
+                        </ul>
+  
+                      </div>
+                      <div class="col-12 col-md-4 col-lg-3">
+                        <h4 class="footer">Providers</h4>
+                        <ul class="list-unstyled">
+                          <li><a href="">Become a Provider</a></li>
+                          <li><a href="">Providers' FAQ</a></li>
+                          <li><a href="">Providers' Terms of Use</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-12 col-md-4 col-lg-3">
+                        <h4 class="footer">Follow Us</h4>
+                        <a href="https://www.facebook.com/Cleanifiq.The.Cleaning.Marketplace" target="_blank"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <a href="https://www.instagram.com/cleanifiq/ " target="_blank"><i class="fa fa-2x fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/68361677/" target="_blank"><i class="fa fa-2x fa-linkedin-square"></i></a>
+                        <a href="https://twitter.com/cleanifiq" target="_blank"><i class="fa fa-2x fa-twitter-square"></i></a>
+                          </div>
+                    </div>
+                  </div>
+  
+
+
+                <hr class="solid">
+
+                <div class="copy">All Rights Reserved | GellifiQue &copy; 2020</div>
+
+            </footer>
+            {% endblock footer %}
+        </div>
+        {% endblock content_container %}
+    </div>
+</div>
+
+{% block modal %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-btn-dismiss">Close</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-action">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+<!-- Bootstrap JavaScript -->
+<script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" 
+    integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+  <!-- 3rd party JavaScript -->
+
+  <script src="https://kit.fontawesome.com/8abf12b995.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
+
+  <!-- Project JS -->
+  <script src="{% static 'js/base.js' %}"></script>
+
+  {% endblock javascript %}
+
+
+</body>
+</html>
+
+<!-- base.html -->  
+<!-- {{ request.user }} 
+    {{ request.user.user_type }} 
+    {{ user_type }} 
+-->

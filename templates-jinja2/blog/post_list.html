@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Blog Posts{% endblock %}
+
+
+{% block content %}
+{% if post_list %}
+    {% for post in post_list %}
+        <div class="blog_post">
+            <div class="blog_a">
+                <a href="{% url 'blog:post' post.slug %}">{{ post.title }}</a>
+            </div>
+            <div class="blog_body">
+                {{post.formatted_markdown|safe}}
+            </div>
+            <div class="blog_date">
+            Published {{ post.created_dt }}
+            </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <p>There are no posts yet.</p>
+  {% endif %}     
+{% endblock content %}
+
+
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block extrahead %}{{ block.super }}
+<!-- link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" -->
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+
+
+{% endblock %}
+
+
+{% block submit_buttons_bottom %}
+<hr>
+{{ block.super }}
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<!-- script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script -->
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<script>
+var simplemde = new EasyMDE({
+    forceSync: true,
+    promptURLs: true,
+    uploadImage: true,
+    imageUploadEndpoint: "/markdownx/upload/",
+    imageCSRFToken: django.jQuery('input[name=csrfmiddlewaretoken]').val(),
+    toolbar: [
+        "bold",
+        "italic",
+        "heading",
+        "heading-smaller",
+        "heading-bigger",
+        "unordered-list",
+        "ordered-list",
+        "clean-block",
+        "link",
+        "image",
+        "table",
+        "horizontal-rule",
+        "preview",
+        "|",
+        "guide"
+],
+
+});
+</script>
+
+{% endblock %}
