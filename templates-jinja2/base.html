@@ -40,7 +40,7 @@
 
             {% block header %} 
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#"><img src="{% static 'images/logo-professional-263.png' %}"></a>
+                <a class="navbar-brand" href="https://www.gellifique.co.uk/en/"><img src="{% static 'images/logo-professional-263.png' %}"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -48,12 +48,13 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="{% url 'blog:list' %}">Blog Home</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#">About</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    {#
+                      <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
@@ -68,6 +69,7 @@
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                   </form>
+                  #}
                 </div>
               </nav>
 
@@ -90,42 +92,58 @@
                 <div class="container-fluid">
                     <div class="row justify-content-start align-items-start">
                       <div class="col-12 col-md-4 col-lg-3">
-                          <div class="about"><a href="">About Us</a></div>
+                        <h4 class="footer">PRODUCTS</h4>
+                        <ul class="list-unstyled">
+                          <li><a href="#">Prices drop</a></li>
+                          <li><a href="#">New products</a></li>
+                          <li><a href="#">Best sales</a></li>
+                        </ul>
                       </div>
                       <div class="col-12 col-md-4 col-lg-3">
-                        <h4 class="footer">Customers</h4>
+                        <h4 class="footer">OUR COMPANY</h4>
                         <ul class="list-unstyled">
-                          <li><a href="/">Private Customers</a></li>
-                          <li><a href="">Business Customers</a></li>
-                          <li><a href="">FAQ</a></li>
+                          <li><a href="#">Delivery</a></li>
+                          <li><a href="#">Terms and Conditions</a></li>
+                          <li><a href="#">About us</a></li>
+                          <li><a href="#">Secure payment</a></li>
+                          <li><a href="#">Cookies Policy</a></li>
+                          <li><a href="#">Contact us</a></li>
+                          <li><a href="#">Sitemap</a></li>
                         </ul>
   
                       </div>
                       <div class="col-12 col-md-4 col-lg-3">
-                        <h4 class="footer">Providers</h4>
+                        <h4 class="footer">STORE INFORMATION</h4>
                         <ul class="list-unstyled">
-                          <li><a href="">Become a Provider</a></li>
-                          <li><a href="">Providers' FAQ</a></li>
-                          <li><a href="">Providers' Terms of Use</a></li>
+
+                          
+                          <li>GellifiQue Professional</li>
+                          <li>159 Great Junction Street</li>
+                          <li>Edinburgh</li>
+                          <li>EH6 5LG</li>
+                          <li>United Kingdom</li>
+                          <li>Email us: info@gellifique.co.uk</li>
+
                         </ul>
                       </div>
                       <div class="col-12 col-md-4 col-lg-3">
                         <h4 class="footer">Follow Us</h4>
-                        <a href="https://www.facebook.com/Cleanifiq.The.Cleaning.Marketplace" target="_blank"><i class="fa fa-2x fa-facebook-square"></i></a>
-                        <a href="https://www.instagram.com/cleanifiq/ " target="_blank"><i class="fa fa-2x fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/company/68361677/" target="_blank"><i class="fa fa-2x fa-linkedin-square"></i></a>
-                        <a href="https://twitter.com/cleanifiq" target="_blank"><i class="fa fa-2x fa-twitter-square"></i></a>
+                        <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><i class="fa fa-2x fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><i class="fa fa-2x fa-youtube-square"></i></a>
+                        <a href="https://twitter.com/gellifique" target="_blank"><i class="fa fa-2x fa-twitter-square"></i></a>
+                        <a href="https://uk.pinterest.com/gellifique/" target="_blank"><i class="fa fa-2x fa-pinterest-square"></i></a>
                           </div>
                     </div>
                   </div>
   
 
-
-                <hr class="solid">
-
-                <div class="copy">All Rights Reserved | GellifiQue &copy; 2020</div>
+                <div class="copy">© 2020 - GellifiQue® </div>
 
             </footer>
+  
+  
+  
             {% endblock footer %}
         </div>
         {% endblock content_container %}
