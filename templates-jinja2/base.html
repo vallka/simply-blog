@@ -26,6 +26,8 @@
 <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i" rel="stylesheet">
 {% endblock %}
 </head>
 
@@ -47,24 +49,17 @@
               
                 <div class="collapse navbar-collapse" id="navbarColor01">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                       <a class="nav-link" href="{% url 'blog:list' %}">Blog Home</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">About</a>
-                    </li>
-                    {#
                       <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Blog Categories</a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item" href="{% url 'blog:list' %}">News and announcements</a>
                       </div>
                     </li>
                   </ul>
+                  {#}
                   <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -79,7 +74,7 @@
             {% endblock header %} 
     
 
-            <div class="content">
+            <div class="blog_content">
                 {% block content %}
                 <h1 class="text-center mt-2 mb-0">Some content</h1>
                 {% endblock content %}

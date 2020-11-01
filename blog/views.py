@@ -1,3 +1,4 @@
+import re
 from django.utils import timezone
 from django.views import generic
 
@@ -6,25 +7,30 @@ from .models import *
 
 class ListView(generic.ListView):
     model = Post
-
+    
     def get_queryset(self):
         return Post.objects.filter(
             blog_start_dt__lte=timezone.now(),blog=True
         ).order_by('-blog_start_dt')[:5]
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+
+        context['post'] = context['post_list'][0]
+
+        context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
+        return context        
 
 class PostView(generic.DetailView):
     model = Post
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
 
-#class BlogListView(generic.ListView):
-#    model = Page
-#    template_name = 'pages/blog_list.html'
+        context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
+        return context        
 
-#    def get_queryset(self):
-#        return Page.objects.filter(blog_post=True).order_by('-created_dt')[:10]
 
-#class BlogDetailView(generic.DetailView):
-#    model = Page
-#    template_name = 'pages/blog_detail.html'
 

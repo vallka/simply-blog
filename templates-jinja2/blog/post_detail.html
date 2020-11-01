@@ -23,7 +23,7 @@
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
           <a itemprop="item" href="{% url 'blog:post' post.slug %}">
-            <span itemprop="name">{{ post.title }}</span>
+            <span itemprop="name">{{ breadcrumb }}</span>
           </a>
           <meta itemprop="position" content="2">
         </li>
@@ -35,6 +35,14 @@
 
 {% block content %}
 {% if post %}
-    {{post.formatted_markdown|safe}}
+    <div class="blog_post">
+      <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
+      <div class="blog_date">
+        Published {{ post.created_dt }}
+      </div>
+      <div class="blog_body">
+        {{post.formatted_markdown|safe}}
+      </div>
+    </div>
 {% endif %}     
 {% endblock content %}

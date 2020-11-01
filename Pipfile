@@ -18,6 +18,7 @@ jinja2 = "*"
 jinja2-django-tags = "*"
 update = "*"
 pillow = "*" 
+beautifulsoup4 = "*"
 
 [requires]
 python_version = "3.7"

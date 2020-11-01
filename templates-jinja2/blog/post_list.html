@@ -15,8 +15,8 @@
       
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'blog:post' post_list[0].slug %}">
-            <span itemprop="name">{{ post_list[0].title }}</span>
+          <a itemprop="item" href="{% url 'blog:post' post.slug %}">
+            <span itemprop="name">{{ breadcrumb }}</span>
           </a>
           <meta itemprop="position" content="2">
         </li>
@@ -28,19 +28,20 @@
 
 {% block content %}
 {% if post_list %}
-    {% for post in post_list %}
+  {% for post in post_list %}
     <div class="blog_post">
-            <div class="blog_body">
-                {{post.formatted_markdown|safe}}
-            </div>
-            <div class="blog_date">
-            Published {{ post.created_dt }}
-            </div>
+      <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
+      <div class="blog_date">
+        Published {{ post.created_dt }}
+      </div>
+      <div class="blog_body">
+        {{post.formatted_markdown|safe}}
+      </div>
     </div>
-    {% endfor %}
-  {% else %}
-    <p>There are no posts yet.</p>
-  {% endif %}     
+  {% endfor %}
+{% else %}
+  <p>There are no posts yet.</p>
+{% endif %}     
 {% endblock content %}
 
 

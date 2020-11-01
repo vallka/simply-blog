@@ -44,6 +44,15 @@ var simplemde = new EasyMDE({
 ],
 
 });
+
+django.jQuery(function(){
+    django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
+    django.jQuery('#btn-preview').click(function(){
+        window.open('/blog/'+django.jQuery('#id_slug').val())
+    });
+})
+
 </script>
 
 {% endblock %}
+

@@ -1,3 +1,8 @@
+import re
+import requests
+
+from bs4 import BeautifulSoup
+
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -58,5 +63,38 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+
+        self.look_up_gellifique_product()
             
         super().save(*args, **kwargs)
+
+    def look_up_gellifique_product(self):
+        # [](https://www.gellifique.co.uk/en/pro-limited-edition/-periwinkle-hema-free(1342).html)
+
+        print ('look_up_gellifique_product')
+
+        product_re = r"(\[\])\((https:\/\/www.gellifique.co.uk\/.+?\.html)\)"
+        #product_re = r"\((https:\/\/www.gellifique.co.uk\/.+\.html)\)"
+
+        prods = re.findall(product_re,self.text)
+        
+        if prods:
+            print (prods)
+
+            for prod in prods:
+                print (prod[1])
+                prod_html = requests.get(prod[1])
+                if prod_html.status_code == 200:
+                    print ('soup::')
+                    prod_html = prod_html.text
+
+                    soup = BeautifulSoup(prod_html, 'html.parser')
+                    prod_name = soup.find('h1',attrs={'itemprop':'name'})
+                    prod_price = soup.find(attrs={'itemprop':'price'})
+                    prod_img = soup.find('img',attrs={'itemprop':'image'})
+
+                    print (prod_img['src'])
+
+                    self.text = re.sub(product_re,f"![]({prod_img['src']})\n[<h4>{prod_name.text} - {prod_price.text}</h4>]({prod[1]})",self.text)
+
+
