@@ -130,17 +130,19 @@ h1, h2, h3 {
   text-transform: initial;
   letter-spacing: initial;
   font-size: 1rem;
-  background-color: #2baadf;
+  background-color: #d73672;
   color: white;
   display: inline-block;
   padding: 1rem;
   border-radius: 5px;
 }
+
 .blog_post h4 a, .blog_post h5 a, .blog_post h6 a {
   color: white;
 }
 .blog_post h4 a:hover, .blog_post h5:hover a, .blog_post h6:hover a {
-  color: #d73672;
+  background-color: #f766a2;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -207,6 +209,11 @@ dl, ol, ul {
 
 .blog_post p {
 }
+
+.blog_post p a {
+  color: #2fb5d2;
+}
+
 
 .blog_date {
   font-style: italic;
