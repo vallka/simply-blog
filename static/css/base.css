@@ -151,6 +151,13 @@ h1, h2, h3 {
   text-decoration: none;
 }
 
+
+.blog_post ol,.blog_post ul {
+  margin-top: 0;
+  text-align: left;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 .breadcrumb {
   padding: .75rem 1rem;
   margin-bottom: 1rem;

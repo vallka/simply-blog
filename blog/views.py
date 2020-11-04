@@ -19,6 +19,27 @@ class ListView(generic.ListView):
 
         context['post'] = context['post_list'][0]
 
+        n = 0
+        for p in context['post_list']:
+            if n>0:
+                print(p.text)
+
+                pics = re.finditer(r'\!\[\]\(',p.text)
+
+                pos = [pic.start() for pic in pics]
+
+                print (pos[1])
+
+                print(p.text[0:pos[1]])
+
+                p.text = p.text[0:pos[1]]
+
+                p.read_more = True
+
+                #print (pics[1].span())
+
+            n += 1
+
         context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
         return context        
 

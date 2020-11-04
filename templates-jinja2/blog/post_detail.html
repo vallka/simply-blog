@@ -44,5 +44,8 @@
         {{post.formatted_markdown|safe}}
       </div>
     </div>
-{% endif %}     
+    <div class="blog_post">
+      <h4><a href="{% url 'blog:list' %}">Other posts</a></h4>
+    </div>
+    {% endif %}     
 {% endblock content %}

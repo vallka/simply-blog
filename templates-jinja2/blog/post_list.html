@@ -37,6 +37,10 @@
       <div class="blog_body">
         {{post.formatted_markdown|safe}}
       </div>
+      {% if post.read_more %}
+        <h4><a href="{% url 'blog:post' post.slug %}">Read more...</a></h4>
+      {% endif %}
+
     </div>
   {% endfor %}
 {% else %}
