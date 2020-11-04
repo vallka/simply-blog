@@ -137,11 +137,16 @@ h1, h2, h3 {
   border-radius: 5px;
 }
 
+.blog_post h4:hover, .blog_post h5:hover, .blog_post h6:hover {
+  background-color: #f766a2;
+  color: #fff;
+  text-decoration: none;
+}
+
 .blog_post h4 a, .blog_post h5 a, .blog_post h6 a {
   color: white;
 }
-.blog_post h4 a:hover, .blog_post h5:hover a, .blog_post h6:hover a {
-  background-color: #f766a2;
+.blog_post h4 a:hover, .blog_post h5 a:hover, .blog_post h6 a:hover {
   color: #fff;
   text-decoration: none;
 }
