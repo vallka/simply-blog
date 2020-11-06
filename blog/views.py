@@ -57,7 +57,7 @@ class PostView(generic.DetailView):
 
         next = Post.objects.filter(
             blog_start_dt__lte=timezone.now(),blog=True,blog_start_dt__gt=this_dt,
-        ).order_by('-blog_start_dt')[:1]
+        ).order_by('blog_start_dt')[:1]
 
 
         prev = Post.objects.filter(
