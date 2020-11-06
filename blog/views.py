@@ -11,7 +11,7 @@ class ListView(generic.ListView):
     def get_queryset(self):
         return Post.objects.filter(
             blog_start_dt__lte=timezone.now(),blog=True
-        ).order_by('-blog_start_dt')[:5]
+        ).order_by('-blog_start_dt')[:10]
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
