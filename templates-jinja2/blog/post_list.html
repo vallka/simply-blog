@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}GellifiQue Blog - {{post.title}}{% endblock %}
+{% block title %}Blog Posts{% endblock %}
 
 {% block breadcrumb %}
 <nav data-depth="3" class="breadcrumb hidden-sm-down">
@@ -30,9 +30,11 @@
 {% if post_list %}
   {% for post in post_list %}
     <div class="blog_post">
-      <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
-      <div class="blog_date">
-        Published {{ post.blog_start_dt }}
+      <div class="blog_header">
+        <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
+        <div class="blog_date">
+          Published {{ post.blog_start_dt }}
+        </div>
       </div>
       <div class="blog_body">
         {{post.formatted_markdown|safe}}

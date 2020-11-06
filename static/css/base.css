@@ -151,6 +151,11 @@ h1, h2, h3 {
   text-decoration: none;
 }
 
+.blog_post .blog_header {
+  background-color: #fdc5dc;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+}
 
 .blog_post ol,.blog_post ul {
   margin-top: 0;
@@ -230,8 +235,9 @@ dl, ol, ul {
 .blog_date {
   font-style: italic;
   font-size: 0.8rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   margin-top: -1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .footer-container {

@@ -36,16 +36,18 @@
 {% block content %}
 {% if post %}
     <div class="blog_post">
-      <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
-      <div class="blog_date">
-        Published {{ post.blog_start_dt }}
+      <div class="blog_header">
+        <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
+        <div class="blog_date">
+          Published {{ post.blog_start_dt }}
+        </div>
       </div>
       <div class="blog_body">
         {{post.formatted_markdown|safe}}
       </div>
     </div>
     <div class="blog_post">
-      <h4><a href="{% url 'blog:list' %}">Other posts</a></h4>
+      <h4><a href="{% url 'blog:list' %}">Blog Index</a></h4>
     </div>
     {% endif %}     
 {% endblock content %}
