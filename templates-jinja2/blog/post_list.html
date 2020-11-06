@@ -32,7 +32,7 @@
     <div class="blog_post">
       <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
       <div class="blog_date">
-        Published {{ post.created_dt }}
+        Published {{ post.blog_start_dt }}
       </div>
       <div class="blog_body">
         {{post.formatted_markdown|safe}}
