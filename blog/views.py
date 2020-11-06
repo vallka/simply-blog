@@ -49,8 +49,28 @@ class PostView(generic.DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-
         context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
+
+        this_dt = context['post'].blog_start_dt
+
+        print(this_dt)
+
+        next = Post.objects.filter(
+            blog_start_dt__lte=timezone.now(),blog=True,blog_start_dt__gt=this_dt,
+        ).order_by('-blog_start_dt')[:1]
+
+
+        prev = Post.objects.filter(
+            blog_start_dt__lte=timezone.now(),blog=True,blog_start_dt__lt=this_dt,
+        ).order_by('-blog_start_dt')[:1]
+
+        if len(next): 
+            print (next[0].slug)
+            context['next'] = next[0].slug
+        if len(prev): 
+            print (prev[0].slug)
+            context['prev'] = prev[0].slug
+
         return context        
 
 

@@ -47,7 +47,14 @@
       </div>
     </div>
     <div class="blog_post">
+      {% if prev%}
+        <h4><a href="{% url 'blog:post' prev %}"> < </a></h4>
+      {% endif %}     
+
       <h4><a href="{% url 'blog:list' %}">Blog Index</a></h4>
+      {% if next%}
+        <h4><a href="{% url 'blog:post' next %}"> > </a></h4>
+      {% endif %}     
     </div>
     {% endif %}     
 {% endblock content %}
