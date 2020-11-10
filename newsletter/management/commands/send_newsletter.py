@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from django.utils import timezone
+from django.db import connections
 
 from blog.models import *
 from newsletter.models import *
@@ -29,12 +30,37 @@ class Command(BaseCommand):
 
 
         if len(newsletter_post) > 0:
-            print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
+            #print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
+
+            custs = self.get_customers()
+
+            if len(custs):
+                print (custs[0])
+            else:
+                print('no more customers!')
+
+
+
 
 
         logger.error("DONE - %s! - %s",self.help,str(today))
         print("DONE - %s! - %s" % (self.help,str(today)))
 
+
+
+    def get_customers(self):
+        with connections['presta'].cursor() as cursor:
+            sql = """
+                SELECT id_customer,email,firstname,lastname,id_lang FROM `ps17_customer`  
+                where active=1 and newsletter=1
+                ORDER BY `ps17_customer`.`id_customer`  DESC
+                limit 0,10
+            """
+
+            cursor.execute(sql)
+            row = cursor.fetchall()
+
+        return row
 
 
     def add_html(self,text,title,slug):
