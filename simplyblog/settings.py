@@ -163,6 +163,23 @@ MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (610, 1500), 'quality': 80 }
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'tables'
 ]
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'email-smtp.eu-west-1.amazonaws.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'AKIASCSKY2P4MANAGT3A'
+#EMAIL_HOST_PASSWORD = '911kleanifik'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+#EMAIL_TIMEOUT
+#EMAIL_SSL_KEYFILE
+#EMAIL_SSL_CERTFILE
+
+EMAIL_FROM_USER = "info@gellifique.co.uk"
+EMAIL_BCC_TO = None
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

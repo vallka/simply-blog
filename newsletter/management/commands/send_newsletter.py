@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.core.management.base import BaseCommand, CommandError
+from django.core.mail import send_mail,EmailMessage,EmailMultiAlternatives
 from django.conf import settings
 from django.utils import timezone
 from django.db import connections
@@ -30,12 +31,17 @@ class Command(BaseCommand):
 
 
         if len(newsletter_post) > 0:
+            html = self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug)
             #print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
 
             custs = self.get_customers()
 
             if len(custs):
                 print (custs[0])
+                self.send(custs[0],html,newsletter_post[0].title)
+
+
+
             else:
                 print('no more customers!')
 
@@ -45,6 +51,14 @@ class Command(BaseCommand):
 
         logger.error("DONE - %s! - %s",self.help,str(today))
         print("DONE - %s! - %s" % (self.help,str(today)))
+
+    def send(self,cust,html,title):
+        to_email = 'newsletter@vallka.com'
+        email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email], bcc=[settings.EMAIL_BCC_TO] )
+        if html: email.attach_alternative(html, "text/html") 
+        #if attachment_file: email.attach_file(attachment_file)
+        
+        email.send()
 
 
 
