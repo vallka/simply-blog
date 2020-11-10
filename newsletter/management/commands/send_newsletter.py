@@ -190,7 +190,7 @@ footer {
         </style>
     </head>
    <body>
-        <img src="https://www.gellifique.co.uk/newsletter/pixel/" style="display:none">
+        <img src="https://www.gellifique.co.uk/newsletter/pixel/?u=##uuid##" style="display:none">
         <div class="blog_content">
             <div class="header"><img src="https://www.gellifique.co.uk/static/images/newsletter_header.jpg"></div>
             <div class="blog_post">
@@ -200,8 +200,6 @@ footer {
                 </div>
                 <div class="blog_body">
 
-
-    <p><img src="https://www.gellifique.co.uk/static/images/newsletter_header.jpg"</p>
 
     <!-- start text -->
     {text}
