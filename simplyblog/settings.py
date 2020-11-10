@@ -170,7 +170,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'email-smtp.eu-west-1.amazonaws.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'AKIASCSKY2P4MANAGT3A'
-#EMAIL_HOST_PASSWORD = '911kleanifik'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 #EMAIL_TIMEOUT
