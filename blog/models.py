@@ -41,6 +41,13 @@ class Post(models.Model):
     email = models.BooleanField(_("Send as newsletter"),default=False)
     email_send_dt = models.DateTimeField(_("Send Date/Time"), blank=True, null=True)
 
+    class EmailStatus(models.IntegerChoices):
+        NONE = 0
+        SENDING = 1
+        SENT = 2
+
+    email_status = models.IntegerField(default=EmailStatus.NONE,choices=EmailStatus.choices)
+
     category = models.ManyToManyField(Category, )
 
     text = MarkdownxField(_("Text"), blank=True, null=False)
