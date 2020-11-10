@@ -27,7 +27,7 @@ class Command(BaseCommand):
         today = timezone.now() # get a Date object
         logger.info(today)
 
-        newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today,email_status__not=Post.EmailStatus.SENT).order_by('id')
+        newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today,email_status__in=[Post.EmailStatus.NONE,Post.EmailStatus.SENDING]).order_by('id')
 
 
         if len(newsletter_post) > 0:
