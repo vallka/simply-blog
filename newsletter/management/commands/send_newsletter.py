@@ -41,7 +41,7 @@ class Command(BaseCommand):
 
                 shot = NewsShot(blog=newsletter_post[0],customer_id=custs[0][0])
 
-                self.send(custs[0],html,newsletter_post[0].title)
+                self.send(custs[0],html,newsletter_post[0].title,shot.uuid)
 
                 shot.send_dt = timezone.now()
                 shot.save() 
@@ -57,10 +57,11 @@ class Command(BaseCommand):
         logger.error("DONE - %s! - %s",self.help,str(today))
         print("DONE - %s! - %s" % (self.help,str(today)))
 
-    def send(self,cust,html,title):
+    def send(self,cust,html,title,uuid):
         to_email = 'newsletter@vallka.com'
+        html = html.replace("##uuid##",uuid)
         email = EmailMultiAlternatives( title + ':' + cust[1], title, settings.EMAIL_FROM_USER, [to_email], bcc=[settings.EMAIL_BCC_TO] )
-        if html: email.attach_alternative(html, "text/html") 
+        email.attach_alternative(html, "text/html") 
         #if attachment_file: email.attach_file(attachment_file)
         
         email.send()
