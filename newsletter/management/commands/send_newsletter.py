@@ -86,7 +86,7 @@ body {
 }
 
 .blog_content .header {
-    max-width: 610px;
+    max-width: 642px;
     margin: 0 auto;
 }
 
@@ -201,10 +201,13 @@ footer {
                 <div class="blog_body">
 
 
-    <p><img src=""https://www.gellifique.co.uk/static/images/newsletter_header.jpg"</p>
+    <p><img src="https://www.gellifique.co.uk/static/images/newsletter_header.jpg"</p>
 
+    <!-- start text -->
     {text}
-    <p><img src=""https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
+    <!-- end text -->
+
+    <p><img src="https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
 
                 </div>
                 <div class="social">
@@ -218,7 +221,8 @@ footer {
         </div>
 
         <footer>
-            <a href="#">unsubscribe from this list</a> |     <a href="#">update subscription preferences</a>
+            <a href="https://www.gellifique.co.uk/en/identity">unsubscribe from this list</a> |     
+            <a href="https://www.gellifique.co.uk/en/identity">update subscription preferences</a>
         </footer>
     </body>
 </html>
