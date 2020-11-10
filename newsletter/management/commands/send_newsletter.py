@@ -25,7 +25,13 @@ class Command(BaseCommand):
         today = timezone.now() # get a Date object
         logger.info(today)
 
-        newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today)
+        newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today).order_by('-id')
+
+        print(newsletter_post)
+
+        if len(newsletter_post) > 0:
+            print(newsletter_post[0])
+
 
         logger.error("DONE - %s! - %s",self.help,str(today))
         print("DONE - %s! - %s" % (self.help,str(today)))
