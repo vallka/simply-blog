@@ -27,7 +27,7 @@ class Command(BaseCommand):
         today = timezone.now() # get a Date object
         logger.info(today)
 
-        newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today).order_by('-id')
+        newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today,email_status__not=Post.EmailStatus.SENT).order_by('id')
 
 
         if len(newsletter_post) > 0:
@@ -38,8 +38,13 @@ class Command(BaseCommand):
 
             if len(custs):
                 print (custs[0])
+
+                shot = NewsShot(blog=newsletter_post[0],customer_id=custs[0][0])
+
                 self.send(custs[0],html,newsletter_post[0].title)
 
+                shot.send_dt = timezone.now()
+                shot.save() 
 
 
             else:
@@ -54,7 +59,7 @@ class Command(BaseCommand):
 
     def send(self,cust,html,title):
         to_email = 'newsletter@vallka.com'
-        email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email], bcc=[settings.EMAIL_BCC_TO] )
+        email = EmailMultiAlternatives( title + ':' + cust[1], title, settings.EMAIL_FROM_USER, [to_email], bcc=[settings.EMAIL_BCC_TO] )
         if html: email.attach_alternative(html, "text/html") 
         #if attachment_file: email.attach_file(attachment_file)
         
