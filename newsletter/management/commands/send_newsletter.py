@@ -60,7 +60,7 @@ class Command(BaseCommand):
     def send(self,cust,html,title,uuid):
         to_email = 'newsletter2@vallka.com'
         #html = html.replace("##uuid##",str(uuid))
-        email = EmailMultiAlternatives( title + ':' + cust[1], title, settings.EMAIL_FROM_USER, [to_email],  )
+        email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email]  )
         email.attach_alternative(html, "text/html") 
         #if attachment_file: email.attach_file(attachment_file)
         
