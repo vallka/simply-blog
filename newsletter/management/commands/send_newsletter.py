@@ -23,7 +23,7 @@ def my_replace(match):
     match3 = match.group(3)
     match3 = urllib.parse.quote_plus(match3)
 
-    return f'{match1}{match2}blog/newsletter/click/####uuid####/{match3}'
+    return f'{match1}{match2}blog/newsletter/click/####uuid####/?path={match3}'
 
 class Command(BaseCommand):
     help = 'send newsletter'
@@ -265,7 +265,7 @@ footer {
         </style>
     </head>
    <body>
-        <img src="https://www.gellifique.co.uk/blog/newsletter/pixel/?u=##uuid##" style="display:none">
+        <img src="https://www.gellifique.co.uk/blog/newsletter/pixel/?uuid=####uuid####" style="display:none">
         <div class="blog_content">
             <div class="header"><img src="https://www.gellifique.co.uk/static/images/newsletter_header.jpg"></div>
             <div class="blog_post">
