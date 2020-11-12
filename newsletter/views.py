@@ -14,7 +14,7 @@ def my_image(request):
     logger.error("my_image - uuid:%s",uuid)
     try:
         ns = NewsShot.objects.get(uuid=uuid)
-        if ns.opened_dt!=None:
+        if ns.opened_dt==None:
             ns.opened_dt = timezone.now()
             ns.save()
     except NewsShot.DoesNotExist:
@@ -29,13 +29,13 @@ def click_redirect(request,uuid):
     logger.error("click_redirect - uuid:%s, path:%s",uuid,path)
     try:
         ns = NewsShot.objects.get(uuid=uuid)
-        if ns.clicked_dt!=None:
+        if ns.clicked_dt==None:
             ns.clicked_dt = timezone.now()
             ns.clicked_qnt = 1
         else:    
             ns.clicked_qnt += 1
         ns.save()
-        
+
     except NewsShot.DoesNotExist:
         logger.error("NewsShot.DoesNotExist:%s",uuid)
 
