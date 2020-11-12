@@ -1,4 +1,6 @@
 from datetime import datetime, timedelta
+import urllib
+import re
 
 from django.core.management.base import BaseCommand, CommandError
 from django.core.mail import send_mail,EmailMessage,EmailMultiAlternatives
@@ -12,6 +14,16 @@ from newsletter.models import *
 import logging
 logger = logging.getLogger(__name__)
 
+MOCK = False
+
+
+def my_replace(match):
+    match1 = match.group(1)
+    match2 = match.group(2)
+    match3 = match.group(3)
+    match3 = urllib.parse.quote_plus(match3)
+
+    return f'{match1}{match2}blog/newsletter/click/####uuid####/{match3}'
 
 class Command(BaseCommand):
     help = 'send newsletter'
@@ -57,30 +69,45 @@ class Command(BaseCommand):
         logger.error("DONE - %s! - %s",self.help,str(today))
         print("DONE - %s! - %s" % (self.help,str(today)))
 
+
+    def encode_urls(self,html,uuid):
+        html = re.sub(r'(<a\s+href=")(https://www\.gellifique\.co.uk/)([^"]*)',my_replace,html)
+        html = html.replace('####uuid####',uuid)
+        return html
+
+
     def send(self,cust,html,title,uuid):
         to_email = 'vallka@vallka.com'
         #html = html.replace("##uuid##",str(uuid))
-        email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email]  )
-        email.attach_alternative(html, "text/html") 
-        #if attachment_file: email.attach_file(attachment_file)
-        
-        send_result = email.send()
-        print('send_result',send_result)
+        html = self.encode_urls(html,str(uuid))
+
+        print (html)
+        if not MOCK:
+            email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email]  )
+            email.attach_alternative(html, "text/html") 
+            #if attachment_file: email.attach_file(attachment_file)
+            
+            send_result = email.send()
+            print('send_result',send_result)
 
 
 
 
     def get_customers(self):
-        with connections['presta'].cursor() as cursor:
-            sql = """
-                SELECT id_customer,email,firstname,lastname,id_lang FROM `ps17_customer`  
-                where active=1 and newsletter=1
-                ORDER BY `ps17_customer`.`id_customer`  DESC
-                limit 0,10
-            """
 
-            cursor.execute(sql)
-            row = cursor.fetchall()
+        if not MOCK:
+            with connections['presta'].cursor() as cursor:
+                sql = """
+                    SELECT id_customer,email,firstname,lastname,id_lang FROM `ps17_customer`  
+                    where active=1 and newsletter=1
+                    ORDER BY `ps17_customer`.`id_customer`  DESC
+                    limit 0,10
+                """
+
+                cursor.execute(sql)
+                row = cursor.fetchall()
+        else:
+            row = [(12345,'vallka@vallka.com','Val','Kool,1')]
 
         return row
 
