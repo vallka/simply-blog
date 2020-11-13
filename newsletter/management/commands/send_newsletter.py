@@ -52,7 +52,8 @@ class Command(BaseCommand):
             if len(custs):
 
                 for i,c in enumerate(custs):
-                    print (i+1,c)
+                    print(f"{i+1}, customer:{c[0]}:{c[1]}")
+                    logger.info(f"{i+1}, customer:{c[0]}:{c[1]}")
 
                     shot = NewsShot(blog=newsletter_post[0],customer_id=c[0])
 
