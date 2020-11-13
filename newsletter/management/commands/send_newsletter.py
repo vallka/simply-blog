@@ -118,10 +118,10 @@ class Command(BaseCommand):
                     select customer_id from dj.newsletter_newsshot where customer_id=c.id_customer
                     and blog_id=%s
                     )
-                    and c.email like '%%@vallka.com'
                     ORDER BY c.id_customer  DESC
-                    limit 0,5
+                    limit 0,20
                 """
+                ###    and c.email like '%%@vallka.com'
 
                 cursor.execute(sql,[blog_id,])
                 row = cursor.fetchall()
