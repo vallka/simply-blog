@@ -63,7 +63,7 @@ class Command(BaseCommand):
                     shot.save() 
 
             if newsletter_post[0].email_status==Post.EmailStatus.NONE:
-                newsletter_post[0].email_status = Post.EmailStatus.SENT
+                newsletter_post[0].email_status = Post.EmailStatus.SENDING
                 newsletter_post[0].save()
 
 
