@@ -65,6 +65,9 @@ class Command(BaseCommand):
 
             else:
                 print('no more customers!')
+                logger.info('no more customers!')
+                newsletter_post.email_status = Post.EmailStatus.SENT
+                newsletter_post.save()
 
 
 
