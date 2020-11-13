@@ -36,6 +36,8 @@ class Command(BaseCommand):
         logger.info(self.help)
         print(self.help)
 
+        sent = 0
+
         #today = datetime.today().date() # get a Date object
         today = timezone.now() # get a Date object
         logger.info(today)
@@ -51,6 +53,10 @@ class Command(BaseCommand):
 
             if len(custs):
 
+                if newsletter_post[0].email_status==Post.EmailStatus.NONE:
+                    newsletter_post[0].email_status = Post.EmailStatus.SENDING
+                    newsletter_post[0].save()
+
                 for i,c in enumerate(custs):
                     print(f"{i+1}, customer:{c[0]}:{c[1]}")
                     logger.info(f"{i+1}, customer:{c[0]}:{c[1]}")
@@ -62,10 +68,7 @@ class Command(BaseCommand):
                     shot.send_dt = timezone.now()
                     shot.save() 
 
-            if newsletter_post[0].email_status==Post.EmailStatus.NONE:
-                newsletter_post[0].email_status = Post.EmailStatus.SENDING
-                newsletter_post[0].save()
-
+                    sent += 1
 
             else:
                 print('no more customers!')
@@ -79,8 +82,8 @@ class Command(BaseCommand):
 
 
 
-        logger.error("DONE - %s! - %s",self.help,str(today))
-        print("DONE - %s! - %s" % (self.help,str(today)))
+        logger.error("DONE! - %s! Sent:%s",self.help,str(sent))
+        print("DONE! - %s! Sent:%s" % (self.help,str(sent)))
 
 
     def encode_urls(self,html,uuid):
