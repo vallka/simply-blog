@@ -65,7 +65,7 @@ class Post(models.Model):
         return markdownify(self.text)
 
     def __str__(self):
-        return str(self.id) + ':'+ str(self.slug) + ' -- ' + str(self.title)
+        return str(self.id) + ':'+ str(self.slug)
 
     def save(self, *args, **kwargs):
         if not self.slug:

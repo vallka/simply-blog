@@ -12,5 +12,5 @@ admin.site.register(Category)
 
 @admin.register(Post)
 class PostAdmin(MarkdownxModelAdmin):
-    list_display = ['id','slug','title','created_dt']
+    list_display = ['id','slug','title','blog','email','created_dt']
     search_fields = ['title','text', ]
