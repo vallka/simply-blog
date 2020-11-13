@@ -46,10 +46,10 @@ class Command(BaseCommand):
             html = self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug)
             #print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
 
-            custs = self.get_customers(newsletter_post[0].blog_id)
+            custs = self.get_customers(newsletter_post[0].id)
 
             if len(custs):
-                print (custs[0])
+                print (custs[0],custs[1])
 
                 shot = NewsShot(blog=newsletter_post[0],customer_id=custs[0][0])
 
