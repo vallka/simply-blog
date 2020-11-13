@@ -52,7 +52,7 @@ class Command(BaseCommand):
             if len(custs):
 
                 for i,c in enumerate(custs):
-                    print (i,c)
+                    print (i+1,c)
 
                     shot = NewsShot(blog=newsletter_post[0],customer_id=c[0])
 
@@ -110,7 +110,7 @@ class Command(BaseCommand):
                     )
                     and c.email like '%%@vallka.com'
                     ORDER BY c.id_customer  DESC
-                    limit 0,2
+                    limit 0,5
                 """
 
                 cursor.execute(sql,[blog_id,])
