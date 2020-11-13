@@ -68,6 +68,8 @@ class Command(BaseCommand):
                 logger.info('no more customers!')
                 newsletter_post[0].email_status = Post.EmailStatus.SENT
                 newsletter_post[0].save()
+        else:
+                logger.info('no newsletters to send!')
 
 
 
