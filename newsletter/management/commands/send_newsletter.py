@@ -105,7 +105,7 @@ class Command(BaseCommand):
             
             send_result = email.send()
             print('send_result',send_result)
-            time.sleep(1)
+            time.sleep(0.5)
 
 
 
