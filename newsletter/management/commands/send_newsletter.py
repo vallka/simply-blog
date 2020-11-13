@@ -46,7 +46,7 @@ class Command(BaseCommand):
             html = self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug)
             #print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
 
-            custs = self.get_customers()
+            custs = self.get_customers(newsletter_post[0].blog_id)
 
             if len(custs):
                 print (custs[0])
@@ -93,18 +93,23 @@ class Command(BaseCommand):
 
 
 
-    def get_customers(self):
+    def get_customers(self,blog_id):
 
         if not MOCK:
-            with connections['presta'].cursor() as cursor:
+            with connections['default'].cursor() as cursor:
                 sql = """
-                    SELECT id_customer,email,firstname,lastname,id_lang FROM `ps17_customer`  
+                SELECT id_customer,email,firstname,lastname,id_lang FROM gellifique.ps17_customer c 
                     where active=1 and newsletter=1
-                    ORDER BY `ps17_customer`.`id_customer`  DESC
-                    limit 0,10
+                    and c.id_customer not IN (
+                    select customer_id from dj.newsletter_newsshot where customer_id=c.id_customer
+                    and blog_id=%s
+                    )
+                    and c.email like '%vallka.com%'
+                    ORDER BY c.id_customer  DESC
+                    limit 0,2
                 """
 
-                cursor.execute(sql)
+                cursor.execute(sql,[blog_id,])
                 row = cursor.fetchall()
         else:
             row = [(12345,'vallka@vallka.com','Val','Kool,1')]
