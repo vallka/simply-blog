@@ -81,6 +81,7 @@ class Command(BaseCommand):
 
     def send(self,cust,html,title,uuid):
         #to_email = 'vallka@vallka.com'
+        to_email = cust[1]
         html = self.encode_urls(html,str(uuid))
 
         #print (html)
