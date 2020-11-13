@@ -49,7 +49,7 @@ class Command(BaseCommand):
             custs = self.get_customers(newsletter_post[0].id)
 
             if len(custs):
-                print (custs[0],custs[1])
+                print (custs[0])
 
                 shot = NewsShot(blog=newsletter_post[0],customer_id=custs[0][0])
 
