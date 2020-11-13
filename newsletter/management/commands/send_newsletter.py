@@ -62,6 +62,10 @@ class Command(BaseCommand):
                     shot.send_dt = timezone.now()
                     shot.save() 
 
+            if newsletter_post[0].email_status==Post.EmailStatus.NONE:
+                newsletter_post[0].email_status = Post.EmailStatus.SENT
+                newsletter_post[0].save()
+
 
             else:
                 print('no more customers!')
