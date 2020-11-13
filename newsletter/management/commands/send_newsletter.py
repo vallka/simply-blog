@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import urllib
 import re
+import time
 
 from django.core.management.base import BaseCommand, CommandError
 from django.core.mail import send_mail,EmailMessage,EmailMultiAlternatives
@@ -49,14 +50,16 @@ class Command(BaseCommand):
             custs = self.get_customers(newsletter_post[0].id)
 
             if len(custs):
-                print (custs[0])
 
-                shot = NewsShot(blog=newsletter_post[0],customer_id=custs[0][0])
+                for i,c in enumerate(custs):
+                    print (i,c)
 
-                self.send(custs[0],html,newsletter_post[0].title,shot.uuid)
+                    shot = NewsShot(blog=newsletter_post[0],customer_id=c[0])
 
-                shot.send_dt = timezone.now()
-                shot.save() 
+                    self.send(c,html,newsletter_post[0].title,shot.uuid)
+
+                    shot.send_dt = timezone.now()
+                    shot.save() 
 
 
             else:
@@ -77,11 +80,10 @@ class Command(BaseCommand):
 
 
     def send(self,cust,html,title,uuid):
-        to_email = 'vallka@vallka.com'
-        #html = html.replace("##uuid##",str(uuid))
+        #to_email = 'vallka@vallka.com'
         html = self.encode_urls(html,str(uuid))
 
-        print (html)
+        #print (html)
         if not MOCK:
             email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email]  )
             email.attach_alternative(html, "text/html") 
@@ -89,6 +91,7 @@ class Command(BaseCommand):
             
             send_result = email.send()
             print('send_result',send_result)
+            time.sleep(1)
 
 
 
