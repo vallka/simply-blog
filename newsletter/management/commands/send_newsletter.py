@@ -37,10 +37,11 @@ class Command(BaseCommand):
         print(self.help)
 
         sent = 0
+        dolog = False
 
         #today = datetime.today().date() # get a Date object
         today = timezone.now() # get a Date object
-        logger.info(today)
+        #logger.info(today)
 
         newsletter_post = Post.objects.filter(email=True,email_send_dt__lt=today,email_status__in=[Post.EmailStatus.NONE,Post.EmailStatus.SENDING]).order_by('id')
 
@@ -52,6 +53,7 @@ class Command(BaseCommand):
             custs = self.get_customers(newsletter_post[0].id)
 
             if len(custs):
+                dolog = True
 
                 if newsletter_post[0].email_status==Post.EmailStatus.NONE:
                     newsletter_post[0].email_status = Post.EmailStatus.SENDING
@@ -59,7 +61,7 @@ class Command(BaseCommand):
 
                 for i,c in enumerate(custs):
                     print(f"{i+1}, customer:{c[0]}:{c[1]}")
-                    logger.info(f"{i+1}, customer:{c[0]}:{c[1]}")
+                    #logger.info(f"{i+1}, customer:{c[0]}:{c[1]}")
 
                     shot = NewsShot(blog=newsletter_post[0],customer_id=c[0])
 
@@ -71,19 +73,19 @@ class Command(BaseCommand):
                     sent += 1
 
             else:
-                print('no more customers!')
-                logger.info('no more customers!')
+                dolog = True
+                print('no more customers! - setting SENT status')
+                logger.info('no more customers! - setting SENT status')
                 newsletter_post[0].email_status = Post.EmailStatus.SENT
                 newsletter_post[0].save()
         else:
-                logger.info('no newsletters to send!')
+            #logger.info('no newsletters to send!')
+            print('no newsletters to send!')
 
-
-
-
-
-        logger.error("DONE! - %s! Sent:%s",self.help,str(sent))
         print("DONE! - %s! Sent:%s" % (self.help,str(sent)))
+        if dolog:
+            logger.error("DONE! - %s! Sent:%s",self.help,str(sent))
+
 
 
     def encode_urls(self,html,uuid):
