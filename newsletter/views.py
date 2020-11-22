@@ -74,8 +74,8 @@ def sendtest(request,slug):
     logger.info("sendtest:%s",slug)
 
     post = Post.objects.get(slug=slug)
-    #to_email = request.user.email
-    to_email = 'nobody@gellifique.co.uk'
+    to_email = request.user.email
+    #to_email = 'nobody@gellifique.co.uk'
 
     html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
 
@@ -84,8 +84,9 @@ def sendtest(request,slug):
     #if attachment_file: email.attach_file(attachment_file)
     
     send_result = email.send()
-    print('send_result',send_result)
-    logger.error("send_result:%s",send_result)
+    message_id = email.extra_headers.get('Message-Id',None)
+    print('send_result',send_result,message_id)
+    logger.error("send_result:%s:%s",send_result,message_id)
 
 
     return HttpResponse({'result':'ok'})    
