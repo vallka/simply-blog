@@ -71,11 +71,11 @@ def sendtest(request,slug):
 
     print('sendtest:',slug)
     print(request.user.email)
-    logger.error("sendtest:%s",slug)
+    logger.info("sendtest:%s",slug)
 
     post = Post.objects.get(slug=slug)
-    #to_email = request.user.email
-    to_email = 'nobody@gellifique.co.uk'
+    to_email = request.user.email
+    #to_email = 'nobody@gellifique.co.uk'
 
     html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
 
@@ -85,6 +85,7 @@ def sendtest(request,slug):
     
     send_result = email.send()
     print('send_result',send_result)
+    logger.error("send_result:%s",send_result)
 
 
     return HttpResponse({'result':'ok'})    
