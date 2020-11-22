@@ -84,7 +84,7 @@ def sendtest(request,slug):
     #if attachment_file: email.attach_file(attachment_file)
     
     send_result = email.send()
-    message_id = email.extra_headers.get('Message-Id',None)
+    message_id = email.extra_headers.get('messageId',None)
     print('send_result',send_result,message_id)
     logger.error("send_result:%s:%s",send_result,message_id)
 

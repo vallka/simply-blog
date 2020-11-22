@@ -195,7 +195,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
     environment="dev",
-    dsn="https://fa080f42ed784f2aa4ad19b97809f449@o360522.ingest.sentry.io/5499309",
+    dsn="https://235ef220fc8e4f9793858eacb15a542d@o480612.ingest.sentry.io/5528028",
     integrations=[DjangoIntegration()],
     traces_sample_rate=1.0,
 

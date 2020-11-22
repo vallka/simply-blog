@@ -39,7 +39,7 @@ DEBUG = True
 
 sentry_sdk.init(
     environment="prod",
-    dsn="https://fa080f42ed784f2aa4ad19b97809f449@o360522.ingest.sentry.io/5499309",
+    dsn="https://235ef220fc8e4f9793858eacb15a542d@o480612.ingest.sentry.io/5528028",
     integrations=[DjangoIntegration()],
 
     # If you wish to associate users to errors (assuming you are using
