@@ -1,5 +1,12 @@
+import uuid
+import os
+
 from django.shortcuts import redirect
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse
+from django.conf import settings
 
 import logging
 logger = logging.getLogger(__name__)
@@ -40,3 +47,19 @@ def click_redirect(request,uuid):
         logger.error("NewsShot.DoesNotExist:%s",uuid)
 
     return redirect('/' + path)
+
+
+@csrf_exempt
+@require_POST
+def notification(request):
+
+    print('notification')
+    logger.error("notification")
+
+    filename = str(uuid.uuid1())+ '.json'
+
+    f = open(os.path.join(settings.MEDIA_ROOT,filename)   ,'wb')
+    f.write(request.body)
+    f.close()
+
+    return HttpResponse(os.path.join(settings.MEDIA_URL,filename))
