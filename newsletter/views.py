@@ -3,6 +3,7 @@ import os
 import json
 
 from django.core.mail import send_mail,EmailMessage,EmailMultiAlternatives
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -83,6 +84,9 @@ def notification(request):
                     shot.save()
 
             except NewsShot.DoesNotExist:
+                pass
+
+            except ValidationError:
                 pass
 
 
