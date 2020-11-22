@@ -60,14 +60,6 @@ def click_redirect(request,uuid):
 @require_POST
 def notification(request):
 
-    print('notification')
-
-    filename = str(uuid.uuid1())+ '.json'
-
-    f = open(os.path.join(settings.MEDIA_ROOT,filename)   ,'wb')
-    f.write(request.body)
-    f.close()
-
     message_id = ''
     note = json.loads(request.body)
     if note["mail"] and note["mail"]["headers"]:
@@ -93,12 +85,9 @@ def notification(request):
                 pass
 
 
-        logger.error("notification!!!:%s,%s,%s",note["notificationType"],note["mail"]["destination"][0],message_id)
+        #logger.error("notification!!!:%s,%s,%s",note["notificationType"],note["mail"]["destination"][0],message_id)
 
-
-
-
-    return HttpResponse(os.path.join(settings.MEDIA_URL,filename))
+    return HttpResponse('ok')
 
 @require_POST
 def sendtest(request,slug):
