@@ -17,6 +17,7 @@ class NewsShot(models.Model):
     opened_dt = models.DateTimeField(blank=True, null=True)
     clicked_dt = models.DateTimeField(blank=True, null=True)
     clicked_qnt = models.IntegerField(blank=True, null=True)
+    note = models.CharField(blank=True, null=True, max_length=25)
 
     @staticmethod
     def add_html(text,title,slug):

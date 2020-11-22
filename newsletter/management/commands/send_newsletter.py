@@ -37,6 +37,7 @@ class Command(BaseCommand):
         print(self.help)
 
         sent = 0
+        not_sent = 0
         dolog = False
 
         #today = datetime.today().date() # get a Date object
@@ -65,12 +66,14 @@ class Command(BaseCommand):
 
                     shot = NewsShot(blog=newsletter_post[0],customer_id=c[0])
 
-                    self.send(c,html,newsletter_post[0].title,shot.uuid)
+                    if self.send(c,html,newsletter_post[0].title,shot.uuid):
 
-                    shot.send_dt = timezone.now()
-                    shot.save() 
+                        shot.send_dt = timezone.now()
+                        shot.save() 
 
-                    sent += 1
+                        sent += 1
+                    else:
+                        not_sent += 1
 
             else:
                 dolog = True
@@ -82,9 +85,9 @@ class Command(BaseCommand):
             #logger.info('no newsletters to send!')
             print('no newsletters to send!')
 
-        print("DONE! - %s! Sent:%s" % (self.help,str(sent)))
+        print("DONE! - %s! Sent:%s, Not sent:%s" % (self.help,str(sent),str(not_sent)))
         if dolog:
-            logger.error("DONE! - %s! Sent:%s",self.help,str(sent))
+            logger.error("DONE! - %s! Sent:%s, Not sent:%s",self.help,str(sent),str(not_sent))
 
 
 
@@ -101,14 +104,16 @@ class Command(BaseCommand):
 
         #print (html)
         if not MOCK:
-            email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email]  )
+            email = EmailMultiAlternatives( title, title, settings.EMAIL_FROM_USER, [to_email], headers = {'X-gel-id': str(uuid)}   )
             email.attach_alternative(html, "text/html") 
             #if attachment_file: email.attach_file(attachment_file)
             
             send_result = email.send()
             print('send_result',send_result)
             time.sleep(0.5)
+            return send_result
 
+        return 1
 
 
 
@@ -119,6 +124,7 @@ class Command(BaseCommand):
                 sql = """
                 SELECT id_customer,email,firstname,lastname,id_lang FROM gellifique.ps17_customer c 
                     where active=1 and newsletter=1
+                    and c.email like '%%@vallka.com'
                     and c.id_customer not IN (
                     select customer_id from dj.newsletter_newsshot where customer_id=c.id_customer
                     and blog_id=%s

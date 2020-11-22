@@ -64,13 +64,26 @@ def notification(request):
     f.write(request.body)
     f.close()
 
-    message_id = '?'
+    message_id = ''
     note = json.loads(request.body)
     if note["mail"] and note["mail"]["headers"]:
         for h in note["mail"]["headers"]:
             if h['name']=='X-gel-id':
                 message_id = h['value']
                 break
+
+
+        if message_id:
+            try:
+                shot = NewsShot.objects.get(uuid=message_id)
+                if shot:
+                    shot.note = note["notificationType"]
+                    if note["notificationType"]=='Delivery':
+                        shot.received_dt = timezone.now()
+                    shot.save()
+
+            except NewsShot.DoesNotExist:
+                pass
 
 
         logger.error("notification!!!:%s,%s,%s",note["notificationType"],note["mail"]["destination"][0],message_id)
@@ -88,8 +101,8 @@ def sendtest(request,slug):
     logger.info("sendtest:%s",slug)
 
     post = Post.objects.get(slug=slug)
-    #to_email = request.user.email
-    to_email = 'nobody@gellifique.co.uk'
+    to_email = request.user.email
+    #to_email = 'nobody@gellifique.co.uk'
 
     html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
 
