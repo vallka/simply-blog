@@ -86,8 +86,8 @@ def sendtest(request,slug):
     send_result = email.send()
     #message_id = email.extra_headers.get('messageId',None)
     print('send_result',send_result)
+    logger.error(email.headers)
     logger.error("send_result:%s",send_result)
-    logger.error(email.extra_headers)
 
 
     return HttpResponse({'result':'ok'})    
