@@ -31,6 +31,9 @@ def my_image(request):
     except NewsShot.DoesNotExist:
         logger.error("NewsShot.DoesNotExist:%s",uuid)
 
+    except ValidationError:
+        pass
+
 
     return redirect('/static/images/pixel.png')
 
