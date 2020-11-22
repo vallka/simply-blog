@@ -1,5 +1,6 @@
 import uuid
 import os
+import json
 
 from django.core.mail import send_mail,EmailMessage,EmailMultiAlternatives
 from django.shortcuts import redirect
@@ -56,13 +57,27 @@ def click_redirect(request,uuid):
 def notification(request):
 
     print('notification')
-    logger.error("notification")
+    logger.info("notification---")
 
     filename = str(uuid.uuid1())+ '.json'
 
     f = open(os.path.join(settings.MEDIA_ROOT,filename)   ,'wb')
     f.write(request.body)
     f.close()
+
+    message_id = '?'
+    note = json.loads(request.body)
+    if note["notificationType"]=="Delivery":
+        for h in note["mail"]["headers"]:
+            if h['name']=='X-gel-id':
+                message_id = h['value']
+                break
+
+
+    logger.error("notification!!!:%s,%s,%s",note["notificationType"],note["mail"]["destination"][0],message_id)
+
+
+
 
     return HttpResponse(os.path.join(settings.MEDIA_URL,filename))
 
