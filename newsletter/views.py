@@ -79,12 +79,12 @@ def sendtest(request,slug):
 
     html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
 
-    email = EmailMultiAlternatives( post.title, post.title, settings.EMAIL_FROM_USER, [to_email]  )
+    email = EmailMultiAlternatives( post.title, post.title, settings.EMAIL_FROM_USER, [to_email], headers = {'X-gel-id': f'xxx-{to_email}-xxx'}  )
     email.attach_alternative(html, "text/html") 
     #if attachment_file: email.attach_file(attachment_file)
     
     send_result = email.send()
-    message_id = email.extra_headers.get('Message-ID','-')
+    message_id = email.extra_headers.get('X-gel-id','-')
     print('send_result',send_result,message_id)
     logger.info(email.extra_headers)
     logger.error("send_result:%s:%s",send_result,message_id)
