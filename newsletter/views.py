@@ -1,6 +1,7 @@
 import uuid
 import os
 
+from django.core.mail import send_mail,EmailMessage,EmailMultiAlternatives
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +13,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from .models import *
+from blog.models import *
 
 # Create your views here.
 
@@ -63,3 +65,25 @@ def notification(request):
     f.close()
 
     return HttpResponse(os.path.join(settings.MEDIA_URL,filename))
+
+@require_POST
+def sendtest(request,slug):
+
+    print('sendtest:',slug)
+    print(request.user.email)
+    logger.error("sendtest:%s",slug)
+
+    post = Post.objects.get(slug=slug)
+    to_email = request.user.email
+
+    html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
+
+    email = EmailMultiAlternatives( post.title, post.title, settings.EMAIL_FROM_USER, [to_email]  )
+    email.attach_alternative(html, "text/html") 
+    #if attachment_file: email.attach_file(attachment_file)
+    
+    send_result = email.send()
+    print('send_result',send_result)
+
+
+    return HttpResponse({'result':'ok'})    

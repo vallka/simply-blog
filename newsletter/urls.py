@@ -8,4 +8,5 @@ urlpatterns = [
     path('pixel/', my_image, name='pixel'),
     path('click/<str:uuid>/', click_redirect, name='click'),
     path('notification/', notification, name='notification'),
+    path('sendtest/<str:slug>', sendtest, name='sendtest'),
 ]

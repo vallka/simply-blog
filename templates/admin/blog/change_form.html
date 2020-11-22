@@ -49,12 +49,62 @@ var simplemde = new EasyMDE({
 
 django.jQuery(function(){
     django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
+    django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
     django.jQuery('#btn-preview').click(function(){
         window.open('/blog/'+django.jQuery('#id_slug').val())
     });
-})
+
+
+    django.jQuery('#btn-send-test').click(function(e){
+        if (!confirm("Are you sure to do this?"))
+            return;
+
+        const slug = django.jQuery('#id_slug').val()
+        const token = getCookie('csrftoken');
+        console.info('sending:' + slug );
+
+        django.jQuery.ajax({
+            url: '/blog/newsletter/sendtest/'+slug,
+            type: 'post',
+            headers: {
+                "X-CSRFToken": token
+            },
+            dataType: 'json',
+            success: function (gooddata) {
+                console.info(gooddata);
+
+                if (gooddata['result']=='ok') {
+                    alert('ok')
+                }
+                else {
+                    alert(gooddata['error'])
+                }
+            },
+            error:  function (errdata) {
+                console.info('error');
+                console.info(errdata);
+                alert(errdata.statusText)
+            },
+        });
+    });
+});
+
+function getCookie(name) {
+var cookieValue = null;
+if (document.cookie && document.cookie !== '') {
+var cookies = document.cookie.split(';');
+for (var i = 0; i < cookies.length; i++) {
+var cookie = cookies[i].trim();
+// Does this cookie string begin with the name we want?
+if (cookie.substring(0, name.length + 1) === (name + '=')) {
+    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+    break;
+}
+}
+}
+return cookieValue;
+}
 
 </script>
 
 {% endblock %}
-
