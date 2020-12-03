@@ -31,7 +31,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     class Meta:
-        ordering = ['slug']
+        ordering = ['-id']
 
     title = models.CharField(_("Title"), max_length=100, unique=True)
     slug = models.SlugField(_("Slug"), unique=True, max_length=100, blank=True, null=False)

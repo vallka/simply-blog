@@ -97,12 +97,12 @@ def sendtest(request,slug):
     logger.info("sendtest:%s",slug)
 
     post = Post.objects.get(slug=slug)
-    to_email = request.user.email
-    #to_email = 'nobody@gellifique.co.uk'
+    #to_email = request.user.email
+    to_email = 'info@gellifique.co.uk'
 
     html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
 
-    email = EmailMultiAlternatives( post.title, post.title, settings.EMAIL_FROM_USER, [to_email], headers = {'X-gel-id': f'xxx-{to_email}-xxx'}  )
+    email = EmailMultiAlternatives( '[TEST NEWSLATTER]' + post.title, post.title, settings.EMAIL_FROM_USER, [to_email], headers = {'X-gel-id': f'xxx-{to_email}-xxx'}  )
     email.attach_alternative(html, "text/html") 
     #if attachment_file: email.attach_file(attachment_file)
     
