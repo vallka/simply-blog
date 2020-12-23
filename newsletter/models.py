@@ -22,84 +22,6 @@ class NewsShot(models.Model):
     @staticmethod
     def add_html(text,title,slug):
 
-
-        fa_style = r"""
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0');
-  src: url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), 
-       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), 
-       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), 
-       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), 
-       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-/* makes the font 33% larger relative to the icon container */
-.fa-lg {
-  font-size: 1.33333333em;
-  line-height: 0.75em;
-  vertical-align: -15%;
-}
-.fa-2x {
-  font-size: 2em;
-}
-.fa-3x {
-  font-size: 3em;
-}
-.fa-4x {
-  font-size: 4em;
-}
-.fa-5x {
-  font-size: 5em;
-}
-.fa-fw {
-  width: 1.28571429em;
-  text-align: center;
-}
-.fa-ul {
-  padding-left: 0;
-  margin-left: 2.14285714em;
-  list-style-type: none;
-}
-.fa-ul > li {
-  position: relative;
-}
-.fa-li {
-  position: absolute;
-  left: -2.14285714em;
-  width: 2.14285714em;
-  top: 0.14285714em;
-  text-align: center;
-}
-.fa-li.fa-lg {
-  left: -1.85714286em;
-}
-.fa-facebook-square:before {
-  content: "\f082";
-}
-.fa-instagram:before {
-  content: "\f16d";
-}
-.fa-youtube-square:before {
-  content: "\f166";
-}
-.fa-twitter-square:before {
-  content: "\f081";
-}
-.fa-pinterest-square:before {
-  content: "\f0d3";
-}
-        """
-
         style = """
 body {
     font-family: 'Open Sans', sans-serif !important;
@@ -241,6 +163,9 @@ footer {
     color: #d73672 !important;
 }
 
+.social img {
+    width: 3rem;
+}
         """
 
         html = f"""
@@ -254,7 +179,6 @@ footer {
 
         <title>{title}</title>
         <style>
-            {fa_style}
             {style}
         </style>
     </head>
