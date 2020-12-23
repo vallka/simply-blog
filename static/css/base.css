@@ -124,6 +124,13 @@ h1, h2, h3 {
 .h1, h1 {
   font-size: 1.375rem;
   margin-bottom: 1.563rem;
+  color: #1a1a1a;
+}
+.h2, h2 {
+  color: #d73672;
+}
+.h3, h3 {
+  color: #1a1a1a;
 }
 
 .blog_post h4, .blog_post h5, .blog_post h6 {

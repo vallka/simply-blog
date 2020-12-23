@@ -21,6 +21,85 @@ class NewsShot(models.Model):
 
     @staticmethod
     def add_html(text,title,slug):
+
+
+        fa_style = r"""
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), 
+       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), 
+       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), 
+       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), 
+       url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* makes the font 33% larger relative to the icon container */
+.fa-lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+.fa-2x {
+  font-size: 2em;
+}
+.fa-3x {
+  font-size: 3em;
+}
+.fa-4x {
+  font-size: 4em;
+}
+.fa-5x {
+  font-size: 5em;
+}
+.fa-fw {
+  width: 1.28571429em;
+  text-align: center;
+}
+.fa-ul {
+  padding-left: 0;
+  margin-left: 2.14285714em;
+  list-style-type: none;
+}
+.fa-ul > li {
+  position: relative;
+}
+.fa-li {
+  position: absolute;
+  left: -2.14285714em;
+  width: 2.14285714em;
+  top: 0.14285714em;
+  text-align: center;
+}
+.fa-li.fa-lg {
+  left: -1.85714286em;
+}
+.fa-facebook-square:before {
+  content: "\f082";
+}
+.fa-instagram:before {
+  content: "\f16d";
+}
+.fa-youtube-square:before {
+  content: "\f166";
+}
+.fa-twitter-square:before {
+  content: "\f081";
+}
+.fa-pinterest-square:before {
+  content: "\f0d3";
+}
+        """
+
         style = """
 body {
     font-family: 'Open Sans', sans-serif !important;
@@ -89,6 +168,13 @@ h1, h2, h3 {
     margin-bottom: 1.563rem !important;
     padding-bottom: 0.5rem !important;
     color: black !important;
+}
+
+.h2, h2 {
+  color: #d73672 !important;
+}
+.h3, h3 {
+  color: #1a1a1a !important;
 }
 
 hr {
@@ -165,10 +251,10 @@ footer {
         <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <title>{title}</title>
         <style>
+            {fa_style}
             {style}
         </style>
     </head>
@@ -191,17 +277,18 @@ footer {
     <p><img src="https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
 
                 </div>
-                <div class="social">
-                    <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
-                    <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
-                    <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
-                    <a href="https://twitter.com/gellifique" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
-                    <a href="https://uk.pinterest.com/gellifique/" target="_blank"><i class="fa fa-2x fa-pinterest-square" aria-hidden="true"></i></a>
-                </div>
             </div>
         </div>
 
         <footer>
+            <div class="social">
+                <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/gellifique" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+                <a href="https://uk.pinterest.com/gellifique/" target="_blank"><i class="fa fa-2x fa-pinterest-square" aria-hidden="true"></i></a>
+            </div>
+
             <a href="https://www.gellifique.co.uk/en/identity">unsubscribe from this list</a> |     
             <a href="https://www.gellifique.co.uk/en/identity">update subscription preferences</a>
         </footer>

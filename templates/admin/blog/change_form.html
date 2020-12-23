@@ -5,6 +5,123 @@
 <!-- link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" -->
 <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 
+<style>
+.editor-preview {
+    max-width: 610px !important;
+    text-align: center !important;
+    background-color: white !important;
+    padding: 1rem !important;
+    margin: auto !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+@media (min-width: 768px){
+  .editor-preview {
+    border-radius: 5px !important;
+  }
+}
+
+.blog_post .blog_header {
+    background-color: #fdc5dc !important;
+    border-radius: 5px !important;
+    padding-top: 0.5rem !important;
+}
+
+.editor-preview {
+    text-align: center !important;
+}
+
+.editor-preview img {
+    max-width: 100% !important;
+}
+
+.editor-preview .header {
+    max-width: 642px !important;
+    margin: 0 auto !important;
+}
+
+.editor-preview h1, .editor-preview h2, .editor-preview h3 {
+    margin-top: 0 !important;
+    margin-bottom: .5rem !important;
+    font-family: inherit !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    color: #d73672 !important;
+    text-transform: initial !important;
+    letter-spacing: initial !important;
+}
+
+.editor-preview .h1, .editor-preview h1 {
+    font-size: 1.375rem !important;
+    margin-bottom: 1.563rem !important;
+    padding-bottom: 0.5rem !important;
+    color: black !important;
+}
+
+.editor-preview .h2, .editor-preview h2 {
+  color: #d73672 !important;
+}
+.editor-preview .h3, .editor-preview h3 {
+  color: #1a1a1a !important;
+}
+
+.editor-preview hr {
+    box-sizing: content-box !important;
+    height: 0 !important;
+    overflow: visible !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    border: 0 !important;
+    border-top-color: currentcolor !important;
+    border-top-style: none !important;
+    border-top-width: 0px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.editor-preview a {
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+}
+
+.editor-preview h4, .editor-preview h5, .editor-preview h6 {
+    text-transform: initial !important;
+    letter-spacing: initial !important;
+    font-size: 1rem !important;
+    color: white !important;
+}
+
+.editor-preview h4 a, .editor-preview h5 a, .editor-preview h6 a {
+    color: white !important;
+}
+
+.editor-preview h4:hover, .editor-preview h5:hover, .editor-preview h6:hover {
+  background-color: #f766a2 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.editor-preview h4 a:hover, .editor-preview h5 a:hover, .editor-preview h6 a:hover {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.editor-preview h4, .editor-preview h5, .editor-preview h6 {
+    text-transform: initial !important;
+    letter-spacing: initial !important;
+    font-size: 1rem !important;
+    background-color: #d73672 !important;
+    color: white !important;
+    display: inline-block !important;
+    padding: 1rem !important;
+    border-radius: 5px !important;
+}
+
+</style>
+
 
 {% endblock %}
 
@@ -28,7 +145,6 @@ var simplemde = new EasyMDE({
     toolbar: [
         "bold",
         "italic",
-        "heading-1",
         "heading-2",
         "heading-3",
         "heading-smaller",

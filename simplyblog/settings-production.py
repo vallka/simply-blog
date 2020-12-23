@@ -35,6 +35,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #FORCE_SCRIPT_NAME = '/pyadmin734r04xdw'
 #STATIC_URL = '%s%s' % (FORCE_SCRIPT_NAME, WHITENOISE_STATIC_PREFIX)
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT') 
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
 DEBUG = True
 
 sentry_sdk.init(
