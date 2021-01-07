@@ -56,7 +56,7 @@ body {
 }
 
 .blog_post .blog_header {
-    background-color: #fdc5dc !important;
+    background-color: #eee !important;
     border-radius: 5px !important;
     padding-top: 0.5rem !important;
 }
@@ -164,7 +164,7 @@ footer {
 }
 
 .social img {
-    width: 3rem;
+    width: 2rem;
 }
         """
 
@@ -198,14 +198,19 @@ footer {
     {text}
     <!-- end text -->
 
-    <p><img src="https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
+    <hr />
+
+    <p><img width="60%" src="https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
 
                 </div>
             </div>
         </div>
 
+    <hr />
         <footer>
             <div class="social">
+                <a href="https://www.gellifique.co.uk/">www.gellifique.co.uk</a>
+                <hr />
                 <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/facebook-square-brands.png"></a>
                 <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/instagram-square-brands.png"></a>
                 <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://www.gellifique.co.uk/static/images/youtube-square-brands.png"></a>
