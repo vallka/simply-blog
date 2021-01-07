@@ -160,8 +160,10 @@ footer {
 }
 
 footer .www a {
-    font-size: 1rem;
     color: #d73672 !important;
+}
+footer .www {
+    font-size: 1rem;
     padding-bottom: 1rem;
 }
 
