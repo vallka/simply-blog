@@ -154,10 +154,18 @@ a {
 footer {
     text-align: center !important;
     font-size: 0.8rem !important;
-    font-style: italic !important;
 }
 .social {
     text-align: center !important;
+}
+
+.social .www a {
+    font-size: 1rem;
+    color: #d73672 !important;
+}
+
+.social .unsubscribe {
+    font-style: italic !important;
 }
 .social i {
     color: #d73672 !important;
@@ -198,28 +206,29 @@ footer {
     {text}
     <!-- end text -->
 
-    <hr />
 
     <p><img width="60%" src="https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
+    <hr />
 
                 </div>
             </div>
         </div>
 
-    <hr />
         <footer>
+            <div class="www">
+                <a href="https://www.gellifique.co.uk/">https://www.gellifique.co.uk/</a>
+            </div>
             <div class="social">
-                <a href="https://www.gellifique.co.uk/">www.gellifique.co.uk</a>
-                <hr />
                 <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/facebook-square-brands.png"></a>
                 <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/instagram-square-brands.png"></a>
                 <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://www.gellifique.co.uk/static/images/youtube-square-brands.png"></a>
                 <a href="https://twitter.com/gellifique" target="_blank"><img src="https://www.gellifique.co.uk/static/images/twitter-square-brands.png"></a>
                 <a href="https://uk.pinterest.com/gellifique/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/pinterest-square-brands.png"></a>
             </div>
-
-            <a href="https://www.gellifique.co.uk/en/identity">unsubscribe from this list</a> |     
-            <a href="https://www.gellifique.co.uk/en/identity">update subscription preferences</a>
+            <div class="unsubscribe">
+                <a href="https://www.gellifique.co.uk/en/identity">unsubscribe from this list</a> |     
+                <a href="https://www.gellifique.co.uk/en/identity">update subscription preferences</a>
+            </div>
         </footer>
     </body>
 </html>
