@@ -159,12 +159,13 @@ footer {
     text-align: center !important;
 }
 
-.social .www a {
+footer .www a {
     font-size: 1rem;
     color: #d73672 !important;
+    padding-bottom: 1rem;
 }
 
-.social .unsubscribe {
+footer .unsubscribe {
     font-style: italic !important;
 }
 .social i {
