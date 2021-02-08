@@ -23,20 +23,15 @@ class ListView(generic.ListView):
         for p in context['post_list']:
             if n>0:
                 print(p.text)
-
                 pics = re.finditer(r'\!\[\]\(',p.text)
 
-                pos = [pic.start() for pic in pics]
-
-                print (pos[1])
-
-                print(p.text[0:pos[1]])
-
-                p.text = p.text[0:pos[1]]
-
-                p.read_more = True
-
-                #print (pics[1].span())
+                if len(pics)>1:
+                    pos = [pic.start() for pic in pics]
+                    print (pos[1])
+                    print(p.text[0:pos[1]])
+                    p.text = p.text[0:pos[1]]
+                    p.read_more = True
+                    #print (pics[1].span())
 
             n += 1
 
