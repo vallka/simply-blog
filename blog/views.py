@@ -25,8 +25,9 @@ class ListView(generic.ListView):
                 print(p.text)
                 pics = re.finditer(r'\!\[\]\(',p.text)
 
-                if len(pics)>1:
-                    pos = [pic.start() for pic in pics]
+                pos = [pic.start() for pic in pics]
+
+                if len(pos)>1:
                     print (pos[1])
                     print(p.text[0:pos[1]])
                     p.text = p.text[0:pos[1]]
