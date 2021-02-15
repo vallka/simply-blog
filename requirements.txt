@@ -4,7 +4,7 @@ certifi==2020.6.20
 chardet==3.0.4
 Django==3.1.2
 django-debug-toolbar==3.1.1
--e git+https://github.com/vallka/django-markdownx.git@30f2930fb3eb76e447c31333cb6c3a66b2786f77#egg=django_markdownx
+-e git+https://github.com/vallka/django-markdownx.git@6ba5289b2afb7058183da0f1df8ea5b41ba29736#egg=django_markdownx
 idna==2.10
 importlib-metadata==2.0.0
 Jinja2==2.11.2
