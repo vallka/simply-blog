@@ -27,7 +27,7 @@ SECRET_KEY = '$6#)l_2$c8y=tp)=mrl9+znqa&=_$r1zteeg+3vdtxdldtgjd('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -61,7 +61,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'simplyblog.urls'
 
 TEMPLATES = [
-    { 
+    {
         'BACKEND':'django.template.backends.jinja2.Jinja2',
         'DIRS': [os.path.join(BASE_DIR, 'templates-jinja2')],
         'APP_DIRS': True,
@@ -154,7 +154,7 @@ STATICFILES_DIRS = [
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/' 
+MEDIA_URL = '/media/'
 
 from datetime import datetime
 
@@ -170,7 +170,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'sent-emails' # change this to a proper location
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT') 
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
