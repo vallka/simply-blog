@@ -67,12 +67,12 @@ footer li a{
   color: #7a7a7a;
 }
 footer li a:hover{
-  color: #d73672;
+  color: #4ab1a8;
   text-decoration: none;
 }
 
 footer i,footer .copy {
-  color: #d73672;
+  color: #4ab1a8;
 }
 
 
@@ -116,9 +116,10 @@ h1, h2, h3 {
     font-family: inherit;
     font-weight: 700;
     line-height: 1.1;
-    color: #d73672;
+    color: #4ab1a8;
     text-transform: initial;
     letter-spacing: initial;
+    text-align: center;
 }
 
 .h1, h1 {
@@ -127,7 +128,7 @@ h1, h2, h3 {
   color: #1a1a1a;
 }
 .h2, h2 {
-  color: #d73672;
+  color: #4ab1a8;
 }
 .h3, h3 {
   color: #1a1a1a;
@@ -137,11 +138,12 @@ h1, h2, h3 {
   text-transform: initial;
   letter-spacing: initial;
   font-size: 1rem;
-  background-color: #d73672;
+  background-color: #4ab1a8;
   color: white;
   display: inline-block;
   padding: 1rem;
   border-radius: 5px;
+  text-align: center;
 }
 
 .blog_post h4:hover, .blog_post h5:hover, .blog_post h6:hover {
@@ -159,7 +161,7 @@ h1, h2, h3 {
 }
 
 .blog_post .blog_header {
-  background-color: #fdc5dc;
+  background-color: #c5fdf8;
   border-radius: 5px;
   padding-top: 0.5rem;
 }
@@ -211,13 +213,17 @@ dl, ol, ul {
 }
 
 .blog_post {
-  max-width: 610px;
+  max-width: 712px;
   text-align: center;
   background-color: white;
   padding: 1rem;
   margin: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.blog_post p {
+  text-align: left;
 }
 
 @media (min-width: 768px){
@@ -229,6 +235,8 @@ dl, ol, ul {
 
 .blog_post img {
   max-width: 100%;
+  display: block;
+  margin: auto;
 }
 
 .blog_post p {
@@ -245,6 +253,7 @@ dl, ol, ul {
   padding-bottom: 0.5rem;
   margin-top: -1.5rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .footer-container {
