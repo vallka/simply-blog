@@ -13,7 +13,7 @@ requests = "*"
 uritemplate = "*"
 sentry-sdk = "*"
 django-debug-toolbar = "*"
-django-markdownx = "*"
+django-markdownx = {editable = true,path = "./../django-markdownx"}
 jinja2 = "*"
 jinja2-django-tags = "*"
 update = "*"
