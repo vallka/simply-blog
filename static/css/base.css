@@ -241,6 +241,8 @@ dl, ol, ul {
 
 .blog_post img {
   max-width: 100%;
+  margin: 0 auto;
+  display: block;
 }
 
 .blog_post p {
