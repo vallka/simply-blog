@@ -159,7 +159,7 @@ MEDIA_URL = '/media/'
 from datetime import datetime
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
-MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (610, 1500), 'quality': 80 }
+MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (680, 1500), 'quality': 80 }
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'tables','attr_list',
 ]
@@ -179,7 +179,7 @@ EMAIL_USE_SSL = False
 #EMAIL_SSL_KEYFILE
 #EMAIL_SSL_CERTFILE
 
-EMAIL_FROM_USER = "info@gellifique.co.uk"
+EMAIL_FROM_USER = "info@vallka.com"
 EMAIL_BCC_TO = None
 
 LOGGING = {

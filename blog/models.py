@@ -50,6 +50,9 @@ class Post(models.Model):
 
     category = models.ManyToManyField(Category, )
 
+    title_color = models.CharField(_("Title Color"),max_length=20, blank=True, null=False, default='#232323')
+    title_bgcolor = models.CharField(_("Title Bg Color"),max_length=20, blank=True, null=False, default='#eeeeee')
+
     text = MarkdownxField(_("Text"), blank=True, null=False)
 
     created_dt = models.DateTimeField(_("Created Date/Time"), auto_now_add=True, null=True)

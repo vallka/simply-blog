@@ -35,6 +35,20 @@
 
 {% block content %}
 {% if post %}
+  {% if post.title_color %}
+    <style>
+      .blog_post .blog_header, .blog_post .blog_header a {
+        color: {{post.title_color}} !important;
+      }
+    </style>
+  {% endif %}
+  {% if post.title_bgcolor %}
+    <style>
+      .blog_post .blog_header {
+        background-color: {{post.title_bgcolor}} !important;
+      }
+    </style>
+  {% endif %}
     <div class="blog_post">
       <div class="blog_header">
         <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>

@@ -100,7 +100,7 @@ def sendtest(request,slug):
     #to_email = request.user.email
     to_email = 'info@gellifique.co.uk'
 
-    html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug)
+    html = NewsShot.add_html(post.formatted_markdown,post.title,post.slug,post.title_color,post.title_bgcolor)
 
     email = EmailMultiAlternatives( '[TEST NEWSLETTER] ' + post.title, post.title, settings.EMAIL_FROM_USER, [to_email], headers = {'X-gel-id': f'xxx-{to_email}-xxx'}  )
     email.attach_alternative(html, "text/html") 

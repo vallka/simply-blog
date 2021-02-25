@@ -133,6 +133,15 @@
 
 {% block admin_change_form_document_ready %}
 {{ block.super }}
+<script>var 
+jQuery = django.jQuery; // for spectrum
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
+
 <!-- script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script -->
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <script>
@@ -203,6 +212,18 @@ django.jQuery(function(){
             },
         });
     });
+
+    django.jQuery('#id_title_color').spectrum({
+        type: "component",
+        showInput: "true",
+        showInitial: "true"
+    });
+    django.jQuery('#id_title_bgcolor').spectrum({
+        type: "component",
+        showInput: "true",
+        showInitial: "true"
+    });
+
 });
 
 function getCookie(name) {

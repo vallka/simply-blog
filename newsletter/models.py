@@ -20,13 +20,13 @@ class NewsShot(models.Model):
     note = models.CharField(blank=True, null=True, max_length=25)
 
     @staticmethod
-    def add_html(text,title,slug):
+    def add_html(text,title,slug,title_color,title_bgcolor):
 
         style = """
 body {
     font-family: 'Open Sans', sans-serif !important;
     font-size: 1rem !important;
-    color: #7a7a7a !important;
+    color: #232323 !important;
     line-height: 1.25em !important;
     letter-spacing: initial !important;
     background-color: #f6f6f6 !important;
@@ -178,6 +178,26 @@ footer .unsubscribe {
     width: 2rem;
 }
         """
+        style2 = ''
+
+        if title_color:
+            style2 += f"""
+
+.blog_post .blog_header, .blog_post .blog_header a {{
+    color: {title_color} !important;
+}}
+
+            """
+
+        if title_bgcolor:
+            style2 += f"""
+
+.blog_post .blog_header {{
+    background-color: {title_bgcolor} !important;
+}}
+
+            """
+
 
         html = f"""
 <html>
@@ -191,6 +211,7 @@ footer .unsubscribe {
         <title>{title}</title>
         <style>
             {style}
+            {style2}
         </style>
     </head>
    <body>
