@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="utf-8">
@@ -35,7 +36,6 @@
 {% block content_container %}
 <div class="container" id="content-container">
     <section>
-        {{settings.TEMPLATE_SKIN}}
         {% include 'messages.html' %}
     </section>
 
@@ -92,22 +92,20 @@
                 </div>
                 <div class="col-12 col-md-4 col-lg-3">
                 <h4 class="footer">Follow Me</h4>
-                <a href="https://www.facebook.com/valentine.kulikov/" target="_blank"><i class="fa fa-2x fa-facebook-square"></i></a>
-                <a href="https://www.instagram.com/val2ka/" target="_blank"><i class="fa fa-2x fa-instagram"></i></a>
-                <a href="https://www.youtube.com/channel/UC4eUbuyNpUMLpacJnWwsbnA" target="_blank"><i class="fa fa-2x fa-youtube-square"></i></a>
-                <a href="https://twitter.com/val2ka" target="_blank"><i class="fa fa-2x fa-twitter-square"></i></a>
-                <a href="https://www.pinterest.co.uk/vallkadotcom/" target="_blank"><i class="fa fa-2x fa-pinterest-square"></i></a>
-                    </div>
+                <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-2x fa-facebook-square"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-2x fa-instagram"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-2x fa-youtube-square"></i></a>
+                <a href="https://twitter.com/" target="_blank"><i class="fa fa-2x fa-twitter-square"></i></a>
+                <a href="https://www.pinterest.co.uk/" target="_blank"><i class="fa fa-2x fa-pinterest-square"></i></a>
+                </div>
             </div>
             </div>
 
         <div class="copy">© 2021 - vallka.com </div>
 
     </footer>
-
-
-
     {% endblock footer %}
+
 </div>
 {% endblock content_container %}
 
@@ -155,3 +153,4 @@
 </body>
 </html>
 <!-- base.html -->  
+<!-- skin:{{settings.TEMPLATE_SKIN}} -->

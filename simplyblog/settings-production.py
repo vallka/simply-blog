@@ -28,6 +28,8 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['*']
 
+TEMPLATE_SKIN = 'gellifique'
+MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (610, 1500), 'quality': 80 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -44,6 +46,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 DEBUG = True
+
 
 sentry_sdk.init(
     environment="prod",
