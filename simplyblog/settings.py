@@ -87,6 +87,9 @@ TEMPLATES = [
     },
 ]
 
+#TEMPLATE_SKIN = 'gellifique'
+TEMPLATE_SKIN = 'vallka'
+
 WSGI_APPLICATION = 'simplyblog.wsgi.application'
 
 
