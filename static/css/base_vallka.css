@@ -175,6 +175,8 @@ h1, h2, h3 {
     font-size: 91.5%;
     color: #026684;
     text-align: left;
+    background-color: #daf6ff;
+   padding: 10px;
 }
 
 .breadcrumb {
