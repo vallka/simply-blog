@@ -6,23 +6,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dj',
-        'USER': 'dj',
+        'USER': 'gellifique',
         'PASSWORD': os.environ['POLLS_DB_PASSWORD'],
-        'HOST': '127.0.0.1',
+        #'HOST': '127.0.0.1',
+        'HOST': '172.31.17.32',
     },
     'presta': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gellifique',
         'USER': 'gellifique',
         'PASSWORD': os.environ['POLLS_DB_PASSWORD'],
-        'HOST': '127.0.0.1',
+        #'HOST': '127.0.0.1',
+        'HOST': '172.31.17.32',
     },
     'presta-testa': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gellifique_test',
         'USER': 'gel',
         'PASSWORD': os.environ['POLLS_DB_PASSWORD'],
-        'HOST': '127.0.0.1',
+        #'HOST': '127.0.0.1',
+        'HOST': '172.31.17.32',
     },
 }  
 
