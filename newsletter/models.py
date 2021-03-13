@@ -144,7 +144,7 @@ a {
     text-transform: initial !important;
     letter-spacing: initial !important;
     font-size: 1rem !important;
-    background-color: #d73672 !important;
+    background-color: #444 !important;
     color: white !important;
     display: inline-block !important;
     padding: 1rem !important;

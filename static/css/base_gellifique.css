@@ -137,7 +137,7 @@ h1, h2, h3 {
   text-transform: initial;
   letter-spacing: initial;
   font-size: 1rem;
-  background-color: #d73672;
+  background-color: #444;
   color: white;
   display: inline-block;
   padding: 1rem;
@@ -145,7 +145,7 @@ h1, h2, h3 {
 }
 
 .blog_post h4:hover, .blog_post h5:hover, .blog_post h6:hover {
-  background-color: #f766a2;
+  background-color: #666;
   color: #fff;
   text-decoration: none;
 }
@@ -156,6 +156,18 @@ h1, h2, h3 {
 .blog_post h4 a:hover, .blog_post h5 a:hover, .blog_post h6 a:hover {
   color: #fff;
   text-decoration: none;
+}
+
+.blog_post h4.read_more {
+  background-color:inherit;
+}
+
+.blog_post h4.read_more a {
+  color: #d73672;
+  font-style: italic;
+}
+.blog_post h4.read_more a:hover {
+  color: #2fb5d2;
 }
 
 .blog_post .blog_header {
