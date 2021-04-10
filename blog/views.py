@@ -54,6 +54,7 @@ class PostView(generic.DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
+        context['categories'] = Category.objects.all().order_by('id')
 
         this_dt = context['post'].blog_start_dt
 
