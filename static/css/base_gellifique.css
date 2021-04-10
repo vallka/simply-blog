@@ -232,10 +232,10 @@ dl, ol, ul {
   margin-bottom: 1rem;
 }
 
-.paginator {
+.blog_post .paginator {
 }
 
-.paginator-current {
+.blog_post .paginator-current {
   background-color: #d73672;
 }
 
