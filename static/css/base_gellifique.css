@@ -232,6 +232,13 @@ dl, ol, ul {
   margin-bottom: 1rem;
 }
 
+.paginator {
+}
+
+.paginator-current {
+  background-color: #d73672;
+}
+
 @media (min-width: 768px){
   .blog_post {
     border-radius: 5px;

@@ -68,21 +68,21 @@
 {% if is_paginated %}
 <div class="blog_post">
   {% if page_obj.has_previous() %}
-      <h4><a href="?page=1">&#x3008;</a></h4>
-      <h4><a href="?page={{ page_obj.previous_page_number() }}">&#x300A;</a></h4></h4>
+      <h4 class="paginator"><a href="?page=1">&#x3008;</a></h4>
+      <h4 class="paginator><a href="?page={{ page_obj.previous_page_number() }}">&#x300A;</a></h4></h4>
     {% endif %}
 
     {% for num in page_obj.paginator.page_range %}
       {% if page_obj.number == num %}
-      <h4><span>{{ num }}</span></h4>
+      <h4 class="paginator paginator-current>{{ num }}</h4>
       {% else %}
-      <h4><a href="?page={{ num }}">{{ num }}</a></h4>
+      <h4 class="paginator><a href="?page={{ num }}">{{ num }}</a></h4>
       {% endif %}
     {% endfor %}
 
     {% if page_obj.has_next() %}
-      <h4><a href="?page={{ page_obj.next_page_number() }}">&#x3009;</a></h4>
-      <h4><a href="?page={{ page_obj.paginator.num_pages }}">&#x300B;</a></h4>
+      <h4 class="paginator><a href="?page={{ page_obj.next_page_number() }}">&#x3009;</a></h4>
+      <h4 class="paginator><a href="?page={{ page_obj.paginator.num_pages }}">&#x300B;</a></h4>
     {% endif %}
 </div>
 {% endif %}
