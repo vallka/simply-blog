@@ -240,7 +240,10 @@ dl, ol, ul {
 }
 
 hr.after-post {
-  max-width: 610px;
+  max-width: 500px;
+  border-top: 3px solid #fff;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 @media (min-width: 768px){
