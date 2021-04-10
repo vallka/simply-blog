@@ -239,6 +239,10 @@ dl, ol, ul {
   background-color: #d73672;
 }
 
+hr.after-post {
+  max-width: 610px;
+}
+
 @media (min-width: 768px){
   .blog_post {
     border-radius: 5px;
