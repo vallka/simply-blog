@@ -69,7 +69,7 @@
 {% if is_paginated %}
 <div class="blog_post">
   {% if page_obj.has_previous() %}
-      <h4 class="paginator"><a href="?page=1">&#x300A;</a></h4>
+      {# <h4 class="paginator"><a href="?page=1">&#x300A;</a></h4> #}
       <h4 class="paginator"><a href="?page={{ page_obj.previous_page_number() }}">&#x3008;</a></h4></h4>
     {% endif %}
 
@@ -83,7 +83,7 @@
 
     {% if page_obj.has_next() %}
       <h4 class="paginator"><a href="?page={{ page_obj.next_page_number() }}">&#x3009;</a></h4>
-      <h4 class="paginator"><a href="?page={{ page_obj.paginator.num_pages }}">&#x300B;</a></h4>
+      {# <h4 class="paginator"><a href="?page={{ page_obj.paginator.num_pages }}">&#x300B;</a></h4> #}
     {% endif %}
 </div>
 {% endif %}
