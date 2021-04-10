@@ -7,7 +7,7 @@ from .models import *
 
 class ListView(generic.ListView):
     model = Post
-    paginate_by = 10
+    paginate_by = 5
     
     def get_queryset(self):
         return Post.objects.filter(
