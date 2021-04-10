@@ -30,18 +30,20 @@
     </button>
     
     <div class="collapse navbar-collapse" id="navbarColor01">
+        {% block header_nav %} 
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'blog:list' %}">Blog Home</a>
-        </li>
+          </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Blog Categories</a>
             <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'blog:list' %}">News and announcements</a>
+              <a class="dropdown-item" href="{% url 'blog:list' %}">News and announcements</a>
             </div>
-        </li>
+          </li>
         </ul>
-        {#}
+        {% endblock header_nav %} 
+          {#}
         <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>

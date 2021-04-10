@@ -81,7 +81,7 @@ class Post(models.Model):
     def look_up_gellifique_product(self):
         # [](https://www.gellifique.co.uk/en/pro-limited-edition/-periwinkle-hema-free(1342).html)
 
-        print ('look_up_gellifique_product')
+        #print ('look_up_gellifique_product')
 
         product_re = r"(\[\])\((https:\/\/www.gellifique.co.uk\/.+?\.html)\)"
         #product_re = r"\((https:\/\/www.gellifique.co.uk\/.+\.html)\)"

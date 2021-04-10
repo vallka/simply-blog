@@ -31,6 +31,7 @@ ga('require', 'ec');
     </button>
   
     <div class="collapse navbar-collapse" id="navbarColor01">
+      {% block header_nav %} 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'blog:list' %}">Blog Home</a>
@@ -42,6 +43,7 @@ ga('require', 'ec');
           </div>
         </li>
       </ul>
+      {% endblock header_nav %} 
       {#}
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
