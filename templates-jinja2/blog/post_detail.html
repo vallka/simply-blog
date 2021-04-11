@@ -36,7 +36,7 @@
       
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'blog:post' post.slug %}">
+          <a itemprop="item" href="{{ post.get_absolute_url() }}">
             <span itemprop="name">{{ breadcrumb }}</span>
           </a>
           <meta itemprop="position" content="2">
@@ -74,6 +74,8 @@
         {{post.formatted_markdown|safe}}
       </div>
     </div>
+    <div class="divider div-transparent div-dot"></div>
+
     <div class="blog_post">
       {% if prev%}
         <h4><a href="{% url 'blog:post' prev %}"> < Earlier </a></h4>

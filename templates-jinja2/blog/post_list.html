@@ -28,7 +28,7 @@
       
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'blog:post' post.slug %}">
+          <a itemprop="item" href="{{ post.get_absolute_url() }}">
             <span itemprop="name">{{ breadcrumb }}</span>
           </a>
           <meta itemprop="position" content="2">
@@ -60,7 +60,7 @@
   {% endif %}
     <div class="blog_post blog_post_{{post.id}}">
       <div class="blog_header">
-        <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
+        <h1><a href="{{ post.get_absolute_url() }}">{{post.title}}</a></h1>
         <div class="blog_date">
           Published {{ post.blog_start_dt }}
         </div>
@@ -69,11 +69,12 @@
         {{post.formatted_markdown|safe}}
       </div>
       {% if post.read_more %}
-        <h4 class="read_more"><a href="{% url 'blog:post' post.slug %}">Read more...</a></h4>
+        <h4 class="read_more"><a href="{{ post.get_absolute_url() }}">Read more...</a></h4>
       {% endif %}
 
     </div>
-    <hr class="after-post">
+    <div class="divider div-transparent div-dot"></div>
+
   {% endfor %}
 {% else %}
   <p>There are no posts yet.</p>

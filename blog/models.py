@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.urls import reverse
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
@@ -77,6 +78,9 @@ class Post(models.Model):
         self.look_up_gellifique_product()
             
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return '/blog/' + str(self.slug)        
 
     def look_up_gellifique_product(self):
         # [](https://www.gellifique.co.uk/en/pro-limited-edition/-periwinkle-hema-free(1342).html)
