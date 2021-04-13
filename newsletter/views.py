@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse,JsonResponse
 from django.conf import settings
+from django.db import connection
 
 import logging
 logger = logging.getLogger(__name__)
@@ -114,3 +115,20 @@ def sendtest(request,slug):
 
 
     return JsonResponse({'result':'ok'})    
+
+@require_POST
+def stats(request,slug):
+
+    post = Post.objects.get(slug=slug)
+
+    print('stats:',slug,post.id)
+    logger.info("stats:%s",slug)
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT COUNT(send_dt),COUNT(received_dt),COUNT(opened_dt),COUNT(clicked_dt) " + 
+            "FROM newsletter_newsshot WHERE blog_id=%s", [post.id])
+
+        row = cursor.fetchone()
+        return JsonResponse({'result':'ok','data':row})        
+
+    return JsonResponse({'result':'error'})        

@@ -9,4 +9,5 @@ urlpatterns = [
     path('click/<str:uuid>/', click_redirect, name='click'),
     path('notification/', notification, name='notification'),
     path('sendtest/<str:slug>', sendtest, name='sendtest'),
+    path('stats/<str:slug>', stats, name='stats'),
 ]

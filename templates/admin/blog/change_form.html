@@ -177,10 +177,48 @@ var simplemde = new EasyMDE({
 django.jQuery(function(){
     django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
     django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
+    django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
     django.jQuery('#btn-preview').click(function(){
         window.open('/blog/'+django.jQuery('#id_slug').val())
     });
 
+    django.jQuery('#btn-stats').click(function(e){
+        const slug = django.jQuery('#id_slug').val()
+        const token = getCookie('csrftoken');
+        console.info('sending:' + slug );
+
+        django.jQuery.ajax({
+            url: '/blog/newsletter/stats/'+slug,
+            type: 'post',
+            headers: {
+                "X-CSRFToken": token
+            },
+            dataType: 'json',
+            success: function (gooddata) {
+                console.info(gooddata);
+
+                if (gooddata['result']=='ok') {
+                    const n0 = gooddata['data'][0];
+                    const n1 = gooddata['data'][1];
+                    const n2 = gooddata['data'][2];
+                    const n3 = gooddata['data'][3];
+
+                    django.jQuery('#stats-row').remove()
+                    django.jQuery('.submit-row').after('<div id="stats-row">Sent:'+n0+
+                                    ' &bull; Received:'+n1+' &bull; Opened:'+n2+' &bull; Clicked:'+n3+'</div>')                    
+                }
+                else {
+                    alert(gooddata['error'])
+                }
+            },
+            error:  function (errdata) {
+                console.info('error');
+                console.info(errdata);
+                alert(errdata.statusText)
+            },
+        });
+    });
+        
 
     django.jQuery('#btn-send-test').click(function(e){
         if (!confirm("Are you sure to do this?"))
