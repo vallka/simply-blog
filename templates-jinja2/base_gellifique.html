@@ -34,14 +34,13 @@ ga('require', 'ec');
       {% block header_nav %} 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog:list' %}">Blog Home</a>
+          <a class="nav-link" href="{% url 'blog:list' %}">Latest</a>
         </li>
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Blog Categories</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'blog:list' %}">News and announcements</a>
-          </div>
-        </li>
+        {% for cat in categories %}
+          {% if cat.category[0]!='_' %}
+            <a class="nav-link" href="{% url 'blog:post-by-cat' cat.slug%}">{{cat.category}}</a>
+          {% endif %}
+        {% endfor %}
       </ul>
       {% endblock header_nav %} 
       {#}

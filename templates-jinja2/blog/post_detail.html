@@ -9,20 +9,6 @@
 {{post.json_ld|safe}}
 {% endblock json_ld %}
 
-{% block header_nav %} 
-<ul class="navbar-nav mr-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'blog:list' %}">Latest</a>
-  </li>
-  {% for cat in categories %}
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'blog:post-by-cat' cat.slug%}">{{cat.category}}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% endblock header_nav %} 
-
-
 {% block breadcrumb %}
 <nav data-depth="3" class="breadcrumb hidden-sm-down">
   <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
