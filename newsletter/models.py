@@ -231,7 +231,7 @@ footer .unsubscribe {
     <!-- end text -->
 
 
-    <p><img width="60%" src="https://www.gellifique.co.uk/static/images/newsletter_footer.png"</p>
+    <p><img width="90%" src="https://www.gellifique.co.uk/static/images/newsletter_footer2.png"</p>
     <hr />
 
                 </div>
