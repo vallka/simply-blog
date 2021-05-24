@@ -19,11 +19,14 @@ body {
 {% endif %}
 
 
-{{ request.GET.get('w') }}
-{{ request.GET.get('s') }}
+{% if request.GET.get('w') %}
+  font-weight: {{request.GET.get('w')}};
+{% endif %}
 
-font-weight: 400;
-font-size: 15px;
+{% if request.GET.get('s') %}
+  font-size: {{request.GET.get('s')}}px;
+{% endif %}
+
 }
 
 </style>
