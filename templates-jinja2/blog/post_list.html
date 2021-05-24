@@ -14,7 +14,9 @@ body {
 
 
 
-{{ request.GET }}
+{{ request.GET.get('f') }}
+{{ request.GET.get('w') }}
+{{ request.GET.get('s') }}
 
 </style>
 {% endblock %}
