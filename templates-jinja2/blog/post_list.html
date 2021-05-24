@@ -5,18 +5,26 @@
 {% block skin_css %}
 {{ super() }}
 <style>
+
 body {
+
+
+{% if request.GET.get('f')=='robotomono' %}
   font-family: 'Roboto Mono', monospace;
-  /*font-family: 'Roboto', arial;*/
-  font-weight: 400;
-  font-size: 15px;
-}
+
+{% endif %}
+
+{% if request.GET.get('f')=='roboto' %}
+  font-family: 'Roboto', arial;
+{% endif %}
 
 
-
-{{ request.GET.get('f') }}
 {{ request.GET.get('w') }}
 {{ request.GET.get('s') }}
+
+font-weight: 400;
+font-size: 15px;
+}
 
 </style>
 {% endblock %}
