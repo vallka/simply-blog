@@ -17,6 +17,9 @@ class ListView(generic.ListView):
             cat = Category.objects.get(slug=cat_slug)
             print (cat)
             posts = posts.filter(category=cat)
+        else:
+            cat_ex = Category.objects.filter(category__startswith='_')
+            posts = posts.exclude(category__in=cat_ex)
 
         self.request.session['category'] = cat_slug
 
