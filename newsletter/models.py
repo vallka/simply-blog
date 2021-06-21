@@ -151,6 +151,13 @@ a {
     border-radius: 5px !important;
 }
 
+.blog_post ol, .blog_post ul {
+    margin-top: 0;
+    text-align: left;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 footer {
     text-align: center !important;
     font-size: 0.8rem !important;
