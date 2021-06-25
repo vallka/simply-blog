@@ -96,6 +96,11 @@ footer i,footer .copy {
   color: #d73672;
 }
 
+.navbar {
+  font-family: 'corporative-regular';
+  font-size: 1rem;
+}
+
 
 .nav-link, .nav-link a {
   color: white !important;
@@ -209,6 +214,8 @@ h1, h2, h3 {
   list-style: none;
   background-color: #f6f6f6;
   border-radius: 0;
+  font-family: 'corporative-regular';
+  font-size: 1rem;
 }
 
 .breadcrumb ol {
