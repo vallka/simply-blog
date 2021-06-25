@@ -141,14 +141,16 @@ h1, h2, h3 {
 }
 
 .h1, h1 {
-  font-size: 1.375rem;
   margin-bottom: 1.563rem;
   color: #1a1a1a;
+  font-size: 2rem;
 }
 .h2, h2 {
   color: #d73672;
+  font-size: 1.5rem;
 }
 .h3, h3 {
+  font-size: 1.25rem;
   color: #1a1a1a;
 }
 
