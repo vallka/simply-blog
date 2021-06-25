@@ -2,10 +2,18 @@ body {
   font-family: mr-eaves-modern, sans-serif;
   font-weight: 300;
   /*font-family: 'Open Sans', sans-serif;*/
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #7a7a7a;
-  line-height: 1.25em;
+  line-height: 1.1em;
   letter-spacing: initial;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'corporative-regular';
+  src: url('corporative-regular-webfont.woff2') format('woff2'),
+      url('corporative-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 footer {
