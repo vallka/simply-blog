@@ -9,9 +9,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'corporative-regular';
-  src: url('corporative-regular-webfont.woff2') format('woff2'),
-      url('corporative-regular-webfont.woff') format('woff');
+  font-family: 'corporative-bold';
+  src: url('corporative-bold-webfont.woff2') format('woff2'),
+      url('corporative-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -123,8 +123,6 @@ footer i,footer .copy {
 
 h1, h2, h3 {
     margin-bottom: .5rem;
-    font-family: inherit;
-    font-weight: 700;
     line-height: 1.1;
     color: #d73672;
     text-transform: initial;
