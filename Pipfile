@@ -20,6 +20,8 @@ update = "*"
 pillow = "*" 
 beautifulsoup4 = "*"
 markdown = "*"
+instaloader = "*"
+imagekitio = "*"
 
 [requires]
 python_version = "3"
