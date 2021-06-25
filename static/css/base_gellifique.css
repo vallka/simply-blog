@@ -8,12 +8,17 @@ body {
   letter-spacing: initial;
 }
 
-h1, h2, h3, h4, h5, h6 {
+@font-face {
   font-family: 'corporative-bold';
   src: url('corporative-bold-webfont.woff2') format('woff2'),
-      url('corporative-bold-webfont.woff') format('woff');
+       url('corporative-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'corporative-bold';
 }
 
 footer {
