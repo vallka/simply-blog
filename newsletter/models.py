@@ -23,14 +23,29 @@ class NewsShot(models.Model):
     def add_html(text,title,slug,title_color,title_bgcolor):
 
         style = """
-body {
-    font-family: 'Open Sans', sans-serif !important;
-    font-size: 1rem !important;
-    color: #232323 !important;
-    line-height: 1.25em !important;
-    letter-spacing: initial !important;
-    background-color: #f6f6f6 !important;
+@font-face {
+  font-family: 'corporative-regular';
+  src: url('https://www.gellifique.co.uk/static/css/corporative-regular-webfont.woff2') format('woff2'),
+       url('https://www.gellifique.co.uk/static/css/corporative-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
+
+
+body {
+  font-family: mr-eaves-modern, sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 1.3rem !important;
+  color: #232323 !important;
+  background-color: #f6f6f6 !important;
+  line-height: 1.1em !important;
+  letter-spacing: initial !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'corporative-regular';
+}
+
 
 .blog_content {
     margin: 0 !important;
@@ -86,7 +101,7 @@ h1, h2, h3 {
 }
 
 .h1, h1 {
-    font-size: 1.375rem !important;
+    font-size: 1.5rem !important;
     margin-bottom: 1.563rem !important;
     padding-bottom: 0.5rem !important;
     color: black !important;
@@ -94,9 +109,26 @@ h1, h2, h3 {
 
 .h2, h2 {
   color: #d73672 !important;
+  font-size: 1.25rem !important;
 }
 .h3, h3 {
   color: #1a1a1a !important;
+  font-size: 1.1rem !important;
+}
+
+.navbar {
+  font-family: 'corporative-regular' !important;
+  font-size: 1rem !important;
+}
+
+.breadcrumb {
+  padding: .75rem 1rem !important;
+  margin-bottom: 1rem !important;
+  list-style: none !important;
+  background-color: #f6f6f6 !important;
+  border-radius: 0 !important;
+  font-family: 'corporative-regular' !important;
+  font-size: 1rem !important;
 }
 
 hr {
@@ -213,7 +245,8 @@ footer .unsubscribe {
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://use.typekit.net/oki2ljd.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <title>{title}</title>
         <style>
