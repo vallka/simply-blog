@@ -24,7 +24,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'corporative-regular';
+  font-family: 'corporative-bold';
 }
 
 footer {
@@ -34,7 +34,7 @@ footer {
     padding: 2rem 3rem;
     text-align: left;
     font-size: 16px;
-    font-family: 'corporative-regular';
+    font-family: 'corporative-bold';
   }
   
   footer img {
@@ -98,7 +98,7 @@ footer i,footer .copy {
 }
 
 .navbar {
-  font-family: 'corporative-regular';
+  font-family: 'corporative-bold';
   font-size: 1rem;
 }
 
@@ -215,7 +215,7 @@ h1, h2, h3 {
   list-style: none;
   background-color: #f6f6f6;
   border-radius: 0;
-  font-family: 'corporative-regular';
+  font-family: 'corporative-bold';
   font-size: 1rem;
 }
 

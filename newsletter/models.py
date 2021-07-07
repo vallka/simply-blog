@@ -30,6 +30,13 @@ class NewsShot(models.Model):
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'corporative-bold';
+  src: url('corporative-bold-webfont.woff2') format('woff2'),
+       url('corporative-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 body {
@@ -43,7 +50,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'corporative-regular';
+  font-family: 'corporative-bold';
 }
 
 
@@ -117,7 +124,7 @@ h1, h2, h3 {
 }
 
 .navbar {
-  font-family: 'corporative-regular' !important;
+  font-family: 'corporative-bold' !important;
   font-size: 1rem !important;
 }
 
@@ -127,7 +134,7 @@ h1, h2, h3 {
   list-style: none !important;
   background-color: #f6f6f6 !important;
   border-radius: 0 !important;
-  font-family: 'corporative-regular' !important;
+  font-family: 'corporative-bold' !important;
   font-size: 1rem !important;
 }
 
