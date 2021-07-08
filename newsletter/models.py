@@ -23,26 +23,10 @@ class NewsShot(models.Model):
     def add_html(text,title,slug,title_color,title_bgcolor):
 
         style = """
-@font-face {
-  font-family: 'corporative-regular';
-  src: url('https://www.gellifique.co.uk/static/css/corporative-regular-webfont.woff2') format('woff2'),
-       url('https://www.gellifique.co.uk/static/css/corporative-regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'corporative-bold';
-  src: url('https://www.gellifique.co.uk/static/css/corporative-bold-webfont.woff2') format('woff2'),
-       url('https://www.gellifique.co.uk/static/css/`corporative-bold-webfont.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
-
 
 .blog_content {
-  font-family: mr-eaves-modern, sans-serif !important;
-  font-weight: 300 !important;
-  font-size: 1.3rem !important;
+  font-family: arial, sans-serif !important;
+  font-size: 1rem !important;
   color: #232323 !important;
   background-color: #f6f6f6 !important;
   line-height: 1.1em !important;
@@ -53,7 +37,6 @@ class NewsShot(models.Model):
 
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'corporative-bold';
   font-weight: 700 !important;
 }
 
@@ -124,19 +107,13 @@ h1, h2, h3 {
 }
 
 .navbar {
-  font-family: mr-eaves-modern, sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 300 !important;
   background-color: #1a1a1a !important;
-  text-transform: uppercase !important;
 }
 
 a.navbar-item {
-    color: #fff !important;
-    background-color: #1a1a1a !important;
-    margin: 2px 2px;
-  font-size: 14px !important;
-  font-weight: 300 !important;
+  color: #fff !important;
+  margin: 2px 2px;
+  font-size: 11px !important;
   background-color: #1a1a1a !important;
   text-transform: uppercase !important;
 }
@@ -151,7 +128,6 @@ a.navbar-item:hover {
   list-style: none !important;
   background-color: #f6f6f6 !important;
   border-radius: 0 !important;
-  font-family: 'corporative-bold' !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
 }
