@@ -34,7 +34,7 @@ class NewsShot(models.Model):
   font-family: 'corporative-bold';
   src: url('https://www.gellifique.co.uk/static/css/corporative-bold-webfont.woff2') format('woff2'),
        url('https://www.gellifique.co.uk/static/css/`corporative-bold-webfont.woff') format('woff');
-  font-weight: normal;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -51,6 +51,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'corporative-bold';
+  font-weight: 700 !important;
 }
 
 
@@ -94,12 +95,12 @@ h1, h2, h3, h4, h5, h6 {
 .blog_content .header {
     max-width: 642px !important;
     margin: 0 auto !important;
+    background-color: #1a1a1a !important;
 }
 
 h1, h2, h3 {
     margin-top: 0 !important;
     margin-bottom: .5rem !important;
-    font-family: inherit !important;
     font-weight: 700 !important;
     line-height: 1.1 !important;
     color: #d73672 !important;
@@ -124,8 +125,20 @@ h1, h2, h3 {
 }
 
 .navbar {
-  font-family: 'corporative-bold' !important;
-  font-size: 1rem !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  background-color: #1a1a1a !important;
+  text-transform: uppercase !important;
+}
+
+.navbar a {
+    color: #fff !important;
+    background-color: #1a1a1a !important;
+    margin: 2px 2px;
+}
+
+.navbar a:hover {
+    color: #d73672 !important;
 }
 
 .breadcrumb {
@@ -136,6 +149,7 @@ h1, h2, h3 {
   border-radius: 0 !important;
   font-family: 'corporative-bold' !important;
   font-size: 1rem !important;
+  font-weight: 700 !important;
 }
 
 hr {
@@ -155,6 +169,10 @@ a {
     color: #1a1a1a !important;
     text-decoration: none !important;
     background-color: transparent !important;
+}
+
+.blog_post p a {
+    color: #2fb5d2  !important;
 }
 
 .blog_post h4, .blog_post h5, .blog_post h6 {
@@ -263,14 +281,22 @@ footer .unsubscribe {
     </head>
    <body>
         <img src="https://www.gellifique.co.uk/blog/newsletter/pixel/?uuid=####uuid####" style="display:none">
-        <nav class="navbar">
-            <div class="navbar-menu">
-                <a class="navbar-item" href="https://www.gellifique.co.uk/en/shop-now(62)">SHOP NOW</a>
-                <a class="navbar-item" href="https://www.gellifique.co.uk/en/outlet(21)">OUTLET</a>
-            </div>
-        </nav>
         <div class="blog_content">
-            <div class="header"><img src="https://www.gellifique.co.uk/static/images/newsletter_header.jpg"></div>
+            <div class="header"><img class="logo img-responsive" src="https://www.gellifique.co.uk/img/logo-professional-263.png" alt="GellifiQue Professional">
+                <nav class="navbar">
+                    <div class="navbar-menu">
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/shop-now(62)">SHOP NOW</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/outlet(21)">OUTLET</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/content/delivery(1)">Delivery</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/content/opportunities(13)">Opportunities</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/content/category/brochures(3)">BROCHURES</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/content/category/health-safety(4)">HEALTH & SAFETY</a>
+                        <a class="navbar-item" href="https://blog.gellifique.co.uk/blog/">BLOG</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/content/SHOWROOM(12)">Showroom</a>
+                        <a class="navbar-item" href="https://www.gellifique.co.uk/en/content/nail-salon(21)">Nail Salon</a>
+                    </div>
+                </nav>
+            </div>
             <div class="blog_post">
 
                 <div class="blog_header">
