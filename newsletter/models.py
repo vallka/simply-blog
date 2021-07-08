@@ -131,13 +131,17 @@ h1, h2, h3 {
   text-transform: uppercase !important;
 }
 
-.navbar a {
+a.navbar-item {
     color: #fff !important;
     background-color: #1a1a1a !important;
     margin: 2px 2px;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  background-color: #1a1a1a !important;
+  text-transform: uppercase !important;
 }
 
-.navbar a:hover {
+a.navbar-item:hover {
     color: #d73672 !important;
 }
 
