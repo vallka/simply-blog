@@ -32,8 +32,8 @@ class NewsShot(models.Model):
 }
 @font-face {
   font-family: 'corporative-bold';
-  src: url('corporative-bold-webfont.woff2') format('woff2'),
-       url('corporative-bold-webfont.woff') format('woff');
+  src: url('https://www.gellifique.co.uk/static/css/corporative-bold-webfont.woff2') format('woff2'),
+       url('https://www.gellifique.co.uk/static/css/`corporative-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -263,6 +263,12 @@ footer .unsubscribe {
     </head>
    <body>
         <img src="https://www.gellifique.co.uk/blog/newsletter/pixel/?uuid=####uuid####" style="display:none">
+        <nav class="navbar">
+            <div class="navbar-menu">
+                <a class="navbar-item" href="https://www.gellifique.co.uk/en/shop-now(62)">SHOP NOW</a>
+                <a class="navbar-item" href="https://www.gellifique.co.uk/en/outlet(21)">OUTLET</a>
+            </div>
+        </nav>
         <div class="blog_content">
             <div class="header"><img src="https://www.gellifique.co.uk/static/images/newsletter_header.jpg"></div>
             <div class="blog_post">
