@@ -113,7 +113,7 @@ h1, h2, h3 {
 a.navbar-item {
   color: #fff !important;
   margin: 2px 2px;
-  font-size: 11px !important;
+  font-size: 10px !important;
   background-color: #1a1a1a !important;
   text-transform: uppercase !important;
 }
