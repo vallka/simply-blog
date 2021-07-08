@@ -39,7 +39,7 @@ class NewsShot(models.Model):
 }
 
 
-body {
+.blog_content {
   font-family: mr-eaves-modern, sans-serif !important;
   font-weight: 300 !important;
   font-size: 1.3rem !important;
@@ -47,7 +47,10 @@ body {
   background-color: #f6f6f6 !important;
   line-height: 1.1em !important;
   letter-spacing: initial !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'corporative-bold';
@@ -55,10 +58,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.blog_content {
-    margin: 0 !important;
-    padding: 0 !important;
-}
 
 .blog_post {
     max-width: 610px !important;
@@ -125,6 +124,7 @@ h1, h2, h3 {
 }
 
 .navbar {
+  font-family: mr-eaves-modern, sans-serif !important;
   font-size: 14px !important;
   font-weight: 300 !important;
   background-color: #1a1a1a !important;
