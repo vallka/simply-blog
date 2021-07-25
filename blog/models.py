@@ -88,7 +88,7 @@ class Post(models.Model):
         #print ('look_up_gellifique_product')
 
         product_re = r"(\[\])\((https:\/\/www.gellifique.co.uk\/.+?\.html)\)"
-        product_re = r"(\[\])\((https:\/\/(www.)?gellifique.((co.uk)|(eu))\/.+?\.html)\)"
+        #product_re = r"(\[\])\((https:\/\/gellifique.eu\/.+?\.html)\)"
         ##product_re = r"\((https:\/\/www.gellifique.co.uk\/.+\.html)\)"
 
         prods = re.findall(product_re,self.text)
