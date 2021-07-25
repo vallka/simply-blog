@@ -317,6 +317,70 @@ footer .unsubscribe {
 </html>
         """
 
+        #forget the above, now re-do for spanish:
+
+        html = f"""
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+        <link rel="stylesheet" href="https://use.typekit.net/oki2ljd.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>{title}</title>
+        <style>
+            {style}
+            {style2}
+        </style>
+    </head>
+   <body>
+        <img src="https://www.gellifique.co.uk/blog/newsletter/pixel/?uuid=####uuid####" style="display:none">
+        <div class="blog_content">
+            <div class="header"><img class="logo img-responsive" src="https://www.gellifique.eu/img/logo-professional-263.png" alt="GellifiQue Professional">
+            </div>
+            <div class="blog_post">
+
+                <div class="blog_header">
+                    <h1><a href="https://www.gellifique.co.uk/blog/{slug}">{title}</a></h1>
+                </div>
+                <div class="blog_body">
+
+
+    <!-- start text -->
+    {text}
+    <!-- end text -->
+
+
+    <p><img width="80%" src="https://www.gellifique.co.uk/static/images/newsletter_footer2.png"</p>
+    <hr />
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="www">
+                <a href="https://www.gellifique.eu/">https://www.gellifique.eu/</a>
+            </div>
+            <div class="social">
+                <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/facebook-square-brands.png"></a>
+                <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/instagram-square-brands.png"></a>
+                <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://www.gellifique.co.uk/static/images/youtube-square-brands.png"></a>
+                <a href="https://twitter.com/gellifique" target="_blank"><img src="https://www.gellifique.co.uk/static/images/twitter-square-brands.png"></a>
+                <a href="https://uk.pinterest.com/gellifique/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/pinterest-square-brands.png"></a>
+            </div>
+            <div class="unsubscribe">
+                <a href="https://gellifique.eu/es/identidad">unsubscribe from this list</a> |     
+                <a href="https://gellifique.eu/es/identidad">update subscription preferences</a>
+            </div>
+        </footer>
+    </body>
+</html>
+        """
+
+
         return html
 
 

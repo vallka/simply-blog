@@ -51,7 +51,8 @@ class Command(BaseCommand):
             html = NewsShot.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug,newsletter_post[0].title_color,newsletter_post[0].title_bgcolor)
             #print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
 
-            custs = self.get_customers(newsletter_post[0].id)
+            #custs = self.get_customers(newsletter_post[0].id)
+            custs = self.get_customers_eu(newsletter_post[0].id)
 
             if len(custs):
                 dolog = True
@@ -123,7 +124,7 @@ class Command(BaseCommand):
             with connections['default'].cursor() as cursor:
                 sql = """
                 SELECT id_customer,email,firstname,lastname,id_lang FROM gellifique.ps17_customer c 
-                    where active=1 and newsletter=1
+                    where active=1 and newsletter=1 and id_shop=1
                     and c.id_customer not IN (
                     select customer_id from dj.newsletter_newsshot where customer_id=c.id_customer
                     and blog_id=%s
@@ -140,4 +141,26 @@ class Command(BaseCommand):
 
         return row
 
+    def get_customers_eu(self,blog_id):
+
+            if not MOCK:
+                with connections['default'].cursor() as cursor:
+                    sql = """
+                    SELECT id_customer,email,firstname,lastname,id_lang FROM gellifique2.ps17_customer c 
+                        where active=1 and id_shop=2
+                        and c.id_customer not IN (
+                        select customer_id from dj.newsletter_newsshot where customer_id=c.id_customer
+                        and blog_id=%s
+                        )
+                        ORDER BY c.id_customer  DESC
+                        limit 0,50
+                    """
+                    ###    and c.email like '%%@vallka.com'
+
+                    cursor.execute(sql,[blog_id,])
+                    row = cursor.fetchall()
+            else:
+                row = [(12345,'vallka@vallka.com','Val','Kool,1')]
+
+            return row
 
