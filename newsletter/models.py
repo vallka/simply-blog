@@ -317,9 +317,9 @@ footer .unsubscribe {
 </html>
         """
 
-        #forget the above, now re-do for spanish:
+        #now re-do for spanish (unused now)
 
-        html = f"""
+        html_eu = f"""
 <html>
     <head>
         <meta charset="UTF-8">

@@ -51,8 +51,8 @@ class Command(BaseCommand):
             html = NewsShot.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug,newsletter_post[0].title_color,newsletter_post[0].title_bgcolor)
             #print(self.add_html(newsletter_post[0].formatted_markdown,newsletter_post[0].title,newsletter_post[0].slug))
 
-            #custs = self.get_customers(newsletter_post[0].id)
-            custs = self.get_customers_eu(newsletter_post[0].id)
+            custs = self.get_customers(newsletter_post[0].id)
+            #custs = self.get_customers_eu(newsletter_post[0].id)
 
             if len(custs):
                 dolog = True

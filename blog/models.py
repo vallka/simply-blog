@@ -39,7 +39,7 @@ class Post(models.Model):
 
     blog = models.BooleanField(_("Publish to blog"),default=False)
     blog_start_dt = models.DateTimeField(_("Publish Date/Time"), blank=True, null=True)
-    email = models.BooleanField(_("Send as newsletter to EU customers"),default=False)
+    email = models.BooleanField(_("Send as newsletter to UK customers"),default=False)
     email_send_dt = models.DateTimeField(_("Send Date/Time"), blank=True, null=True)
 
     class EmailStatus(models.IntegerChoices):
@@ -87,8 +87,8 @@ class Post(models.Model):
 
         #print ('look_up_gellifique_product')
 
-        product_re = r"(\[\])\((https:\/\/www.gellifique.co.uk\/.+?\.html)\)"
         product_re = r"(\[\])\((https:\/\/gellifique.eu\/.+?\.html)\)"
+        product_re = r"(\[\])\((https:\/\/www.gellifique.co.uk\/.+?\.html)\)"
         ##product_re = r"\((https:\/\/www.gellifique.co.uk\/.+\.html)\)"
 
         prods = re.findall(product_re,self.text)
