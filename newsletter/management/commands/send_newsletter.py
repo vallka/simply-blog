@@ -15,7 +15,7 @@ from newsletter.models import *
 import logging
 logger = logging.getLogger(__name__)
 
-MOCK = True
+MOCK = False
 
 
 def my_replace(match):
