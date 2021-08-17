@@ -73,6 +73,9 @@ body {
       .blog_post_{{post.id}} .blog_header {
         background-color: {{post.title_bgcolor}} !important;
       }
+      .blog_post_{{post.id}} p a {
+          border-bottom-color: {{post.title_bgcolor}} !important;
+      }
     </style>
   {% endif %}
     <div class="blog_post blog_post_{{post.id}}">

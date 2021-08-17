@@ -290,13 +290,20 @@ hr.after-post {
 
 .blog_post img {
   max-width: 100%;
+  display: block;
+  margin: auto;
 }
 
 .blog_post p {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .blog_post p a {
-  color: #2fb5d2;
+  text-decoration: none;
+  border-bottom: 3px solid #2fb5d2;
+  font-weight: 600;
 }
 
 
