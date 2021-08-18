@@ -151,9 +151,25 @@ a {
     background-color: transparent !important;
 }
 
-.blog_post p a {
-    color: #2fb5d2  !important;
+.blog_post img {
+  max-width: 100%;
+  display: block;
+  margin: auto;
 }
+
+.blog_post p {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.blog_post p a {
+  color: #5a5a5a;
+  text-decoration: none;
+  border-bottom: 3px solid #2fb5d2;
+  font-weight: 600;
+}
+
 
 .blog_post h4, .blog_post h5, .blog_post h6 {
     text-transform: initial !important;
@@ -238,7 +254,13 @@ footer .unsubscribe {
 
 .blog_post .blog_header {{
     background-color: {title_bgcolor} !important;
+    
 }}
+
+.blog_post p a {{
+    border-bottom-color: {title_bgcolor} !important;
+}}
+
 
             """
 
@@ -280,7 +302,7 @@ footer .unsubscribe {
             <div class="blog_post">
 
                 <div class="blog_header">
-                    <h1><a href="https://www.gellifique.co.uk/blog/{slug}">{title}</a></h1>
+                    <h1><a href="https://blog.gellifique.co.uk/blog/{slug}">{title}</a></h1>
                 </div>
                 <div class="blog_body">
 
@@ -290,7 +312,7 @@ footer .unsubscribe {
     <!-- end text -->
 
 
-    <p><img width="80%" src="https://www.gellifique.co.uk/static/images/newsletter_footer2.png"</p>
+    <p><img width="80%" src="https://blog.gellifique.co.uk/static/images/newsletter_footer2.png"</p>
     <hr />
 
                 </div>
@@ -302,11 +324,11 @@ footer .unsubscribe {
                 <a href="https://www.gellifique.co.uk/">https://www.gellifique.co.uk/</a>
             </div>
             <div class="social">
-                <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/facebook-square-brands.png"></a>
-                <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/instagram-square-brands.png"></a>
-                <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://www.gellifique.co.uk/static/images/youtube-square-brands.png"></a>
-                <a href="https://twitter.com/gellifique" target="_blank"><img src="https://www.gellifique.co.uk/static/images/twitter-square-brands.png"></a>
-                <a href="https://uk.pinterest.com/gellifique/" target="_blank"><img src="https://www.gellifique.co.uk/static/images/pinterest-square-brands.png"></a>
+                <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/facebook-square-brands.png"></a>
+                <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/instagram-square-brands.png"></a>
+                <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/youtube-square-brands.png"></a>
+                <a href="https://twitter.com/gellifique" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/twitter-square-brands.png"></a>
+                <a href="https://uk.pinterest.com/gellifique/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/pinterest-square-brands.png"></a>
             </div>
             <div class="unsubscribe">
                 <a href="https://www.gellifique.co.uk/en/identity">unsubscribe from this list</a> |     
