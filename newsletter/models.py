@@ -35,6 +35,10 @@ class NewsShot(models.Model):
   padding: 0 !important;
 }
 
+@media (max-width: 768px){
+  font-size: 1.5rem !important;
+  line-height: 1.5em !important;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700 !important;
@@ -220,7 +224,9 @@ footer {
 }
 
 footer .www a {
-    color: #d73672 !important;
+    /*color: #d73672 !important;*/
+    color: #1a1a1a !important;
+    
 }
 footer .www {
     font-size: 1rem;
@@ -231,7 +237,8 @@ footer .unsubscribe {
     font-style: italic !important;
 }
 .social i {
-    color: #d73672 !important;
+    /*color: #d73672 !important;*/
+    color: #1a1a1a !important;
 }
 
 .social img {
