@@ -37,8 +37,8 @@ class NewsShot(models.Model):
 
 @media (max-width: 768px){
   .blog_content {
-    font-size: 1.5rem !important;
-    line-height: 1.5em !important;
+    font-size: 1.25rem !important;
+    line-height: 1.25em !important;
   }
 }
 
@@ -333,11 +333,11 @@ footer .unsubscribe {
                 <a href="https://www.gellifique.co.uk/">https://www.gellifique.co.uk/</a>
             </div>
             <div class="social">
-                <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/facebook-square-brands.png"></a>
-                <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/instagram-square-brands.png"></a>
-                <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/youtube-square-brands.png"></a>
-                <a href="https://twitter.com/gellifique" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/twitter-square-brands.png"></a>
-                <a href="https://uk.pinterest.com/gellifique/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/pinterest-square-brands.png"></a>
+                <a href="https://www.facebook.com/gellifiqueltd/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/facebook-square-brands-bl.png"></a>
+                <a href="https://www.instagram.com/gellifique_gel_colour/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/instagram-square-brands-bl.png"></a>
+                <a href="https://www.youtube.com/channel/UC8EB7U4DV4n_8BY8wprBXOQ" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/youtube-square-brands-bl.png"></a>
+                <a href="https://twitter.com/gellifique" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/twitter-square-brands-bl.png"></a>
+                <a href="https://uk.pinterest.com/gellifique/" target="_blank"><img src="https://blog.gellifique.co.uk/static/images/pinterest-square-brands-bl.png"></a>
             </div>
             <div class="unsubscribe">
                 <a href="https://www.gellifique.co.uk/en/identity">unsubscribe from this list</a> |     
