@@ -36,8 +36,10 @@ class NewsShot(models.Model):
 }
 
 @media (max-width: 768px){
-  font-size: 1.5rem !important;
-  line-height: 1.5em !important;
+  .blog_content {
+    font-size: 1.5rem !important;
+    line-height: 1.5em !important;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
