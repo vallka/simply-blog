@@ -77,9 +77,12 @@ def update_year(y):
                 gi = Gellifinsta.objects.get(shortcode=sc)
             except Gellifinsta.DoesNotExist:    
                 txt = requests.get(txt_url)
+                txt_text = ''
                 if txt.status_code==200:
                     print(txt.text)
                     print(txt.encoding)
+                    txt_text = txt.text.encode('utf-8','ignore').decode('ascii','ignore')
+                    print(txt_text)
                 else:
                     print(txt.status_code)
 
@@ -97,7 +100,7 @@ def update_year(y):
 
                 Gellifinsta.objects.create(shortcode=sc,
                         taken_at_datetime=dts,
-                        caption=txt.text,
+                        caption=txt_text,
                         file_path=f['filePath'],
                         url=f['url'],
                         username='gellifique_professional',

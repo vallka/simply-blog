@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import mark_safe
 
 
 # Create your models here.
@@ -20,7 +21,12 @@ class Gellifinsta(models.Model):
     tags = models.TextField(_("Tags"), blank=True, null=True)
 
     def __str__(self):
-        return self.tag + ':' + self.shortcode + ':' + str(self.taken_at_datetime)
+        return self.shortcode + ':' + str(self.taken_at_datetime)
+
+    def image_tag(self):
+        return mark_safe('<img src="%s" width="250" height="250" />' % (self.url))
+
+    image_tag.short_description = 'Image'
 
 class Products(models.Model):
     class Meta:
@@ -28,3 +34,6 @@ class Products(models.Model):
 
     name = models.CharField(_("Name"), max_length=100, unique=True)
     is_active = models.BooleanField(_("Active"),default=True)
+
+    def __str__(self):
+        return self.name
