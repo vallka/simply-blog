@@ -34,7 +34,7 @@ class Command(BaseCommand):
         for p in products:
             names.append(p.name)
 
-        gfs = Gellifinsta.objects.filter(tags__isnull=False)
+        gfs = Gellifinsta.objects.filter(tags__isnull=True)
 
         for gf in gfs:
             text = str(gf.caption.encode('ascii',errors="ignore").decode('ascii',errors="ignore").lower()) 
