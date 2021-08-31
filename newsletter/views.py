@@ -60,7 +60,7 @@ def click_redirect(request,uuid):
 @csrf_exempt
 @require_POST
 def notification(request):
-    logger.error("notification:%s",request.body)
+    #logger.error("notification:%s",request.body)
 
     message_id = ''
     note = json.loads(request.body)
