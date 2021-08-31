@@ -64,8 +64,12 @@ def notification(request):
 
     message_id = ''
     note = json.loads(request.body)
+
+    if note.get("Type")=="SubscriptionConfirmation":
+        logger.error("SubscriptionConfirmation:SubscribeURL:%s",note.get("SubscribeURL"))
+
     
-    if note["mail"] and note["mail"]["headers"]:
+    if note.get('mail') and note["mail"].get("headers"):
         for h in note["mail"]["headers"]:
             if h['name']=='X-gel-id':
                 message_id = h['value']
