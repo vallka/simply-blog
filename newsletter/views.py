@@ -60,9 +60,11 @@ def click_redirect(request,uuid):
 @csrf_exempt
 @require_POST
 def notification(request):
+    logger.error("notification:%s",request.body)
 
     message_id = ''
     note = json.loads(request.body)
+    
     if note["mail"] and note["mail"]["headers"]:
         for h in note["mail"]["headers"]:
             if h['name']=='X-gel-id':
