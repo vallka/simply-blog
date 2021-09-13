@@ -102,14 +102,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'presta': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db-presta.sqlite3'),
-    },
-    'presta-testa': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db-presta-testa.sqlite3'),
-    },
 }
 
 
@@ -199,13 +191,13 @@ INTERNAL_IPS = ['127.0.0.1','90.253.213.37','87.74.96.146']
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-sentry_sdk.init(
-    environment="dev",
-    dsn="https://235ef220fc8e4f9793858eacb15a542d@o480612.ingest.sentry.io/5528028",
-    integrations=[DjangoIntegration()],
-    traces_sample_rate=1.0,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
+#sentry_sdk.init(
+#    environment="dev",
+#    dsn="https://235ef220fc8e4f9793858eacb15a542d@o480612.ingest.sentry.io/5528028",
+#    integrations=[DjangoIntegration()],
+#    traces_sample_rate=1.0,
+#
+#    # If you wish to associate users to errors (assuming you are using
+#    # django.contrib.auth) you may enable sending PII data.
+#    send_default_pii=True
+#)
