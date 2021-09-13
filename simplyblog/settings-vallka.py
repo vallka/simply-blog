@@ -4,6 +4,16 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['*']
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vallkadotcom$vallka',
+        'USER': 'vallkadotcom',
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': 'vallkadotcom.mysql.pythonanywhere-services.com',
+        'OPTIONS': {'charset': 'utf8mb4'},
+    },
+}  
 
 
 DEBUG = True
