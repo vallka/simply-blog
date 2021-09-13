@@ -24,6 +24,7 @@ markdown = "*"
 instaloader = "*"
 imagekitio = "*"
 gunicorn = "*"
+pcloud = "*"
 
 [requires]
 python_version = "3"
