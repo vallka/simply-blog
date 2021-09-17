@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'blog',
     'newsletter',
     'gellifinsta',
+    'fotoweb',
 
     'django.contrib.admin',
     'django.contrib.auth',

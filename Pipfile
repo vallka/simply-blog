@@ -25,6 +25,7 @@ instaloader = "*"
 imagekitio = "*"
 gunicorn = "*"
 pcloud = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3"
