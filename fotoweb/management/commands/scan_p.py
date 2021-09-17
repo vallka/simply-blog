@@ -45,7 +45,7 @@ def open_dir(dir):
 
                 if not res['response'] or parser.parse(res['response'][0]['createdAt'])<fdt:
                     #fd = pc.file_open(path=f['path'],flags=os.O_BINARY)
-                    fd = pc.file_open(path=f['path'])
+                    fd = pc.file_open(path=f['path'],flags=os.O_RDONLY)
                     data = pc.file_read(fd=fd['fd'],count=1024*1024*100)
                     print ('len=',len(data))
                     upload = imagekit.upload(
