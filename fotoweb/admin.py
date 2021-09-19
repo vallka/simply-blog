@@ -6,6 +6,6 @@ from .models import *
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
-    list_display = ['id','name','path','img_tag',]
+    list_display = ['id','name','path','thumb_tag',]
 
     readonly_fields = ['img_tag','name','path','url']

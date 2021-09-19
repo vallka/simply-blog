@@ -26,7 +26,11 @@ class Image(models.Model):
         return str(self.id) + ':' + str(self.name)
 
     def img_tag(self):
-        return mark_safe('<img src="%s" width="250" />' % (self.url + '?tr=w-250'))
+        return mark_safe('<img src="%s" width="600" />' % (self.url + '?tr=w-600'))
 
     img_tag.short_description = 'Image'
 
+    def thumb_tag(self):
+        return mark_safe('<img src="%s" width="250" />' % (self.url + '?tr=w-250'))
+
+    thumb_tag.short_description = 'thumb'
