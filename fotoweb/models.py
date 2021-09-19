@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 
 # Create your models here.
 class Image(models.Model):
