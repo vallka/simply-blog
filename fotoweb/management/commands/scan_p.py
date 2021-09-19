@@ -11,6 +11,8 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from django.db import connections
 
+from fotoweb.models import *
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -41,7 +43,7 @@ def open_dir(dir):
                 
                 res = imagekit.list_files({'path':new_dir,'name':fn})
 
-                print (res)
+                #print (res)
 
                 if not res['response'] or parser.parse(res['response'][0]['createdAt'])<fdt:
                     #fd = pc.file_open(path=f['path'],flags=os.O_BINARY)
@@ -58,6 +60,22 @@ def open_dir(dir):
                     )
                     print("Upload binary", upload)
                     pc.file_close(fd=fd)
+                else:
+                    pass
+                    if res['error']==None:
+                        print (res['response'][0]['name'])
+                        print (res['response'][0]['filePath'])
+                        print (res['response'][0]['url'])
+
+                        try:
+                            img = Image.objects.get(name=res['response'][0]['name'])
+                        except Image.DoesNotExist:
+                            img = Image(name=res['response'][0]['name'],path=res['response'][0]['filePath'],url=res['response'][0]['url'])
+                            img.save()
+                            print(img.id)
+
+                        
+
 
 class Command(BaseCommand):
     help = 'scan_p'
