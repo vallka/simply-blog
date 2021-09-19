@@ -11,7 +11,7 @@ class Image(models.Model):
     mykeyworder_tags = models.TextField('mykeyworder tags',null=True, blank=True)
     adobe_tags = models.TextField('adobe tags',null=True, blank=True,)
     google_tags = models.TextField('goggle tags',null=True, blank=True,)
-    title = models.CharField('title',max_length=100)
+    title = models.CharField('title',max_length=100,null=True, blank=True,)
     description = models.TextField('description',null=True, blank=True,)
     tags = models.TextField('tags',null=True, blank=True,)
     instagram = models.BooleanField('instagram',default=False)
