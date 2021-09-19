@@ -20,3 +20,11 @@ class Image(models.Model):
     adobe_dt = models.DateTimeField('adobe_dt',null=True, blank=True,)
     shutter = models.BooleanField('shutter',default=False)
     shutter_dt = models.DateTimeField('shutter_dt',null=True, blank=True,)
+
+    def __str__(self):
+        return str(self.id) + ':' + str(self.name)
+
+    def img_tag(self):
+        return mark_safe('<img src="%s" width="250" height="250" />' % (self.url))
+
+    img_tag.short_description = 'Image'
