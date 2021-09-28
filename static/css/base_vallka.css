@@ -181,7 +181,7 @@ h1, h2, h3 {
 
 .breadcrumb {
   padding: .75rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   list-style: none;
   background-color: #f6f6f6;
   border-radius: 0;
@@ -215,7 +215,7 @@ dl, ol, ul {
 
 .blog_content {
   background-color: #f6f6f6;
-  margin-top: -1rem;
+  margin-top: 0;
   padding-bottom: 2rem;
 }
 
@@ -225,7 +225,7 @@ dl, ol, ul {
   background-color: white;
   padding: 1rem;
   margin: auto;
-  margin-top: 1rem;
+  margin-top: 0;
   margin-bottom: 1rem;
 }
 

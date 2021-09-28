@@ -34,3 +34,11 @@ class Image(models.Model):
         return mark_safe('<img src="%s" width="250" />' % (self.url + '?tr=w-250'))
 
     thumb_tag.short_description = 'thumb'
+
+    def instagram_text(self):
+        tags = self.tags if self.tags else self.mykeyworder_tags
+        tags = tags.replace(',','#').replace(' ','').replace('#',' #')
+        return str(self.title or '') + ' #' + tags + (' #dronephotography' if 'DJI' in self.name else '')
+
+    instagram_text.short_description = 'instagram_text'
+

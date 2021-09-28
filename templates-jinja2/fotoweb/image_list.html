@@ -1,0 +1,64 @@
+{% extends "base_skinned.html" %}
+
+{% block title %}Fotoweb{% endblock %}
+
+{% block skin_css %}
+{{ super() }}
+<style>
+
+body {
+
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+{% if image_list %}
+  {% for image in image_list %}
+    <div class="blog_image blog_image_{{image.id}}">
+      <div class="blog_header">
+        <h1><a href="{{ image.title }}">{{image.title}}</a></h1>
+      </div>
+      <div class="blog_body">
+        {{image.img_tag()|safe}}
+      </div>
+
+    </div>
+
+  {% endfor %}
+{% else %}
+  <p>There are no images yet.</p>
+{% endif %}     
+
+{% if is_paginated %}
+<div class="blog_post">
+  {% if page_obj.has_previous() %}
+      {# <h4 class="paginator"><a href="?page=1">&#x300A;</a></h4> #}
+      <h4 class="paginator"><a href="?page={{ page_obj.previous_page_number() }}">&#x3008;</a></h4></h4>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <h4 class="paginator paginator-current">{{ num }}</h4>
+      {% else %}
+      <h4 class="paginator"><a href="?page={{ num }}">{{ num }}</a></h4>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next() %}
+      <h4 class="paginator"><a href="?page={{ page_obj.next_page_number() }}">&#x3009;</a></h4>
+      {# <h4 class="paginator"><a href="?page={{ page_obj.paginator.num_pages }}">&#x300B;</a></h4> #}
+    {% endif %}
+</div>
+{% endif %}
+
+
+{% endblock content %}
+
+
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}
