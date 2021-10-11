@@ -6,6 +6,10 @@ body {
   letter-spacing: initial;
 }
 
+.bg-primary {
+  background-color: #000 !important;
+}
+
 footer {
     color: white;  
     background-color: #333;

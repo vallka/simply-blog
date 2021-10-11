@@ -34,11 +34,15 @@ def open_dir(dir):
         if f['isfolder']:
             open_dir (f['path'])
         else:
-            if f['contenttype']=='image/jpeg' and 'web' in f['path']:
+            if f['contenttype']=='image/jpeg' and '2048' in f['path']:
                 print(f)
                 fdt = parser.parse(f['created'])
                 new_dir = dir.replace('/Gellifique/VALYA','')
                 new_dir = new_dir.replace(' ','_')
+                #new_dir = new_dir.replace(' ','_')
+                new_dir = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_dir)
+                new_dir = new_dir.replace('__','_')
+
                 fn = os.path.basename(f['path'].replace(' ','_'))
                 
                 res = imagekit.list_files({'path':new_dir,'name':fn})

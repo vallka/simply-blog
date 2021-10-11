@@ -6,4 +6,5 @@ app_name = 'fotoweb'
 
 urlpatterns = [
     path('images/', ImageListView.as_view(), name='image'),
+    path('<str:album>/', ImageListView.as_view(), name='album'),
 ]

@@ -11,6 +11,7 @@ class Image(models.Model):
     mykeyworder_tags = models.TextField('mykeyworder tags',null=True, blank=True)
     adobe_tags = models.TextField('adobe tags',null=True, blank=True,)
     google_tags = models.TextField('goggle tags',null=True, blank=True,)
+    shutter_tags = models.TextField('shutter tags',null=True, blank=True,)
     title = models.CharField('title',max_length=100,null=True, blank=True,)
     description = models.TextField('description',null=True, blank=True,)
     tags = models.TextField('tags',null=True, blank=True,)
@@ -31,12 +32,13 @@ class Image(models.Model):
     img_tag.short_description = 'Image'
 
     def thumb_tag(self):
-        return mark_safe('<img src="%s" width="250" />' % (self.url + '?tr=w-250'))
+        return mark_safe('<img src="%s" width="250" alt="image" />' % (self.url + '?tr=w-250'))
 
     thumb_tag.short_description = 'thumb'
 
     def instagram_text(self):
-        tags = self.tags if self.tags else self.mykeyworder_tags
+        #tags = self.tags if self.tags else self.mykeyworder_tags if self.mykeyworder_tags else ''
+        tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
         tags = tags.replace(',','#').replace(' ','').replace('#',' #')
         return str(self.title or '') + ' #' + tags + (' #dronephotography' if 'DJI' in self.name else '')
 
