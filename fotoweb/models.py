@@ -39,8 +39,16 @@ class Image(models.Model):
     def instagram_text(self):
         #tags = self.tags if self.tags else self.mykeyworder_tags if self.mykeyworder_tags else ''
         tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
-        tags = tags.replace(',','#').replace(' ','').replace('#',' #')
-        return str(self.title or '') + ' #' + tags + (' #dronephotography' if 'DJI' in self.name else '')
+        tags = tags.split(',')
+        tags = ['#'+n.replace(' ','') for n in tags]
+        if 'DJI' in self.name:
+            tags = tags[:29]
+            tags[29] = '#dronephotography'
+        else:
+            tags = tags[:30]
+
+        tags = ' '.join(tags)
+        return str(self.title or '') + ' ' + tags
 
     instagram_text.short_description = 'instagram_text'
 
