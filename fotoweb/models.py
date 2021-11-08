@@ -43,7 +43,7 @@ class Image(models.Model):
         tags = ['#'+n.replace(' ','') for n in tags]
         if 'DJI' in self.name:
             tags = tags[:29]
-            tags[29] = '#dronephotography'
+            tags.append('#dronephotography')
         else:
             tags = tags[:30]
 
