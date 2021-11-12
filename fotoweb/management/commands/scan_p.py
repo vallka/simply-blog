@@ -3,6 +3,8 @@ import re
 import os
 import base64
 from dateutil import parser
+from io import BytesIO
+from iptcinfo3 import IPTCInfo
 
 from pcloud import PyCloud
 from imagekitio import ImageKit
@@ -24,28 +26,33 @@ imagekit = ImageKit(
 
 pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
+cnt = 0
 
 def open_dir(dir):
+    global cnt
+
     print ('dir:',dir)
     ff = pc.listfolder(path=dir)
     #print(ff)
 
-    for f in ff['metadata']['contents']:
+    for f in sorted(ff['metadata']['contents'],key=lambda file: file['path']):
         if f['isfolder']:
             open_dir (f['path'])
         else:
             if f['contenttype']=='image/jpeg' and '2048' in f['path']:
-                print(f)
+                cnt += 1
+                print(cnt,f['path'])
                 fdt = parser.parse(f['created'])
                 new_dir = dir.replace('/Gellifique/VALYA','')
                 new_dir = new_dir.replace(' ','_')
-                #new_dir = new_dir.replace(' ','_')
                 new_dir = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_dir)
                 new_dir = new_dir.replace('__','_')
 
                 fn = os.path.basename(f['path'].replace(' ','_'))
                 
                 res = imagekit.list_files({'path':new_dir,'name':fn})
+                if res['error']:
+                    print ('ERROR',res)
 
                 #print (res)
 
@@ -54,6 +61,9 @@ def open_dir(dir):
                     fd = pc.file_open(path=f['path'],flags=os.O_RDONLY)
                     data = pc.file_read(fd=fd['fd'],count=1024*1024*100)
                     print ('len=',len(data))
+                    iptc = IPTCInfo(BytesIO(data),inp_charset='utf_8',out_charset='utf_8')
+                    print (iptc)
+
                     upload = imagekit.upload(
                             file=base64.b64encode(data),
                             file_name=fn,
@@ -64,19 +74,24 @@ def open_dir(dir):
                     )
                     print("Upload binary", upload)
                     pc.file_close(fd=fd)
+
+                    try:
+                        img = Image.objects.get(name=upload['response']['name'])
+                    except Image.DoesNotExist:
+                        img = Image(name=upload['response']['name'])
+                        
+                    img.path=upload['response']['filePath']
+                    img.url=upload['response']['url']
+                    if not img.title: img.title = iptc['headline']
+                    if not img.description: img.description = iptc['caption/abstract']
+                    if not img.tags: img.tags = ', '.join(iptc['keywords'])
+
+                    img.save()
+                    print('ID:',img.id)
+
+
                 else:
                     pass
-                    if res['error']==None:
-                        print (res['response'][0]['name'])
-                        print (res['response'][0]['filePath'])
-                        print (res['response'][0]['url'])
-
-                        try:
-                            img = Image.objects.get(name=res['response'][0]['name'])
-                        except Image.DoesNotExist:
-                            img = Image(name=res['response'][0]['name'],path=res['response'][0]['filePath'],url=res['response'][0]['url'])
-                            img.save()
-                            print(img.id)
 
                         
 
@@ -95,7 +110,7 @@ class Command(BaseCommand):
         logger.error("DONE - %s!",self.help,)
 
 
-start_dir = '/Gellifique/VALYA/C1/foto'
+start_dir = '/Gellifique/VALYA/C1/foto/Scotland 20-21'
 
 
 

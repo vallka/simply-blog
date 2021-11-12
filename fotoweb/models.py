@@ -15,6 +15,7 @@ class Image(models.Model):
     title = models.CharField('title',max_length=100,null=True, blank=True,)
     description = models.TextField('description',null=True, blank=True,)
     tags = models.TextField('tags',null=True, blank=True,)
+    editorial = models.BooleanField('editorial',default=False)
     instagram = models.BooleanField('instagram',default=False)
     instagram_dt = models.DateTimeField('instagram_dt',null=True, blank=True,)
     instagram_code = models.CharField('instagram_code',null=True, blank=True,max_length=20)
@@ -22,6 +23,45 @@ class Image(models.Model):
     adobe_dt = models.DateTimeField('adobe_dt',null=True, blank=True,)
     shutter = models.BooleanField('shutter',default=False)
     shutter_dt = models.DateTimeField('shutter_dt',null=True, blank=True,)
+
+    class ShutterCategories(models.TextChoices):
+        EMPTY = '', ''
+        Abstract = 'Abstract', 'Abstract'
+        Animals = 'Animals/Wildlife', 'Animals/Wildlife'
+        Backgrounds = 'Backgrounds/Textures', 'Backgrounds/Textures'	
+        Beauty = 'Beauty/Fashion', 'Beauty/Fashion'	
+        Buildings = 'Buildings/Landmarks', 'Buildings/Landmarks'	
+        Business = 'Business/Finance', 'Business/Finance'	
+        Celebrities = 'Celebrities', 'Celebrities'	
+        Education = 'Education', 'Education'	
+        Food = 'Food and Drink', 'Food and Drink'	
+        Healthcare = 'Healthcare/Medical', 'Healthcare/Medical'	
+        Holidays = 'Holidays', 'Holidays'	
+        Industrial = 'Industrial', 'Industrial'	
+        Interiors = 'Interiors', 'Interiors'	
+        Miscellaneous = 'Miscellaneous', 'Miscellaneous'
+        Objects = 'Objects', 'Objects'
+        Parks = 'Parks/Outdoor', 'Parks/Outdoor'
+        People = 'People', 'People'
+        Religion = 'Religion', 'Religion'
+        Science = 'Science', 'Science'
+        Signs = 'Signs/Symbols', 'Signs/Symbols'
+        Sports = 'Sports/Recreation', 'Sports/Recreation'
+        Technology = 'Technology', 'Technology'
+        Arts = 'The Arts', 'The Arts'
+        Vintage = 'Vintage', 'Vintage'
+
+    shutter_cat1 = models.CharField(
+        max_length=50,
+        choices=ShutterCategories.choices,
+        default=ShutterCategories.Buildings,
+    )
+    shutter_cat2 = models.CharField(
+        max_length=50,
+        choices=ShutterCategories.choices,
+        default=ShutterCategories.Parks,
+    )
+
 
     def __str__(self):
         return str(self.id) + ':' + str(self.name)

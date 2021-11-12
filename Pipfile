@@ -26,6 +26,7 @@ imagekitio = "*"
 gunicorn = "*"
 pcloud = "*"
 python-dateutil = "*"
+IPTCInfo3 = "*"
 
 [requires]
 python_version = "3"
