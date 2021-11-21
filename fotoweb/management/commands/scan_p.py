@@ -110,7 +110,7 @@ class Command(BaseCommand):
         logger.error("DONE - %s!",self.help,)
 
 
-start_dir = '/Gellifique/VALYA/C1/foto/Scotland 20-21'
+start_dir = '/Gellifique/VALYA/C1/foto'
 
 
 

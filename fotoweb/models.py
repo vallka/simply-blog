@@ -77,8 +77,14 @@ class Image(models.Model):
     thumb_tag.short_description = 'thumb'
 
     def instagram_text(self):
-        #tags = self.tags if self.tags else self.mykeyworder_tags if self.mykeyworder_tags else ''
-        tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
+        #tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
+        tags = ''
+        if self.tags and len(self.tags)>len(tags): tags = self.tags
+        if self.mykeyworder_tags and len(self.mykeyworder_tags)>len(tags): tags = self.mykeyworder_tags
+        if self.adobe_tags and len(self.adobe_tags)>len(tags): tags = self.adobe_tags
+        if self.shutter_tags and len(self.shutter_tags)>len(tags): tags = self.shutter_tags
+        if self.google_tags and len(self.google_tags)>len(tags): tags = self.google_tags
+
         tags = tags.split(',')
         tags = ['#'+n.replace(' ','') for n in tags]
         if 'DJI' in self.name:
@@ -88,7 +94,7 @@ class Image(models.Model):
             tags = tags[:30]
 
         tags = ' '.join(tags)
-        return str(self.title or '') + ' ' + tags
+        return str(self.title or '') + '\n' + tags + '\n' + self.name
 
     instagram_text.short_description = 'instagram_text'
 
