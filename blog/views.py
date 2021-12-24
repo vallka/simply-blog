@@ -103,5 +103,64 @@ class PostView(generic.DetailView):
 
         return context        
 
+class SearchView(generic.ListView):
+    model = Post
+    paginate_by = 10
+    
+    def get_queryset(self):
+        
+        print(Post.objects.filter(blog_start_dt__lte=timezone.now(),blog=True,).query)
+        q = self.request.GET.get('q')
+        print(Post.objects.filter(text__search,q).query)
+        if q:
+            sql = "select * from blog_post where match(title,text) against (%s in boolean mode) and blog=1 and blog_start_dt<=%s"
+
+            posts = Post.objects.raw(sql,[q,timezone.now()])
+        else:
+            cat_ex = Category.objects.filter(category__startswith='_')
+            posts = posts.exclude(category__in=cat_ex)
+
+        self.request.session['category'] = q
+
+        return posts
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['post'] = context['post_list'][0]
+        context['categories'] = Category.objects.all().order_by('id')
+
+        page = int(self.request.GET.get('page',1))
+
+        n = 0
+        for p in context['post_list']:
+            if n>0 or page>1:
+                #print(p.text)
+                pics = re.finditer(r'\!\[\]\(',p.text)
+
+                pos = [pic.start() for pic in pics]
+
+                print(p.slug,pos)
+
+                if len(pos)>1 and pos[0]<100:
+                    p.text = p.text[0:pos[1]]
+                    p.read_more = True
+                
+                elif len(pos)>0 and pos[0]>=100:
+                    p.text = p.text[0:pos[0]]
+                    p.read_more = True
+
+                else:
+                    crs = re.finditer(r'\n',p.text)    
+                    pos = [cr.start() for cr in crs]
+                    if len(pos)>3:
+                        p.text = p.text[0:pos[3]]
+                        p.read_more = True
+
+            n += 1
+
+        context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
+        return context        
+
 
 

@@ -54,7 +54,7 @@ class Post(models.Model):
     title_color = models.CharField(_("Title Color"),max_length=20, blank=True, null=False, default='#232323')
     title_bgcolor = models.CharField(_("Title Bg Color"),max_length=20, blank=True, null=False, default='#eeeeee')
 
-    text = MarkdownxField(_("Text"), blank=True, null=False)
+    text = MarkdownxField(_("Text"), blank=True, null=False, db_index=True)
 
     created_dt = models.DateTimeField(_("Created Date/Time"), auto_now_add=True, null=True)
     updated_dt = models.DateTimeField(_("Updated Date/Time"), auto_now=True, null=True)

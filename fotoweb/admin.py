@@ -42,5 +42,13 @@ class GellifinstaAdmin(admin.ModelAdmin):
     list_filter = ['instagram','adobe','shutter']
     search_fields = ['path','title',]
 
-    readonly_fields = ['img_tag','url']
+    readonly_fields = ['img_tag','url','created_dt','updated_dt']
     actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter]
+
+@admin.register(Album)
+class GellifinstaAlbumAdmin(admin.ModelAdmin):
+    list_display = ['id','path','title','position','thumb_tag',]
+    list_display_links = ['id','path','title','position','thumb_tag']
+    search_fields = ['path','title',]
+
+    readonly_fields = ['img_tag','created_dt','updated_dt']

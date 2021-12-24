@@ -6,8 +6,9 @@ class Image(models.Model):
     name = models.CharField('name',max_length=100, unique=True)
     path = models.CharField('path',max_length=200, unique=True)
     url = models.CharField('url',max_length=200, unique=True)
+    no_show = models.BooleanField('no show',default=False)
     created_dt = models.DateTimeField('created_dt',auto_now_add=True, null=True)
-    updated_dt = models.DateTimeField('created_dt',auto_now=True, null=True)
+    updated_dt = models.DateTimeField('updated_dt',auto_now=True, null=True)
     mykeyworder_tags = models.TextField('mykeyworder tags',null=True, blank=True)
     adobe_tags = models.TextField('adobe tags',null=True, blank=True,)
     google_tags = models.TextField('goggle tags',null=True, blank=True,)
@@ -98,3 +99,26 @@ class Image(models.Model):
 
     instagram_text.short_description = 'instagram_text'
 
+
+class Album(models.Model):
+    path = models.CharField('path',max_length=200, unique=True)
+    no_show = models.BooleanField('no show',default=False)
+    created_dt = models.DateTimeField('created_dt',auto_now_add=True, null=True)
+    updated_dt = models.DateTimeField('updated_dt',auto_now=True, null=True)
+    title = models.CharField('title',max_length=100,null=True, blank=True,)
+    description = models.TextField('description',null=True, blank=True,)
+    position = models.IntegerField('position',default=0, blank=True,)
+    cover = models.CharField('cover',max_length=200,blank=True,default='')
+
+    def __str__(self):
+        return str(self.id) + ':' + str(self.title)
+
+    def img_tag(self):
+        return mark_safe('<img src="%s" width="600" />' % (self.cover + '?tr=w-600'))
+
+    img_tag.short_description = 'Image'
+
+    def thumb_tag(self):
+        return mark_safe('<img src="%s" width="250" alt="image" />' % (self.cover + '?tr=w-250'))
+
+    thumb_tag.short_description = 'thumb'

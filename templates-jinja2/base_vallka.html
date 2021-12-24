@@ -33,7 +33,7 @@
         {% block header_nav %} 
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'blog:list' %}">Latest</a>
+            <a class="nav-link" href="{% url 'fotoweb:albums' %}">Photo</a>
           </li>
           {% for cat in categories %}
           <li class="nav-item">
@@ -66,6 +66,54 @@
     <div class="container-fluid">
         <div class="row justify-content-start align-items-start">
             <div class="col-12 col-md-4 col-lg-3">
+              <style>
+              .floatingchat-container-wrap, .floatingchat-container-wrap-mobi {
+                position: relative;
+                bottom: 66px;
+                max-width: 540px;
+                z-index: 999 !important;
+                margin:auto;
+              }
+
+              @media (min-width: 576px) {
+                .floatingchat-container-wrap {
+                  max-width: 540px;
+                }
+              }
+
+              @media (min-width: 768px) {
+                .floatingchat-container-wrap {
+                  max-width: 720px;
+                }
+              }
+
+              @media (min-width: 992px) {
+                .floatingchat-container-wrap {
+                  max-width: 960px;
+                }
+              }
+
+              @media (min-width: 1200px) {
+                .floatingchat-container-wrap {
+                  max-width: 1140px;
+                }
+              }
+
+
+
+              .floatingchat-container,.floatingchat-container-mobi {
+              width: 210px;
+              }
+              </style>
+              <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+              <script>
+                kofiWidgetOverlay.draw('vallka', {
+                  'type': 'floating-chat',
+                  'floating-chat.donateButton.text': 'Buy me a Coffee',
+                  'floating-chat.donateButton.background-color': 'rgb(74, 177, 168)',
+                  'floating-chat.donateButton.text-color': '#fff'
+                });
+              </script>
             </div>
             <div class="col-12 col-md-4 col-lg-3">
             </div>
