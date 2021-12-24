@@ -47,12 +47,10 @@
           </li>
         </ul>
           {% endblock header_nav %} 
-          {#}
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        #}
+          <form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'blog:search' %}">
+            <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </form>
     </div>
 </nav>
 
