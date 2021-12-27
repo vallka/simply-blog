@@ -14,14 +14,18 @@ class ImageListView(generic.ListView):
     def get_queryset(self):
         album = self.kwargs.get('album')
         if album:
-            new_album = album
-            new_album = new_album.replace('¬¬','/')
+            album = Album.objects.get(slug=album)
+
+            new_album = album.path
             new_album = new_album.replace(' ','_')
             new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
             new_album = new_album.replace('__','_')
             print('album:',album,new_album)
 
-            return Image.objects.filter(no_show=0,path__icontains=new_album).order_by('name')
+            r= Image.objects.filter(no_show=0,path__icontains=new_album).order_by('name')
+            print (len(r))
+
+            return r
         else:
             return Image.objects.filter(no_show=0).order_by('-name')
 

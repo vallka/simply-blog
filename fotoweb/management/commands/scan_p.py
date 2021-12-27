@@ -43,6 +43,9 @@ def open_dir(dir,album_needs_cover):
             need_cover = None
             if '2048' in f['path']:
                 path = f['path'].replace(imgk_nostore_dir,'')
+                path = path.replace(' ','_')
+                path = re.sub(r'[^/_0-9A-Za-z\-.]','_',path)
+                path = path.replace('__','_')
                 title = path.replace(imgk_start_dir+'/','')
                 title = re.sub('/[^/]*2048[^/]*','',title)
                 print('>>>',path,title)

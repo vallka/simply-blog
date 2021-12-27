@@ -21,7 +21,7 @@ body {
   <div id="gallery">
   {% for album in album_list %}
         <!-- data-image="{{album.path|replace('/','|')}}" -->
-          <a href="/photo/{{album.path|replace('/','¬¬')}}">
+          <a href="/photo/{{album.slug}}">
           <img src="{{album.cover}}?tr=w-400" 
             data-description="{{album.title if album.title else album.path}}"          
             alt="{{album.title if album.title else album.path}}" 

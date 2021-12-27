@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import mark_safe
+from django.utils.text import slugify
 
 # Create your models here.
 class Image(models.Model):
@@ -106,6 +107,7 @@ class Album(models.Model):
     created_dt = models.DateTimeField('created_dt',auto_now_add=True, null=True)
     updated_dt = models.DateTimeField('updated_dt',auto_now=True, null=True)
     title = models.CharField('title',max_length=100,null=True, blank=True,)
+    slug = models.CharField('slug',max_length=100,null=False, blank=True, unique=True, )
     description = models.TextField('description',null=True, blank=True,)
     position = models.IntegerField('position',default=0, blank=True,)
     cover = models.CharField('cover',max_length=200,blank=True,default='')
@@ -122,3 +124,9 @@ class Album(models.Model):
         return mark_safe('<img src="%s" width="250" alt="image" />' % (self.cover + '?tr=w-250'))
 
     thumb_tag.short_description = 'thumb'
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            
+        super().save(*args, **kwargs)
