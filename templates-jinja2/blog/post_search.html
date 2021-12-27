@@ -1,0 +1,133 @@
+{% extends "base_skinned.html" %}
+
+{% block title %} {{meta_title}} - Blog - {{post.title}}{% endblock %}
+
+{% block skin_css %}
+{{ super() }}
+<style>
+
+body {
+
+
+{% if request.GET.get('f')=='robotomono' %}
+  font-family: 'Roboto Mono', monospace;
+
+{% endif %}
+
+{% if request.GET.get('f')=='roboto' %}
+  font-family: 'Roboto', arial;
+{% endif %}
+
+
+{% if request.GET.get('w') %}
+  font-weight: {{request.GET.get('w')}};
+{% endif %}
+
+{% if request.GET.get('s') %}
+  font-size: {{request.GET.get('s')}}px;
+{% endif %}
+
+}
+
+</style>
+{% endblock %}
+
+{% block breadcrumb %}
+<nav data-depth="3" class="breadcrumb hidden-sm-down">
+  <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+          
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="{% url 'blog:list' %}">
+            <span itemprop="name">Blog</span>
+          </a>
+          <meta itemprop="position" content="1">
+        </li>
+      
+          
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="{{ post.get_absolute_url() }}">
+            <span itemprop="name">{{ breadcrumb }}</span>
+          </a>
+          <meta itemprop="position" content="2">
+        </li>
+    
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+{% if post_list %}
+**search**
+  {% for post in post_list %}
+  {% if post.title_color %}
+    <style>
+      .blog_post_{{post.id}} .blog_header, 
+      .blog_post_{{post.id}} .blog_date, 
+      .blog_post_{{post.id}} .blog_header a {
+        color: {{post.title_color}} !important;
+      }
+    </style>
+  {% endif %}
+  {% if post.title_bgcolor %}
+    <style>
+      .blog_post_{{post.id}} .blog_header {
+        background-color: {{post.title_bgcolor}} !important;
+      }
+      .blog_post_{{post.id}} p a {
+          border-bottom-color: {{post.title_bgcolor}} !important;
+      }
+    </style>
+  {% endif %}
+    <div class="blog_post blog_post_{{post.id}}">
+      <div class="blog_header">
+        <h1><a href="{{ post.get_absolute_url() }}">{{post.title}}</a></h1>
+        <div class="blog_date">
+          Published {{ post.blog_start_dt }}
+        </div>
+      </div>
+      <div class="blog_body">
+        {{post.formatted_markdown|safe}}
+      </div>
+      {% if post.read_more %}
+        <h4 class="read_more"><a href="{{ post.get_absolute_url() }}">Read more...</a></h4>
+      {% endif %}
+
+    </div>
+    <div class="divider div-transparent div-dot"></div>
+
+  {% endfor %}
+{% else %}
+  <p>There are no posts yet.</p>
+{% endif %}     
+
+{% if is_paginated %}
+<div class="blog_post">
+  {% if page_obj.has_previous() %}
+      {# <h4 class="paginator"><a href="?page=1">&#x300A;</a></h4> #}
+      <h4 class="paginator"><a href="?page={{ page_obj.previous_page_number() }}">&#x3008;</a></h4></h4>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <h4 class="paginator paginator-current">{{ num }}</h4>
+      {% else %}
+      <h4 class="paginator"><a href="?page={{ num }}">{{ num }}</a></h4>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next() %}
+      <h4 class="paginator"><a href="?page={{ page_obj.next_page_number() }}">&#x3009;</a></h4>
+      {# <h4 class="paginator"><a href="?page={{ page_obj.paginator.num_pages }}">&#x300B;</a></h4> #}
+    {% endif %}
+</div>
+{% endif %}
+
+
+{% endblock content %}
+
+
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

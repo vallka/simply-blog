@@ -22,11 +22,12 @@ from django.conf.urls.static import static
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('blog/')),
+    #path('', lambda request: redirect('blog/')),
+    path('', lambda request: redirect('photo/albums')),
     path('blog/admin/', admin.site.urls),
     path('blog/newsletter/', include('newsletter.urls')),
     path('blog/', include('blog.urls')),
-    path('fotoweb/', include('fotoweb.urls')),
+    path('photo/', include('fotoweb.urls')),
     #path('admin/', admin.site.urls),
     path('markdownx/', include('markdownx.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

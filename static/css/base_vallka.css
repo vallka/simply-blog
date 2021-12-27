@@ -86,12 +86,21 @@ footer i,footer .copy {
 
 .navbar-collapse {
   flex-direction: column-reverse;
+  width: 100%;
 }
 
 .navbar-expand-lg {
   flex-direction: column;
   align-items: flex-start;
 
+}
+
+.navbar {
+  padding: 0;
+}
+
+.navbar-brand {
+  z-index: 2;
 }
 
 @media (min-width: 992px){
@@ -103,7 +112,8 @@ footer i,footer .copy {
   }
   .search-box button {
     border: none;
-    margin-left: -35px;
+    margin-left: -3rem;
+    margin-right: 1rem;
     background-color: transparent;
     color: #fff;
   }

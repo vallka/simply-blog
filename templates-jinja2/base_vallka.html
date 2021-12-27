@@ -35,6 +35,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'fotoweb:albums' %}">Photo</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:list' %}">Blog</a>
+          </li>
           {% for cat in categories %}
           <li class="nav-item">
             {% if cat.category[0]!='_' %}
@@ -46,12 +49,14 @@
             <a class="nav-link" target="_blank" href="http://api.vallka.com/mycovidash">My Covidash</a>
           </li>
         </ul>
-          {% endblock header_nav %} 
-          <form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'blog:search' %}">
-            <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search">
+        {% endblock header_nav %} 
+        {% block header_search %} 
+        <form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'blog:search' %}">
+            <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Blog">
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-          </form>
-    </div>
+         </form>
+        {% endblock header_search %} 
+        </div>
 </nav>
 
 {% block breadcrumb %}
