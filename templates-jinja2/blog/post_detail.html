@@ -9,29 +9,6 @@
 {{post.json_ld|safe}}
 {% endblock json_ld %}
 
-{% block breadcrumb %}
-<nav data-depth="3" class="breadcrumb hidden-sm-down">
-  <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
-          
-        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'blog:list' %}">
-            <span itemprop="name">Blog</span>
-          </a>
-          <meta itemprop="position" content="1">
-        </li>
-      
-          
-        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{{ post.get_absolute_url() }}">
-            <span itemprop="name">{{ breadcrumb }}</span>
-          </a>
-          <meta itemprop="position" content="2">
-        </li>
-    
-  </ol>
-</nav>
-{% endblock breadcrumb %}
-
 
 {% block content %}
 {% if post %}

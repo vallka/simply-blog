@@ -28,7 +28,7 @@ class ListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['post'] = context['post_list'][0]
+        context['post'] = context['post_list'] and context['post_list'][0]
         context['categories'] = Category.objects.all().order_by('id')
 
         page = int(self.request.GET.get('page',1))
@@ -61,6 +61,7 @@ class ListView(generic.ListView):
             n += 1
 
         context['breadcrumb'] = re.sub(r'[^\x00-\x7F]',' ', context['post'].title)
+        context['page_title'] = context['breadcrumb']
         return context        
 
 class PostView(generic.DetailView):
@@ -138,6 +139,29 @@ class SearchView(generic.ListView):
         page = int(self.request.GET.get('page',1))
         #q = self.request.GET.get('q')
         context['q'] = self.q
+
+        for p in context['post_list']:
+            pics = re.finditer(r'\!\[\]\(',p.text)
+
+            pos = [pic.start() for pic in pics]
+
+            print(p.slug,pos)
+
+            if len(pos)>1 and pos[0]<100:
+                p.text = p.text[0:pos[1]]
+                p.read_more = True
+            
+            elif len(pos)>0 and pos[0]>=100:
+                p.text = p.text[0:pos[0]]
+                p.read_more = True
+
+            else:
+                crs = re.finditer(r'\n',p.text)    
+                pos = [cr.start() for cr in crs]
+                if len(pos)>3:
+                    p.text = p.text[0:pos[3]]
+                    p.read_more = True
+
 
         context['breadcrumb'] = f'Search: {self.q} ({self.len})' 
         context['page_title'] = context['breadcrumb']
