@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'newsletter',
     'gellifinsta',
     'fotoweb',
+    'mycovidash',
 
     'django.contrib.admin',
     'django.contrib.auth',

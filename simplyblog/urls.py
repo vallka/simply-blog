@@ -28,6 +28,7 @@ urlpatterns = [
     path('blog/newsletter/', include('newsletter.urls')),
     path('blog/', include('blog.urls')),
     path('photo/', include('fotoweb.urls')),
+    path('mycovidash/', include('mycovidash.urls')),
     #path('admin/', admin.site.urls),
     path('markdownx/', include('markdownx.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

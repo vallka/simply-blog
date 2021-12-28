@@ -27,6 +27,10 @@ gunicorn = "*"
 pcloud = "*"
 python-dateutil = "*"
 IPTCInfo3 = "*"
+pandas = "*"
+openpyxl = "*"
+plotly = "*"
+plotly-express = "*"
 
 [requires]
 python_version = "3"
