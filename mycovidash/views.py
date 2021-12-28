@@ -73,7 +73,7 @@ def get_data():
     with open(os.path.join(path,'weekly-deaths-by-location-age-sex.xlsx'),'wb') as f:
         f.write(xl.content)
 
-    data_2021 = pd.read_excel ('weekly-deaths-by-location-age-sex.xlsx',
+    data_2021 = pd.read_excel (os.path.join(path,'weekly-deaths-by-location-age-sex.xlsx'),
     sheet_name='Data',
             skiprows=4,
             skipfooter=2,
@@ -89,7 +89,7 @@ def get_data():
     with open(os.path.join(path,'weekly-deaths-by-location-age-group-sex-15-19.xlsx'),'wb') as f:
         f.write(xl.content)
 
-    data_1519 = pd.read_excel ('weekly-deaths-by-location-age-group-sex-15-19.xlsx',
+    data_1519 = pd.read_excel (os.path.join(path,'weekly-deaths-by-location-age-group-sex-15-19.xlsx'),
             sheet_name='Data',
             skiprows=4,
             skipfooter=2,
