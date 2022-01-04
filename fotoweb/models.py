@@ -1,9 +1,12 @@
 import requests
 import os
+import random
 
 from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify
+
+from imagekitio import ImageKit
 
 # Create your models here.
 class Image(models.Model):
@@ -16,6 +19,7 @@ class Image(models.Model):
     mykeyworder_tags = models.TextField('mykeyworder tags',null=True, blank=True)
     adobe_tags = models.TextField('adobe tags',null=True, blank=True,)
     google_tags = models.TextField('goggle tags',null=True, blank=True,)
+    aws_tags = models.TextField('aws tags',null=True, blank=True,)
     shutter_tags = models.TextField('shutter tags',null=True, blank=True,)
     title = models.CharField('title',max_length=100,null=True, blank=True,)
     description = models.TextField('description',null=True, blank=True,)
@@ -89,9 +93,12 @@ class Image(models.Model):
         if self.adobe_tags and len(self.adobe_tags)>len(tags): tags = self.adobe_tags
         if self.shutter_tags and len(self.shutter_tags)>len(tags): tags = self.shutter_tags
         if self.google_tags and len(self.google_tags)>len(tags): tags = self.google_tags
+        if self.aws_tags and len(self.aws_tags)>len(tags): tags = self.aws_tags
 
         tags = tags.split(',')
         tags = ['#'+n.replace(' ','') for n in tags]
+        random.shuffle(tags)
+        tags.sort(key=str.lower)
         if 'DJI' in self.name:
             tags = tags[:29]
             tags.append('#dronephotography')
@@ -119,6 +126,66 @@ class Image(models.Model):
         print (res['keywords'])
         kw = ','.join(res['keywords'])
         return kw
+
+    def get_imagekit_kw(self,provider='google'):
+        imagekit = ImageKit(
+            private_key=os.environ['IMAGEKIT_PRIVATE_KEY'],
+            public_key=os.environ['IMAGEKIT_PUBLIC_KEY'],
+            url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT'],
+        )
+
+        res = imagekit.list_files({'path':os.path.dirname(self.path),'name':self.name})
+        print(res)
+
+        if not res['error'] and res['response']:
+            id = res['response'][0]['fileId']
+
+        if id and res['response'][0]['AITags']:
+            tags = []
+            for tag in res['response'][0]['AITags']:
+                if tag['source']==f"{provider}-auto-tagging":
+                    print (tag)
+                    tags.append(tag['name'])
+
+            if tags:
+                return ','.join(tags)
+
+        updated_detail = imagekit.update_file_details(id,
+            {"extensions": [
+                {
+                    "name": f"{provider}-auto-tagging",
+                    "maxTags": 25,
+                    "minConfidence": 50
+                },
+            ]}
+        )
+
+        print("Updated detail-", updated_detail, end="\n\n")
+
+        if not updated_detail['error'] and updated_detail['response'] and updated_detail['response']['AITags']:
+            tags = []
+            for tag in updated_detail['response']['AITags']:
+                if tag['source']==f"{provider}-auto-tagging":
+                    print (tag)
+                    tags.append(tag['name'])
+
+            if tags:
+                return ','.join(tags)
+
+        res = imagekit.list_files({'path':os.path.dirname(self.path),'name':self.name})
+        print(res)
+        if not res['error'] and res['response'] and res['response'][0]['AITags']:
+            tags = []
+            for tag in res['response'][0]['AITags']:
+                if tag['source']==f"{provider}-auto-tagging":
+                    print (tag)
+                    tags.append(tag['name'])
+
+            if tags:
+                return ','.join(tags)
+
+        return ''
+
 
 class Album(models.Model):
     path = models.CharField('path',max_length=200, unique=True)

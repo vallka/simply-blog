@@ -42,17 +42,29 @@ def get_mykeyworder_tags(modeladmin, request, queryset):
         q.mykeyworder_tags = q.get_mykeywords()
         q.save()
 
+@admin.action(description='Get Google tags')
+def get_google_tags(modeladmin, request, queryset):
+    for q in queryset:
+        print (q.url)
+        q.google_tags = q.get_imagekit_kw()
+        q.save()
 
+@admin.action(description='Get AWS tags')
+def get_aws_tags(modeladmin, request, queryset):
+    for q in queryset:
+        print (q.url)
+        q.aws_tags = q.get_imagekit_kw('aws')
+        q.save()
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
     list_display = ['id','path','thumb_tag','instagram_text','instagram','adobe','shutter']
     list_display_links = ['id','path','thumb_tag']
     list_filter = ['instagram','adobe','shutter']
-    search_fields = ['path','title',]
+    search_fields = ['path','title','id']
 
     readonly_fields = ['img_tag','url','created_dt','updated_dt']
-    actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter,get_mykeyworder_tags]
+    actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter,get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
 @admin.register(Album)
 class GellifinstaAlbumAdmin(admin.ModelAdmin):

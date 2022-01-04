@@ -22,12 +22,14 @@
 var input_mykeyworder = document.querySelector('textarea[id=id_mykeyworder_tags]');
 var input_adobe = document.querySelector('textarea[id=id_adobe_tags]');
 var input_google = document.querySelector('textarea[id=id_google_tags]');
+var input_aws = document.querySelector('textarea[id=id_aws_tags]');
 var input_shutter = document.querySelector('textarea[id=id_shutter_tags]');
 var input_tags = document.querySelector('textarea[id=id_tags]');
 var tagy = {}
 tagy['mykeyworder'] = new Tagify(input_mykeyworder);
 tagy['adobe'] = new Tagify(input_adobe);
 tagy['google'] = new Tagify(input_google);
+tagy['aws'] = new Tagify(input_aws);
 tagy['shutter'] = new Tagify(input_shutter);
 tagy['tags'] = new Tagify(input_tags);
 
@@ -40,6 +42,7 @@ django.jQuery(function(){
     django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_add_tags" data-name="mykeyworder" style="display: block;"> Add</button>');
     django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_add_tags" data-name="adobe" style="display: block;"> Add</button>');
     django.jQuery('label[for=id_google_tags]').append('<button class="button btn_add_tags" data-name="google" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_add_tags" data-name="aws" style="display: block;"> Add</button>');
     django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_add_tags" data-name="shutter" style="display: block;"> Add</button>');
 
     django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
@@ -65,6 +68,7 @@ django.jQuery(function(){
         do_destroy(tagy['mykeyworder'],',');
         do_destroy(tagy['adobe'],',');
         do_destroy(tagy['google'],',');
+        do_destroy(tagy['aws'],',');
         do_destroy(tagy['shutter'],',');
         do_destroy(tagy['tags'],',');
 
