@@ -35,6 +35,15 @@ def make_csv_shutter(modeladmin, request, queryset):
     with open(os.path.join(settings.MEDIA_ROOT, 'shutterstock.csv'), 'w') as writer:
         writer.write(csv)
 
+@admin.action(description='Get Mykeyworder tags')
+def get_mykeyworder_tags(modeladmin, request, queryset):
+    for q in queryset:
+        print (q.url)
+        q.mykeyworder_tags = q.get_mykeywords()
+        q.save()
+
+
+
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
     list_display = ['id','path','thumb_tag','instagram_text','instagram','adobe','shutter']
@@ -43,7 +52,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
     search_fields = ['path','title',]
 
     readonly_fields = ['img_tag','url','created_dt','updated_dt']
-    actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter]
+    actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter,get_mykeyworder_tags]
 
 @admin.register(Album)
 class GellifinstaAlbumAdmin(admin.ModelAdmin):

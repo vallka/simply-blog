@@ -1,3 +1,6 @@
+import requests
+import os
+
 from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify
@@ -100,6 +103,22 @@ class Image(models.Model):
 
     instagram_text.short_description = 'instagram_text'
 
+    def get_mykeywords(self):
+        username=os.environ['MYKEYWORDER_USERNAME']
+        key=os.environ['MYKEYWORDER_KEY']
+
+        print(username,key)
+
+        response = requests.get(f'http://mykeyworder.com/api/v1/analyze?url={self.url}?tr=w:600',auth=(username,key))
+
+        print(response)
+        print(response.text)
+
+        res = response.json()
+        print (res)
+        print (res['keywords'])
+        kw = ','.join(res['keywords'])
+        return kw
 
 class Album(models.Model):
     path = models.CharField('path',max_length=200, unique=True)
