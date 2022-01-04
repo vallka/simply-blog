@@ -1,0 +1,98 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block extrahead %}{{ block.super }}
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+<style>
+</style>
+{% endblock %}
+
+
+{% block submit_buttons_bottom %}
+<hr>
+{{ block.super }}
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+
+<script>
+var input_mykeyworder = document.querySelector('textarea[id=id_mykeyworder_tags]');
+var input_adobe = document.querySelector('textarea[id=id_adobe_tags]');
+var input_google = document.querySelector('textarea[id=id_google_tags]');
+var input_shutter = document.querySelector('textarea[id=id_shutter_tags]');
+var input_tags = document.querySelector('textarea[id=id_tags]');
+var tagy = {}
+tagy['mykeyworder'] = new Tagify(input_mykeyworder);
+tagy['adobe'] = new Tagify(input_adobe);
+tagy['google'] = new Tagify(input_google);
+tagy['shutter'] = new Tagify(input_shutter);
+tagy['tags'] = new Tagify(input_tags);
+
+django.jQuery(function(){
+    django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
+    django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
+    django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
+
+
+    django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_add_tags" data-name="mykeyworder" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_add_tags" data-name="adobe" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_google_tags]').append('<button class="button btn_add_tags" data-name="google" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_add_tags" data-name="shutter" style="display: block;"> Add</button>');
+
+    django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
+
+    django.jQuery('.btn_add_tags').click(function(e){
+        e.preventDefault();
+
+        tagy['tags'].addTags(tagy[django.jQuery(this).attr('data-name')].value)
+
+    });
+
+    django.jQuery('.btn_sort_tags').click(function(e){
+        e.preventDefault();
+
+        let tagy_val = tagy[django.jQuery(this).attr('data-name')].value;
+        tagy_val = tagy_val.sort(function(a,b){return a.value.toUpperCase().localeCompare(b.value.toUpperCase())})
+
+        tagy[django.jQuery(this).attr('data-name')].removeAllTags();
+        tagy[django.jQuery(this).attr('data-name')].addTags(tagy_val);
+    });
+
+    django.jQuery('#image_form').submit(function(){
+        do_destroy(tagy['mykeyworder'],',');
+        do_destroy(tagy['adobe'],',');
+        do_destroy(tagy['google'],',');
+        do_destroy(tagy['shutter'],',');
+        do_destroy(tagy['tags'],',');
+
+        return true;
+    });
+
+});
+
+function do_destroy(tagif,delimeter=', ') {
+    let text = untagify(tagif.value,delimeter);
+    let id = tagif.DOM.originalInput.id;
+
+    tagif.destroy();
+
+    tagif.DOM.originalInput.insertAdjacentElement('afterend',tagif.DOM.originalInput.cloneNode(false));
+    tagif.DOM.originalInput.remove();
+    document.getElementById(id).value = text;
+}
+
+function untagify(s,delimeter=', ') {
+    let str='';
+    for (var i=0;i<s.length;++i) {
+        str += s[i].value;
+        if (i<s.length-1)
+            str += delimeter;
+    }
+    return str;
+}
+
+</script>
+{% endblock %}
