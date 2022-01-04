@@ -15,6 +15,38 @@ body {
 </style>
 {% endblock %}
 
+{% block header_search %} 
+<form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'fotoweb:search' %}">
+    <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Photos">
+    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+ </form>
+{% endblock header_search %} 
+
+
+{% block breadcrumb %}
+<nav data-depth="3" class="breadcrumb hidden-sm-down">
+  <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+          
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="{% url 'fotoweb:albums' %}">
+            <span itemprop="name">Photo</span>
+          </a>
+          <meta itemprop="position" content="1">
+        </li>
+          
+        {% if post %}
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="{{ post.get_absolute_url() }}">
+            <span itemprop="name">{{ breadcrumb }}</span>
+          </a>
+          <meta itemprop="position" content="2">
+        </li>
+        {% endif %}
+    
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
 
 {% block content %}
 {% if album_list %}

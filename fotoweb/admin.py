@@ -66,6 +66,26 @@ class GellifinstaAdmin(admin.ModelAdmin):
     readonly_fields = ['img_tag','url','created_dt','updated_dt']
     actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter,get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
+    def get_search_results(self, request, queryset, search_term):
+        queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)
+
+        sql = "SELECT id from fotoweb_image"
+        sql += " where match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode) limit 0,100"
+
+        queryset2 = self.model.objects.raw(sql,[search_term])
+
+        print( len(queryset2))
+        if len(queryset2)>0:
+            s=[]
+            for row in queryset2:
+                s.append(row.id)
+
+            queryset3 = self.model.objects.filter(id__in=s)
+            return queryset | queryset3, may_have_duplicates
+
+        return queryset, may_have_duplicates    
+
+
 @admin.register(Album)
 class GellifinstaAlbumAdmin(admin.ModelAdmin):
     list_display = ['id','path','title','position','thumb_tag',]

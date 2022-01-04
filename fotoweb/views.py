@@ -25,9 +25,48 @@ class ImageListView(generic.ListView):
             r= Image.objects.filter(no_show=0,path__icontains=new_album).order_by('name')
             print (len(r))
 
+            self.breadcrumb = album.title
+
             return r
         else:
             return Image.objects.filter(no_show=0).order_by('-name')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['breadcrumb'] = self.breadcrumb
+        context['page_title'] = context['breadcrumb']
+        return context        
+
+class ImageSearchView(generic.ListView):
+    model = Image
+    paginate_by = 200
+
+    def get_queryset(self):
+        self.q = self.request.GET.get('q')
+
+        sql = Image.objects.filter(no_show=0).query
+        sql = re.sub('ORDER BY.*$','',str(sql))
+        sql += "and match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode)"
+        print(sql)
+
+        posts = Image.objects.raw(sql,[self.q])
+        self.len = len(posts)
+        return posts
+        #return Image.objects.filter(no_show=0).order_by('-name')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #context['post'] = context['post_list'] and context['post_list'][0]
+
+        page = int(self.request.GET.get('page',1))
+        context['q'] = self.q
+
+        context['breadcrumb'] = f'Search: {self.q} ({self.len})' 
+        context['page_title'] = context['breadcrumb']
+        return context        
+
 
 class AlbumListView(generic.ListView):
     model = Album
