@@ -34,24 +34,32 @@ tagy['shutter'] = new Tagify(input_shutter);
 tagy['tags'] = new Tagify(input_tags);
 
 django.jQuery(function(){
-    django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
-    django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
-    django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
+    //django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
+    //django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
+    //django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
 
 
     django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_add_tags" data-name="mykeyworder" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_copy_tags" data-name="mykeyworder" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_add_tags" data-name="adobe" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_copy_tags" data-name="adobe" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_google_tags]').append('<button class="button btn_add_tags" data-name="google" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_google_tags]').append('<button class="button btn_copy_tags" data-name="google" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_add_tags" data-name="aws" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_copy_tags" data-name="aws" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_add_tags" data-name="shutter" style="display: block;"> Add</button>');
-
+    django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_copy_tags" data-name="shutter" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
+    django.jQuery('label[for=id_tags]').append('<button class="button btn_copy_tags" data-name="tags" style="display: block;"> Copy</button>');
 
     django.jQuery('.btn_add_tags').click(function(e){
         e.preventDefault();
-
         tagy['tags'].addTags(tagy[django.jQuery(this).attr('data-name')].value)
+    });
 
+    django.jQuery('.btn_copy_tags').click(function(e){
+        e.preventDefault();
+        copyTextToClipboard(untagify(tagy[django.jQuery(this).attr('data-name')].value,', '));
     });
 
     django.jQuery('.btn_sort_tags').click(function(e){
@@ -97,6 +105,43 @@ function untagify(s,delimeter=', ') {
     }
     return str;
 }
+
+function copyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+
+  textArea.style.position = 'fixed';
+  textArea.style.top = 0;
+  textArea.style.left = 0;
+
+  // doesn't work as this gives a negative w/h on some browsers.
+  textArea.style.width = '2em';
+  textArea.style.height = '2em';
+
+  textArea.style.padding = 0;
+
+  textArea.style.border = 'none';
+  textArea.style.outline = 'none';
+  textArea.style.boxShadow = 'none';
+
+  textArea.style.background = 'transparent';
+
+  textArea.value = text;
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    //console.log('Copying text command was ' + msg);
+  } catch (err) {
+    //console.log('Oops, unable to copy');
+  }
+
+  document.body.removeChild(textArea);
+}
+
 
 </script>
 {% endblock %}
