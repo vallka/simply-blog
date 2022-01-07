@@ -93,13 +93,13 @@ def open_dir(dir,album_needs_cover):
                             options={
                                 "folder":new_dir,
                                 "use_unique_file_name":False,
-                                "extensions": [
-                                    {
-                                        "name": f"{provider}-auto-tagging",
-                                        "maxTags": 25,
-                                        "minConfidence": 50
-                                    },
-                                ]
+                                #"extensions": [
+                                #    {
+                                #        "name": f"{provider}-auto-tagging",
+                                #        "maxTags": 25,
+                                #        "minConfidence": 50
+                                #    },
+                                #]
                             },
                     )
                     print("Upload binary", upload)
