@@ -85,12 +85,21 @@ def open_dir(dir,album_needs_cover):
                     iptc = IPTCInfo(BytesIO(data),inp_charset='utf_8',out_charset='utf_8')
                     print (iptc)
 
+                    provider = 'aws';
+
                     upload = imagekit.upload(
                             file=base64.b64encode(data),
                             file_name=fn,
                             options={
                                 "folder":new_dir,
                                 "use_unique_file_name":False,
+                                "extensions": [
+                                    {
+                                        "name": f"{provider}-auto-tagging",
+                                        "maxTags": 25,
+                                        "minConfidence": 50
+                                    },
+                                ]
                             },
                     )
                     print("Upload binary", upload)
@@ -106,6 +115,16 @@ def open_dir(dir,album_needs_cover):
                     if not img.title: img.title = iptc['headline']
                     if not img.description: img.description = iptc['caption/abstract']
                     if not img.tags: img.tags = ', '.join(iptc['keywords'])
+
+                    if not img.aws_tags and upload['response']['AITags']:
+                        tags = []
+                        for tag in upload['response']['AITags']:
+                            if tag['source']==f"{provider}-auto-tagging":
+                                print (tag)
+                                tags.append(tag['name'])
+
+                        if tags:
+                            img.aws_tags = ','.join(tags)
 
                     img.save()
                     print('ID:',img.id)
