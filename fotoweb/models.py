@@ -197,6 +197,7 @@ class Album(models.Model):
     description = models.TextField('description',null=True, blank=True,)
     position = models.IntegerField('position',default=0, blank=True,)
     cover = models.CharField('cover',max_length=200,blank=True,default='')
+    level = models.IntegerField('level',default=0, )
 
     def __str__(self):
         return str(self.id) + ':' + str(self.title)
@@ -212,7 +213,15 @@ class Album(models.Model):
     thumb_tag.short_description = 'thumb'
 
     def save(self, *args, **kwargs):
+
+        if self.path:
+            self.level = self.path.count('/') - 3
+        else:
+            self.level = -1
+            self.no_show = True
+
         if not self.slug:
             self.slug = slugify(self.title)
+
             
         super().save(*args, **kwargs)

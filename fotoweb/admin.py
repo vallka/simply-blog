@@ -88,8 +88,8 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class GellifinstaAlbumAdmin(admin.ModelAdmin):
-    list_display = ['id','path','title','position','thumb_tag',]
-    list_display_links = ['id','path','title','position','thumb_tag']
+    list_display = ['thumb_tag','title','position','id',]
+    list_display_links = list_display
     search_fields = ['path','title',]
 
     readonly_fields = ['img_tag','created_dt','updated_dt']

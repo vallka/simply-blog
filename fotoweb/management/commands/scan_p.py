@@ -31,7 +31,7 @@ imgk_start_dir = '/C1/foto'
 imgk_nostore_dir = '/Gellifique/VALYA'
 cnt = 0
 
-def open_dir(dir,album_needs_cover):
+def open_dir(dir,albums_needs_cover):
     global cnt
 
     print ('dir:',dir)
@@ -41,7 +41,7 @@ def open_dir(dir,album_needs_cover):
     for f in sorted(ff['metadata']['contents'],key=lambda file: file['path']):
         if f['isfolder']:
             need_cover = None
-            if '2048' in f['path']:
+            if not 'JPEG-2048' in f['path'] and not 'JPEG-Full-size' in f['path']:
                 path = f['path'].replace(imgk_nostore_dir,'')
                 path = path.replace(' ','_')
                 path = re.sub(r'[^/_0-9A-Za-z\-.]','_',path)
@@ -57,11 +57,17 @@ def open_dir(dir,album_needs_cover):
                     album.save()
                     need_cover = album
 
-            open_dir (f['path'],need_cover)
+            if need_cover:
+                albums_needs_cover.append(need_cover)
+
+                print ('folders need cover:',albums_needs_cover)
+
+
+            open_dir (f['path'],albums_needs_cover)
         else:
-            if f['contenttype']=='image/jpeg' and '2048' in f['path']:
+            if f['contenttype']=='image/jpeg' and 'JPEG-2048' in f['path']:
                 cnt += 1
-                print(cnt,f['path'])
+                #print(cnt,f['path'])
                 fdt = parser.parse(f['created'])
                 new_dir = dir.replace(imgk_nostore_dir,'')
                 new_dir = new_dir.replace(' ','_')
@@ -129,17 +135,21 @@ def open_dir(dir,album_needs_cover):
                     img.save()
                     print('ID:',img.id)
 
-                    if album_needs_cover:
-                        album_needs_cover.cover = img.url
-                        album_needs_cover.save()
-                        album_needs_cover = None
+                    if albums_needs_cover:
+                        print ('files - cover:',albums_needs_cover)
+                        for album_needs_cover in albums_needs_cover:
+                            album_needs_cover.cover = img.url
+                            album_needs_cover.save()
+                        albums_needs_cover.clear()
 
                 else:
                     pass
-                    if album_needs_cover:
-                        album_needs_cover.cover = res['response'][0]['url']
-                        album_needs_cover.save()
-                        album_needs_cover = None
+                    if albums_needs_cover:
+                        print ('files - cover:',albums_needs_cover)
+                        for album_needs_cover in albums_needs_cover:
+                            album_needs_cover.cover = res['response'][0]['url']
+                            album_needs_cover.save()
+                        albums_needs_cover.clear()
 
                         
 
@@ -154,7 +164,7 @@ class Command(BaseCommand):
         print (self.help)
         logger.info(self.help)
         
-        open_dir(start_dir,None)
+        open_dir(start_dir,[])
 
         print ("DONE!")
         logger.error("DONE - %s!",self.help,)

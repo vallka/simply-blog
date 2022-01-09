@@ -1,5 +1,5 @@
 import re
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import generic
 from .models import *
 
@@ -72,5 +72,37 @@ class AlbumListView(generic.ListView):
     model = Album
     paginate_by = 200
 
+    def render_to_response(self,context):
+        print ('render_to_response')
+        print (self.object_list)
+        if len(self.object_list):
+            return super().render_to_response(context)
+
+        return redirect('fotoweb:album-photos', self.kwargs.get('album')) 
+
+    
     def get_queryset(self):
-        return Album.objects.filter(no_show=0).order_by('position','-id')
+        album = self.kwargs.get('album')
+        if album:
+            album = Album.objects.get(slug=album)
+
+            new_album = album.path
+            new_album = new_album.replace(' ','_')
+            new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
+            new_album = new_album.replace('__','_')
+            print('album:',album,new_album)
+
+            self.breadcrumb = album.title
+
+            albums = Album.objects.filter(no_show=0,level=album.level+1,path__icontains=new_album).order_by('position','-id')
+            return albums
+
+        self.breadcrumb = ''
+        return Album.objects.filter(no_show=0,level=0).order_by('position','-id')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['breadcrumb'] = self.breadcrumb
+        context['page_title'] = context['breadcrumb']
+        return context        

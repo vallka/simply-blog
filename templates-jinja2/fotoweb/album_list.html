@@ -34,11 +34,9 @@ body {
           <meta itemprop="position" content="1">
         </li>
           
-        {% if post %}
+        {% if breadcrumb %}
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{{ post.get_absolute_url() }}">
             <span itemprop="name">{{ breadcrumb }}</span>
-          </a>
           <meta itemprop="position" content="2">
         </li>
         {% endif %}
@@ -52,6 +50,7 @@ body {
 {% if album_list %}
   <div id="gallery">
   {% for album in album_list %}
+    {% if album.cover %}
         <!-- data-image="{{album.path|replace('/','|')}}" -->
           <a href="/photo/{{album.slug}}">
           <img src="{{album.cover}}?tr=w-400" 
@@ -60,7 +59,7 @@ body {
             style="display: none;" 
           />
         </a>
-
+    {% endif %}
   {% endfor %}
   </div>
 {% else %}
