@@ -85,6 +85,11 @@ class Image(models.Model):
 
     thumb_tag.short_description = 'thumb'
 
+    def tags_spaced(self):
+        return mark_safe('<div><span>'+self.tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
+    tags_spaced.short_description = 'Tags'
+
+
     def instagram_text(self):
         #tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
         tags = ''

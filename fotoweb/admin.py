@@ -58,9 +58,9 @@ def get_aws_tags(modeladmin, request, queryset):
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
-    list_display = ['id','path','thumb_tag','instagram_text','instagram','adobe','shutter']
-    list_display_links = ['id','path','thumb_tag']
-    list_filter = ['instagram','adobe','shutter']
+    list_display = ['thumb_tag','title','id','path','tags_spaced','instagram_text','instagram','adobe','shutter']
+    list_display_links = ['id','path','thumb_tag','title']
+    #list_filter = ['instagram','adobe','shutter']
     search_fields = ['path','title','id']
 
     readonly_fields = ['img_tag','url','created_dt','updated_dt']
