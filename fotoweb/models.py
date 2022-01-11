@@ -86,7 +86,8 @@ class Image(models.Model):
     thumb_tag.short_description = 'thumb'
 
     def tags_spaced(self):
-        return mark_safe('<div><span>'+self.tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
+        tags = self.tags or ''
+        return mark_safe('<div><span class="copy_tags">'+tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
     tags_spaced.short_description = 'Tags'
 
 
@@ -111,7 +112,9 @@ class Image(models.Model):
             tags = tags[:30]
 
         tags = ' '.join(tags)
-        return str(self.title or '') + '\n' + tags + '\n' + self.name
+        return mark_safe('<div><span class="copy_tags">'+
+            str(self.title or '') + '\n' + tags + '\n' + self.name + 
+            '</span> <a href="#" class="copy_tags">(^C)</a></div>')
 
     instagram_text.short_description = 'instagram_text'
 

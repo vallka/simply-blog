@@ -1,0 +1,73 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+
+{% block extrahead %}
+<!-- block extrahead -->
+{{ block.super }}
+<script>
+django.jQuery(function(){
+  django.jQuery('.copy_tags').click(function(e){
+        e.preventDefault();
+        var text = django.jQuery(this).parent('div').find('span').text();
+        copyTextToClipboard(text);
+        myAlert(text +' - Copied',1000)
+    });
+
+})
+function copyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+
+  textArea.style.position = 'fixed';
+  textArea.style.top = 0;
+  textArea.style.left = 0;
+
+  // doesn't work as this gives a negative w/h on some browsers.
+  textArea.style.width = '2em';
+  textArea.style.height = '2em';
+
+  textArea.style.padding = 0;
+
+  textArea.style.border = 'none';
+  textArea.style.outline = 'none';
+  textArea.style.boxShadow = 'none';
+
+  textArea.style.background = 'transparent';
+
+  textArea.value = text;
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    //console.log('Copying text command was ' + msg);
+  } catch (err) {
+    //console.log('Oops, unable to copy');
+  }
+
+  document.body.removeChild(textArea);
+}
+
+function myAlert(mymsg,mymsecs)
+{
+ var myelement = document.createElement("div");
+myelement.setAttribute("style","background-color: grey;color:black; width: 450px;height: 100px;position: fixed;top:0;bottom:0;left:0;right:0;margin:auto;border: 1px solid black;display: flex; align-items: center; justify-content: center; text-align: center;");
+ myelement.innerHTML = mymsg;
+ setTimeout(function(){
+  myelement.parentNode.removeChild(myelement);
+ },mymsecs);
+ document.body.appendChild(myelement);
+}
+
+</script>
+<!-- /block extrahead -->
+{% endblock %}
+
+{% block content %}
+<!-- block content -->
+{{ block.super }}
+<!-- /block content -->
+{% endblock %}
