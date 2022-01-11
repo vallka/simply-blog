@@ -86,7 +86,13 @@ class Image(models.Model):
     thumb_tag.short_description = 'thumb'
 
     def tags_spaced(self):
-        tags = self.tags or ''
+        tags = ''
+        if self.tags and len(self.tags)>len(tags): tags = self.tags
+        if self.mykeyworder_tags and len(self.mykeyworder_tags)>len(tags): tags = self.mykeyworder_tags
+        if self.adobe_tags and len(self.adobe_tags)>len(tags): tags = self.adobe_tags
+        if self.shutter_tags and len(self.shutter_tags)>len(tags): tags = self.shutter_tags
+        if self.google_tags and len(self.google_tags)>len(tags): tags = self.google_tags
+        if self.aws_tags and len(self.aws_tags)>len(tags): tags = self.aws_tags
         return mark_safe('<div><span class="copy_tags">'+tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
     tags_spaced.short_description = 'Tags'
 
