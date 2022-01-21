@@ -1,5 +1,7 @@
 import os
+import re
 
+from django.db.models import Q
 from django.contrib import admin
 from .models import *
 
@@ -67,6 +69,25 @@ class GellifinstaAdmin(admin.ModelAdmin):
     actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter,get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
     def get_search_results(self, request, queryset, search_term):
+        if search_term[0:2]=='a:':
+            album_id = search_term[2:]
+            try:
+                if re.match(r'^\d+$',album_id):
+                    album = Album.objects.get(id=int(album_id))
+                else:    
+                    album = Album.objects.get(slug=album_id)
+                new_album = album.path
+                new_album = new_album.replace(' ','_')
+                new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
+                new_album = new_album.replace('__','_')
+                print('album:',album,new_album)
+
+            except Album.DoesNotExist:    
+                new_album = '///////'
+
+            r = Image.objects.filter(path__icontains=new_album)
+            return r, False    
+
         queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)
 
         sql = "SELECT id from fotoweb_image"
