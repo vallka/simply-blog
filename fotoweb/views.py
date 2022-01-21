@@ -26,15 +26,19 @@ class ImageListView(generic.ListView):
             print (len(r))
 
             self.breadcrumb = album.title
+            self.album_id = album.id
 
             return r
         else:
+            self.breadcrumb = ''
+            self.album_id = None
             return Image.objects.filter(no_show=0).order_by('-name')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['breadcrumb'] = self.breadcrumb
+        context['album_id'] = self.album_id
         context['page_title'] = context['breadcrumb']
         return context        
 
@@ -93,16 +97,26 @@ class AlbumListView(generic.ListView):
             print('album:',album,new_album)
 
             self.breadcrumb = album.title
+            self.album_id = album.id
 
             albums = Album.objects.filter(no_show=0,level=album.level+1,path__icontains=new_album).order_by('position','-id')
             return albums
 
         self.breadcrumb = ''
+        self.album_id = None
         return Album.objects.filter(no_show=0,level=0).order_by('position','-id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['breadcrumb'] = self.breadcrumb
+        context['album_id'] = self.album_id
         context['page_title'] = context['breadcrumb']
         return context        
+
+def view_img(request):
+    path=request.GET['p']
+    print ('view_img',path)
+    logger.error("view_img - path:%s",path)
+
+    return redirect(path)

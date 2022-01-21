@@ -37,7 +37,12 @@ body {
         {% if breadcrumb %}
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
             <span itemprop="name">{{ breadcrumb }}</span>
-          <meta itemprop="position" content="2">
+            {% if album_id %}
+              {% if request.user.is_authenticated and request.user.is_staff: %}
+                <a href="/admin/fotoweb/image/?q=a:{{ album_id }}" target="_blank" title="Open in Admin">{{ album_id }}</a>
+              {% endif %}
+            {% endif %}
+            <meta itemprop="position" content="2">
         </li>
         {% endif %}
     

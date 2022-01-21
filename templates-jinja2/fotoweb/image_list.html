@@ -37,6 +37,11 @@ body {
         {% if breadcrumb %}
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
             <span itemprop="name">{{ breadcrumb }}</span>
+            {% if album_id %}
+              {% if request.user.is_authenticated and request.user.is_staff: %}
+                <a href="/admin/fotoweb/image/?q=a:{{ album_id }}" target="_blank" title="Open in Admin">{{ album_id }}</a>
+              {% endif %}
+            {% endif %}
           <meta itemprop="position" content="2">
         </li>
         {% endif %}
@@ -52,7 +57,7 @@ body {
   {% for image in image_list %}
         <a href="#">
           <img src="{{image.url}}?tr=w-400" 
-            data-image="{{image.url}}"
+            data-image="/photo/i/?p={{image.url}}"
             data-description="{{image.title if image.title else image.name}}"          
             alt="{{image.title if image.title else image.name}}" 
             style="display: none;" 

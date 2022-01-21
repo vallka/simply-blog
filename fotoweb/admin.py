@@ -23,6 +23,14 @@ def make_published_adobe(modeladmin, request, queryset):
 def make_published_shutter(modeladmin, request, queryset):
     queryset.update(shutter=True)
 
+@admin.action(description='Mark selected as Pexelled')
+def make_published_pexels(modeladmin, request, queryset):
+    queryset.update(pexels=True)
+
+@admin.action(description='Mark selected as Rasfocused')
+def make_published_rasfocus(modeladmin, request, queryset):
+    queryset.update(rasfocus=True)
+
 @admin.action(description='Make CSV for Shutterstock')
 def make_csv_shutter(modeladmin, request, queryset):
     csv = "Filename,Description,Keywords,Categories,Editorial\n"
@@ -60,13 +68,19 @@ def get_aws_tags(modeladmin, request, queryset):
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
-    list_display = ['thumb_tag','title','id','path','tags_spaced','instagram_text','instagram','adobe','shutter']
-    list_display_links = ['id','path','thumb_tag','title']
+    list_display = ['thumb_tag','id','path','tags_spaced','instagram_text','instagram','adobe','shutter','pexels','rasfocus']
+    list_display_links = ['id','path','thumb_tag',]
     #list_filter = ['instagram','adobe','shutter']
     search_fields = ['path','title','id']
 
     readonly_fields = ['img_tag','url','created_dt','updated_dt']
-    actions = [make_csv_shutter,make_published_insta,make_published_adobe,make_published_shutter,get_mykeyworder_tags,get_google_tags,get_aws_tags]
+    actions = [make_csv_shutter,
+            make_published_insta,
+            make_published_adobe,
+            make_published_shutter,
+            make_published_pexels,
+            make_published_rasfocus,
+            get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
     def get_search_results(self, request, queryset, search_term):
         if search_term[0:2]=='a:':

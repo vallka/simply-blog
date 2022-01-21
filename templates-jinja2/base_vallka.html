@@ -141,6 +141,11 @@
               </script>
             </div>
             <div class="col-12 col-md-4 col-lg-3">
+              {% if request.user.is_authenticated: %}
+                {{ request.user.email }}
+                {{ request.user.is_staff }}
+                {{ request.user.is_superuser }}
+              {% endif %}
             </div>
             <div class="col-12 col-md-4 col-lg-3">
             </div>
