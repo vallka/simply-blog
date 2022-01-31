@@ -1,5 +1,6 @@
 import os
 import re
+from datetime import datetime
 
 from django.db.models import Q
 from django.contrib import admin
@@ -13,23 +14,28 @@ from django.conf import settings
 
 @admin.action(description='Mark selected as Instagrammed')
 def make_published_insta(modeladmin, request, queryset):
-    queryset.update(instagram=True)
+    queryset.filter(instagram__isnull=True).update(instagram=True)
+    queryset.filter(instagram_dt__isnull=True).update(instagram_dt=datetime.now())
 
 @admin.action(description='Mark selected as Abobed')
 def make_published_adobe(modeladmin, request, queryset):
-    queryset.update(adobe=True)
+    queryset.filter(adobe__isnull=True).update(adobe=True)
+    queryset.filter(adobe_dt__isnull=True).update(adobe_dt=datetime.now())
 
 @admin.action(description='Mark selected as Shutterstocked')
 def make_published_shutter(modeladmin, request, queryset):
-    queryset.update(shutter=True)
+    queryset.filter(shutter__isnull=True).update(shutter=True)
+    queryset.filter(shutter_dt__isnull=True).update(shutter_dt=datetime.now())
 
 @admin.action(description='Mark selected as Pexelled')
 def make_published_pexels(modeladmin, request, queryset):
-    queryset.update(pexels=True)
+    queryset.filter(pexels__isnull=True).update(pexels=True)
+    queryset.filter(pexels_dt__isnull=True).update(pexels_dt=datetime.now())
 
 @admin.action(description='Mark selected as Rasfocused')
 def make_published_rasfocus(modeladmin, request, queryset):
-    queryset.update(rasfocus=True)
+    queryset.filter(rasfocus__isnull=True).update(rasfocus=True)
+    queryset.filter(rasfocus_dt__isnull=True).update(rasfocus_dt=datetime.now())
 
 @admin.action(description='Make CSV for Shutterstock')
 def make_csv_shutter(modeladmin, request, queryset):
@@ -50,6 +56,8 @@ def get_mykeyworder_tags(modeladmin, request, queryset):
     for q in queryset:
         print (q.url)
         q.mykeyworder_tags = q.get_mykeywords()
+        q.add_auto_tags(q.mykeyworder_tags)
+        q.add_auto_title(q.mykeyworder_tags)
         q.save()
 
 @admin.action(description='Get Google tags')
@@ -57,6 +65,8 @@ def get_google_tags(modeladmin, request, queryset):
     for q in queryset:
         print (q.url)
         q.google_tags = q.get_imagekit_kw()
+        q.add_auto_tags(q.google_tags)
+        q.add_auto_title(q.google_tags)
         q.save()
 
 @admin.action(description='Get AWS tags')
@@ -64,13 +74,15 @@ def get_aws_tags(modeladmin, request, queryset):
     for q in queryset:
         print (q.url)
         q.aws_tags = q.get_imagekit_kw('aws')
+        q.add_auto_tags(q.aws_tags)
+        q.add_auto_title(q.aws_tags)
         q.save()
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
     list_display = ['thumb_tag','id','path','tags_spaced','instagram_text','instagram','adobe','shutter','pexels','rasfocus']
     list_display_links = ['id','path','thumb_tag',]
-    #list_filter = ['instagram','adobe','shutter']
+    list_filter = ['instagram','adobe','shutter','pexels','rasfocus']
     search_fields = ['path','title','id']
 
     readonly_fields = ['img_tag','url','created_dt','updated_dt']

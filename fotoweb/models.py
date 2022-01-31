@@ -24,6 +24,7 @@ class Image(models.Model):
     title = models.CharField('title',max_length=100,null=True, blank=True)
     description = models.TextField('description',null=True, blank=True,)
     tags = models.TextField('tags',null=True, blank=True,)
+    private = models.BooleanField('private',default=False)
     editorial = models.BooleanField('editorial',default=False)
     instagram = models.BooleanField('instagram',default=False)
     instagram_dt = models.DateTimeField('instagram_dt',null=True, blank=True,)
@@ -207,6 +208,23 @@ class Image(models.Model):
 
         return ''
 
+    def add_auto_tags(self,new_tags):
+        tags_cf = self.tags.casefold().split(',')
+        new_tags = new_tags.split(',')
+        for t in new_tags:
+            if not t.casefold() in tags_cf:
+                self.tags += ',' + t
+
+        self.tags = self.tags.strip(',')
+
+    def add_auto_title(self,new_tags):
+        if not self.title:
+            new_tags = new_tags.split(',')
+            self.title = ''
+            for t in new_tags[:6]:
+                self.title += t + ' '
+
+            self.title = self.title.strip(' ')
 
 class Album(models.Model):
     path = models.CharField('path',max_length=200, unique=True)
