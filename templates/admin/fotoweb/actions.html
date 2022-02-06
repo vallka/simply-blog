@@ -1,0 +1,14 @@
+{% extends "admin/actions.html" %}
+{% load i18n admin_urls static admin_list %}
+
+
+
+  {% block actions %}
+  {{ block.super }}
+
+  <span id="download-links" class="">
+    Download: <a href="/media/shutterstock.csv">shutterstock.csv</a> 
+  </span>
+
+
+  {% endblock %}

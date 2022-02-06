@@ -14,27 +14,27 @@ from django.conf import settings
 
 @admin.action(description='Mark selected as Instagrammed')
 def make_published_insta(modeladmin, request, queryset):
-    queryset.filter(instagram__isnull=True).update(instagram=True)
+    queryset.filter(instagram=False).update(instagram=True)
     queryset.filter(instagram_dt__isnull=True).update(instagram_dt=datetime.now())
 
 @admin.action(description='Mark selected as Abobed')
 def make_published_adobe(modeladmin, request, queryset):
-    queryset.filter(adobe__isnull=True).update(adobe=True)
+    queryset.filter(adobe=False).update(adobe=True)
     queryset.filter(adobe_dt__isnull=True).update(adobe_dt=datetime.now())
 
 @admin.action(description='Mark selected as Shutterstocked')
 def make_published_shutter(modeladmin, request, queryset):
-    queryset.filter(shutter__isnull=True).update(shutter=True)
+    queryset.filter(shutter=False).update(shutter=True)
     queryset.filter(shutter_dt__isnull=True).update(shutter_dt=datetime.now())
 
 @admin.action(description='Mark selected as Pexelled')
 def make_published_pexels(modeladmin, request, queryset):
-    queryset.filter(pexels__isnull=True).update(pexels=True)
+    queryset.filter(pexels=False).update(pexels=True)
     queryset.filter(pexels_dt__isnull=True).update(pexels_dt=datetime.now())
 
 @admin.action(description='Mark selected as Rasfocused')
 def make_published_rasfocus(modeladmin, request, queryset):
-    queryset.filter(rasfocus__isnull=True).update(rasfocus=True)
+    queryset.filter(rasfocus=False).update(rasfocus=True)
     queryset.filter(rasfocus_dt__isnull=True).update(rasfocus_dt=datetime.now())
 
 @admin.action(description='Make CSV for Shutterstock')
