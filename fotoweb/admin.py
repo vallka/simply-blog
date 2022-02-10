@@ -95,6 +95,11 @@ class GellifinstaAdmin(admin.ModelAdmin):
             get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
     def get_search_results(self, request, queryset, search_term):
+        queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)
+
+        if not search_term:
+            return queryset, may_have_duplicates
+
         if search_term[0:2]=='a:':
             album_id = search_term[2:]
             try:
@@ -111,13 +116,12 @@ class GellifinstaAdmin(admin.ModelAdmin):
             except Album.DoesNotExist:    
                 new_album = '///////'
 
-            r = Image.objects.filter(path__icontains=new_album)
-            return r, False    
+            queryset3 = Image.objects.filter(path__icontains=new_album)
+            return queryset & queryset3, may_have_duplicates
 
-        queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)
 
         sql = "SELECT id from fotoweb_image"
-        sql += " where match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode) limit 0,100"
+        sql += " where match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode) limit 0,1000"
 
         queryset2 = self.model.objects.raw(sql,[search_term])
 
@@ -128,7 +132,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
                 s.append(row.id)
 
             queryset3 = self.model.objects.filter(id__in=s)
-            return queryset | queryset3, may_have_duplicates
+            return queryset & queryset3, may_have_duplicates
 
         return queryset, may_have_duplicates    
 

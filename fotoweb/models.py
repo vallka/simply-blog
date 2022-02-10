@@ -33,6 +33,7 @@ class Image(models.Model):
     adobe_dt = models.DateTimeField('adobe_dt',null=True, blank=True,)
     shutter = models.BooleanField('shutter',default=False)
     shutter_dt = models.DateTimeField('shutter_dt',null=True, blank=True,)
+    shutter_url = models.CharField('shutter_url',null=True, blank=True,max_length=200)
 
     class ShutterCategories(models.TextChoices):
         EMPTY = '', ''
