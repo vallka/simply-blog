@@ -15,8 +15,15 @@ class ImageView(generic.DetailView):
     model = Image
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        print (self.kwargs)
+
+        if self.kwargs.get('name'): 
+            self.object = self.model.objects.get(name=self.kwargs.get('name'))
+        else:
+            self.object = self.get_object()
+
         context = self.get_context_data(object=self.object)
+
 
         if self.kwargs.get('par')=='json': 
             return JsonResponse(model_to_dict(self.object))

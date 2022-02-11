@@ -13,4 +13,6 @@ urlpatterns = [
     path('s/<str:album>/', ImageListView.as_view(), name='album-photos'),
     path('image/<int:pk>/<str:par>', ImageView.as_view(), name='image-w-par'),
     path('image/<int:pk>/', ImageView.as_view(), name='image'),
+    path('image/<str:name>/', ImageView.as_view(), name='image'),
+    path('image/<str:name>/<str:par>', ImageView.as_view(), name='image-w-par'),
 ]
