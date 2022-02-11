@@ -31,6 +31,7 @@ pandas = "*"
 openpyxl = "*"
 plotly = "*"
 plotly-express = "*"
+selenium = "*"
 
 [requires]
 python_version = "3"

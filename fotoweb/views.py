@@ -1,11 +1,31 @@
 import re
+from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import generic
+from django.forms.models import model_to_dict
+
+
 from .models import *
 
 
 import logging
 logger = logging.getLogger(__name__)
+
+class ImageView(generic.DetailView):
+    model = Image
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+
+        if self.kwargs.get('par')=='json': 
+            return JsonResponse(model_to_dict(self.object))
+        
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context        
 
 class ImageListView(generic.ListView):
     model = Image
