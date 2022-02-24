@@ -112,13 +112,12 @@ body {
       console.log('************* '+img);
       g_logged = img;
       gtag("event", "view_item", {
-        items: [
-        {
+        items: [{
           item_id: img,
           item_name: img,
-        }
-        ]
+        }]
       });
+    }
   }
 
   jQuery(document).ready(function(){
