@@ -27,6 +27,8 @@ imagekit = ImageKit(
 pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
 start_dir = '/Gellifique/VALYA/C1/foto'
+#start_dir = '/Gellifique/VALYA/C1/foto/Pentland Hills Walk'
+
 imgk_start_dir = '/C1/foto'
 imgk_nostore_dir = '/Gellifique/VALYA'
 cnt = 0
@@ -67,7 +69,7 @@ def open_dir(dir,albums_needs_cover):
         else:
             if f['contenttype']=='image/jpeg' and 'JPEG-2048' in f['path']:
                 cnt += 1
-                #print(cnt,f['path'])
+                print(cnt,f['path'])
                 fdt = parser.parse(f['created'])
                 new_dir = dir.replace(imgk_nostore_dir,'')
                 new_dir = new_dir.replace(' ','_')
@@ -75,12 +77,10 @@ def open_dir(dir,albums_needs_cover):
                 new_dir = new_dir.replace('__','_')
 
                 fn = os.path.basename(f['path'].replace(' ','_'))
-                
+
                 res = imagekit.list_files({'path':new_dir,'name':fn})
                 if res['error']:
                     print ('ERROR',res)
-
-                #print (res)
 
                 #if not res['response'] or parser.parse(res['response'][0]['createdAt'])<fdt:
                 if not res['response']:
@@ -115,7 +115,7 @@ def open_dir(dir,albums_needs_cover):
                         img = Image.objects.get(name=upload['response']['name'])
                     except Image.DoesNotExist:
                         img = Image(name=upload['response']['name'])
-                        
+
                     img.path=upload['response']['filePath']
                     img.url=upload['response']['url']
                     if not img.title: img.title = iptc['headline']
@@ -151,7 +151,7 @@ def open_dir(dir,albums_needs_cover):
                             album_needs_cover.save()
                         albums_needs_cover.clear()
 
-                        
+
 
 
 class Command(BaseCommand):
@@ -163,7 +163,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print (self.help)
         logger.info(self.help)
-        
+
         open_dir(start_dir,[])
 
         print ("DONE!")
