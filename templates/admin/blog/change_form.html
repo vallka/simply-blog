@@ -145,42 +145,65 @@ jQuery = django.jQuery; // for spectrum
 <!-- script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script -->
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <script>
-var simplemde = new EasyMDE({
-    forceSync: true,
-    promptURLs: true,
-    uploadImage: true,
-    imageUploadEndpoint: "/markdownx/upload-em/",
-    imageCSRFToken: django.jQuery('input[name=csrfmiddlewaretoken]').val(),
-    toolbar: [
-        "bold",
-        "italic",
-        "heading-2",
-        "heading-3",
-        "heading-smaller",
-        "heading-bigger",
-        "unordered-list",
-        "ordered-list",
-        "code",
-        "quote",
-        "clean-block",
-        "link",
-        "image",
-        "table",
-        "horizontal-rule",
-        "preview",
-        "|",
-        "guide"
-],
+var simplemde = null;
 
-});
+
+function mde_up() {
+    simplemde = new EasyMDE({
+        forceSync: true,
+        promptURLs: true,
+        uploadImage: true,
+        imageUploadEndpoint: "/markdownx/upload-em/",
+        imageCSRFToken: django.jQuery('input[name=csrfmiddlewaretoken]').val(),
+        toolbar: [
+            "bold",
+            "italic",
+            "heading-2",
+            "heading-3",
+            "heading-smaller",
+            "heading-bigger",
+            "unordered-list",
+            "ordered-list",
+            "code",
+            "quote",
+            "clean-block",
+            "link",
+            "image",
+            "table",
+            "horizontal-rule",
+            "preview",
+            "|",
+            "guide"
+    ],
+
+    });
+}
+
+mde_up();
 
 django.jQuery(function(){
+    django.jQuery('label[for=id_text]').append(' <span class="button btn_markdown">Raw text</span>');
+
     django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
     django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
     django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
     django.jQuery('#btn-preview').click(function(){
         window.open('/blog/'+django.jQuery('#id_slug').val())
     });
+
+
+    django.jQuery('.btn_markdown').click(function(e){
+        if (simplemde) {
+            simplemde.toTextArea();
+            simplemde = null;
+            django.jQuery('.btn_markdown').text('MD Editor');
+        }
+        else {
+            mde_up();
+            django.jQuery('.btn_markdown').text('Raw text');
+        }
+    });
+
 
     django.jQuery('#btn-stats').click(function(e){
         const slug = django.jQuery('#id_slug').val()
