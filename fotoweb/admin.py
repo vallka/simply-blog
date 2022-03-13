@@ -80,12 +80,6 @@ def get_aws_tags(modeladmin, request, queryset):
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
-    list_display = ['thumb_tag','id','path','tags_spaced','instagram_text','instagram','adobe','shutter','pexels','rasfocus']
-    list_display_links = ['id','path','thumb_tag',]
-    list_filter = ['instagram','adobe','shutter','pexels','rasfocus']
-    search_fields = ['path','title','id']
-
-    readonly_fields = ['img_tag','url','created_dt','updated_dt']
     actions = [make_csv_shutter,
             make_published_insta,
             make_published_adobe,
@@ -93,6 +87,99 @@ class GellifinstaAdmin(admin.ModelAdmin):
             make_published_pexels,
             make_published_rasfocus,
             get_mykeyworder_tags,get_google_tags,get_aws_tags]
+
+    list_display = ['thumb_tag','id','path','tags_spaced','instagram_text','instagram','adobe','shutter','pexels','rasfocus']
+    list_display_links = ['id','path','thumb_tag',]
+    list_filter = ['instagram','adobe','shutter','pexels','rasfocus']
+    search_fields = ['path','title','id']
+    date_hierarchy = 'created_dt'
+
+    readonly_fields = ['img_tag','url','created_dt','updated_dt']
+    fields = [
+            'name',
+            'path',
+            'url',
+            'img_tag',
+            'title',
+            'description',
+            'no_show',
+            'private',
+            'editorial',
+            'tags',
+            'mykeyworder_tags',
+            'adobe_tags',
+            'google_tags',
+            'aws_tags',
+            'shutter_tags',
+            'shutter_cat1',
+            'shutter_cat2',
+            'instagram',
+            'instagram_dt',
+            'instagram_code',
+            'adobe',
+            'adobe_dt',
+            'shutter',
+            'shutter_dt',
+            'shutter_url',
+            'pexels',
+            'pexels_dt',
+            'pexels_url',
+            'rasfocus',
+            'rasfocus_dt',
+            'rasfocus_url',
+            'created_dt',
+            'updated_dt',
+    ]
+
+    def img_tag(self,instance):
+        return mark_safe('<img src="%s" width="625" />' % (instance.url + '?tr=w-625'))
+
+    img_tag.short_description = 'Image'
+
+    def thumb_tag(self,instance):
+        return mark_safe('<img src="%s" width="250" alt="image" />' % (instance.url + '?tr=w-250'))
+
+    thumb_tag.short_description = 'thumb'
+
+    def instagram_text(self,instance):
+        #tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
+        tags = ''
+        if instance.tags and len(instance.tags)>len(tags): tags = instance.tags
+        if instance.mykeyworder_tags and len(instance.mykeyworder_tags)>len(tags): tags = instance.mykeyworder_tags
+        if instance.adobe_tags and len(instance.adobe_tags)>len(tags): tags = instance.adobe_tags
+        if instance.shutter_tags and len(instance.shutter_tags)>len(tags): tags = instance.shutter_tags
+        if instance.google_tags and len(instance.google_tags)>len(tags): tags = instance.google_tags
+        if instance.aws_tags and len(instance.aws_tags)>len(tags): tags = instance.aws_tags
+
+        tags = tags.split(',')
+        tags = ['#'+n.replace(' ','') for n in tags]
+        random.shuffle(tags)
+        tags.sort(key=str.lower)
+        if 'DJI' in instance.name:
+            tags = tags[:29]
+            tags.append('#dronephotography')
+        else:
+            tags = tags[:30]
+
+        tags = ' '.join(tags)
+        return mark_safe('<div><span class="copy_tags">'+
+            str(instance.title or '') + '\n' + tags + '\n' + instance.name + 
+            '</span> <a href="#" class="copy_tags">(^C)</a></div>')
+
+    instagram_text.short_description = 'instagram_text'
+
+    def tags_spaced(self,instance):
+        tags = ''
+        if instance.tags and len(instance.tags)>len(tags): tags = instance.tags
+        if instance.mykeyworder_tags and len(instance.mykeyworder_tags)>len(tags): tags = instance.mykeyworder_tags
+        if instance.adobe_tags and len(instance.adobe_tags)>len(tags): tags = instance.adobe_tags
+        if instance.shutter_tags and len(instance.shutter_tags)>len(tags): tags = instance.shutter_tags
+        if instance.google_tags and len(instance.google_tags)>len(tags): tags = instance.google_tags
+        if instance.aws_tags and len(instance.aws_tags)>len(tags): tags = instance.aws_tags
+        return mark_safe('<div><span class="copy_tags">'+tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
+
+    tags_spaced.short_description = 'Tags'
+
 
     def get_search_results(self, request, queryset, search_term):
 

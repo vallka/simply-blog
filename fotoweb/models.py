@@ -84,54 +84,6 @@ class Image(models.Model):
     def __str__(self):
         return str(self.id) + ':' + str(self.name)
 
-    def img_tag(self):
-        return mark_safe('<img src="%s" width="600" />' % (self.url + '?tr=w-600'))
-
-    img_tag.short_description = 'Image'
-
-    def thumb_tag(self):
-        return mark_safe('<img src="%s" width="250" alt="image" />' % (self.url + '?tr=w-250'))
-
-    thumb_tag.short_description = 'thumb'
-
-    def tags_spaced(self):
-        tags = ''
-        if self.tags and len(self.tags)>len(tags): tags = self.tags
-        if self.mykeyworder_tags and len(self.mykeyworder_tags)>len(tags): tags = self.mykeyworder_tags
-        if self.adobe_tags and len(self.adobe_tags)>len(tags): tags = self.adobe_tags
-        if self.shutter_tags and len(self.shutter_tags)>len(tags): tags = self.shutter_tags
-        if self.google_tags and len(self.google_tags)>len(tags): tags = self.google_tags
-        if self.aws_tags and len(self.aws_tags)>len(tags): tags = self.aws_tags
-        return mark_safe('<div><span class="copy_tags">'+tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
-    tags_spaced.short_description = 'Tags'
-
-
-    def instagram_text(self):
-        #tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
-        tags = ''
-        if self.tags and len(self.tags)>len(tags): tags = self.tags
-        if self.mykeyworder_tags and len(self.mykeyworder_tags)>len(tags): tags = self.mykeyworder_tags
-        if self.adobe_tags and len(self.adobe_tags)>len(tags): tags = self.adobe_tags
-        if self.shutter_tags and len(self.shutter_tags)>len(tags): tags = self.shutter_tags
-        if self.google_tags and len(self.google_tags)>len(tags): tags = self.google_tags
-        if self.aws_tags and len(self.aws_tags)>len(tags): tags = self.aws_tags
-
-        tags = tags.split(',')
-        tags = ['#'+n.replace(' ','') for n in tags]
-        random.shuffle(tags)
-        tags.sort(key=str.lower)
-        if 'DJI' in self.name:
-            tags = tags[:29]
-            tags.append('#dronephotography')
-        else:
-            tags = tags[:30]
-
-        tags = ' '.join(tags)
-        return mark_safe('<div><span class="copy_tags">'+
-            str(self.title or '') + '\n' + tags + '\n' + self.name + 
-            '</span> <a href="#" class="copy_tags">(^C)</a></div>')
-
-    instagram_text.short_description = 'instagram_text'
 
     def get_mykeywords(self):
         username=os.environ['MYKEYWORDER_USERNAME']
