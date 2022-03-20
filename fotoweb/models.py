@@ -1,6 +1,6 @@
 import requests
 import os
-import random
+import re
 
 from django.db import models
 from django.utils.html import mark_safe
@@ -80,6 +80,14 @@ class Image(models.Model):
     rasfocus_dt = models.DateTimeField('rasfocus_dt',null=True, blank=True,)
     rasfocus_url = models.CharField('rasfocus_url',null=True, blank=True,max_length=200)
 
+    @property
+    def album(self):
+        imgk_start_dir = '/C1/foto'
+        a = self.path
+        a = a.replace(imgk_start_dir+'/','')
+        a = a.replace(self.name,'')
+        a = re.sub('/[^/]*2048[^/]*/*','',a)
+        return a
 
     def __str__(self):
         return str(self.id) + ':' + str(self.name)

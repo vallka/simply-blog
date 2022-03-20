@@ -59,6 +59,8 @@ body {
           <img src="{{image.url}}?tr=w-400" 
             data-image="{{image.url}}"
             data-description="{{image.title if image.title else image.name}}"          
+            data-album="{{image.album}}"
+            data-id="{{image.name}}"
             alt="{{image.title if image.title else image.name}}" 
             style="display: none;" 
           />
@@ -108,14 +110,20 @@ body {
 
 
   function g_log(img) {
-    if (g_logged!=img) {
-      console.log('************* '+img);
-      g_logged = img;
+    if (g_logged!=img.urlImage) {
+      console.log('************* '+img.urlImage);
+      g_logged = img.urlImage;
+      let m = img.urlImage.match (/^(.+?)([^/]+)$/);
+      let id=m[2];
+      let dir=m[1];
+      m=dir.match(/^(.*)(C1\/foto\/)(.+)(\/[^/]*2048[^/]*)/)
+      let al=m[3];
       gtag("event", "view_item", {
         items: [{
-          item_id: img,
-          item_name: img,
-        }]
+          item_id: id,
+          item_name: img.title,
+          item_category: al,
+       }]
       });
     }
   }
@@ -132,13 +140,13 @@ body {
 
     api.on("item_change",function(num, data){		
       console.log("item_change "+num);
-      console.log(data.urlImage);
-      g_log(data.urlImage);
+      console.log(data);
+      g_log(data);
     });
     api.on("open_lightbox",function(lb, data){		
       console.log("open_lightbox ");
-      console.log(data.urlImage);
-      g_log(data.urlImage);
+      console.log(data);
+      g_log(data);
     });
 
     
