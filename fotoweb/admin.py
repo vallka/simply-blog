@@ -1,5 +1,6 @@
 import os
 import re
+import random
 from datetime import datetime
 
 from django.db.models import Q
@@ -154,14 +155,15 @@ class GellifinstaAdmin(admin.ModelAdmin):
         tags = tags.split(',')
         tags = ['#'+n.replace(' ','') for n in tags]
         random.shuffle(tags)
-        tags.sort(key=str.lower)
         if 'DJI' in instance.name:
             tags = tags[:29]
             tags.append('#dronephotography')
         else:
             tags = tags[:30]
 
+        tags.sort(key=str.lower)
         tags = ' '.join(tags)
+
         return mark_safe('<div><span class="copy_tags">'+
             str(instance.title or '') + '\n' + tags + '\n' + instance.name + 
             '</span> <a href="#" class="copy_tags">(^C)</a></div>')
