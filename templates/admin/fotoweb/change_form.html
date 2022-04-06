@@ -92,7 +92,7 @@ function do_destroy(tagif,delimeter=', ') {
     let text = untagify(tagif.value,delimeter);
     let id = tagif.DOM.originalInput.id;
 
-    tagif.destroy();
+    //tagif.destroy();
 
     tagif.DOM.originalInput.insertAdjacentElement('afterend',tagif.DOM.originalInput.cloneNode(false));
     tagif.DOM.originalInput.remove();
