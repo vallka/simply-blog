@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'gellifinsta',
     'fotoweb',
     'mycovidash',
+    'castles',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'markdownx',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

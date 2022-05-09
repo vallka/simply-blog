@@ -32,6 +32,11 @@ openpyxl = "*"
 plotly = "*"
 plotly-express = "*"
 selenium = "*"
+django-extensions = "*"
+ipython = "*"
+notebook = "*"
+exif = "*"
+osgridconverter = "*"
 
 [requires]
 python_version = "3"

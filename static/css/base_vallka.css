@@ -103,6 +103,10 @@ footer i,footer .copy {
   z-index: 2;
 }
 
+.nav-item {
+  margin-right: 0;
+}
+
 @media (min-width: 992px){
   .search-box {
   width: 100%;
