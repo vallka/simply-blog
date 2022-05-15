@@ -59,7 +59,7 @@
         }).addTo(map);
 
         var addressPoints = [
-            {% for c in castles %}[{{ c.lat }}, {{ c.lng }}, "{{ c.name }}", "{{ c.description_short }}", "{{ c.image_url }}"],
+            {% for c in castles %}[{{ c.lat }}, {{ c.lng }}, "{{ c.name }}", "{{ c.description_short }}", "{{ c.image_url }}", "{{ c.source_url }}", "{{ c.canmore_url }}", "{{ c.canmore_map }}" ],
             {% endfor %}
         ];
 
@@ -81,8 +81,18 @@
 			var title = a[2];
 			var desc = a[3];
             var image = a[4];
+            var url = a[5];
+            var canmore_url = a[6];
+            var canmore_map = a[7];
 			var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title, icon: myIcon });
-			marker.bindPopup('<b>'+title+'</b><br><img src="'+image+'" width="250" height="250"><br>'+desc);
+			marker.bindPopup('<b>'+title+'</b><br>'+
+                '<img src="'+image+'" width="300" height="300"><br>'+
+                desc+'<br>'+
+                '&bull; <a href="'+url+'" target="_blank">TheCastleGuy</a> &bull; '+
+                '<a href="'+canmore_url+'" target="_blank">Canmore</a> &bull; '+
+                '<a href="'+canmore_map+'" target="_blank">Canmore Map</a> &bull;'+
+                ''
+            );
 			markers.addLayer(marker);
 		}
 
