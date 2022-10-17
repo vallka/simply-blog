@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'fotoweb',
     'mycovidash',
     'castles',
+    'weather',
 
     'django.contrib.admin',
     'django.contrib.auth',

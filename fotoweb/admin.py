@@ -52,6 +52,20 @@ def make_csv_shutter(modeladmin, request, queryset):
     with open(os.path.join(settings.MEDIA_ROOT, 'shutterstock.csv'), 'w') as writer:
         writer.write(csv)
 
+@admin.action(description='Make CSV for Adobe')
+def make_csv_adobe(modeladmin, request, queryset):
+    csv = "Filename,Title,Keywords,Category\n"
+
+    for q in queryset:
+        desc = q.description or q.title
+        adobe_cat = 11 #landscapes
+        csv +=  f'"{q.name}","{desc}","{q.tags}","{adobe_cat}"\n'
+
+    print (csv)    
+    
+    with open(os.path.join(settings.MEDIA_ROOT, 'adobe.csv'), 'w') as writer:
+        writer.write(csv)
+
 @admin.action(description='Get Mykeyworder tags')
 def get_mykeyworder_tags(modeladmin, request, queryset):
     for q in queryset:
@@ -82,6 +96,7 @@ def get_aws_tags(modeladmin, request, queryset):
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
     actions = [make_csv_shutter,
+            make_csv_adobe,
             make_published_insta,
             make_published_adobe,
             make_published_shutter,
