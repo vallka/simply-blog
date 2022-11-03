@@ -27,7 +27,7 @@ imagekit = ImageKit(
 pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
 start_dir = '/Gellifique/VALYA/C1/foto'
-#start_dir = '/Gellifique/VALYA/C1/foto/Pentland Hills Walk'
+#start_dir = '/Gellifique/VALYA/C1/foto/Alicante 2020'
 
 imgk_start_dir = '/C1/foto'
 imgk_nostore_dir = '/Gellifique/VALYA'
@@ -69,8 +69,9 @@ def open_dir(dir,albums_needs_cover):
         else:
             if f['contenttype']=='image/jpeg' and 'JPEG-2048' in f['path']:
                 cnt += 1
-                print(cnt,f['path'])
+                #print(f)
                 fdt = parser.parse(f['created'])
+                fdtm = parser.parse(f['modified'])
                 new_dir = dir.replace(imgk_nostore_dir,'')
                 new_dir = new_dir.replace(' ','_')
                 new_dir = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_dir)
@@ -82,8 +83,12 @@ def open_dir(dir,albums_needs_cover):
                 if res['error']:
                     print ('ERROR',res)
 
-                #if not res['response'] or parser.parse(res['response'][0]['createdAt'])<fdt:
-                if not res['response']:
+                if res['response']:
+                    print('dates:',f['path'],parser.parse(res['response'][0]['updatedAt']),fdt,fdtm)
+                    #print(res['response'][0])
+
+                if not res['response'] or parser.parse(res['response'][0]['updatedAt'])<fdt or parser.parse(res['response'][0]['updatedAt'])<fdtm:
+                #if not res['response']:
                     #fd = pc.file_open(path=f['path'],flags=os.O_BINARY)
                     fd = pc.file_open(path=f['path'],flags=os.O_RDONLY)
                     data = pc.file_read(fd=fd['fd'],count=1024*1024*100)
