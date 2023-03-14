@@ -7,6 +7,15 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vallka',
+        'USER': 'vallkadotcom',
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': 'localhost',
+        'PORT': 3307,
+        'OPTIONS': {'charset': 'utf8mb4'},
+    },
+    'default_pa': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vallkadotcom$vallka',
         'USER': 'vallkadotcom',
         'PASSWORD': os.environ['DB_PASSWORD'],

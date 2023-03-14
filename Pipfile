@@ -6,22 +6,23 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = ">=3.2, <4.0"
+django = ">=4.1"
 mysqlclient = "*"
 whitenoise = "*"
 requests = "*"
 uritemplate = "*"
 sentry-sdk = "*"
 django-debug-toolbar = "*"
+#django-markdownx = ">=4"
+django-markdownx = {git = "https://github.com/neutronX/django-markdownx.git", editable = false}
 #django-markdownx = {editable = true,path = "./../django-markdownx"}
-django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
+#django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
 jinja2 = "*"
-jinja2-django-tags = "*"
+#jinja2-django-tags = "*"
 update = "*"
 pillow = "*" 
 beautifulsoup4 = "*"
 markdown = "*"
-instaloader = "*"
 imagekitio = "*"
 gunicorn = "*"
 pcloud = "*"
@@ -31,12 +32,15 @@ pandas = "*"
 openpyxl = "*"
 plotly = "*"
 plotly-express = "*"
-selenium = "*"
+#selenium = "*"
 django-extensions = "*"
-ipython = "*"
-notebook = "*"
+#ipython = "*"
+#notebook = "*"
 exif = "*"
 osgridconverter = "*"
 
 [requires]
 python_version = "3"
+
+[pipenv] 
+allow_prereleases = true

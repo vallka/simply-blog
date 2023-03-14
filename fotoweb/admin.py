@@ -2,6 +2,7 @@ import os
 import re
 import random
 from datetime import datetime
+from django.shortcuts import HttpResponseRedirect, render
 import pytz
 
 from django.db.models import Q
@@ -28,6 +29,7 @@ def make_published_adobe(modeladmin, request, queryset):
 def make_published_shutter(modeladmin, request, queryset):
     queryset.filter(shutter=False).update(shutter=True)
     queryset.filter(shutter_dt__isnull=True).update(shutter_dt=datetime.now(pytz.timezone('Europe/London')))
+    modeladmin.message_user(request,"Changed status on {} images".format(queryset.count()))
 
 @admin.action(description='Mark selected as Pexelled')
 def make_published_pexels(modeladmin, request, queryset):
@@ -44,7 +46,7 @@ def make_csv_shutter(modeladmin, request, queryset):
     csv = "Filename,Description,Keywords,Categories,Editorial\n"
 
     for q in queryset:
-        desc = q.description or q.title
+        desc = q.title
         editorial = 'yes' if q.editorial else 'no'
         csv +=  f'"{q.name}","{desc}","{q.tags}","{q.shutter_cat1},{q.shutter_cat2}","{editorial}"\n'
 
@@ -58,7 +60,7 @@ def make_csv_adobe(modeladmin, request, queryset):
     csv = "Filename,Title,Keywords,Category\n"
 
     for q in queryset:
-        desc = q.description or q.title
+        desc = q.title
         adobe_cat = 11 #landscapes
         csv +=  f'"{q.name}","{desc}","{q.tags}","{adobe_cat}"\n'
 
@@ -96,6 +98,24 @@ def get_aws_tags(modeladmin, request, queryset):
 
 @admin.register(Image)
 class GellifinstaAdmin(admin.ModelAdmin):
+    def update_title(self, request, queryset):
+        if 'apply' in request.POST and 'title' in request.POST and request.POST['title'].strip(' ')!='':
+            queryset.update(title=request.POST['title'].strip(' '))
+            self.message_user(request,"Updated Title on {} images".format(queryset.count()))
+            return
+            
+        return render(request,'admin/fotoweb/update_title.html',context={'items':queryset})
+    update_title.short_description = 'Update Title'
+
+    def update_tags(self, request, queryset):
+        if 'apply' in request.POST and 'tags' in request.POST and request.POST['tags'].strip(' ')!='':
+            queryset.update(tags=request.POST['tags'].strip(' '))
+            self.message_user(request,"Updated Tags on {} images".format(queryset.count()))
+            return
+            
+        return render(request,'admin/fotoweb/update_tags.html',context={'items':queryset})
+    update_tags.short_description = 'Update Tags'
+
     actions = [make_csv_shutter,
             make_csv_adobe,
             make_published_insta,
@@ -103,6 +123,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
             make_published_shutter,
             make_published_pexels,
             make_published_rasfocus,
+            update_title,update_tags,
             get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
     list_display = ['thumb_tag','id','path','tags_spaced','instagram_text','instagram','adobe','shutter','pexels','rasfocus']
@@ -154,7 +175,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
     img_tag.short_description = 'Image'
 
     def thumb_tag(self,instance):
-        return mark_safe('<img src="%s" width="250" alt="image" />' % (instance.url + '?tr=w-250'))
+        return mark_safe('<img src="%s" height="200" alt="image" />' % (instance.url + '?tr=w-300'))
 
     thumb_tag.short_description = 'thumb'
 
@@ -182,7 +203,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
         return mark_safe('<div><span class="copy_tags">'+
             str(instance.title or '') + '\n' + tags + '\n' + instance.name + 
-            '</span> <a href="#" class="copy_tags">(^C)</a></div>')
+            '</span></div>')
 
     instagram_text.short_description = 'instagram_text'
 
@@ -194,7 +215,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
         if instance.shutter_tags and len(instance.shutter_tags)>len(tags): tags = instance.shutter_tags
         if instance.google_tags and len(instance.google_tags)>len(tags): tags = instance.google_tags
         if instance.aws_tags and len(instance.aws_tags)>len(tags): tags = instance.aws_tags
-        return mark_safe('<div><span class="copy_tags">'+tags.replace(',',', ') + '</span> <a href="#" class="copy_tags">(^C)</a></div>')
+        return mark_safe('<div><span class="copy_title"><b>'+str(instance.title or '') +'</b></span><br><span class="copy_tags">'+tags.replace(',',', ') + '</span></div>')
 
     tags_spaced.short_description = 'Tags'
 

@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -73,7 +78,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'extensions': [
-                'jdj_tags.extensions.DjangoCompat',
+                #'jdj_tags.extensions.DjangoCompat',
+                #'jdj_tags.extensions.DjangoStatic',
+                
             ],
             "environment": "simplyblog.jinja2.JinjaEnvironment",
         },

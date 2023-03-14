@@ -4,7 +4,7 @@
 
 {% block skin_css %}
 {{ super() }}
-<link  href="{% static 'unitegallery/css/unite-gallery.css'%}" rel='stylesheet' type='text/css' />
+<link  href="/static/unitegallery/css/unite-gallery.css" rel='stylesheet' type='text/css' />
 
 <style>
 
@@ -16,7 +16,7 @@ body {
 {% endblock %}
 
 {% block header_search %} 
-<form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'fotoweb:search' %}">
+<form class="form-inline search-box d-flex justify-content-lg-end" action="{{ url ('fotoweb:search') }}">
     <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Photos">
     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
  </form>
@@ -28,7 +28,7 @@ body {
   <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'fotoweb:albums' %}">
+          <a itemprop="item" href="{{ url ('fotoweb:albums') }}">
             <span itemprop="name">Photo</span>
           </a>
           <meta itemprop="position" content="1">
@@ -101,9 +101,8 @@ body {
 
 {% block javascript %}
 {{ super() }}
-<!-- script src="{% static 'unitegallery/js/jquery-11.0.min.js'%}" type='text/javascript'  ></script -->
-<script src="{% static 'unitegallery/js/unitegallery.js'%}" type='text/javascript'  ></script>
-<script src="{% static 'unitegallery/themes/tiles/ug-theme-tiles.js'%}" type='text/javascript'></script>
+<script src="/static/unitegallery/js/unitegallery.js" type='text/javascript'  ></script>
+<script src="/static/unitegallery/themes/tiles/ug-theme-tiles.js" type='text/javascript'></script>
 <script type="text/javascript">
   var api;
   var g_logged = '';

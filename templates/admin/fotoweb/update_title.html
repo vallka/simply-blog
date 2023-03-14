@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<style>
+.vTextField, .vLargeTextField {
+    width: 610px;
+}
+.button.default, input[type="submit"].default, .submit-row input.default {
+    float:none;
+}
+</style>
+<script>
+function title_on(value) {
+   if(value.trim()) {
+    document.getElementById('id_apply').disabled=false;
+   }
+}
+
+</script>
+
+<form action="" method="post">
+  {% csrf_token %}
+<p>
+Are you sure you want to set title on the selected items?
+</p>  
+<input type="text" name="title" class="vTextField" maxlength="100" onblur="title_on(this.value)" onkeyup="title_on(this.value)">
+  {% for item in items %}
+    <p>
+      {{ item.name }}: <b>{{ item.title }}</b>
+    </p>
+    <input type="hidden" name="_selected_action" value="{{ item.pk }}" />
+  {% endfor %}
+
+  <input type="hidden" name="action" value="update_title" />
+
+
+  <div class="submit-row">
+
+    <input type="submit" class="button default" name="apply" value="Update" disabled="1" id="id_apply"/>
+    <a href="#" class="button cancel-link" onclick="history.back()">Cancel</a>
+   
+    
+    </div>
+
+</form>
+{% endblock %}

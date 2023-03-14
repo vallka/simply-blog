@@ -9,10 +9,16 @@
 django.jQuery(function(){
   django.jQuery('.copy_tags').click(function(e){
         e.preventDefault();
-        var text = django.jQuery(this).parent('div').find('span').text();
+        var text = django.jQuery(this).parent('div').find('span.copy_tags').text();
         copyTextToClipboard(text);
-        myAlert(text +' - Copied',1000)
+        myAlert(text,1000)
     });
+  django.jQuery('.copy_title').click(function(e){
+      e.preventDefault();
+      var text = django.jQuery(this).parent('div').find('span.copy_title').text();
+      copyTextToClipboard(text);
+      myAlert(text,1000)
+  });
 
 })
 function copyTextToClipboard(text) {
@@ -71,6 +77,19 @@ td, th, table thead th, table thead th .text a, table thead th .text span {
 .column-instagram, .column-adobe, .column-shutter, .column-pexels, .column-rasfocus {
   max-width: 10px;
   overflow: hidden;
+}
+
+td div {
+  max-height:200px;
+  overflow: hidden;
+}
+.field-thumb_tag {
+  max-width:251px;
+  padding-right: 0;
+}
+.field-id a {
+  color:white;
+  background-color: #00000050;
 }
 </style>
 

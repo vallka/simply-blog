@@ -3,8 +3,8 @@
 {% set meta_title = 'vallka.com' %}
 
 {% block skin_css %}
-<link rel="stylesheet" href="{% static 'css/base_vallka.css' %}">
-<!-- link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon_vallka.ico' %}" -->
+<link rel="stylesheet" href="/static/css/base_vallka.css">
+<!-- link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon_vallka.ico" -->
 {% endblock skin_css %}
 
 {% block ga %}
@@ -34,7 +34,7 @@
 
 {% block header %} 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="/"><img src="{% static 'images/vallkacom.png' %}"></a>
+    <a class="navbar-brand" href="/"><img src="/static/images/vallkacom.png"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,30 +43,30 @@
         {% block header_nav %} 
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'fotoweb:albums' %}">Photo</a>
+            <a class="nav-link" href="{{ url( 'fotoweb:albums' )}}">Photo</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'blog:list' %}">Blog</a>
+            <a class="nav-link" href="{{ url( 'blog:list' )}}">Blog</a>
           </li>
           {% for cat in categories %}
           <li class="nav-item">
             {% if cat.category[0]!='_' %}
-              <a class="nav-link" href="{% url 'blog:post-by-cat' cat.slug%}">{{cat.category}}</a>
+              <a class="nav-link" href="{{ url( 'blog:post-by-cat', args=[cat.slug] )}}">{{cat.category}}</a>
             {% endif %}
           </li>
           {% endfor %}
           {% if 0 %}
           <li class="nav-item">
-            <a class="nav-link" target="_blank" href="{% url 'mycovidash:mycovidash' %}">My Covidash</a>
+            <a class="nav-link" target="_blank" href="{{ url( 'mycovidash:mycovidash' )}}">My Covidash</a>
           </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link" target="_blank" href="{% url 'castles:map' %}">Castles</a>
+            <a class="nav-link" target="_blank" href="{{ url( 'castles:map' )}}">Castles</a>
           </li>
         </ul>
         {% endblock header_nav %} 
         {% block header_search %} 
-        <form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'blog:search' %}">
+        <form class="form-inline search-box d-flex justify-content-lg-end" action="{{ url( 'blog:search'  )}}">
             <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Blog">
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
          </form>
@@ -79,7 +79,7 @@
   <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'blog:list' %}">
+          <a itemprop="item" href="{{ url( 'blog:list' )}}">
             <span itemprop="name">Blog</span>
           </a>
           <meta itemprop="position" content="1">

@@ -136,3 +136,4 @@ sent-emails/
 *.pkl
 *.exe
 
+.dump/vallka-sql.sql
