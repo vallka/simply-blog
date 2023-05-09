@@ -11,6 +11,16 @@ from .models import *
 
 from django.conf import settings
 
+from django import forms
+from django.contrib.admin.widgets import AdminTextareaWidget
+
+class ImageModelAdminForm(forms.ModelForm):
+    title = forms.CharField(widget=AdminTextareaWidget(attrs={'rows': 3}))
+
+    class Meta:
+        model = Image
+        fields = '__all__'
+
 
 # Register your models here.
 #admin.site.register(Image)
@@ -96,8 +106,9 @@ def get_aws_tags(modeladmin, request, queryset):
         q.add_auto_title(q.aws_tags)
         q.save()
 
-@admin.register(Image)
+#@admin.register(Image,ImageModelAdminForm)
 class GellifinstaAdmin(admin.ModelAdmin):
+    form = ImageModelAdminForm
     def update_title(self, request, queryset):
         if 'apply' in request.POST and 'title' in request.POST and request.POST['title'].strip(' ')!='':
             queryset.update(title=request.POST['title'].strip(' '))
@@ -271,6 +282,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
         return queryset, may_have_duplicates    
 
+admin.site.register(Image,GellifinstaAdmin)
 
 @admin.register(Album)
 class GellifinstaAlbumAdmin(admin.ModelAdmin):
