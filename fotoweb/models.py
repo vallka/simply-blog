@@ -7,6 +7,8 @@ from django.utils.html import mark_safe
 from django.utils.text import slugify
 
 from imagekitio import ImageKit
+from imagekitio.models.ListAndSearchFileRequestOptions import ListAndSearchFileRequestOptions
+from imagekitio.models.UpdateFileRequestOptions import UpdateFileRequestOptions
 
 # Create your models here.
 class Image(models.Model):
@@ -117,49 +119,56 @@ class Image(models.Model):
             url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT'],
         )
 
-        res = imagekit.list_files({'path':os.path.dirname(self.path),'name':self.name})
+        options = ListAndSearchFileRequestOptions(
+            path=os.path.dirname(self.path),
+            search_query=f"name='{self.name}'"
+        )
+
+        res = imagekit.list_files(options=options)
         print(res)
 
-        if not res['error'] and res['response']:
-            id = res['response'][0]['fileId']
+        if res.list and res.list[0]:
+            id = res.list[0].file_id
 
-        if id and res['response'][0]['AITags']:
+        if id and res.list[0].ai_tags:
             tags = []
-            for tag in res['response'][0]['AITags']:
-                if tag['source']==f"{provider}-auto-tagging":
+            for tag in res.list[0].ai_tags:
+                if tag.source==f"{provider}-auto-tagging":
                     print (tag)
-                    tags.append(tag['name'])
+                    tags.append(tag.name)
 
             if tags:
                 return ','.join(tags)
 
-        updated_detail = imagekit.update_file_details(id,
-            {"extensions": [
+        uoptions = UpdateFileRequestOptions(
+            extensions=[
                 {
                     "name": f"{provider}-auto-tagging",
                     "maxTags": 25,
                     "minConfidence": 50
                 },
-            ]}
+            ]
         )
+
+        updated_detail = imagekit.update_file_details(id,options=uoptions)
 
         print("Updated detail-", updated_detail, end="\n\n")
 
-        if not updated_detail['error'] and updated_detail['response'] and updated_detail['response']['AITags']:
+        if updated_detail and updated_detail.ai_tags:
             tags = []
-            for tag in updated_detail['response']['AITags']:
-                if tag['source']==f"{provider}-auto-tagging":
+            for tag in updated_detail.ai_tags:
+                if tag.source==f"{provider}-auto-tagging":
                     print (tag)
-                    tags.append(tag['name'])
+                    tags.append(tag.name)
 
             if tags:
                 return ','.join(tags)
 
-        res = imagekit.list_files({'path':os.path.dirname(self.path),'name':self.name})
+        res = imagekit.list_files(options=options)
         print(res)
-        if not res['error'] and res['response'] and res['response'][0]['AITags']:
+        if id and res.list[0].ai_tags:
             tags = []
-            for tag in res['response'][0]['AITags']:
+            for tag in res.list[0].ai_tags:
                 if tag['source']==f"{provider}-auto-tagging":
                     print (tag)
                     tags.append(tag['name'])

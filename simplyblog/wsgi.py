@@ -8,9 +8,12 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
 """
 
 import os
+from dotenv import load_dotenv,dotenv_values
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'simplyblog.settings')
+env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.env'))
+
+load_dotenv(env_path)
 
 application = get_wsgi_application()

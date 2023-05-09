@@ -8,6 +8,8 @@ from iptcinfo3 import IPTCInfo
 
 from pcloud import PyCloud
 from imagekitio import ImageKit
+from imagekitio.models.ListAndSearchFileRequestOptions import ListAndSearchFileRequestOptions
+from imagekitio.models.UploadFileRequestOptions import UploadFileRequestOptions
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
@@ -27,7 +29,7 @@ imagekit = ImageKit(
 pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
 start_dir = '/Gellifique/VALYA/C1/foto'
-#start_dir = '/Gellifique/VALYA/C1/foto/Alicante 2020'
+#start_dir = '/Gellifique/VALYA/C1/foto/Twilight near Faro de Cullera'
 
 imgk_start_dir = '/C1/foto'
 imgk_nostore_dir = '/Gellifique/VALYA'
@@ -79,15 +81,22 @@ def open_dir(dir,albums_needs_cover):
 
                 fn = os.path.basename(f['path'].replace(' ','_'))
 
-                res = imagekit.list_files({'path':new_dir,'name':fn})
-                if res['error']:
-                    print ('ERROR',res)
+                options = ListAndSearchFileRequestOptions(
+                    path=new_dir,
+                    search_query=f"name='{fn}'"
+                )
 
-                if res['response']:
-                    print('dates:',f['path'],parser.parse(res['response'][0]['updatedAt']),fdt,fdtm)
+                #res = imagekit.list_files({'path':new_dir,'name':fn})
+                res = imagekit.list_files(options=options)
+                #if res['error']:
+                #    print ('ERROR',res)
+
+                if res.list and res.list[0]:
+                    print('dates:',f['path'],parser.parse(res.list[0].updated_at),fdt,fdtm)
                     #print(res['response'][0])
 
-                if not res['response'] or parser.parse(res['response'][0]['updatedAt'])<fdt or parser.parse(res['response'][0]['updatedAt'])<fdtm:
+                if not res.list or parser.parse(res.list[0].updated_at)<fdt or parser.parse(res.list[0].updated_at)<fdtm:
+                #if not res['response'] or parser.parse(res['response'][0]['updatedAt'])<fdt or parser.parse(res['response'][0]['updatedAt'])<fdtm:
                 #if not res['response']:
                     #fd = pc.file_open(path=f['path'],flags=os.O_BINARY)
                     fd = pc.file_open(path=f['path'],flags=os.O_RDONLY)
@@ -98,44 +107,39 @@ def open_dir(dir,albums_needs_cover):
 
                     provider = 'aws';
 
+                    options = UploadFileRequestOptions(
+                        use_unique_file_name=False,
+                        folder=new_dir,
+                    )
+
                     upload = imagekit.upload(
                             file=base64.b64encode(data),
                             file_name=fn,
-                            options={
-                                "folder":new_dir,
-                                "use_unique_file_name":False,
-                                #"extensions": [
-                                #    {
-                                #        "name": f"{provider}-auto-tagging",
-                                #        "maxTags": 25,
-                                #        "minConfidence": 50
-                                #    },
-                                #]
-                            },
+                            options=options
                     )
                     print("Upload binary", upload)
                     pc.file_close(fd=fd)
 
                     try:
-                        img = Image.objects.get(name=upload['response']['name'])
+                        img = Image.objects.get(name=upload.name)
                     except Image.DoesNotExist:
-                        img = Image(name=upload['response']['name'])
+                        img = Image(name=upload.name)
 
-                    img.path=upload['response']['filePath']
-                    img.url=upload['response']['url']
+                    img.path=upload.file_path
+                    img.url=upload.url
                     if not img.title: img.title = iptc['headline']
                     if not img.description: img.description = iptc['caption/abstract']
                     if not img.tags: img.tags = ', '.join(iptc['keywords'])
 
-                    if not img.aws_tags and upload['response']['AITags']:
-                        tags = []
-                        for tag in upload['response']['AITags']:
-                            if tag['source']==f"{provider}-auto-tagging":
-                                print (tag)
-                                tags.append(tag['name'])
+                    #if not img.aws_tags and upload['response']['AITags']:
+                    #    tags = []
+                    #    for tag in upload['response']['AITags']:
+                    #        if tag['source']==f"{provider}-auto-tagging":
+                    #            print (tag)
+                    #            tags.append(tag['name'])
 
-                        if tags:
-                            img.aws_tags = ','.join(tags)
+                    #    if tags:
+                    #        img.aws_tags = ','.join(tags)
 
                     img.save()
                     print('ID:',img.id)
@@ -152,7 +156,8 @@ def open_dir(dir,albums_needs_cover):
                     if albums_needs_cover:
                         print ('files - cover:',albums_needs_cover)
                         for album_needs_cover in albums_needs_cover:
-                            album_needs_cover.cover = res['response'][0]['url']
+                            #album_needs_cover.cover = res['response'][0]['url']
+                            album_needs_cover.cover = res.list[0].url
                             album_needs_cover.save()
                         albums_needs_cover.clear()
 

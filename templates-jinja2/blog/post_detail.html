@@ -31,7 +31,7 @@
   {% endif %}
     <div class="blog_post">
       <div class="blog_header">
-        <h1><a href="{% url 'blog:post' post.slug %}">{{post.title}}</a></h1>
+        <h1><a href="{{ url('blog:post', args=[post.slug]) }}">{{post.title}}</a></h1>
         <div class="blog_date">
           Published {{ post.blog_start_dt }}
         </div>
@@ -44,12 +44,12 @@
 
     <div class="blog_post">
       {% if prev%}
-        <h4><a href="{% url 'blog:post' prev %}"> < Earlier </a></h4>
+        <h4><a href="{{ url('blog:post', args=[prev]) }}"> < Earlier </a></h4>
       {% endif %}     
 
-      <h4><a href="{% url 'blog:list' %}">Blog Index</a></h4>
+      <h4><a href="{{ url('blog:list') }}">Blog Index</a></h4>
       {% if next%}
-        <h4><a href="{% url 'blog:post' next %}"> Later > </a></h4>
+        <h4><a href="{{ url('blog:post', args=[next]) }}"> Later > </a></h4>
       {% endif %}     
     </div>
     {% endif %}     

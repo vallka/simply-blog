@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -167,7 +167,7 @@ MEDIA_URL = '/media/'
 from datetime import datetime
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
-MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (680, 1500), 'quality': 80 }
+MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (1500, 1500), 'quality': 80 }
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'tables','attr_list','fenced_code','md_in_html','nl2br','wikilinks',
 ]
@@ -190,27 +190,4 @@ EMAIL_USE_SSL = False
 EMAIL_FROM_USER = "info@vallka.com"
 EMAIL_BCC_TO = None
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'incremental': True,
-    'root': {
-        'level': 'DEBUG',
-    },
-}
 
-INTERNAL_IPS = ['127.0.0.1','90.253.213.37','87.74.96.146']
-
-#import sentry_sdk
-#from sentry_sdk.integrations.django import DjangoIntegration
-
-#sentry_sdk.init(
-#    environment="dev",
-#    dsn="https://235ef220fc8e4f9793858eacb15a542d@o480612.ingest.sentry.io/5528028",
-#    integrations=[DjangoIntegration()],
-#    traces_sample_rate=1.0,
-#
-#    # If you wish to associate users to errors (assuming you are using
-#    # django.contrib.auth) you may enable sending PII data.
-#    send_default_pii=True
-#)

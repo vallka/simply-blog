@@ -3,19 +3,20 @@ from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import generic
 from django.forms.models import model_to_dict
-
+from icecream import ic
 
 from .models import *
 
 
 import logging
 logger = logging.getLogger(__name__)
+ic.configureOutput(includeContext=True,contextAbsPath=True,prefix='')
 
 class ImageView(generic.DetailView):
     model = Image
 
     def get(self, request, *args, **kwargs):
-        print (self.kwargs)
+        #ic (self.kwargs)
 
         if self.kwargs.get('name'): 
             self.object = self.model.objects.get(name=self.kwargs.get('name'))
@@ -43,17 +44,22 @@ class ImageListView(generic.ListView):
         if album:
             album = Album.objects.get(slug=album)
 
+            #logger.error("ImageListView - album:%s  (logger)",album)
+            logger.info(ic.format(album))
+
             new_album = album.path
             new_album = new_album.replace(' ','_')
             new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
             new_album = new_album.replace('__','_')
-            print('album:',album,new_album)
+            logger.info(ic.format(new_album))
 
             r= Image.objects.filter(no_show=0,path__icontains=new_album).order_by('name')
-            print (len(r))
+            logger.info(ic.format(len(r)))
 
             self.breadcrumb = album.title
             self.album_id = album.id
+
+            logger.error(ic.format('done'))
 
             return r
         else:
@@ -78,8 +84,8 @@ class ImageSearchView(generic.ListView):
 
         sql = Image.objects.filter(no_show=0).query
         sql = re.sub('ORDER BY.*$','',str(sql))
-        sql += "and match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode)"
-        print(sql)
+        sql += " and match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode)"
+        logger.error(ic.format(sql))
 
         posts = Image.objects.raw(sql,[self.q])
         self.len = len(posts)
@@ -104,8 +110,8 @@ class AlbumListView(generic.ListView):
     paginate_by = 200
 
     def render_to_response(self,context):
-        print ('render_to_response')
-        print (self.object_list)
+        #ic ('ren#der_to_response')
+        #ic (self.object_list)
         if len(self.object_list):
             return super().render_to_response(context)
 
@@ -121,7 +127,7 @@ class AlbumListView(generic.ListView):
             new_album = new_album.replace(' ','_')
             new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
             new_album = new_album.replace('__','_')
-            print('album:',album,new_album)
+            logger.error(ic.format('album:',album,new_album))
 
             self.breadcrumb = album.title
             self.album_id = album.id
@@ -143,7 +149,6 @@ class AlbumListView(generic.ListView):
 
 def view_img(request):
     path=request.GET['p']
-    print ('view_img',path)
-    logger.error("view_img - path:%s",path)
+    logger.error(ic.format(path))
 
     return redirect(path)

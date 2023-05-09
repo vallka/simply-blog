@@ -109,7 +109,10 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
     def update_tags(self, request, queryset):
         if 'apply' in request.POST and 'tags' in request.POST and request.POST['tags'].strip(' ')!='':
-            queryset.update(tags=request.POST['tags'].strip(' '))
+            #queryset.update(tags=request.POST['tags'].strip(' '))
+            for q in queryset:
+                q.add_auto_tags(request.POST['tags'].strip(' '))
+                q.save()
             self.message_user(request,"Updated Tags on {} images".format(queryset.count()))
             return
             
