@@ -15,4 +15,5 @@ urlpatterns = [
     path('image/<int:pk>/', ImageView.as_view(), name='image'),
     path('image/<str:name>/', ImageView.as_view(), name='image'),
     path('image/<str:name>/<str:par>', ImageView.as_view(), name='image-w-par'),
+    path('api/findtags/',findtags,name='findtags')
 ]

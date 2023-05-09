@@ -23,7 +23,7 @@ class Image(models.Model):
     google_tags = models.TextField('goggle tags',null=True, blank=True,)
     aws_tags = models.TextField('aws tags',null=True, blank=True,)
     shutter_tags = models.TextField('shutter tags',null=True, blank=True,)
-    title = models.CharField('title',max_length=100,null=True, blank=True)
+    title = models.CharField('title',max_length=200,null=True, blank=True)
     description = models.TextField('description',null=True, blank=True,)
     tags = models.TextField('tags',null=True, blank=True,)
     private = models.BooleanField('private',default=False)

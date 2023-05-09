@@ -3,6 +3,10 @@ from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import generic
 from django.forms.models import model_to_dict
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from icecream import ic
 
 from .models import *
@@ -152,3 +156,12 @@ def view_img(request):
     logger.error(ic.format(path))
 
     return redirect(path)
+
+@api_view(['POST'])
+def findtags(request):
+    img_name = request.data['name']
+    img = Image.objects.get(name=img_name)
+    tags = img.get_imagekit_kw()
+
+    ic (tags)
+    return Response({'tags': tags})

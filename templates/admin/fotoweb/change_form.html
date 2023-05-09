@@ -48,18 +48,27 @@ django.jQuery(function(){
     //django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
 
 
-    django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_add_tags" data-name="mykeyworder" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_add_tags" data-name="mykeyworder" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_copy_tags" data-name="mykeyworder" style="display: block;"> Copy</button>');
-    django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_add_tags" data-name="adobe" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_add_tags" data-name="adobe" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_copy_tags" data-name="adobe" style="display: block;"> Copy</button>');
-    django.jQuery('label[for=id_google_tags]').append('<button class="button btn_add_tags" data-name="google" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_google_tags]').append('<button class="button btn_find_tags" data-name="google" style="display: block;"> Find</button>');
+    django.jQuery('label[for=id_google_tags]').append('<button class="button btn_add_tags" data-name="google" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_google_tags]').append('<button class="button btn_copy_tags" data-name="google" style="display: block;"> Copy</button>');
-    django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_add_tags" data-name="aws" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_add_tags" data-name="aws" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_copy_tags" data-name="aws" style="display: block;"> Copy</button>');
-    django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_add_tags" data-name="shutter" style="display: block;"> Add</button>');
+    django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_add_tags" data-name="shutter" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_copy_tags" data-name="shutter" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_copy_tags" data-name="tags" style="display: block;"> Copy</button>');
+
+    django.jQuery('.btn_find_tags').click(function(e){
+        e.preventDefault();
+        console.log(django.jQuery(this).attr('data-name'));
+        console.log(django.jQuery('input[name=name]').val());
+        find_tags(django.jQuery('input[name=name]').val(),django.jQuery(this).attr('data-name'));
+    });
+
 
     django.jQuery('.btn_add_tags').click(function(e){
         e.preventDefault();
@@ -151,6 +160,34 @@ function copyTextToClipboard(text) {
   document.body.removeChild(textArea);
 }
 
+
+function find_tags(name,provider='') {
+    fetch('/photo/api/findtags/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+        body: JSON.stringify({name: name}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.tags);
+        tagy['google'].addTags(data.tags);
+    });
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+        }
+    }
+    return cookieValue;
+}
 
 </script>
 {% endblock %}

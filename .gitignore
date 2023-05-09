@@ -137,3 +137,5 @@ sent-emails/
 *.exe
 
 .dump/
+
+Untitled*.*

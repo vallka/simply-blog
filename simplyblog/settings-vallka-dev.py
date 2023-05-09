@@ -14,15 +14,6 @@ DATABASES = {
         'PORT': 3307,
         'OPTIONS': {'charset': 'utf8mb4'},
     },
-    'default_pa': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vallkadotcom$vallka',
-        'USER': 'vallkadotcom',
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'localhost',
-        'PORT': 6606,
-        'OPTIONS': {'charset': 'utf8mb4'},
-    },
 }
 
 

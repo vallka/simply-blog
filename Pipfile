@@ -14,8 +14,9 @@ uritemplate = "*"
 sentry-sdk = "*"
 django-debug-toolbar = "*"
 #django-markdownx = ">=4"
-django-markdownx = {git = "https://github.com/neutronX/django-markdownx.git", editable = false}
-#django-markdownx = {editable = true,path = "./../django-markdownx"}
+#django-markdownx = {git = "https://github.com/neutronX/django-markdownx.git", editable = false}
+django-markdownx = {editable = true,path = "./../django-markdownx"}
+#django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
 #django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
 jinja2 = "*"
 #jinja2-django-tags = "*"
@@ -38,6 +39,10 @@ django-extensions = "*"
 #notebook = "*"
 exif = "*"
 osgridconverter = "*"
+deepl = "*"
+icecream = "*"
+python-dotenv = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3"
