@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from icecream import ic
+import openai
 
 from .models import *
 
@@ -163,5 +164,22 @@ def findtags(request):
     img = Image.objects.get(name=img_name)
     tags = img.get_imagekit_kw()
 
-    ic (tags)
+    #ic (tags)
     return Response({'tags': tags})
+
+@api_view(['POST'])
+def maketitle(request):
+    description = request.data['description']
+
+    resp = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+                {"role": "user", "content": f"Shorten the image description below to fit into 150 chars, including spaces and punctuation:\n\n{description}"}
+            ]
+    )
+
+
+    logger.error(resp)
+
+    #ic (tags)
+    return Response({'title': resp.choices[0].message.content})    

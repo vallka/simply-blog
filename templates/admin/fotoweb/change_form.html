@@ -61,6 +61,13 @@ django.jQuery(function(){
     django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_copy_tags" data-name="shutter" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_copy_tags" data-name="tags" style="display: block;"> Copy</button>');
+    django.jQuery('label[for=id_description]').append('<button class="button btn_make_title" style="display: block;"> Make Title</button>');
+
+    django.jQuery('.btn_make_title').click(function(e){
+        e.preventDefault();
+        console.log(django.jQuery('textarea[name=description]').val());
+        make_title(django.jQuery('textarea[name=description]').val());
+    });
 
     django.jQuery('.btn_find_tags').click(function(e){
         e.preventDefault();
@@ -158,6 +165,19 @@ function copyTextToClipboard(text) {
   }
 
   document.body.removeChild(textArea);
+}
+
+function make_title(descr) {
+    fetch('/photo/api/maketitle/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+        body: JSON.stringify({description: descr}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.title);
+        document.getElementById('id_title').value = data.title
+    });
 }
 
 
