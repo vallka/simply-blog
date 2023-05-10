@@ -183,3 +183,14 @@ def maketitle(request):
 
     #ic (tags)
     return Response({'title': resp.choices[0].message.content})    
+
+@api_view(['POST'])
+def getdescription(request):
+    url = request.data['url']
+
+
+    ic (url)
+
+
+
+    return Response({'url': url })    

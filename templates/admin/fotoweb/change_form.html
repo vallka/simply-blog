@@ -13,6 +13,34 @@
   right: 0;
   rsz-index: 10;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.loading .spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 </style>
 {% endblock %}
 
@@ -61,15 +89,25 @@ django.jQuery(function(){
     django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_copy_tags" data-name="shutter" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_copy_tags" data-name="tags" style="display: block;"> Copy</button>');
+    django.jQuery('label[for=id_description]').append('<button class="button btn_find_description" style="display: block;"> Find</button>');
     django.jQuery('label[for=id_description]').append('<button class="button btn_make_title" style="display: block;"> Make Title</button>');
 
+    django.jQuery('.btn_find_description').click(function(e){
+        spinner_on();
+        e.preventDefault();
+        console.log(document.querySelector('.field-url .readonly').innerText);
+        find_description(document.querySelector('.field-url .readonly').innerText)
+    });
+
     django.jQuery('.btn_make_title').click(function(e){
+        spinner_on();
         e.preventDefault();
         console.log(django.jQuery('textarea[name=description]').val());
         make_title(django.jQuery('textarea[name=description]').val());
     });
 
     django.jQuery('.btn_find_tags').click(function(e){
+        spinner_on();
         e.preventDefault();
         console.log(django.jQuery(this).attr('data-name'));
         console.log(django.jQuery('input[name=name]').val());
@@ -167,6 +205,50 @@ function copyTextToClipboard(text) {
   document.body.removeChild(textArea);
 }
 
+function find_description(url) {
+
+    resp = fetch('https://us-central1-causal-diffusion.cloudfunctions.net/describe', {
+        headers: {
+            'x-api-key': 'token {{ api_key }}',
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            data: [
+                {
+                    image: url, 
+                    features: [],
+                    algorithm: 'Aqua',
+                    languages: ['en'],
+                    style: 'concise'
+                },
+            ]
+        }),
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('id_description').value = data.result[0].i18n.en;
+        spinner_off();
+    });
+  
+
+
+
+    /*
+    fetch('/photo/api/getdescription/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+        body: JSON.stringify({url: url}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.url);
+        document.getElementById('id_description').value = data.url
+    });
+    */
+}
+
 function make_title(descr) {
     fetch('/photo/api/maketitle/', {
         method: 'POST',
@@ -177,6 +259,7 @@ function make_title(descr) {
     .then(data => {
         console.log(data.title);
         document.getElementById('id_title').value = data.title
+        spinner_off();
     });
 }
 
@@ -191,6 +274,7 @@ function find_tags(name,provider='') {
     .then(data => {
         console.log(data.tags);
         tagy['google'].addTags(data.tags);
+        spinner_off();
     });
 }
 
@@ -209,5 +293,23 @@ function getCookie(name) {
     return cookieValue;
 }
 
+
+function spinner_on() {
+  // create the loading spinner element
+  var spinner = document.createElement("div");
+  spinner.className = "loading";
+  spinner.innerHTML = '<div class="spinner"></div>';
+
+  // append the spinner to the body
+  document.body.appendChild(spinner);
+}
+
+function spinner_off() {
+  // remove the loading spinner element from the body
+  var spinner = document.querySelector(".loading");
+  if (spinner) {
+    spinner.parentNode.removeChild(spinner);
+  }
+}
 </script>
 {% endblock %}
