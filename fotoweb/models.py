@@ -16,6 +16,8 @@ class Image(models.Model):
     name = models.CharField('name',max_length=100, unique=True)
     path = models.CharField('path',max_length=200, unique=True)
     url = models.CharField('url',max_length=200, unique=True)
+    path_fs = models.CharField('path fs',max_length=200, unique=True,null=True, blank=True,)
+    url_fs = models.CharField('url fs',max_length=200, unique=True,null=True, blank=True,)
     no_show = models.BooleanField('no show',default=False)
     created_dt = models.DateTimeField('created_dt',auto_now_add=True, null=True)
     updated_dt = models.DateTimeField('updated_dt',auto_now=True, null=True)
