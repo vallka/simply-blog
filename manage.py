@@ -2,11 +2,15 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv,dotenv_values
 
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'simplyblog.settings')
+    env_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'.env'))
+
+    load_dotenv(env_path)
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

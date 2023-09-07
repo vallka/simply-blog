@@ -162,7 +162,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
     list_display = ['thumb_tag','id','path','tags_spaced','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
     list_display_links = ['id','path','thumb_tag',]
-    list_filter = ['instagram','adobe','shutter','pexels','rasfocus']
+    list_filter = ['no_show','private','instagram','adobe','shutter',]
     search_fields = ['path','title','id']
     date_hierarchy = 'created_dt'
 

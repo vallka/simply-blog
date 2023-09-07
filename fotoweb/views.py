@@ -186,19 +186,36 @@ def findtags(request):
 @api_view(['POST'])
 def maketitle(request):
     description = request.data['description']
+    keywords = request.data['keywords']
+
+    prompt = f"""Act as a curator for microstock photo submission.
+                Make a caption for the photo with the description and keywords below. 
+                Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
+                Be direct. Put in some emotions, but not too much. Keywords may contain geographical data, use them if you can.
+                Don't include keywords in the caption, use them as an additional source of information.
+                Make sure the length of the caption is under 200 characters.\n\n
+                Description\n\n
+                ------
+                {description}
+                ------
+                Keywords\n\n
+                ------
+                {keywords}
+                """
 
     resp = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-                {"role": "user", "content": f"Shorten the image description below to fit into 150 chars, including spaces and punctuation:\n\n{description}"}
+                {"role": "user", "content": prompt }
             ]
     )
 
 
+    logger.info(prompt)
     logger.error(resp)
 
     #ic (tags)
-    return Response({'title': resp.choices[0].message.content})    
+    return Response({'title': resp.choices[0].message.content.strip(' "')})    
 
 @api_view(['POST'])
 def getdescription(request):
