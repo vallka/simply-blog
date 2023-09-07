@@ -1,6 +1,7 @@
 import requests
 import os
 import re
+import random
 
 from django.db import models
 from django.utils.html import mark_safe
@@ -15,6 +16,8 @@ class Image(models.Model):
     name = models.CharField('name',max_length=100, unique=True)
     path = models.CharField('path',max_length=200, unique=True)
     url = models.CharField('url',max_length=200, unique=True)
+    path_fs = models.CharField('path fs',max_length=200, unique=True,null=True, blank=True,)
+    url_fs = models.CharField('url fs',max_length=200, unique=True,null=True, blank=True,)
     no_show = models.BooleanField('no show',default=False)
     created_dt = models.DateTimeField('created_dt',auto_now_add=True, null=True)
     updated_dt = models.DateTimeField('updated_dt',auto_now=True, null=True)
@@ -28,7 +31,13 @@ class Image(models.Model):
     tags = models.TextField('tags',null=True, blank=True,)
     private = models.BooleanField('private',default=False)
     editorial = models.BooleanField('editorial',default=False)
-    instagram = models.BooleanField('instagram',default=False)
+
+    class InstaStatus(models.IntegerChoices):
+        NONE = 0
+        POSTED = 1
+        QUEUED = 2
+
+    instagram = models.IntegerField('instagram',default=InstaStatus.NONE,choices=InstaStatus.choices)
     instagram_dt = models.DateTimeField('instagram_dt',null=True, blank=True,)
     instagram_code = models.CharField('instagram_code',null=True, blank=True,max_length=20)
     adobe = models.BooleanField('adobe',default=False)
@@ -195,6 +204,31 @@ class Image(models.Model):
                 self.title += t + ' '
 
             self.title = self.title.strip(' ')
+
+    @property
+    def instagram_text(self):
+        #tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
+        tags = ''
+        if self.tags and len(self.tags)>len(tags): tags = self.tags
+        if self.mykeyworder_tags and len(self.mykeyworder_tags)>len(tags): tags = self.mykeyworder_tags
+        if self.adobe_tags and len(self.adobe_tags)>len(tags): tags = self.adobe_tags
+        if self.shutter_tags and len(self.shutter_tags)>len(tags): tags = self.shutter_tags
+        if self.google_tags and len(self.google_tags)>len(tags): tags = self.google_tags
+        if self.aws_tags and len(self.aws_tags)>len(tags): tags = self.aws_tags
+        tags = tags.split(',')
+        tags = ['#'+n.replace(' ','') for n in tags]
+        random.shuffle(tags)
+        if 'DJI' in self.name:
+            tags = tags[:29]
+            tags.append('#dronephotography')
+        else:
+            tags = tags[:30]
+        tags.sort(key=str.lower)
+        tags = ' '.join(tags)
+        return str(self.title or '') + '\n' + tags + '\n' + self.name
+    
+
+
 
 class Album(models.Model):
     path = models.CharField('path',max_length=200, unique=True)

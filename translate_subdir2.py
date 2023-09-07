@@ -8,7 +8,8 @@ translator = deepl.Translator(auth_key)
 input_path = "en/contact.html"
 output_path = "es/contact.html"
 
-lang = "it"
+lang = "pl"
+lang_ext = "PL"
 
 
 #text = '<p>this is my {shop_name} and i like it</p><img alt= "{shop_name}">'
@@ -30,7 +31,8 @@ for root, dirs, files in os.walk('en'):
                 text = f.read()
                 new_text = re.sub(pattern, replace, text)
 
-                result = translator.translate_text(new_text, target_lang=lang,formality="more",preserve_formatting=True,tag_handling="html")
+                result = translator.translate_text(new_text, target_lang=lang_ext,formality="more",preserve_formatting=True,tag_handling="html")
+                #result = translator.translate_text(new_text, target_lang=lang_ext,preserve_formatting=True,tag_handling="html")
                 result
 
                 final_text = result.text.replace('<span class="notranslate">{','').replace('}</span>','')

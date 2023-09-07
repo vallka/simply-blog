@@ -25,6 +25,22 @@ class ImageModelAdminForm(forms.ModelForm):
 # Register your models here.
 #admin.site.register(Image)
 
+@admin.action(description='Set selected as No Show')
+def set_no_show(modeladmin, request, queryset):
+    queryset.filter(no_show=False).update(no_show=True)
+
+@admin.action(description='Set selected as Show')
+def set_show(modeladmin, request, queryset):
+    queryset.filter(no_show=True).update(no_show=False)
+
+@admin.action(description='Set selected as Private')
+def set_private(modeladmin, request, queryset):
+    queryset.filter(private=False).update(private=True)
+
+@admin.action(description='Set selected as non Private')
+def set_non_private(modeladmin, request, queryset):
+    queryset.filter(private=True).update(private=False)
+
 @admin.action(description='Mark selected as Instagrammed')
 def make_published_insta(modeladmin, request, queryset):
     queryset.filter(instagram=False).update(instagram=True)
@@ -53,12 +69,12 @@ def make_published_rasfocus(modeladmin, request, queryset):
 
 @admin.action(description='Make CSV for Shutterstock')
 def make_csv_shutter(modeladmin, request, queryset):
-    csv = "Filename,Description,Keywords,Categories,Editorial\n"
+    csv = "Filename,Description,Keywords,Categories,Editorial,Path\n"
 
     for q in queryset:
         desc = q.title
         editorial = 'yes' if q.editorial else 'no'
-        csv +=  f'"{q.name}","{desc}","{q.tags}","{q.shutter_cat1},{q.shutter_cat2}","{editorial}"\n'
+        csv +=  f'"{q.name}","{desc}","{q.tags}","{q.shutter_cat1},{q.shutter_cat2}","{editorial}","{q.path}"\n'
 
     print (csv)    
     
@@ -85,7 +101,7 @@ def get_mykeyworder_tags(modeladmin, request, queryset):
         print (q.url)
         q.mykeyworder_tags = q.get_mykeywords()
         q.add_auto_tags(q.mykeyworder_tags)
-        q.add_auto_title(q.mykeyworder_tags)
+        #q.add_auto_title(q.mykeyworder_tags)
         q.save()
 
 @admin.action(description='Get Google tags')
@@ -94,7 +110,7 @@ def get_google_tags(modeladmin, request, queryset):
         print (q.url)
         q.google_tags = q.get_imagekit_kw()
         q.add_auto_tags(q.google_tags)
-        q.add_auto_title(q.google_tags)
+        #q.add_auto_title(q.google_tags)
         q.save()
 
 @admin.action(description='Get AWS tags')
@@ -103,7 +119,7 @@ def get_aws_tags(modeladmin, request, queryset):
         print (q.url)
         q.aws_tags = q.get_imagekit_kw('aws')
         q.add_auto_tags(q.aws_tags)
-        q.add_auto_title(q.aws_tags)
+        #q.add_auto_title(q.aws_tags)
         q.save()
 
 #@admin.register(Image,ImageModelAdminForm)
@@ -132,6 +148,10 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
     actions = [make_csv_shutter,
             make_csv_adobe,
+            set_no_show,
+            set_show,
+            set_private,
+            set_non_private,
             make_published_insta,
             make_published_adobe,
             make_published_shutter,
@@ -140,17 +160,19 @@ class GellifinstaAdmin(admin.ModelAdmin):
             update_title,update_tags,
             get_mykeyworder_tags,get_google_tags,get_aws_tags]
 
-    list_display = ['thumb_tag','id','path','tags_spaced','instagram_text','instagram','adobe','shutter','pexels','rasfocus']
+    list_display = ['thumb_tag','id','path','tags_spaced','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
     list_display_links = ['id','path','thumb_tag',]
     list_filter = ['instagram','adobe','shutter','pexels','rasfocus']
     search_fields = ['path','title','id']
     date_hierarchy = 'created_dt'
 
-    readonly_fields = ['img_tag','url','created_dt','updated_dt']
+    readonly_fields = ['img_tag','url','url_fs','created_dt','updated_dt']
     fields = [
             'name',
             'path',
+            'path_fs',
             'url',
+            'url_fs',
             'img_tag',
             'title',
             'description',
@@ -193,33 +215,10 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
     thumb_tag.short_description = 'thumb'
 
-    def instagram_text(self,instance):
-        #tags = self.tags or self.mykeyworder_tags or self.adobe_tags or self.shutter_tags or self.google_tags or ''
-        tags = ''
-        if instance.tags and len(instance.tags)>len(tags): tags = instance.tags
-        if instance.mykeyworder_tags and len(instance.mykeyworder_tags)>len(tags): tags = instance.mykeyworder_tags
-        if instance.adobe_tags and len(instance.adobe_tags)>len(tags): tags = instance.adobe_tags
-        if instance.shutter_tags and len(instance.shutter_tags)>len(tags): tags = instance.shutter_tags
-        if instance.google_tags and len(instance.google_tags)>len(tags): tags = instance.google_tags
-        if instance.aws_tags and len(instance.aws_tags)>len(tags): tags = instance.aws_tags
+    def instagram_text_wtags(self,instance):
+        return mark_safe('<div><span class="copy_tags">' + str(instance.instagram_text) + '</span></div>')
 
-        tags = tags.split(',')
-        tags = ['#'+n.replace(' ','') for n in tags]
-        random.shuffle(tags)
-        if 'DJI' in instance.name:
-            tags = tags[:29]
-            tags.append('#dronephotography')
-        else:
-            tags = tags[:30]
-
-        tags.sort(key=str.lower)
-        tags = ' '.join(tags)
-
-        return mark_safe('<div><span class="copy_tags">'+
-            str(instance.title or '') + '\n' + tags + '\n' + instance.name + 
-            '</span></div>')
-
-    instagram_text.short_description = 'instagram_text'
+    instagram_text_wtags.short_description = 'instagram_text_wtags'
 
     def tags_spaced(self,instance):
         tags = ''

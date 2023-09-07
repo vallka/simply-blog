@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import re
 import os
+import zlib
 import base64
 from dateutil import parser
 from io import BytesIO
@@ -20,11 +21,33 @@ from fotoweb.models import *
 import logging
 logger = logging.getLogger(__name__)
 
-imagekit = ImageKit(
-    private_key=os.environ['IMAGEKIT_PRIVATE_KEY'],
-    public_key=os.environ['IMAGEKIT_PUBLIC_KEY'],
-    url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT'],
-)
+imagekits = []
+
+#if os.environ.get('IMAGEKIT_PRIVATE_KEY'):
+#    imagekit = ImageKit(
+#        private_key=os.environ['IMAGEKIT_PRIVATE_KEY'],
+#        public_key=os.environ['IMAGEKIT_PUBLIC_KEY'],
+#        url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT'],
+#    )
+#    imagekits.append(imagekit)
+
+if os.environ.get('IMAGEKIT_PRIVATE_KEY_1'):
+    imagekit = ImageKit(
+        private_key=os.environ['IMAGEKIT_PRIVATE_KEY_1'],
+        public_key=os.environ['IMAGEKIT_PUBLIC_KEY_1'],
+        url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT_1'],
+    )
+    imagekits.append(imagekit)
+
+if os.environ.get('IMAGEKIT_PRIVATE_KEY_2'):
+    imagekit = ImageKit(
+        private_key=os.environ['IMAGEKIT_PRIVATE_KEY_2'],
+        public_key=os.environ['IMAGEKIT_PUBLIC_KEY_2'],
+        url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT_2'],
+    )
+    imagekits.append(imagekit)
+
+
 
 pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
@@ -92,7 +115,8 @@ def open_dir(dir,albums_needs_cover):
                 #    print ('ERROR',res)
 
                 if res.list and res.list[0]:
-                    print('dates:',f['path'],parser.parse(res.list[0].updated_at),fdt,fdtm)
+                    #print('dates:',f['path'],parser.parse(res.list[0].updated_at),fdt,fdtm)
+                    print('dirs:',f['path'],new_dir,zlib.crc32(bytes(new_dir,'utf8')) % len(imagekits))
                     #print(res['response'][0])
 
                 if not res.list or parser.parse(res.list[0].updated_at)<fdt or parser.parse(res.list[0].updated_at)<fdtm:

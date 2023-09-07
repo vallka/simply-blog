@@ -3,12 +3,17 @@ from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import generic
 from django.forms.models import model_to_dict
+from django.db.models import Q
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from icecream import ic
-import openai
+
+try:
+    import openai
+except:
+    None
 
 from .models import *
 
@@ -52,14 +57,19 @@ class ImageListView(generic.ListView):
             #logger.error("ImageListView - album:%s  (logger)",album)
             logger.info(ic.format(album))
 
-            new_album = album.path
-            new_album = new_album.replace(' ','_')
-            new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
-            new_album = new_album.replace('__','_')
-            logger.info(ic.format(new_album))
+            path1 = album.path
+            path1 = path1.replace(' ','_')
+            path1 = re.sub(r'[^/_0-9A-Za-z\-.]','_',path1)
+            path1 = path1.replace('__','_')
+            path2 = album.path
+            path2 = path1.replace('_',' ')
+            logger.error(ic.format(path1,path2,album.path))
 
-            r= Image.objects.filter(no_show=0,path__icontains=new_album).order_by('name')
-            logger.info(ic.format(len(r)))
+            r= Image.objects.filter(
+                Q(path__icontains=album.path) | Q(path__icontains=path1) | Q(path__icontains=path2),
+                no_show=0,
+                ).order_by('name')
+            logger.error(ic.format(len(r)))
 
             self.breadcrumb = album.title
             self.album_id = album.id
@@ -128,16 +138,22 @@ class AlbumListView(generic.ListView):
         if album:
             album = Album.objects.get(slug=album)
 
-            new_album = album.path
-            new_album = new_album.replace(' ','_')
-            new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
-            new_album = new_album.replace('__','_')
-            logger.error(ic.format('album:',album,new_album))
+            path1 = album.path
+            path1 = path1.replace(' ','_')
+            path1 = re.sub(r'[^/_0-9A-Za-z\-.]','_',path1)
+            path1 = path1.replace('__','_')
+            path2 = album.path
+            path2 = path1.replace('_',' ')
+            logger.error(ic.format(path1,path2,album.path))
 
             self.breadcrumb = album.title
             self.album_id = album.id
 
-            albums = Album.objects.filter(no_show=0,level=album.level+1,path__icontains=new_album).order_by('position','-id')
+            albums = Album.objects.filter(
+                Q(path__icontains=album.path) | Q(path__icontains=path1) | Q(path__icontains=path2),
+                no_show=0,
+                level=album.level+1,
+                ).order_by('position','-id')
             return albums
 
         self.breadcrumb = ''

@@ -43,6 +43,8 @@ deepl = "*"
 icecream = "*"
 python-dotenv = "*"
 djangorestframework = "*"
+#asyncssh = "*"
+selenium = "*"
 
 [requires]
 python_version = "3"
