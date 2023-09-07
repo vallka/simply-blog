@@ -102,8 +102,9 @@ django.jQuery(function(){
     django.jQuery('.btn_make_title').click(function(e){
         spinner_on();
         e.preventDefault();
-        console.log(django.jQuery('textarea[name=description]').val());
-        make_title(django.jQuery('textarea[name=description]').val());
+        const tagstr = untagify(tagy['tags'].value,', ');
+        console.log(django.jQuery('textarea[name=description]').val(),tagstr);
+        make_title(django.jQuery('textarea[name=description]').val(),tagstr);
     });
 
     django.jQuery('.btn_find_tags').click(function(e){
@@ -249,15 +250,18 @@ function find_description(url) {
     */
 }
 
-function make_title(descr) {
+function make_title(descr,keywords) {
     fetch('/photo/api/maketitle/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
-        body: JSON.stringify({description: descr}),
+        body: JSON.stringify({description: descr,keywords: keywords}),
     })
     .then(response => response.json())
     .then(data => {
         console.log(data.title);
+        
+        data.title = data.title.replace('w/','with').replace('&','and');
+
         document.getElementById('id_title').value = data.title
         spinner_off();
     });
