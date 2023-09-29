@@ -54,11 +54,11 @@ if os.environ.get('IMAGEKIT_PRIVATE_KEY_2'):
 
 #pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
-p_dir = 'p:/Shared/Gellifique/VALYA'
+p_dir = 'p:/Shared/Gellifique/VALYA/'
 
 root_dir = '/C1/foto/'
 
-start_dir = 'Scotland_Summer_23'
+start_dir = 'Spain_Autumn_23'
 #start_dir = ''
 
 imgk_start_dir = '/C1/foto'

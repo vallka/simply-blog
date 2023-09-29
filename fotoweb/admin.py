@@ -247,16 +247,19 @@ class GellifinstaAdmin(admin.ModelAdmin):
                     album = Album.objects.get(id=int(album_id))
                 else:    
                     album = Album.objects.get(slug=album_id)
-                new_album = album.path
-                new_album = new_album.replace(' ','_')
-                new_album = re.sub(r'[^/_0-9A-Za-z\-.]','_',new_album)
-                new_album = new_album.replace('__','_')
-                print('album:',album,new_album)
+
+                path1 = album.path
+                path1 = path1.replace(' ','_')
+                path1 = re.sub(r'[^/_0-9A-Za-z\-.]','_',path1)
+                path1 = path1.replace('__','_')
+                path2 = album.path
+                path2 = path1.replace('_',' ')
+                queryset3 = Image.objects.filter(Q(path__icontains=album.path) | Q(path__icontains=path1) | Q(path__icontains=path2))
 
             except Album.DoesNotExist:    
-                new_album = '///////'
+                new_path = '///////'
+                queryset3 = Image.objects.filter(Q(path__icontains=new_path))
 
-            queryset3 = Image.objects.filter(path__icontains=new_album)
 
             print(len(queryset3),len(queryset))
 
