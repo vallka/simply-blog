@@ -10,10 +10,12 @@ from rest_framework.response import Response
 
 from icecream import ic
 
-try:
-    import openai
-except:
-    None
+import openai
+
+#try:
+#    import openai
+#except:
+#    None
 
 from .models import *
 
