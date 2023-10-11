@@ -18,9 +18,10 @@ def callback(p):
 
 
 def upload_shutter():
+    global n,nblocks
     host='ftps.shutterstock.com'
-    user='vallka@vallka.com'
-    passwd='ll440Hym&ss'
+    user=os.environ.get('SHUTTER_USER')
+    passwd=os.environ.get('SHUTTER_PASSWORD')
     #file ="p:/Shared/Gellifique/VALYA/C1/fotoarchive/Scotland Summer 23/Lucas on Loch Lomond/JPEG-Full-size/23-06-22-DSC02854-1.jpg"
     blocksize=8192*100
     rootdir = "p:/Shared/Gellifique/VALYA"
