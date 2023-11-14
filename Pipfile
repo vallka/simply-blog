@@ -45,6 +45,7 @@ python-dotenv = "*"
 djangorestframework = "*"
 #asyncssh = "*"
 selenium = "*"
+openai = "*"
 
 [requires]
 python_version = "3"

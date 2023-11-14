@@ -1,3 +1,4 @@
+from datetime import date
 import requests
 import json
 import re
@@ -29,20 +30,25 @@ class Command(BaseCommand):
         token = os.environ["FB_TOKEN"]
 
 
-
-        
         print (self.help)
 
         logger.info(self.help)
         n = 1  # Number of random images you want to select
-        images = Image.objects.filter(Q(instagram=0) &
+
+        #start_date = date(2022, 1, 1)
+        #end_date = date(2022, 12, 31)
+
+        images = Image.objects.filter(
+            #Q(date__gte=start_date) &
+            #Q(date__lte=end_date) &
+            Q(instagram=0) &
             Q(no_show=0) &
             Q(private=0) &
             ~Q(title='') &
             ~Q(tags='') &
             ~Q(title__isnull=True) &
             ~Q(tags__isnull=True)
-                ).order_by('?')[:n]
+        ).order_by('?')[:n]
 
         for i in images:
             print (i.id,i.title,i.path,i.instagram_text)

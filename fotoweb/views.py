@@ -1,4 +1,8 @@
 import re
+import requests
+import os
+import json
+
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import generic
@@ -10,12 +14,7 @@ from rest_framework.response import Response
 
 from icecream import ic
 
-import openai
-
-#try:
-#    import openai
-#except:
-#    None
+#import openai
 
 from .models import *
 
@@ -187,15 +186,21 @@ def findtags(request):
 
 @api_view(['POST'])
 def maketitle(request):
+    api_key = os.getenv('OPENAI_API_KEY')
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {api_key}',
+    }
+
     description = request.data['description']
     keywords = request.data['keywords']
 
-    prompt = f"""Act as a curator for microstock photo submission.
-                Make a caption for the photo with the description and keywords below. 
+    prompt = f"""Make a caption for the photo with the description and keywords below. 
+                No more than 20 words, one sentence. No quotes and no dot at the end.
+                Make sure the length of the caption is under 200 characters.\n\n
                 Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
                 Be direct. Put in some emotions, but not too much. Keywords may contain geographical data, use them if you can.
                 Don't include keywords in the caption, use them as an additional source of information.
-                Make sure the length of the caption is under 200 characters.\n\n
                 Description\n\n
                 ------
                 {description}
@@ -205,12 +210,41 @@ def maketitle(request):
                 {keywords}
                 """
 
-    resp = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-                {"role": "user", "content": prompt }
-            ]
-    )
+    #resp = openai.ChatCompletion.create(
+    #    model="gpt-3.5-turbo",
+    #    messages=[
+    #            {"role": "user", "content": prompt }
+    #        ]
+    #)
+
+    ic(prompt)
+
+    data = {
+        'model': 'gpt-3.5-turbo-1106',
+        'messages': [
+            {'role': 'system', 'content': 'You are a curator for microstock photo submission.'},
+            {'role': 'user', 'content': prompt}
+        ],
+        'temperature': 1,
+        'n': 5
+    }
+
+    responseobj = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, data=json.dumps(data))
+    response = responseobj.text
+    response = json.loads(responseobj.text)
+
+    ic(response)
+    str = response['choices'][0]['message']['content']
+    ic(str)
+    ic(response['usage'])
+
+    return Response({'title': [
+        response['choices'][0]['message']['content'],
+        response['choices'][1]['message']['content'],
+        response['choices'][2]['message']['content'],
+        response['choices'][3]['message']['content'],
+        response['choices'][4]['message']['content'],
+            ]})    
 
 
     logger.info(prompt)

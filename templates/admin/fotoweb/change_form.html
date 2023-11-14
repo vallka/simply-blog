@@ -28,11 +28,11 @@
 }
 
 .loading .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 150px;
+  height: 150px;
   animation: spin 2s linear infinite;
 }
 
@@ -41,6 +41,16 @@
   100% { transform: rotate(360deg); }
 }
 
+.timer {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 44px; /* You can change the font size as needed */
+  font-weight: bold;
+
+}
 </style>
 {% endblock %}
 
@@ -198,9 +208,9 @@ function copyTextToClipboard(text) {
   try {
     var successful = document.execCommand('copy');
     var msg = successful ? 'successful' : 'unsuccessful';
-    //console.log('Copying text command was ' + msg);
+    console.log('Copying text command was ' + msg);
   } catch (err) {
-    //console.log('Oops, unable to copy');
+    console.log('Oops, unable to copy');
   }
 
   document.body.removeChild(textArea);
@@ -261,11 +271,34 @@ function make_title(descr,keywords) {
     .then(response => response.json())
     .then(data => {
         console.log(data.title);
+        //alert('Done');
         
-        data.title = data.title.replace('w/','with').replace('&','and');
+        //data.title = data.title.replace('w/','with').replace('&','and');
 
-        document.getElementById('id_title').value = data.title
+        for (let i=0; i<data.title.length; ++i) {
+            data.title[i] = data.title[i].replace('w/','with')
+                          .replace('&','and')
+                          .trim()
+                          .replace(/"/g, '');
+            console.log(data.title[i])
+            setTimeout(() => {
+                document.getElementById('id_title').value = data.title[i];
+                document.getElementById('id_title').focus();
+                document.getElementById('id_title').select();
+                document.execCommand('copy');
+            }, 500 * i);
+        
+        }
+
+        document.getElementById('id_title').value = data.title[0]
         spinner_off();
+    })
+    .catch(error => {
+        alert('Error: ' + error);
+        spinner_off();
+        // Handle the error here
+        console.error('Error:', error);
+        // Show an alert or perform any other necessary action
     });
 }
 
@@ -299,15 +332,44 @@ function getCookie(name) {
     return cookieValue;
 }
 
+var timerInterval; // Will be used to keep track of the interval that updates the timer
+var startTime; // Will store the time when the spinner was created
+var formattedTime;
 
 function spinner_on() {
   // create the loading spinner element
   var spinner = document.createElement("div");
   spinner.className = "loading";
-  spinner.innerHTML = '<div class="spinner"></div>';
+  spinner.innerHTML = `
+    <div class="spinner"></div>
+    <div class="timer">00:00</div>
+  `;
 
   // append the spinner to the body
   document.body.appendChild(spinner);
+
+  // Start the timer
+  startTime = new Date(); // Capture the start time
+  if (timerInterval) {
+    clearInterval(timerInterval); // Clear any existing interval to avoid multiple timers running
+  }
+  timerInterval = setInterval(updateTimer, 1000); // Update the timer every second
+}
+
+function updateTimer() {
+  var currentTime = new Date();
+  var elapsedTime = currentTime - startTime; // Time elapsed in milliseconds
+  var seconds = Math.floor(elapsedTime / 1000) % 60; // Convert to seconds
+  var minutes = Math.floor(elapsedTime / (1000 * 60)); // Convert to minutes
+
+  // Format time to always show two digits
+  formattedTime = (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+
+  // Update the timer element with the new time
+  var timerElement = document.querySelector(".timer");
+  if (timerElement) {
+    timerElement.textContent = formattedTime;
+  }
 }
 
 function spinner_off() {
@@ -316,6 +378,9 @@ function spinner_off() {
   if (spinner) {
     spinner.parentNode.removeChild(spinner);
   }
+  
+  // Stop the timer
+  clearInterval(timerInterval);
 }
 </script>
 {% endblock %}
