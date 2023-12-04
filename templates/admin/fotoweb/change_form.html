@@ -101,12 +101,20 @@ django.jQuery(function(){
     django.jQuery('label[for=id_tags]').append('<button class="button btn_copy_tags" data-name="tags" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_description]').append('<button class="button btn_find_description" style="display: block;"> Find</button>');
     django.jQuery('label[for=id_description]').append('<button class="button btn_make_title" style="display: block;"> Make Title</button>');
+    django.jQuery('label[for=id_title]').append('<button class="button btn_find_title" style="display: block;"> Find</button>');
 
     django.jQuery('.btn_find_description').click(function(e){
         spinner_on();
         e.preventDefault();
         console.log(document.querySelector('.field-url .readonly').innerText);
         find_description(document.querySelector('.field-url .readonly').innerText)
+    });
+
+    django.jQuery('.btn_find_title').click(function(e){
+        spinner_on();
+        e.preventDefault();
+        console.log(document.querySelector('.field-url .readonly').innerText);
+        find_title(document.querySelector('.field-url .readonly').innerText)
     });
 
     django.jQuery('.btn_make_title').click(function(e){
@@ -216,8 +224,7 @@ function copyTextToClipboard(text) {
   document.body.removeChild(textArea);
 }
 
-function find_description(url) {
-
+function find_title(url) {
     resp = fetch('https://us-central1-causal-diffusion.cloudfunctions.net/describe', {
         headers: {
             'x-api-key': 'token {{ api_key }}',
@@ -226,13 +233,41 @@ function find_description(url) {
         body: JSON.stringify({
             data: [
                 {
-                    image: url, 
+                    image: url + '?tr=w-600', 
                     features: [],
-                    //algorithm: 'Aqua',
-                    algorithm: 'Dune',
-                    //algorithm: 'Flash',
+                    //algorithm: 'Jelly',
+                    algorithm: 'Comet',
                     languages: ['en'],
-                    style: 'concise'
+                    style: 'concise',
+                    output_length: '200'
+                },
+            ]
+        }),
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('id_title').value = data.result[0].i18n.en;
+        spinner_off();
+    });
+}
+
+function find_description(url) {
+    resp = fetch('https://us-central1-causal-diffusion.cloudfunctions.net/describe', {
+        headers: {
+            'x-api-key': 'token {{ api_key }}',
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            data: [
+                {
+                    image: url + '?tr=w-600', 
+                    features: [],
+                    algorithm: 'Jelly',
+                    //algorithm: 'Comet',
+                    languages: ['en'],
+                    style: 'prompt'
                 },
             ]
         }),
@@ -244,22 +279,6 @@ function find_description(url) {
         document.getElementById('id_description').value = data.result[0].i18n.en;
         spinner_off();
     });
-  
-
-
-
-    /*
-    fetch('/photo/api/getdescription/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
-        body: JSON.stringify({url: url}),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.url);
-        document.getElementById('id_description').value = data.url
-    });
-    */
 }
 
 function make_title(descr,keywords) {

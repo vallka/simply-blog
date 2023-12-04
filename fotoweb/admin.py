@@ -1,9 +1,12 @@
+import json
 import os
 import re
 import random
 from datetime import datetime
 from django.shortcuts import HttpResponseRedirect, render
 import pytz
+
+from icecream import ic
 
 from django.db.models import Q
 from django.contrib import admin
@@ -122,6 +125,99 @@ def get_aws_tags(modeladmin, request, queryset):
         #q.add_auto_title(q.aws_tags)
         q.save()
 
+@admin.action(description='Get Scenex Titles')
+def get_scenex_titles(modeladmin, request, queryset):
+    i = 0
+    imgs=[]
+    for q in queryset:
+        imgs.append({'id':q.id,'url':q.url + '?tr=w-600','title':q.title})
+        i+=1
+        print (i,i%8,q.url + '?tr=w-600')
+        if i%8==0:
+            call_scenex(imgs)
+            ic(imgs)
+            for img in imgs:
+                q = Image.objects.get(id=img['id'])
+                q.title = img['title']
+                q.save()
+            imgs=[]
+
+        #q.aws_tags = q.get_imagekit_kw('aws')
+        #q.add_auto_tags(q.aws_tags)
+        #q.save()
+    
+    if imgs:
+        call_scenex(imgs)
+        ic(imgs)
+        for img in imgs:
+            q = Image.objects.get(id=img['id'])
+            q.title = img['title']
+            q.save()
+        imgs=[]
+
+
+def call_scenex(imgs):
+    api_key = os.getenv('SCENEX_KEY')
+    headers = {
+        'Content-Type': 'application/json',
+        "x-api-key": f"token {api_key}",
+    }    
+
+    data = []
+    for img in imgs:
+        data.append(            {
+                    'image': img['url'], 
+                    'features': [],
+                    'algorithm': 'Comet',
+                    'languages': ['en'],
+                    'style': 'concise',
+                    'output_length': 199 - len(img['title'])
+                },
+        )
+
+    ic ({'data':data})
+    responseobj = requests.post('https://api.scenex.jina.ai/v1/describe', headers=headers, data=json.dumps({'data':data}))
+    ic(responseobj)
+
+    response = responseobj.text
+    ic(response)
+    response = json.loads(responseobj.text)
+
+    for index,img in enumerate(imgs):
+        img['title'] = truncate_string(img['title'] + ' ' + response['result'][index]['text'],200)
+
+
+def truncate_string(string, max_length):
+    if len(string) <= max_length:
+        return string
+    
+    punctuations = ['.', '!', '?']
+    truncated_string = string[:max_length]
+    
+    last_punctuation_index = -1
+    
+    for i in range(max_length-1, -1, -1):
+        if truncated_string[i] in punctuations:
+            last_punctuation_index = i
+            break
+
+    if last_punctuation_index != -1:
+        truncated_string = truncated_string[:last_punctuation_index+1]
+        return truncated_string
+
+
+    for i in range(max_length-1, -1, -1):
+        if truncated_string[i] == ' ':
+            last_punctuation_index = i
+            truncated_string = truncated_string[:i] + '.'
+            break
+    
+    if last_punctuation_index != -1:
+        truncated_string = truncated_string[:last_punctuation_index+1]
+    
+    return truncated_string
+
+
 #@admin.register(Image,ImageModelAdminForm)
 class GellifinstaAdmin(admin.ModelAdmin):
     form = ImageModelAdminForm
@@ -158,7 +254,9 @@ class GellifinstaAdmin(admin.ModelAdmin):
             make_published_pexels,
             make_published_rasfocus,
             update_title,update_tags,
-            get_mykeyworder_tags,get_google_tags,get_aws_tags]
+            get_mykeyworder_tags,get_google_tags,get_aws_tags,
+            get_scenex_titles
+            ]
 
     list_display = ['thumb_tag','id','path','tags_spaced','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
     list_display_links = ['id','path','thumb_tag',]

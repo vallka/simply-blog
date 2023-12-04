@@ -46,6 +46,7 @@ djangorestframework = "*"
 #asyncssh = "*"
 selenium = "*"
 openai = "*"
+mutagen = "*"
 
 [requires]
 python_version = "3"
