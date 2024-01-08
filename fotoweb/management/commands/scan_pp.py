@@ -58,7 +58,7 @@ p_dir = 'p:/Shared/Gellifique/VALYA/'
 
 root_dir = '/C1/foto/'
 
-start_dir = 'Scotland Autumn 23'
+start_dir = 'Spain_Autumn_23/Favara'
 #start_dir = ''
 
 imgk_start_dir = '/C1/foto'
