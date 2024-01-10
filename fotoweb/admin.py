@@ -258,7 +258,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
             get_scenex_titles
             ]
 
-    list_display = ['thumb_tag','id','path','tags_spaced','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
+    list_display = ['thumb_tag','id','path','tags_spaced','description_f','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
     list_display_links = ['id','path','thumb_tag',]
     list_filter = ['no_show','private','instagram','adobe','shutter',]
     search_fields = ['path','title','id']
@@ -316,7 +316,12 @@ class GellifinstaAdmin(admin.ModelAdmin):
     def instagram_text_wtags(self,instance):
         return mark_safe('<div><span class="copy_tags">' + str(instance.instagram_text) + '</span></div>')
 
-    instagram_text_wtags.short_description = 'instagram_text_wtags'
+    instagram_text_wtags.short_description = 'instagram_text'
+
+    def description_f(self,instance):
+        return mark_safe('<div><span class="copy_description">' + str(instance.description) + '</span></div>')
+
+    description_f.short_description = 'description'
 
     def tags_spaced(self,instance):
         tags = ''
