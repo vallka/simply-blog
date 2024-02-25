@@ -225,7 +225,8 @@ class Image(models.Model):
             tags = tags[:30]
         tags.sort(key=str.lower)
         tags = ' '.join(tags)
-        return str(self.title or '') + '\n' + tags + '\n' + self.name
+        info = 'Support me at https://ko-fi.com/vallka and download full resolution photos'
+        return str(self.title or '') + '\n\n' + info + '\n\n' +tags + '\n\n' + self.name
     
 
 
@@ -258,7 +259,7 @@ class Album(models.Model):
     def save(self, *args, **kwargs):
 
         if self.path:
-            self.level = self.path.count('/') - 3
+            self.level = max(self.path.count('/')-3,0)
         else:
             self.level = -1
             self.no_show = True

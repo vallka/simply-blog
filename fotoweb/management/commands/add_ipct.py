@@ -30,7 +30,7 @@ p_dir = 'p:/Shared/Gellifique/VALYA/'
 
 root_dir = '/C1/foto/'
 
-start_dir = "Scotland Autumn 23/Autumn Leaves '23"
+start_dir = "Spain_Autumn_23/Favara"
 #start_dir = ''
 
 
@@ -43,7 +43,7 @@ def process_image(name,dirname,file_path,file_time,full_size):
         exif_title = exif.read_xmp().get('Xmp.dc.title')
         exif.close()
 
-        if not exif_title:
+        if not exif_title or not exif_title.get('lang="x-default"'):
             print('will save')
             img = Image.objects.get(name=name)
             print(img.title,img.description)

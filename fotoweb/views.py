@@ -159,7 +159,12 @@ class AlbumListView(generic.ListView):
 
         self.breadcrumb = ''
         self.album_id = None
-        return Album.objects.filter(no_show=0,level=0).order_by('position','-id')
+        albums = Album.objects.filter(no_show=0,level=0).order_by('position','-id')
+
+        for a in albums:
+            ic(a.id)
+
+        return albums
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

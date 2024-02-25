@@ -233,7 +233,7 @@ function find_title(url) {
         body: JSON.stringify({
             data: [
                 {
-                    image: url + '?tr=w-600', 
+                    image: url + '?tr=w-200', 
                     features: ['opt_out'],
                     //algorithm: 'Jelly',
                     algorithm: 'Comet',
@@ -254,7 +254,7 @@ function find_title(url) {
 }
 
 function find_description(url) {
-    resp = fetch('https://us-central1-causal-diffusion.cloudfunctions.net/describe', {
+    resp = fetch('https://api.scenex.jina.ai/v1/describe', {
         headers: {
             'x-api-key': 'token {{ api_key }}',
             'content-type': 'application/json'
@@ -262,12 +262,13 @@ function find_description(url) {
         body: JSON.stringify({
             data: [
                 {
-                    image: url + '?tr=w-600', 
+                    image: url + '?tr=w-200', 
                     features: ['opt_out'],
-                    algorithm: 'Jelly',
-                    //algorithm: 'Comet',
+                    //algorithm: 'Jelly',
+                    algorithm: 'Comet',
                     languages: ['en'],
-                    style: 'prompt'
+                    style: 'prompt',
+                    output_length: '500'
                 },
             ]
         }),

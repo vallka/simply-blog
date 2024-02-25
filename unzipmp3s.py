@@ -103,7 +103,7 @@ def unzip_and_rename_mp3(zip_file):
             # Delete all non-mp3 files
             os.remove(os.path.join(dest_dir, file))
 
-    ic(year)
+    ic(year[:4])
     ic(album)
     ic(artist)
     ic(albumartist)
@@ -117,7 +117,7 @@ def unzip_and_rename_mp3(zip_file):
     if albumartist:
         new_dir_name = f'{albumartist}. '
     if year:
-        new_dir_name += f'{year}. '
+        new_dir_name += f'{year[:4]}. '
     if album:
         new_dir_name += album
 
