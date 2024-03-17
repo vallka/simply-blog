@@ -5,7 +5,7 @@ import random
 from datetime import datetime
 from django.shortcuts import HttpResponseRedirect, render
 import pytz
-
+import csv
 from icecream import ic
 
 from django.db.models import Q
@@ -14,6 +14,7 @@ from .models import *
 
 from django.conf import settings
 
+from django.http import HttpResponse
 from django import forms
 from django.contrib.admin.widgets import AdminTextareaWidget
 
@@ -72,31 +73,30 @@ def make_published_rasfocus(modeladmin, request, queryset):
 
 @admin.action(description='Make CSV for Shutterstock')
 def make_csv_shutter(modeladmin, request, queryset):
-    csv = "Filename,Description,Keywords,Categories,Editorial,Path\n"
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="shutterstock_' + datetime.now().strftime("%y%m%d%H%M%S") + '.csv"'
 
+    writer = csv.writer(response)
     for q in queryset:
         desc = q.title
         editorial = 'yes' if q.editorial else 'no'
-        csv +=  f'"{q.name}","{desc}","{q.tags}","{q.shutter_cat1},{q.shutter_cat2}","{editorial}","{q.path}"\n'
 
-    print (csv)    
+        writer.writerow([q.name,desc,q.tags,q.shutter_cat1,q.shutter_cat2,editorial,q.path])
     
-    with open(os.path.join(settings.MEDIA_ROOT, 'shutterstock.csv'), 'w') as writer:
-        writer.write(csv)
+    return response
 
 @admin.action(description='Make CSV for Adobe')
 def make_csv_adobe(modeladmin, request, queryset):
-    csv = "Filename,Title,Keywords,Category\n"
-
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="adobe_' + datetime.now().strftime("%y%m%d%H%M%S") + '.csv"'
+    
+    writer = csv.writer(response)
     for q in queryset:
         desc = q.title
         adobe_cat = 11 #landscapes
-        csv +=  f'"{q.name}","{desc}","{q.tags}","{adobe_cat}"\n'
-
-    print (csv)    
+        writer.writerow([q.name,desc,q.tags,adobe_cat])
     
-    with open(os.path.join(settings.MEDIA_ROOT, 'adobe.csv'), 'w') as writer:
-        writer.write(csv)
+    return response
 
 @admin.action(description='Get Mykeyworder tags')
 def get_mykeyworder_tags(modeladmin, request, queryset):
@@ -184,7 +184,13 @@ def call_scenex(imgs):
     response = json.loads(responseobj.text)
 
     for index,img in enumerate(imgs):
-        img['title'] = truncate_string(img['title'] + ' ' + response['result'][index]['text'],200)
+        if not img['title'][-1] in ['.',',','!','?']:
+            img['title'] += '.'
+        
+        if not img['title'][-1]==' ':
+            img['title'] += ' '
+
+        img['title'] = truncate_string(img['title'] + response['result'][index]['text'],200-len(img['title']))
 
 
 def truncate_string(string, max_length):
@@ -335,8 +341,8 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
     tags_spaced.short_description = 'Tags'
 
-
     def get_search_results(self, request, queryset, search_term):
+        print('get_search_results')
 
         if not search_term:
             queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)

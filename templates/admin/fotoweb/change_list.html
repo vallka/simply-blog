@@ -69,6 +69,7 @@ td div, .field-description {
 <script>
 
 
+
 django.jQuery(function(){
   django.jQuery('.copy_tags').click(function(e){
         e.preventDefault();
@@ -85,6 +86,11 @@ django.jQuery(function(){
 
   document.getElementById('changelist-form').addEventListener('submit', function() {
     spinner_on();
+    if (document.getElementById('changelist-form').querySelector('select[name=action]').value=='make_csv_adobe' ||
+        document.getElementById('changelist-form').querySelector('select[name=action]').value=='make_csv_shutter'
+        ) {
+      setInterval(spinner_off,5000);  
+    }
   });
 
 })
