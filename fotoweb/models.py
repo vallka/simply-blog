@@ -242,6 +242,7 @@ class Album(models.Model):
     position = models.IntegerField('position',default=0, blank=True,)
     cover = models.CharField('cover',max_length=200,blank=True,default='')
     level = models.IntegerField('level',default=0, )
+    comments = models.TextField('comments',null=True, blank=True,)
 
     def __str__(self):
         return str(self.id) + ':' + str(self.title)
