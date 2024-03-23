@@ -56,7 +56,7 @@ class ImageListView(generic.ListView):
             album = Album.objects.get(slug=album)
 
             #logger.error("ImageListView - album:%s  (logger)",album)
-            logger.info(ic.format(album))
+            #logger.info(ic.format(album))
 
             path1 = album.path
             path1 = path1.replace(' ','_')
@@ -64,18 +64,18 @@ class ImageListView(generic.ListView):
             path1 = path1.replace('__','_')
             path2 = album.path
             path2 = path1.replace('_',' ')
-            logger.error(ic.format(path1,path2,album.path))
+            #logger.error(ic.format(path1,path2,album.path))
 
             r= Image.objects.filter(
                 Q(path__icontains=album.path) | Q(path__icontains=path1) | Q(path__icontains=path2),
                 no_show=0,
                 ).order_by('name')
-            logger.error(ic.format(len(r)))
+            #logger.error(ic.format(len(r)))
 
             self.breadcrumb = album.title
             self.album_id = album.id
 
-            logger.error(ic.format('done'))
+            #logger.error(ic.format('done'))
 
             return r
         else:
@@ -101,7 +101,7 @@ class ImageSearchView(generic.ListView):
         sql = Image.objects.filter(no_show=0).query
         sql = re.sub('ORDER BY.*$','',str(sql))
         sql += " and match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode)"
-        logger.error(ic.format(sql))
+        #logger.error(ic.format(sql))
 
         posts = Image.objects.raw(sql,[self.q])
         self.len = len(posts)
@@ -145,7 +145,7 @@ class AlbumListView(generic.ListView):
             path1 = path1.replace('__','_')
             path2 = album.path
             path2 = path1.replace('_',' ')
-            logger.error(ic.format(path1,path2,album.path))
+            #logger.error(ic.format(path1,path2,album.path))
 
             self.breadcrumb = album.title
             self.album_id = album.id
@@ -176,7 +176,7 @@ class AlbumListView(generic.ListView):
 
 def view_img(request):
     path=request.GET['p']
-    logger.error(ic.format(path))
+    #logger.error(ic.format(path))
 
     return redirect(path)
 
@@ -252,8 +252,8 @@ def maketitle(request):
             ]})    
 
 
-    logger.info(prompt)
-    logger.error(resp)
+    #logger.info(prompt)
+    #logger.error(resp)
 
     #ic (tags)
     return Response({'title': resp.choices[0].message.content.strip(' "')})    

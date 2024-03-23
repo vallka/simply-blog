@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
         print (self.help)
 
-        logger.info(self.help)
+        #logger.info(self.help)
         n = 1  # Number of random images you want to select
 
         #start_date = date(2022, 1, 1)
@@ -62,7 +62,7 @@ class Command(BaseCommand):
             try:
                 cont_id=json.loads(res.content)['id']
                 print ('container',cont_id)
-                logger.info(f'container:{cont_id}')
+                #logger.info(f'container:{cont_id}')
             except:
                 print("try0",res.text)
                 logger.error(res.text)
@@ -75,7 +75,7 @@ class Command(BaseCommand):
             try:
                 img_id=json.loads(res.content)['id']
                 print ('img_id',img_id)
-                logger.info(f'img_id:{img_id}')
+                #logger.info(f'img_id:{img_id}')
             except:
                 print("try1",res.text)
                 logger.error(res.text)
@@ -86,7 +86,7 @@ class Command(BaseCommand):
             try:
                 ts=json.loads(res.content)['timestamp']
                 print ('ts',ts)
-                logger.info(f'ts:{ts}')
+                #logger.info(f'ts:{ts}')
             except:
                 print("try2",res.text)
                 logger.error(res.text)
@@ -99,4 +99,4 @@ class Command(BaseCommand):
             i.save()
 
         print ("DONE!")
-        logger.error("DONE - %s!",self.help,)
+        #logger.error("DONE - %s!",self.help,)

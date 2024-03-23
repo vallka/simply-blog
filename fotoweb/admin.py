@@ -45,11 +45,6 @@ def set_private(modeladmin, request, queryset):
 def set_non_private(modeladmin, request, queryset):
     queryset.filter(private=True).update(private=False)
 
-@admin.action(description='Mark selected as Instagrammed')
-def make_published_insta(modeladmin, request, queryset):
-    queryset.filter(instagram=False).update(instagram=True)
-    queryset.filter(instagram_dt__isnull=True).update(instagram_dt=datetime.now(pytz.timezone('Europe/London')))
-
 @admin.action(description='Mark selected as Abobed')
 def make_published_adobe(modeladmin, request, queryset):
     queryset.filter(adobe=False).update(adobe=True)
@@ -77,11 +72,12 @@ def make_csv_shutter(modeladmin, request, queryset):
     response['Content-Disposition'] = 'attachment; filename="shutterstock_' + datetime.now().strftime("%y%m%d%H%M%S") + '.csv"'
 
     writer = csv.writer(response)
+    writer.writerow(["Filename","Description","Keywords","Categories","Editorial",])
     for q in queryset:
         desc = q.title
         editorial = 'yes' if q.editorial else 'no'
 
-        writer.writerow([q.name,desc,q.tags,q.shutter_cat1,q.shutter_cat2,editorial,q.path])
+        writer.writerow([q.name,desc,q.tags,f'{q.shutter_cat1}, {q.shutter_cat2}',editorial,])
     
     return response
 
@@ -91,6 +87,7 @@ def make_csv_adobe(modeladmin, request, queryset):
     response['Content-Disposition'] = 'attachment; filename="adobe_' + datetime.now().strftime("%y%m%d%H%M%S") + '.csv"'
     
     writer = csv.writer(response)
+    writer.writerow(["Filename","Title","Keywords","Category",])
     for q in queryset:
         desc = q.title
         adobe_cat = 11 #landscapes
@@ -248,6 +245,15 @@ class GellifinstaAdmin(admin.ModelAdmin):
         return render(request,'admin/fotoweb/update_tags.html',context={'items':queryset})
     update_tags.short_description = 'Update Tags'
 
+    @admin.action(description='Mark selected as Instagrammed')
+    def make_published_insta(self, request, queryset):
+        queryset.filter(instagram=Image.InstaStatus.NONE).update(instagram=Image.InstaStatus.POSTED)
+        queryset.filter(instagram_dt__isnull=True).update(instagram_dt=datetime.now(pytz.timezone('Europe/London')))
+
+    @admin.action(description='Mark selected as non Instagrammed')
+    def make_published_not_insta(self, request, queryset):
+        queryset.filter(instagram=Image.InstaStatus.POSTED).update(instagram=Image.InstaStatus.NONE)
+
     actions = [make_csv_shutter,
             make_csv_adobe,
             set_no_show,
@@ -255,6 +261,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
             set_private,
             set_non_private,
             make_published_insta,
+            make_published_not_insta,
             make_published_adobe,
             make_published_shutter,
             make_published_pexels,
