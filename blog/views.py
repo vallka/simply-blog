@@ -1,6 +1,7 @@
 import re
 from django.utils import timezone
 from django.views import generic
+from django.contrib.sitemaps import Sitemap
 
 from .models import *
 
@@ -168,4 +169,15 @@ class SearchView(generic.ListView):
         return context        
 
 
+class BlogPostSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.6
+
+    def items(self):
+        # Assuming you have a method to fetch episodes
+        return Post.objects.filter(blog_start_dt__lte=timezone.now(),blog=True,)
+
+    def lastmod(self, obj):
+        # Assuming you have a date field for last modification
+        return obj.updated_dt
 

@@ -63,9 +63,9 @@ if os.environ.get('IMAGEKIT_PRIVATE_KEY_3'):
 #pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
 #p_dir = 'p:/Shared/Gellifique/VALYA/'
-p_dir = 'p:/FOTO/vallka/'
+p_dir = 'd:/FOTO/vallka/'
 
-root_dir = '/2024/'
+root_dir = '/2023/'
 
 #start_dir = '24-01 Cullera and Cullera Castle'
 start_dir = ''
@@ -223,7 +223,7 @@ def process_file(file_path,type):
                         album.save()
                 albums = []
     elif type=='d':
-        if not 'JPEG-2048' in dirname and not 'JPEG-Full-size' in dirname:
+        if dirname and not 'JPEG-2048' in dirname and not 'JPEG-Full-size' in dirname:
             dir_title = re.sub(r'^.*\/','',dirname)
             slug = slugify(dirname)
             print(f"Processing dir {type}: {dirname} :: {dirname} :: {dir_title} :: {slug}")

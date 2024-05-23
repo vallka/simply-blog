@@ -20,6 +20,13 @@ from django.conf import settings
 
 from django.conf.urls.static import static 
 from django.shortcuts import redirect
+from django.contrib.sitemaps.views import sitemap
+
+from blog.views import BlogPostSitemap
+
+sitemaps = {
+   'blog': BlogPostSitemap, 
+}
 
 urlpatterns = [
     #path('', lambda request: redirect('blog/')),
@@ -33,6 +40,7 @@ urlpatterns = [
     path('weather/', include('weather.urls')),
     #path('admin/', admin.site.urls),
     path('markdownx/', include('markdownx.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

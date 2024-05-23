@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'markdownx',
     'django_extensions',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

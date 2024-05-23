@@ -162,13 +162,14 @@ def call_scenex(imgs):
 
     data = []
     for img in imgs:
+        ic(img)
         data.append(            {
                     'image': img['url'], 
-                    'features': [],
+                    'features': ['opt_out'],
                     'algorithm': 'Comet',
                     'languages': ['en'],
                     'style': 'concise',
-                    'output_length': 199 - len(img['title'])
+                    'output_length': 199 - (len(img['title']) if img['title'] else 0)
                 },
         )
 
@@ -181,10 +182,11 @@ def call_scenex(imgs):
     response = json.loads(responseobj.text)
 
     for index,img in enumerate(imgs):
-        if not img['title'][-1] in ['.',',','!','?']:
+        if not img['title']: img['title'] = ''
+        if img['title'] and not img['title'][-1] in ['.',',','!','?']:
             img['title'] += '.'
         
-        if not img['title'][-1]==' ':
+        if img['title'] and not img['title'][-1]==' ':
             img['title'] += ' '
 
         img['title'] = truncate_string(img['title'] + response['result'][index]['text'],200-len(img['title']))
