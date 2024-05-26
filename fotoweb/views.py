@@ -159,7 +159,7 @@ class AlbumListView(generic.ListView):
 
         self.breadcrumb = ''
         self.album_id = None
-        albums = Album.objects.filter(no_show=0,level=0).order_by('position','-id')
+        albums = Album.objects.filter(no_show=0,).order_by('-taken_dt','-created_dt')
 
         for a in albums:
             ic(a.id)

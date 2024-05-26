@@ -244,6 +244,14 @@ class Album(models.Model):
     level = models.IntegerField('level',default=0, )
     comments = models.TextField('comments',null=True, blank=True,)
 
+    class Domains(models.IntegerChoices):
+        VALLKA = 1
+        LUCAS = 2
+        GELLIFIQUE = 3
+
+    domain = models.IntegerField(default=Domains.VALLKA,choices=Domains.choices)
+    taken_dt = models.DateField('taken_dt',null=True, blank=True)
+
     def __str__(self):
         return str(self.id) + ':' + str(self.title)
 
