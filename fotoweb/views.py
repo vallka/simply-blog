@@ -8,6 +8,7 @@ from django.shortcuts import render,redirect
 from django.views import generic
 from django.forms.models import model_to_dict
 from django.db.models import Q
+from django.contrib.sites.shortcuts import get_current_site
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -22,6 +23,13 @@ from .models import *
 import logging
 logger = logging.getLogger(__name__)
 ic.configureOutput(includeContext=True,contextAbsPath=True,prefix='')
+
+def get_current_domain(request):
+    site = get_current_site(request)
+    ic(site)
+    if 'lucas' in site.name: return Album.Domains.LUCAS
+    elif 'gellifique' in site.name: return Album.Domains.GELLIFIQUE
+    else: return Album.Domains.VALLKA
 
 class ImageView(generic.DetailView):
     model = Image
@@ -66,11 +74,14 @@ class ImageListView(generic.ListView):
             path2 = path1.replace('_',' ')
             #logger.error(ic.format(path1,path2,album.path))
 
-            r= Image.objects.filter(
-                Q(path__icontains=album.path) | Q(path__icontains=path1) | Q(path__icontains=path2),
-                no_show=0,
-                ).order_by('name')
-            #logger.error(ic.format(len(r)))
+            #r= Image.objects.filter(
+            #    Q(path__icontains=album.path) | Q(path__icontains=path1) | Q(path__icontains=path2),
+            #    no_show=0,
+            #    ).order_by('name')
+
+            r = album.get_images().order_by('name')
+
+            logger.error(ic.format(len(r)))
 
             self.breadcrumb = album.title
             self.album_id = album.id
@@ -101,9 +112,10 @@ class ImageSearchView(generic.ListView):
         sql = Image.objects.filter(no_show=0).query
         sql = re.sub('ORDER BY.*$','',str(sql))
         sql += " and match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode)"
+        sql += " and domain=%s"
         #logger.error(ic.format(sql))
 
-        posts = Image.objects.raw(sql,[self.q])
+        posts = Image.objects.raw(sql,[self.q,get_current_domain(self.request)])
         self.len = len(posts)
         return posts
         #return Image.objects.filter(no_show=0).order_by('-name')
@@ -156,10 +168,11 @@ class AlbumListView(generic.ListView):
                 level=album.level+1,
                 ).order_by('position','-id')
             return albums
+        
 
         self.breadcrumb = ''
         self.album_id = None
-        albums = Album.objects.filter(no_show=0,).order_by('-taken_dt','-created_dt')
+        albums = Album.objects.filter(no_show=0,domain=get_current_domain(self.request)).order_by('-taken_dt','-created_dt')
 
         for a in albums:
             ic(a.id)

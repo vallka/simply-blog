@@ -4,6 +4,8 @@ import re
 import random
 
 from django.db import models
+from django.db.models import Q
+
 from django.utils.html import mark_safe
 from django.utils.text import slugify
 
@@ -90,6 +92,8 @@ class Image(models.Model):
     rasfocus = models.BooleanField('rasfocus',default=False)
     rasfocus_dt = models.DateTimeField('rasfocus_dt',null=True, blank=True,)
     rasfocus_url = models.CharField('rasfocus_url',null=True, blank=True,max_length=200)
+
+    domain = models.IntegerField(default=1,)
 
     @property
     def album(self):
@@ -278,3 +282,26 @@ class Album(models.Model):
 
             
         super().save(*args, **kwargs)
+
+        self.get_images(1).update(domain=self.domain)
+
+
+    def get_images(self,no_show=0):
+        path1 = self.path
+        path1 = path1.replace(' ','_')
+        path1 = re.sub(r'[^/_0-9A-Za-z\-.]','_',path1)
+        path1 = path1.replace('__','_')
+        path2 = self.path
+        path2 = path1.replace('_',' ')
+        #logger.error(ic.format(path1,path2,self.path))
+
+        r= Image.objects.filter(
+            Q(path__icontains=self.path) | Q(path__icontains=path1) | Q(path__icontains=path2),
+            )
+        
+        if not no_show:
+            r = r.filter(no_show=0)
+        
+        return r
+
+        

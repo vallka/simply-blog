@@ -17,7 +17,7 @@ body {
 
 {% block header_search %} 
 <form class="form-inline search-box d-flex justify-content-lg-end" action="{{ url ('fotoweb:search') }}">
-    <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Photos">
+    <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Photos" value="{{q}}">
     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
  </form>
 {% endblock header_search %} 

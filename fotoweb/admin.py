@@ -279,13 +279,14 @@ class GellifinstaAdmin(admin.ModelAdmin):
     search_fields = ['path','title','id']
     date_hierarchy = 'created_dt'
 
-    readonly_fields = ['img_tag','url','url_fs','created_dt','updated_dt']
+    readonly_fields = ['domain','img_tag','url','url_fs','created_dt','updated_dt']
     fields = [
             'name',
             'path',
             'path_fs',
             'url',
             'url_fs',
+            'domain',
             'img_tag',
             'title',
             'description',
@@ -406,8 +407,9 @@ admin.site.register(Image,GellifinstaAdmin)
 
 @admin.register(Album)
 class GellifinstaAlbumAdmin(admin.ModelAdmin):
-    list_display = ['thumb_tag','title','position','id',]
+    list_display = ['thumb_tag','id','title','domain','no_show']
     list_display_links = list_display
     search_fields = ['path','title',]
+    list_filter = ['no_show','domain',]
 
     readonly_fields = ['img_tag','created_dt','updated_dt']
