@@ -1,5 +1,7 @@
 import json
 from django.views import generic
+from django.conf import settings
+
 
 
 
@@ -10,7 +12,7 @@ class WeatherView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        with open('weather/good_forecast.json') as json_file:
+        with open(settings.MEDIA_ROOT + '/weather/good_forecast.json') as json_file:
             context['good_forecast'] = json.load(json_file) 
 
         return context 
