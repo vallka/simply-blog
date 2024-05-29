@@ -1,0 +1,5118 @@
+{
+    "dates": [
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2024-06-01",
+        "2024-06-02",
+        "2024-06-03",
+        "2024-06-04",
+        "2024-06-05",
+        "2024-06-06",
+        "2024-06-07",
+        "2024-06-08",
+        "2024-06-09",
+        "2024-06-10",
+        "2024-06-11"
+    ],
+    "forecast": {
+        "Aberdeen": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 5,
+                "temp_max": 17.9,
+                "wind_max": 7.86
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 13.1,
+                "wind_max": 6.12
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Airdrie": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.1,
+                "wind_max": 7.22
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 20.9,
+                "wind_max": 3.69
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Alloa": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.9,
+                "wind_max": 9.01
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.7,
+                "wind_max": 6.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Arbroath": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 2,
+                "temp_max": 17.2,
+                "wind_max": 7.6
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-02",
+                "length": 3,
+                "temp_max": 17.7,
+                "wind_max": 9.18
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 13.9,
+                "wind_max": 8.99
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Aviemore": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 4,
+                "temp_max": 17.4,
+                "wind_max": 6.16
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 18.5,
+                "wind_max": 4.92
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Ayr": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 15.9,
+                "wind_max": 7.72
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 15.6,
+                "wind_max": 9.27
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Barrhead": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 17.9,
+                "wind_max": 8.3
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.8,
+                "wind_max": 5.66
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Bathgate": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 17.8,
+                "wind_max": 8.61
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.5,
+                "wind_max": 5.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Bellshill": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.2,
+                "wind_max": 7.22
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.3,
+                "wind_max": 4.74
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Benbecula": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 4,
+                "temp_max": 14.0,
+                "wind_max": 6.84
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 13.5,
+                "wind_max": 7.24
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Bishopbriggs": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 6.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.8,
+                "wind_max": 5.48
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Blantyre": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 18.5,
+                "wind_max": 6.94
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.9,
+                "wind_max": 5.11
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Bowmore": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 6,
+                "temp_max": 13.9,
+                "wind_max": 9.57
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 15.1,
+                "wind_max": 9.46
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Broadford": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 15.2,
+                "wind_max": 4.05
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 14.3,
+                "wind_max": 4.51
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Broxburn": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-02",
+                "length": 3,
+                "temp_max": 16.3,
+                "wind_max": 7.93
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.1,
+                "wind_max": 6.12
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Campbeltown": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 5,
+                "temp_max": 14.3,
+                "wind_max": 9.4
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.2,
+                "wind_max": 9.05
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Castlebay": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 13.0,
+                "wind_max": 8.25
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-05",
+                "length": 7,
+                "temp_max": 13.8,
+                "wind_max": 14.2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Clydebank": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 6.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.0,
+                "wind_max": 5.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Coatbridge": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 7.22
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 21.2,
+                "wind_max": 3.69
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Cowdenbeath": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.6,
+                "wind_max": 9.35
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.3,
+                "wind_max": 6.08
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Cumbernauld": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 17.8,
+                "wind_max": 8.52
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.1,
+                "wind_max": 4.74
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dingwall": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 3,
+                "temp_max": 16.9,
+                "wind_max": 7.38
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 15.5,
+                "wind_max": 5.41
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dornoch": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-01",
+                "length": 2,
+                "temp_max": 16.7,
+                "wind_max": 7.53
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 14.4,
+                "wind_max": 6.82
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dumfries": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.4,
+                "wind_max": 7.31
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.5,
+                "wind_max": 5.63
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dundee": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 2,
+                "temp_max": 17.7,
+                "wind_max": 5.9
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 16.6,
+                "wind_max": 7.0
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dunkeld": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 19.8,
+                "wind_max": 8.21
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.5,
+                "wind_max": 7.01
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dunfermline": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.6,
+                "wind_max": 9.41
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.8,
+                "wind_max": 6.66
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Dunoon": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 7,
+                "temp_max": 16.4,
+                "wind_max": 9.38
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 16.7,
+                "wind_max": 6.76
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "East Kilbride": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 17.2,
+                "wind_max": 7.11
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            }
+        ],
+        "Edinburgh": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.3,
+                "wind_max": 7.83
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 5.83
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Elgin": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 3,
+                "temp_max": 16.7,
+                "wind_max": 7.63
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 17.3,
+                "wind_max": 4.83
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Erskine": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 17.9,
+                "wind_max": 9.42
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.9,
+                "wind_max": 5.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Falkirk": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.1,
+                "wind_max": 7.93
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.1,
+                "wind_max": 6.47
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Fort Augustus": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 21.2,
+                "wind_max": 5.85
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Fort William": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 15.9,
+                "wind_max": 4.14
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 20.9,
+                "wind_max": 4.74
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Fortrose": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 3,
+                "temp_max": 17.0,
+                "wind_max": 8.7
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 14.2,
+                "wind_max": 6.2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Fraserburgh": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 14.3,
+                "wind_max": 7.16
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 11.5,
+                "wind_max": 11.25
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Gairloch": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 13.7,
+                "wind_max": 5.92
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 15.0,
+                "wind_max": 7.6
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Glasgow": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.7,
+                "wind_max": 6.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.9,
+                "wind_max": 5.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Glenrothes": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.3,
+                "wind_max": 9.21
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 17.0,
+                "wind_max": 8.49
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Grangemouth": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.3,
+                "wind_max": 7.93
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.8,
+                "wind_max": 6.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Grantown-on-Spey": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 16.3,
+                "wind_max": 5.73
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 18.0,
+                "wind_max": 5.08
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Greenock": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 7,
+                "temp_max": 16.8,
+                "wind_max": 9.38
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 16.7,
+                "wind_max": 6.76
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Hamilton": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 18.3,
+                "wind_max": 6.95
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.2,
+                "wind_max": 5.17
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Hawick": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.7,
+                "wind_max": 7.52
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            }
+        ],
+        "Helensburgh": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 7,
+                "temp_max": 16.9,
+                "wind_max": 9.38
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.8,
+                "wind_max": 5.95
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Inverness": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 3,
+                "temp_max": 17.2,
+                "wind_max": 7.55
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 15.5,
+                "wind_max": 5.41
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Irvine": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 16.3,
+                "wind_max": 7.94
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 15.6,
+                "wind_max": 9.27
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Johnstone": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 17.8,
+                "wind_max": 9.42
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 7.74
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Kilmarnock": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-02",
+                "length": 2,
+                "temp_max": 14.9,
+                "wind_max": 7.94
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.3,
+                "wind_max": 6.81
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Kilwinning": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 16.3,
+                "wind_max": 8.32
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 7.74
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Kirkcaldy": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.4,
+                "wind_max": 8.99
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 16.4,
+                "wind_max": 8.7
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Kirkintilloch": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.2,
+                "wind_max": 7.98
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.2,
+                "wind_max": 5.17
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Kirkwall": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 10.5,
+                "wind_max": 8.81
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Kyle of Lochalsh": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 15.0,
+                "wind_max": 4.41
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 14.3,
+                "wind_max": 4.51
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Largs": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 6,
+                "temp_max": 16.5,
+                "wind_max": 8.32
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 16.9,
+                "wind_max": 9.19
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Larkhall": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 17.8,
+                "wind_max": 6.94
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 19.4,
+                "wind_max": 4.22
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Lerwick": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 4,
+                "temp_max": 13.8,
+                "wind_max": 6.5
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-10",
+                "length": 2,
+                "temp_max": 12.6,
+                "wind_max": 6.23
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Livingston": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 18.0,
+                "wind_max": 8.61
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.8,
+                "wind_max": 6.12
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Lochboisdale": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 13.3,
+                "wind_max": 8.32
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 13.8,
+                "wind_max": 13.69
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Lochgilphead": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 6,
+                "temp_max": 16.6,
+                "wind_max": 8.2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 17.2,
+                "wind_max": 6.82
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Lochmaddy": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 4,
+                "temp_max": 13.5,
+                "wind_max": 6.67
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 13.3,
+                "wind_max": 7.56
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Mallaig": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 3,
+                "temp_max": 13.9,
+                "wind_max": 5.6
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 14.3,
+                "wind_max": 4.51
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Motherwell": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 18.2,
+                "wind_max": 6.94
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 21.2,
+                "wind_max": 3.69
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Musselburgh": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-02",
+                "length": 3,
+                "temp_max": 17.2,
+                "wind_max": 9.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 17.8,
+                "wind_max": 6.81
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Nairn": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 3,
+                "temp_max": 17.4,
+                "wind_max": 8.8
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 13.8,
+                "wind_max": 5.85
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Newton Mearns": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 17.0,
+                "wind_max": 8.3
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 20.3,
+                "wind_max": 4.31
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Oban": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 15.9,
+                "wind_max": 7.29
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 16.0,
+                "wind_max": 6.2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Paisley": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 17.9,
+                "wind_max": 6.66
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 19.0,
+                "wind_max": 6.79
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Penicuik": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-02",
+                "length": 3,
+                "temp_max": 15.0,
+                "wind_max": 9.11
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 4,
+                "temp_max": 17.4,
+                "wind_max": 6.97
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            }
+        ],
+        "Perth": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 20.1,
+                "wind_max": 7.92
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 18.2,
+                "wind_max": 7.39
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Peterhead": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 17.0,
+                "wind_max": 6.82
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 11.7,
+                "wind_max": 9.9
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Port Ellen": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 6,
+                "temp_max": 14.0,
+                "wind_max": 10.32
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 15.1,
+                "wind_max": 9.46
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Port Glasgow": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 7,
+                "temp_max": 16.9,
+                "wind_max": 9.42
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 16.7,
+                "wind_max": 6.76
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Portree": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 14.5,
+                "wind_max": 5.24
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 17.1,
+                "wind_max": 6.26
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Renfrew": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.5,
+                "wind_max": 6.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.0,
+                "wind_max": 5.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Rothesay": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 15.8,
+                "wind_max": 9.38
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.4,
+                "wind_max": 5.47
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Stranraer": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 4,
+                "temp_max": 15.1,
+                "wind_max": 9.18
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 15.3,
+                "wind_max": 10.34
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "St Andrews": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 2,
+                "temp_max": 17.5,
+                "wind_max": 6.76
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-03",
+                "length": 2,
+                "temp_max": 15.4,
+                "wind_max": 9.84
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 15.5,
+                "wind_max": 7.64
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Stirling": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 19.0,
+                "wind_max": 9.01
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 20.7,
+                "wind_max": 6.31
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Stornoway": [
+            {
+                "good": 1,
+                "date": "2024-05-29",
+                "length": 4,
+                "temp_max": 14.3,
+                "wind_max": 7.16
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 2,
+                "temp_max": 13.5,
+                "wind_max": 9.35
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-10",
+                "length": 2,
+                "temp_max": 14.1,
+                "wind_max": 5.37
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Stromness": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 13.1,
+                "wind_max": 7.94
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 10.6,
+                "wind_max": 11.05
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Tain": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-01",
+                "length": 2,
+                "temp_max": 16.8,
+                "wind_max": 6.19
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 15.6,
+                "wind_max": 5.34
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Tarbert": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 14.3,
+                "wind_max": 7.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 14.8,
+                "wind_max": 6.44
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Thurso": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 12.9,
+                "wind_max": 7.62
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 13.6,
+                "wind_max": 8.11
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Tobermory": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 2,
+                "temp_max": 13.5,
+                "wind_max": 5.32
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-08",
+                "length": 4,
+                "temp_max": 15.5,
+                "wind_max": 4.75
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Uig": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 13.3,
+                "wind_max": 6.89
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 17.6,
+                "wind_max": 5.95
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Ullapool": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 13.8,
+                "wind_max": 6.71
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-10",
+                "length": 2,
+                "temp_max": 16.6,
+                "wind_max": 4.61
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Viewpark": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 5,
+                "temp_max": 18.4,
+                "wind_max": 7.22
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-06-07",
+                "length": 5,
+                "temp_max": 21.8,
+                "wind_max": 5.11
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Wick": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-30",
+                "length": 3,
+                "temp_max": 14.8,
+                "wind_max": 8.44
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-10",
+                "length": 2,
+                "temp_max": 10.8,
+                "wind_max": 5.78
+            },
+            {
+                "good": 2
+            }
+        ],
+        "Wishaw": [
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 1,
+                "date": "2024-05-31",
+                "length": 4,
+                "temp_max": 17.3,
+                "wind_max": 8.24
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0,
+                "length": 1
+            },
+            {
+                "good": 0
+            },
+            {
+                "good": 1,
+                "date": "2024-06-09",
+                "length": 3,
+                "temp_max": 20.6,
+                "wind_max": 3.4
+            },
+            {
+                "good": 2
+            },
+            {
+                "good": 2
+            }
+        ]
+    }
+}
