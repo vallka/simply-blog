@@ -122,7 +122,7 @@ django.jQuery(function(){
         e.preventDefault();
         const tagstr = untagify(tagy['tags'].value,', ');
         console.log(django.jQuery('textarea[name=description]').val(),tagstr);
-        make_title(django.jQuery('textarea[name=description]').val(),tagstr);
+        make_title(django.jQuery('textarea[name=description]').val(),tagstr,django.jQuery('.field-img_tag img').attr('src'));
     });
 
     django.jQuery('.btn_find_tags').click(function(e){
@@ -282,19 +282,21 @@ function find_description(url) {
     });
 }
 
-function make_title(descr,keywords) {
+function make_title(descr,keywords,img_url) {
     fetch('/photo/api/maketitle/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
-        body: JSON.stringify({description: descr,keywords: keywords}),
+        body: JSON.stringify({description: descr,keywords: keywords,image_url: img_url}),
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data.title);
+        console.log(data.title,data.keywords);
         //alert('Done');
+        document.getElementById('id_title').value = data.title;
+        tagy['tags'].addTags(data.keywords);
         
         //data.title = data.title.replace('w/','with').replace('&','and');
-
+        /*
         for (let i=0; i<data.title.length; ++i) {
             data.title[i] = data.title[i].replace('w/','with')
                           .replace('&','and')
@@ -311,6 +313,7 @@ function make_title(descr,keywords) {
         }
 
         document.getElementById('id_title').value = data.title[0]
+        */
         spinner_off();
     })
     .catch(error => {

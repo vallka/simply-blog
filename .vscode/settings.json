@@ -1,24 +1,24 @@
 {
     "python.pythonPath": "C:\\Users\\user\\.virtualenvs\\simply-blog-NyU5TgKE\\Scripts\\python.exe",
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#620989",
         "activityBar.activeBorder": "#966b0a",
+        "activityBar.activeBackground": "#620989",
         "activityBar.background": "#620989",
         "activityBar.foreground": "#e7e7e7",
         "activityBar.inactiveForeground": "#e7e7e799",
         "activityBarBadge.background": "#966b0a",
         "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#620989",
         "statusBar.background": "#400659",
         "statusBar.foreground": "#e7e7e7",
         "statusBarItem.hoverBackground": "#620989",
+        "statusBarItem.remoteBackground": "#400659",
+        "statusBarItem.remoteForeground": "#e7e7e7",
         "titleBar.activeBackground": "#400659",
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#40065999",
-        "titleBar.inactiveForeground": "#e7e7e799",
-        "sash.hoverBorder": "#620989",
-        "statusBarItem.remoteBackground": "#400659",
-        "statusBarItem.remoteForeground": "#e7e7e7",
-        "commandCenter.border": "#e7e7e799"
+        "titleBar.inactiveForeground": "#e7e7e799"
     },
     "peacock.remoteColor": "#400659"
 }

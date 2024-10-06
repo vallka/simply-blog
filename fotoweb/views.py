@@ -212,49 +212,12 @@ def maketitle(request):
 
     description = request.data['description']
     keywords = request.data['keywords']
+    image_url = request.data['image_url']
 
-    prompt = f"""Make a caption for the photo with the description and keywords below. 
-                No more than 20 words, one sentence. No quotes and no dot at the end.
-                Make sure the length of the caption is under 200 characters.\n\n
-                Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
-                Be direct. Put in some emotions, but not too much. Keywords may contain geographical data, use them if you can.
-                Don't include keywords in the caption, use them as an additional source of information.
-                Description\n\n
-                ------
-                {description}
-                ------
-                Keywords\n\n
-                ------
-                {keywords}
-                """
+    r = chatgpt_titles(keywords,image_url)
+    ic(r)
 
-    #resp = openai.ChatCompletion.create(
-    #    model="gpt-3.5-turbo",
-    #    messages=[
-    #            {"role": "user", "content": prompt }
-    #        ]
-    #)
-
-    ic(prompt)
-
-    data = {
-        'model': 'gpt-3.5-turbo-1106',
-        'messages': [
-            {'role': 'system', 'content': 'You are a curator for microstock photo submission.'},
-            {'role': 'user', 'content': prompt}
-        ],
-        'temperature': 1,
-        'n': 5
-    }
-
-    responseobj = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, data=json.dumps(data))
-    response = responseobj.text
-    response = json.loads(responseobj.text)
-
-    ic(response)
-    str = response['choices'][0]['message']['content']
-    ic(str)
-    ic(response['usage'])
+    return Response({'title': r['title'], 'keywords': r['keywords']})
 
     return Response({'title': [
         response['choices'][0]['message']['content'],

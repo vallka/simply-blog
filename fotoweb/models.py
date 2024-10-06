@@ -2,6 +2,10 @@ import requests
 import os
 import re
 import random
+import json
+
+
+from icecream import ic
 
 from django.db import models
 from django.db.models import Q
@@ -305,3 +309,72 @@ class Album(models.Model):
         return r
 
         
+
+def chatgpt_titles(keywords,image_url):
+    api_key = os.getenv('OPENAI_API_KEY')
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {api_key}',
+    }
+
+    prompt = f"""Make a caption and keywords for the photo with the image_url and keywords below. 
+No more than 20 words, one sentence.
+Make sure the length of the caption is under 200 characters.\n\n
+Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
+Be direct. Put in some emotions, but not too much. A few keywords providfed, they may contain geographical data, use them if you can.
+Generate more keywords, to have 30-40 keywords in total.
+------
+Some Keywords\n\n
+------
+{keywords}
+"""
+    ic(prompt)
+
+    data = {
+        'model': 'gpt-4o-mini',
+        'messages': [
+            {'role': 'system', 'content': 'You are a curator for microstock photo submission.'},
+            {'role': 'user', 'content': [
+                {
+                    "type": "text",
+                    "text": prompt
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": image_url,
+                        "detail": "low"
+                    }
+                }
+            ]}
+        ],
+        'temperature': 1,
+        'n': 1
+    }
+
+    responseobj = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, data=json.dumps(data))
+    response = responseobj.text
+    response = json.loads(responseobj.text)
+
+    ic(response)
+    str = response['choices'][0]['message']['content']
+    ic(str)
+    ic(response['usage'])
+
+
+    pattern = r'\*\*Caption:\*\*\s*(.*?)\s+\*\*Keywords:\*\*\s*(.*)'
+
+    # Use regex to find the caption and keywords
+    match = re.search(pattern, str)
+
+    if match:
+        caption = match.group(1).strip()
+        keywords = match.group(2).strip()
+        ic("Caption:", caption)
+        ic("Keywords:", keywords)
+    else:
+        caption = None
+        keywords = None
+        ic("No match found.")
+
+    return {'title': caption, 'keywords': keywords}

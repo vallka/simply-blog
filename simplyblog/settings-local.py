@@ -5,10 +5,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dj',
-        'USER': 'root',
+        'NAME': 'vallka',
+        'USER': os.environ['POLLS_DB_USER'],
         'PASSWORD': os.environ['POLLS_DB_PASSWORD'],
         'HOST': '127.0.0.1',
+        'PORT': 3307,
         'OPTIONS': {'charset': 'utf8mb4'},
     },
     'presta': {
@@ -23,8 +24,8 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['*']
 
-TEMPLATE_SKIN = 'gellifique'
-#TEMPLATE_SKIN = 'vallka'
+#TEMPLATE_SKIN = 'gellifique'
+TEMPLATE_SKIN = 'vallka'
 MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (610, 1500), 'quality': 80 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -48,6 +49,9 @@ EMAIL_BCC_TO = None
 
 DEBUG = True
 
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
     environment="local",

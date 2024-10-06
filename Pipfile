@@ -6,26 +6,25 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = ">=4.1"
-mysqlclient = "*"
-whitenoise = "*"
+django = "==4.1.7"
+#  mysqlclient = "*"
+#  whitenoise = "*"
 requests = "*"
 uritemplate = "*"
 sentry-sdk = "*"
 django-debug-toolbar = "*"
-#django-markdownx = ">=4"
-#django-markdownx = {git = "https://github.com/neutronX/django-markdownx.git", editable = false}
-django-markdownx = {editable = true,path = "./../django-markdownx"}
-#django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
-#django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
+#  #django-markdownx = ">=4"
+#  #django-markdownx = {git = "https://github.com/neutronX/django-markdownx.git", editable = false}
+#  #django-markdownx = {editable = true,path = "./../django-markdownx"}
+django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
+#  #django-markdownx = {git = "https://github.com/vallka/django-markdownx.git", editable = true}
 jinja2 = "*"
-#jinja2-django-tags = "*"
+#  #jinja2-django-tags = "*"
 update = "*"
 pillow = "*" 
 beautifulsoup4 = "*"
 markdown = "*"
 imagekitio = "*"
-gunicorn = "*"
 pcloud = "*"
 python-dateutil = "*"
 IPTCInfo3 = "*"
@@ -39,15 +38,14 @@ django-extensions = "*"
 #notebook = "*"
 exif = "*"
 osgridconverter = "*"
-deepl = "*"
+#deepl = "*"
 icecream = "*"
 python-dotenv = "*"
 djangorestframework = "*"
 #asyncssh = "*"
-selenium = "*"
-openai = "*"
 mutagen = "*"
 pyexiv2 = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3"

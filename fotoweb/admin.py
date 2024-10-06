@@ -223,6 +223,20 @@ def truncate_string(string, max_length):
     return truncated_string
 
 
+@admin.action(description='Get ChatGPT Titles')
+def get_chatgpt_titles(modeladmin, request, queryset):
+    for q in queryset:
+        ic(q.tags)
+        ic(q.url + '?tr=w-600')
+
+        r = chatgpt_titles(q.tags,q.url + '?tr=w-512')
+        ic(r)
+        q.add_auto_tags(r["keywords"])
+        q.title = r["title"]
+        q.save()
+
+
+
 #@admin.register(Image,ImageModelAdminForm)
 class GellifinstaAdmin(admin.ModelAdmin):
     form = ImageModelAdminForm
@@ -270,7 +284,8 @@ class GellifinstaAdmin(admin.ModelAdmin):
             make_published_rasfocus,
             update_title,update_tags,
             get_mykeyworder_tags,get_google_tags,get_aws_tags,
-            get_scenex_titles
+            get_scenex_titles,
+            get_chatgpt_titles
             ]
 
     list_display = ['thumb_tag','id','path','tags_spaced','description_f','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
