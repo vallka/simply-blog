@@ -65,10 +65,10 @@ if os.environ.get('IMAGEKIT_PRIVATE_KEY_3'):
 #p_dir = 'p:/Shared/Gellifique/VALYA/'
 p_dir = 'd:/FOTO/vallka/'
 
-root_dir = '/2023/'
+root_dir = '/2024/'
 
 #start_dir = '24-01 Cullera and Cullera Castle'
-start_dir = ''
+start_dir = '24-06 Bike tour - Roslin Glen and Gladhouse Reservoir'
 
 #imgk_start_dir = '/C1/foto'
 #imgk_nostore_dir = '/Gellifique/VALYA'

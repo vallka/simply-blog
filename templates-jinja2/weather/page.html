@@ -15,6 +15,17 @@ body {
   background-color: rgba(0, 191, 255, 0.4);
 }
 
+.forecast_head th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+#good_forecast {
+  position: relative;
+  height: 60vh;
+}
+
 </style>
 {% endblock %}
 
@@ -53,8 +64,6 @@ body {
           {% if f[i]['good']==1 %}
             <td class="weather_good" colspan={{f[i]['length']}}" title="{{f[i]['date'][5:]}} - {{good_forecast['dates'][i-1+f[i]['length']][5:]}}">
               t:{{"%d"|format(f[i]['temp_max']+0.5)}} w:{{"%d"|format(f[i]['wind_max']+0.5)}}m/s
-              <br>
-              {{f[i]['date'][5:]}} - {{good_forecast['dates'][i-1+f[i]['length']][5:]}}
             </td>
           {% elif f[i]['good']==0 %}
             <td> </td>
@@ -64,14 +73,6 @@ body {
       </tr>
       {% endfor %}
     </tbody>
-    <thead class="forecast_head">
-      <tr>
-      <th></th>
-      {% for date in good_forecast['dates'] %}
-        <th>{{date[5:]}}</th>
-      {% endfor %}
-      </tr>
-    </thead>
   </table>  
     {% else %}
   <p>There are no forecast yet.</p>
@@ -106,54 +107,4 @@ body {
 
 {% block javascript %}
 {{ super() }}
-<script src="/static/unitegallery/js/unitegallery.js" type='text/javascript'  ></script>
-<script src="/static/unitegallery/themes/tiles/ug-theme-tiles.js" type='text/javascript'></script>
-<script type="text/javascript">
-  var api;
-  var g_logged = '';
-
-
-  function g_log(img) {
-    if (g_logged!=img.urlImage) {
-      console.log('************* '+img.urlImage);
-      g_logged = img.urlImage;
-      let m = img.urlImage.match (/^(.+?)([^/]+)$/);
-      let id=m[2];
-      let dir=m[1];
-      m=dir.match(/^(.*)(C1\/foto\/)(.+)(\/[^/]*2048[^/]*)/)
-      let al=m[3];
-      gtag("event", "view_item", {
-        items: [{
-          item_id: id,
-          item_name: img.title,
-          item_category: al,
-       }]
-      });
-    }
-  }
-
-  jQuery(document).ready(function(){
-
-    api = jQuery("#gallery").unitegallery({
-      gallery_theme: "tiles",
-	    tiles_type: "nested",
-	    //tiles_type: "justified"
-      tile_enable_textpanel:true,
-	    tile_textpanel_title_text_align: "center"
-    });
-
-    api.on("item_change",function(num, data){		
-      console.log("item_change "+num);
-      console.log(data);
-      g_log(data);
-    });
-    api.on("open_lightbox",function(lb, data){		
-      console.log("open_lightbox ");
-      console.log(data);
-      g_log(data);
-    });
-
-    
-  });
-  </script>
 {% endblock %}

@@ -75,7 +75,7 @@ body {
           </a>
           <div class="media-body ml-2">
             <p class="mt-0"><b>{{album.title if album.title else album.path}}</b></p>
-            <p class="mt-0">{{album.taken_dt.strftime('%B %Y')}}</p>
+            <p class="mt-0">{{album.taken_dt.strftime('%B %Y') if album.taken_dt else ''}}</p>
           </div>
         </div>
     {% endif %}
