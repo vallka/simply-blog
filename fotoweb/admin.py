@@ -373,6 +373,22 @@ class GellifinstaAdmin(admin.ModelAdmin):
             queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)
             return queryset, may_have_duplicates
 
+        if search_term=='a:instagram':
+            queryset, may_have_duplicates = super().get_search_results(request, queryset, '')
+            queryset3 = Image.objects.filter(
+                Q(instagram=0) &
+                Q(no_show=0) &
+                Q(private=0) &
+                ~Q(title='') &
+                ~Q(tags='') &
+                ~Q(title__isnull=True) &
+                ~Q(tags__isnull=True)
+            )
+
+            print(len(queryset3),len(queryset))
+
+            return queryset & queryset3, may_have_duplicates
+
         if search_term[0:2]=='a:':
             album_id = search_term[2:]
             queryset, may_have_duplicates = super().get_search_results(request, queryset, '')

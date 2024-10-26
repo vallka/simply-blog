@@ -50,6 +50,9 @@ class Command(BaseCommand):
             ~Q(tags__isnull=True)
         ).order_by('?')[:n]
 
+        if len(images)==0:
+            print('No more images to publish')
+
         for i in images:
             print (i.id,i.title,i.path,i.instagram_text)
 
@@ -66,7 +69,32 @@ class Command(BaseCommand):
             except:
                 print("try0",res.text)
                 logger.error(res.text)
-                return
+                error = json.loads(res.text)
+                print(error)
+                if (error['error']['error_user_title']=='Invalid aspect ratio'):
+                    print(error['error']['error_user_title'],error['error']['error_user_msg'])
+                    ar = re.search(r"\('(\d+)\/(\d+)',\)",error['error']['error_user_msg'])
+                    w = ar.group(1)
+                    h = ar.group(2)
+
+                    print (w,h,image_url)
+                    if (w<h):
+                        image_url += ',ar-4-5,w-'+w
+                        url=f'https://graph.facebook.com/v17.0/{ig_id}/media?access_token={token}&image_url={image_url}&caption={caption}'
+                        res = requests.post(url)
+
+                        try:
+                            cont_id=json.loads(res.content)['id']
+                            print ('container',cont_id)
+                            #logger.info(f'container:{cont_id}')
+                        except:
+                            print("try0a",res.text)
+                            logger.error(res.text)
+                            return
+                    else:        
+                        return
+                else:        
+                    return
 
 
             url=f'https://graph.facebook.com/v17.0/{ig_id}/media_publish?access_token={token}&creation_id={cont_id}'

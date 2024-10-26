@@ -68,7 +68,7 @@ p_dir = 'd:/FOTO/vallka/'
 root_dir = '/2024/'
 
 #start_dir = '24-01 Cullera and Cullera Castle'
-start_dir = '24-06 Bike tour - Roslin Glen and Gladhouse Reservoir'
+start_dir = '24-06 Valencia'
 
 #imgk_start_dir = '/C1/foto'
 #imgk_nostore_dir = '/Gellifique/VALYA'
