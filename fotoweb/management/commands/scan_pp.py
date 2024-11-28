@@ -144,13 +144,13 @@ def process_image(name,dirname,slug,file_path,file_time,full_size):
             options = UploadFileRequestOptions(
                 use_unique_file_name=False,
                 folder=ik_dirname,
-                extensions=[
-                    {
-                        "name": f"{provider}-auto-tagging",
-                        "maxTags": 25,
-                        "minConfidence": 70
-                    },
-                ]
+                #extensions=[
+                #    {
+                #        "name": f"{provider}-auto-tagging",
+                #        "maxTags": 25,
+                #        "minConfidence": 70
+                #    },
+                #]
             )
 
             with open(file_path, 'rb') as file:
@@ -220,6 +220,7 @@ def process_file(file_path,type):
                     for a_slug in albums:
                         album = Album.objects.get(slug=a_slug)
                         album.cover = img.url
+                        album.taken_dt = img.created_dt
                         album.save()
                 albums = []
     elif type=='d':
@@ -261,17 +262,18 @@ class Command(BaseCommand):
     help = 'scan_pp'
 
     def add_arguments(self, parser):
-        pass
+        parser.add_argument('dir', type=str, help='Directory to scan')
 
     def handle(self, *args, **options):
-        print (self.help)
-        logger.info(self.help)
+        directory_path = options['dir']
+        print (self.help + f' dir={dir}')
+        #logger.info(self.help)
 
-        directory_path = p_dir + root_dir + start_dir
+        #directory_path = p_dir + root_dir + start_dir
         walk_directory(directory_path, process_file)
 
         print ("DONE!")
-        logger.error("DONE - %s!",self.help,)
+        #logger.error("DONE - %s!",self.help,)
 
 
 

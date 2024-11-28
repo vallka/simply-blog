@@ -1,4 +1,7 @@
-from datetime import date
+from datetime import date,datetime,timedelta
+
+# Get the current local time
+datetime.now().hour
 import requests
 import json
 import re
@@ -8,7 +11,8 @@ import os
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from django.db import connections
-from django.db.models import Q
+from django.db.models import Q,Func
+from django.db.models.functions import Now
 
 from fotoweb.models import *
 
@@ -28,27 +32,37 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         ig_id='17841402920326860'
         token = os.environ["FB_TOKEN"]
-
-
-        print (self.help)
+        print (self.help,datetime.now().hour)
 
         #logger.info(self.help)
         n = 1  # Number of random images you want to select
 
-        #start_date = date(2022, 1, 1)
-        #end_date = date(2022, 12, 31)
+        if datetime.now().hour==20:
+            end_date = datetime.now() - timedelta(days=365*2)
+            print (end_date)
 
-        images = Image.objects.filter(
-            #Q(date__gte=start_date) &
-            #Q(date__lte=end_date) &
-            Q(instagram=0) &
-            Q(no_show=0) &
-            Q(private=0) &
-            ~Q(title='') &
-            ~Q(tags='') &
-            ~Q(title__isnull=True) &
-            ~Q(tags__isnull=True)
-        ).order_by('?')[:n]
+            images = Image.objects.filter(
+                Q(created_dt__lte=end_date) &
+                #Q(instagram=0) &
+                Q(no_show=0) &
+                Q(private=0) &
+                ~Q(title='') &
+                ~Q(tags='') &
+                ~Q(title__isnull=True) &
+                ~Q(tags__isnull=True)
+            ).order_by('?')[:n]
+
+        else:    
+            images = Image.objects.filter(
+                #Q(created_dt__lte=end_date) &
+                Q(instagram=0) &
+                Q(no_show=0) &
+                Q(private=0) &
+                ~Q(title='') &
+                ~Q(tags='') &
+                ~Q(title__isnull=True) &
+                ~Q(tags__isnull=True)
+            ).order_by('?')[:n]
 
         if len(images)==0:
             print('No more images to publish')
@@ -71,14 +85,16 @@ class Command(BaseCommand):
                 logger.error(res.text)
                 error = json.loads(res.text)
                 print(error)
-                if (error['error']['error_user_title']=='Invalid aspect ratio'):
+                print(error['error'])
+                print(error['error'].get('error_user_title'))
+                if (error['error'].get('error_user_title')=='Invalid aspect ratio'):
                     print(error['error']['error_user_title'],error['error']['error_user_msg'])
                     ar = re.search(r"\('(\d+)\/(\d+)',\)",error['error']['error_user_msg'])
                     w = ar.group(1)
                     h = ar.group(2)
 
                     print (w,h,image_url)
-                    if (w<h):
+                    if (int(w)<int(h)):
                         image_url += ',ar-4-5,w-'+w
                         url=f'https://graph.facebook.com/v17.0/{ig_id}/media?access_token={token}&image_url={image_url}&caption={caption}'
                         res = requests.post(url)

@@ -321,7 +321,7 @@ def chatgpt_titles(keywords,image_url):
 No more than 20 words, one sentence.
 Make sure the length of the caption is under 200 characters.\n\n
 Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
-Be direct. Put in some emotions, but not too much. A few keywords providfed, they may contain geographical data, use them if you can.
+Be direct. Put in some emotions, but not too much. Don't use imperative, use narrative. A few keywords are provided, they may contain geographical data, use them if you can.
 Generate more keywords, to have 30-40 keywords in total.
 ------
 Some Keywords\n\n
