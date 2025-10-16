@@ -58,17 +58,26 @@ if os.environ.get('IMAGEKIT_PRIVATE_KEY_3'):
     )
     imagekits.append(imagekit)
 
+if os.environ.get('IMAGEKIT_PRIVATE_KEY_4'):
+    imagekit = ImageKit(
+        private_key=os.environ['IMAGEKIT_PRIVATE_KEY_4'],
+        public_key=os.environ['IMAGEKIT_PUBLIC_KEY_4'],
+        url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT_4'],
+    )
+    imagekits.append(imagekit)
 
 
 #pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
-#p_dir = 'p:/Shared/Gellifique/VALYA/'
 p_dir = 'd:/FOTO/vallka/'
+domain = 1
+#p_dir = 'd:/FOTO/Lucas/'
+#domain = 2
 
 root_dir = '/2024/'
 
 #start_dir = '24-01 Cullera and Cullera Castle'
-start_dir = '24-06 Valencia'
+#start_dir = '24-06 Valencia'
 
 #imgk_start_dir = '/C1/foto'
 #imgk_nostore_dir = '/Gellifique/VALYA'
@@ -78,7 +87,7 @@ last_album = ''
 albums = []
 
 def get_imagekit_by_slug(slug):
-    return imagekits[3]
+    return imagekits[4]
 
     crc = zlib.crc32(bytes(slug,'utf8'))
     if crc%2:
@@ -97,7 +106,7 @@ def process_image(name,dirname,slug,file_path,file_time,full_size):
         img = Image.objects.get(name=name)
         print('Image',img.id,img.path,img.url,img.path_fs,img.url_fs,)
     except Image.DoesNotExist:
-        img = Image(name=name)
+        img = Image(name=name,domain=domain)
         img.private = True
         print('Image new')
 
@@ -188,7 +197,7 @@ def process_album(title,dirname,slug):
         need_cover = True if not album.cover else False
         print('Album',album.title,need_cover)
     except Album.DoesNotExist:
-        album = Album(path=dirname,title=title,slug=slug)
+        album = Album(path=dirname,title=title,slug=slug,domain=domain)
         album.save()
         need_cover = True
         print('Album new',album.title,need_cover)

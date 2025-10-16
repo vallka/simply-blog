@@ -322,16 +322,19 @@ No more than 20 words, one sentence.
 Make sure the length of the caption is under 200 characters.\n\n
 Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
 Be direct. Put in some emotions, but not too much. Don't use imperative, use narrative. A few keywords are provided, they may contain geographical data, use them if you can.
-Generate more keywords, to have 30-40 keywords in total.
+Generate more keywords, to have 30-40 keywords in total. Answer in format:
+
+Caption: Some caption text
+Keywords: keyword1, keyword2, keyword3
 ------
-Some Keywords\n\n
+Some known keywords for you\n\n
 ------
 {keywords}
 """
     ic(prompt)
 
     data = {
-        'model': 'gpt-4o-mini',
+        'model': 'gpt-5-nano',
         'messages': [
             {'role': 'system', 'content': 'You are a curator for microstock photo submission.'},
             {'role': 'user', 'content': [
@@ -362,7 +365,7 @@ Some Keywords\n\n
     ic(response['usage'])
 
 
-    pattern = r'\*\*Caption:\*\*\s*(.*?)\s+\*\*Keywords:\*\*\s*(.*)'
+    pattern = r'\*?\*?Caption:\*?\*?\s*(.*?)\s+\*?\*?Keywords:\*?\*?\s*(.*)'
 
     # Use regex to find the caption and keywords
     match = re.search(pattern, str)

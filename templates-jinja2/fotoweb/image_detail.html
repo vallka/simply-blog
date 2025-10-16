@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block header_search %} 
-<form class="form-inline search-box d-flex justify-content-lg-end" action="{% url 'fotoweb:search' %}">
-    <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Photos">
+<form class="form-inline search-box d-flex justify-content-lg-end" action="{{ url ('fotoweb:search') }}">
+    <input name="q" class="form-control mr-sm-4" type="text" placeholder="Search Photos" value="{{q}}">
     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
  </form>
 {% endblock header_search %} 
@@ -21,7 +21,7 @@
   <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
           
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-          <a itemprop="item" href="{% url 'fotoweb:albums' %}">
+          <a itemprop="item" href="{{ url ('fotoweb:albums') }}">
             <span itemprop="name">Photo</span>
           </a>
           <meta itemprop="position" content="1">
@@ -47,6 +47,7 @@
 {% block content %}
 {% if image %}
   <div id="image">
+    <p style="text-align: center;">{{image.title if image.title else image.name}}</p>
           <img src="{{image.url}}?tr=w-1110" 
             class="img-fluid"
             alt="{{image.title if image.title else image.name}}" 
