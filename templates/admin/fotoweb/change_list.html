@@ -83,11 +83,18 @@ django.jQuery(function(){
       copyTextToClipboard(text);
       myAlert(text,1000)
   });
+  django.jQuery('.copy_description').click(function(e){
+      e.preventDefault();
+      var text = django.jQuery(this).parent('div').find('span.copy_description').text();
+      copyTextToClipboard(text);
+      myAlert(text,1000)
+  });
 
   document.getElementById('changelist-form').addEventListener('submit', function() {
     spinner_on();
     if (document.getElementById('changelist-form').querySelector('select[name=action]').value=='make_csv_adobe' ||
-        document.getElementById('changelist-form').querySelector('select[name=action]').value=='make_csv_shutter'
+        document.getElementById('changelist-form').querySelector('select[name=action]').value=='make_csv_shutter' ||
+        document.getElementById('changelist-form').querySelector('select[name=action]').value=='make_csv_dreamstime'
         ) {
       setInterval(spinner_off,5000);  
     }

@@ -93,9 +93,9 @@ class Image(models.Model):
     pexels = models.BooleanField('pexels',default=False)
     pexels_dt = models.DateTimeField('pexels_dt',null=True, blank=True,)
     pexels_url = models.CharField('pexels_url',null=True, blank=True,max_length=200)
-    rasfocus = models.BooleanField('rasfocus',default=False)
-    rasfocus_dt = models.DateTimeField('rasfocus_dt',null=True, blank=True,)
-    rasfocus_url = models.CharField('rasfocus_url',null=True, blank=True,max_length=200)
+    rasfocus = models.BooleanField('dreamstime',default=False)
+    rasfocus_dt = models.DateTimeField('dreamstime_dt',null=True, blank=True,)
+    rasfocus_url = models.CharField('dreamstime_url',null=True, blank=True,max_length=200)
 
     domain = models.IntegerField(default=1,)
 

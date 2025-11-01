@@ -61,7 +61,7 @@ def make_published_pexels(modeladmin, request, queryset):
     queryset.filter(pexels=False).update(pexels=True)
     queryset.filter(pexels_dt__isnull=True).update(pexels_dt=datetime.now(pytz.timezone('Europe/London')))
 
-@admin.action(description='Mark selected as Rasfocused')
+@admin.action(description='Mark selected as Dreamstimed')
 def make_published_rasfocus(modeladmin, request, queryset):
     queryset.filter(rasfocus=False).update(rasfocus=True)
     queryset.filter(rasfocus_dt__isnull=True).update(rasfocus_dt=datetime.now(pytz.timezone('Europe/London')))
@@ -92,6 +92,22 @@ def make_csv_adobe(modeladmin, request, queryset):
         desc = q.title
         adobe_cat = 11 #landscapes
         writer.writerow([q.name,desc,q.tags,adobe_cat])
+    
+    return response
+
+@admin.action(description='Make CSV for DreamsTime')
+def make_csv_dreamstime(modeladmin, request, queryset):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="dreamstime_' + datetime.now().strftime("%y%m%d%H%M%S") + '.csv"'
+    
+    writer = csv.writer(response)
+    writer.writerow(["Filename","Image Name","Description","Category 1","Category 2","Category 3","keywords","Free","W-EL","P-EL","SR-EL","SR-Price","Editorial","MR doc","Ids","Pr Docs",])
+
+    for q in queryset:
+        desc = q.title
+        title = truncate_string(q.title,30)
+        editorial = 1 if q.editorial else 0
+        writer.writerow([q.name,title,desc,146,0,0,q.tags,1,1,1,0,0,editorial,0,0,0])
     
     return response
 
@@ -272,6 +288,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
     actions = [make_csv_shutter,
             make_csv_adobe,
+            make_csv_dreamstime,
             set_no_show,
             set_show,
             set_private,
@@ -283,15 +300,32 @@ class GellifinstaAdmin(admin.ModelAdmin):
             make_published_pexels,
             make_published_rasfocus,
             update_title,update_tags,
-            get_mykeyworder_tags,get_google_tags,get_aws_tags,
-            get_scenex_titles,
+            #get_mykeyworder_tags,get_google_tags,get_aws_tags,
+            #get_scenex_titles,
             get_chatgpt_titles
             ]
 
-    list_display = ['thumb_tag','id','path','tags_spaced','description_f','instagram_text_wtags','no_show','private','instagram','adobe','shutter',]
-    list_display_links = ['id','path','thumb_tag',]
-    list_filter = ['no_show','private','instagram','adobe','shutter',]
-    search_fields = ['path','title','id']
+    list_display = ['thumb_tag','id','name','tags_spaced','description_f','instagram_text_wtags','HID','PRIV','IG','AD','SS','DT','PX']
+    
+    @admin.display(description='HID', boolean=True)
+    def HID(self, obj): return obj.no_show
+    @admin.display(description='PRV', boolean=True)
+    def PRIV(self, obj): return obj.private
+
+    @admin.display(description='IG', boolean=True)
+    def IG(self, obj): return obj.instagram !=0 
+    @admin.display(description='AD', boolean=True)
+    def AD(self, obj): return obj.adobe
+    @admin.display(description='SS', boolean=True)
+    def SS(self, obj): return obj.shutter
+    @admin.display(description='PX', boolean=True)
+    def PX(self, obj): return obj.pexels
+    @admin.display(description='DT', boolean=True)
+    def DT(self, obj): return obj.rasfocus
+
+    list_display_links = ['id','name','thumb_tag',]
+    list_filter = ['no_show','private','instagram','adobe','shutter','rasfocus','pexels','domain',]
+    search_fields = ['name','title','id']
     date_hierarchy = 'created_dt'
 
     readonly_fields = ['domain','img_tag','url','url_fs','created_dt','updated_dt']
@@ -347,12 +381,12 @@ class GellifinstaAdmin(admin.ModelAdmin):
     def instagram_text_wtags(self,instance):
         return mark_safe('<div><span class="copy_tags">' + str(instance.instagram_text) + '</span></div>')
 
-    instagram_text_wtags.short_description = 'instagram_text'
+    instagram_text_wtags.short_description = 'instagram'
 
     def description_f(self,instance):
-        return mark_safe('<div><span class="copy_description">' + str(instance.description) + '</span></div>')
+        return mark_safe('<div><span class="copy_description">' + str(instance.title) + '</span></div>')
 
-    description_f.short_description = 'description'
+    description_f.short_description = 'DESC'
 
     def tags_spaced(self,instance):
         tags = ''
@@ -362,7 +396,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
         if instance.shutter_tags and len(instance.shutter_tags)>len(tags): tags = instance.shutter_tags
         if instance.google_tags and len(instance.google_tags)>len(tags): tags = instance.google_tags
         if instance.aws_tags and len(instance.aws_tags)>len(tags): tags = instance.aws_tags
-        return mark_safe('<div><span class="copy_title"><b>'+str(instance.title or '') +'</b></span><br><span class="copy_tags">'+tags.replace(',',', ') + '</span></div>')
+        return mark_safe('<div><span class="copy_title"><b>'+truncate_string(str(instance.title or ''),50) +'</b></span><br><span class="copy_tags">'+tags.replace(',',', ') + '</span></div>')
 
     tags_spaced.short_description = 'Tags'
 
