@@ -97,7 +97,7 @@ def get_imagekit_by_slug(slug):
 
 
 
-def process_image(name,dirname,slug,file_path,file_time,full_size):
+def process_image(name,dirname,slug,file_path,file_time,full_size,web,full_size_option):
     print('process_image',name,dirname)
     #ik_dirname = dirname.replace(' ','_')
     ik_dirname = re.sub(r'[^/_0-9A-Za-z\-.]','_',dirname)
@@ -123,71 +123,73 @@ def process_image(name,dirname,slug,file_path,file_time,full_size):
 
     if need_upload:
         if full_size:
-            print('Needs upload FS')
-            options = UploadFileRequestOptions(
-                use_unique_file_name=False,
-                folder=ik_dirname,
-            )
-
-            with open(file_path, 'rb') as file:
-                binary_data = file.read()
-                upload = ik.upload(
-                        file=base64.b64encode(binary_data),
-                        file_name=name,
-                        options=options
+            if full_size_option:
+                print('Needs upload FS')
+                options = UploadFileRequestOptions(
+                    use_unique_file_name=False,
+                    folder=ik_dirname,
                 )
 
-                print(upload.url)
-                img.path_fs=dirname+'/'+name
-                img.url_fs=upload.url
-                img.save()
+                with open(file_path, 'rb') as file:
+                    binary_data = file.read()
+                    upload = ik.upload(
+                            file=base64.b64encode(binary_data),
+                            file_name=name,
+                            options=options
+                    )
+
+                    print(upload.url)
+                    img.path_fs=dirname+'/'+name
+                    img.url_fs=upload.url
+                    img.save()
 
         else:
-            print('Needs upload web')
-            iptc = IPTCInfo(file_path,inp_charset='utf_8',out_charset='utf_8')
-            ximg = XImage(file_path)
-            dt = ximg.get('datetime_original')
-            dt=parser.parse(dt.replace(':','-',2)+'Z',tzinfos={'GMT':gettz('UTC')})
+            if web:
+                print('Needs upload web')
+                iptc = IPTCInfo(file_path,inp_charset='utf_8',out_charset='utf_8')
+                ximg = XImage(file_path)
+                dt = ximg.get('datetime_original')
+                dt=parser.parse(dt.replace(':','-',2)+'Z',tzinfos={'GMT':gettz('UTC')})
 
-            provider = 'google'
-            options = UploadFileRequestOptions(
-                use_unique_file_name=False,
-                folder=ik_dirname,
-                #extensions=[
-                #    {
-                #        "name": f"{provider}-auto-tagging",
-                #        "maxTags": 25,
-                #        "minConfidence": 70
-                #    },
-                #]
-            )
-
-            with open(file_path, 'rb') as file:
-                binary_data = file.read()
-                upload = ik.upload(
-                        file=base64.b64encode(binary_data),
-                        file_name=name,
-                        options=options
+                provider = 'google'
+                options = UploadFileRequestOptions(
+                    use_unique_file_name=False,
+                    folder=ik_dirname,
+                    #extensions=[
+                    #    {
+                    #        "name": f"{provider}-auto-tagging",
+                    #        "maxTags": 25,
+                    #        "minConfidence": 70
+                    #    },
+                    #]
                 )
 
-                print(upload.url)
-                img.path=dirname+'/'+name
-                img.url=upload.url
-                img.created_dt = dt
-                if not img.title: img.title = iptc['headline']
-                if not img.description: img.description = iptc['caption/abstract']
-                if not img.tags: img.tags = ','.join(iptc['keywords'])
-                if upload and upload.ai_tags:
-                    tags = []
-                    for tag in upload.ai_tags:
-                        if tag.source==f"{provider}-auto-tagging":
-                            tags.append(tag.name)
-                        img.google_tags = ','.join(tags)   
-                        img.add_auto_tags(','.join(tags))
-                img.save()
-                if img.created_dt != dt:
+                with open(file_path, 'rb') as file:
+                    binary_data = file.read()
+                    upload = ik.upload(
+                            file=base64.b64encode(binary_data),
+                            file_name=name,
+                            options=options
+                    )
+
+                    print(upload.url)
+                    img.path=dirname+'/'+name
+                    img.url=upload.url
                     img.created_dt = dt
+                    if not img.title: img.title = iptc['headline']
+                    if not img.description: img.description = iptc['caption/abstract']
+                    if not img.tags: img.tags = ','.join(iptc['keywords'])
+                    if upload and upload.ai_tags:
+                        tags = []
+                        for tag in upload.ai_tags:
+                            if tag.source==f"{provider}-auto-tagging":
+                                tags.append(tag.name)
+                            img.google_tags = ','.join(tags)   
+                            img.add_auto_tags(','.join(tags))
                     img.save()
+                    if img.created_dt != dt:
+                        img.created_dt = dt
+                        img.save()
 
     return img
                 
@@ -206,7 +208,7 @@ def process_album(title,dirname,slug):
 
 
 
-def process_file(file_path,type):
+def process_file(file_path,type,web,full_size):
     global last_album,albums
 
     dirname = file_path
@@ -221,7 +223,7 @@ def process_file(file_path,type):
             slug = slugify(dir_short_name)
 
             #print(f"Processing file: {basename} :: {root_dir+dirname} :: {file_time}")
-            img = process_image(basename,root_dir+dirname,slug,file_path,file_time,'JPEG-Full-size' in dirname)
+            img = process_image(basename,root_dir+dirname,slug,file_path,file_time,'JPEG-Full-size' in dirname,web,full_size)
             if slug!=last_album:
                 last_album = slug
                 print(f'new album:{slug}',albums)
@@ -242,12 +244,12 @@ def process_file(file_path,type):
                 albums.append(slug)
                 #print(albums)
 
-def walk_directory(directory_path, process_function):
+def walk_directory(directory_path, process_function,web,full_size):
     # Ensure the directory path is valid
     if not os.path.isdir(directory_path):
         raise ValueError("Invalid directory path")
 
-    process_function(directory_path,'d')
+    process_function(directory_path,'d',web,full_size)
 
     # Get a list of all entries in the directory (files and subdirectories)
     entries = os.listdir(directory_path)
@@ -258,28 +260,47 @@ def walk_directory(directory_path, process_function):
     for entry in entries:
         entry_path = os.path.join(directory_path, entry)
         if os.path.isfile(entry_path):
-            process_function(entry_path,'f')
+            process_function(entry_path,'f',web,full_size)
             None
         elif os.path.isdir(entry_path):
-            process_function(entry_path,'d')
-            walk_directory(entry_path, process_function)
+            process_function(entry_path,'d',web,full_size)
+            walk_directory(entry_path, process_function,web,full_size)
 
 
 
 
 class Command(BaseCommand):
     help = 'scan_pp'
+    web = False
+    full = False
 
     def add_arguments(self, parser):
         parser.add_argument('dir', type=str, help='Directory to scan')
+        parser.add_argument('-w', '--web', action='store_true', help='Web only')
+        parser.add_argument('-f', '--full', action='store_true', help='Full-size only')
 
     def handle(self, *args, **options):
         directory_path = options['dir']
+        web = options['web']
+        full = options['full']
+        if web:
+            self.web = True
+        if full:
+            self.full = True    
+
+        if self.web and self.full:
+            print('Cannot use both -w and -f options together')
+            return
+
+        if not self.web and not self.full:
+            self.web = True
+            self.full = True    
+            
         print (self.help + f' dir={dir}')
         #logger.info(self.help)
 
         #directory_path = p_dir + root_dir + start_dir
-        walk_directory(directory_path, process_file)
+        walk_directory(directory_path, process_file,self.web,self.full)
 
         print ("DONE!")
         #logger.error("DONE - %s!",self.help,)

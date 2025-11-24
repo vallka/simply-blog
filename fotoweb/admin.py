@@ -74,7 +74,7 @@ def make_csv_shutter(modeladmin, request, queryset):
     writer = csv.writer(response)
     writer.writerow(["Filename","Description","Keywords","Categories","Editorial",])
     for q in queryset:
-        desc = q.title
+        desc = q.description or q.title
         editorial = 'yes' if q.editorial else 'no'
 
         writer.writerow([q.name,desc,q.tags,f'{q.shutter_cat1}, {q.shutter_cat2}',editorial,])
@@ -89,7 +89,7 @@ def make_csv_adobe(modeladmin, request, queryset):
     writer = csv.writer(response)
     writer.writerow(["Filename","Title","Keywords","Category",])
     for q in queryset:
-        desc = q.title
+        desc = q.description or q.title
         adobe_cat = 11 #landscapes
         writer.writerow([q.name,desc,q.tags,adobe_cat])
     
@@ -104,8 +104,8 @@ def make_csv_dreamstime(modeladmin, request, queryset):
     writer.writerow(["Filename","Image Name","Description","Category 1","Category 2","Category 3","keywords","Free","W-EL","P-EL","SR-EL","SR-Price","Editorial","MR doc","Ids","Pr Docs",])
 
     for q in queryset:
-        desc = q.title
-        title = truncate_string(q.title,30)
+        desc = q.description or q.title
+        title = truncate_string(q.title,130)
         editorial = 1 if q.editorial else 0
         writer.writerow([q.name,title,desc,146,0,0,q.tags,1,1,1,0,0,editorial,0,0,0])
     
@@ -209,7 +209,7 @@ def call_scenex(imgs):
 
 
 def truncate_string(string, max_length):
-    if len(string) <= max_length:
+    if len(string or '') <= max_length:
         return string
     
     punctuations = ['.', '!', '?']
@@ -249,6 +249,8 @@ def get_chatgpt_titles(modeladmin, request, queryset):
         ic(r)
         q.add_auto_tags(r["keywords"])
         q.title = r["title"]
+        q.description = r.get("description",q.title)
+        modeladmin.message_user(request, f'Updated title for image {q.id}')
         q.save()
 
 
@@ -384,7 +386,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
     instagram_text_wtags.short_description = 'instagram'
 
     def description_f(self,instance):
-        return mark_safe('<div><span class="copy_description">' + str(instance.title) + '</span></div>')
+        return mark_safe('<div><span class="copy_description">' + str(instance.description or instance.title) + '</span></div>')
 
     description_f.short_description = 'DESC'
 
@@ -396,7 +398,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
         if instance.shutter_tags and len(instance.shutter_tags)>len(tags): tags = instance.shutter_tags
         if instance.google_tags and len(instance.google_tags)>len(tags): tags = instance.google_tags
         if instance.aws_tags and len(instance.aws_tags)>len(tags): tags = instance.aws_tags
-        return mark_safe('<div><span class="copy_title"><b>'+truncate_string(str(instance.title or ''),50) +'</b></span><br><span class="copy_tags">'+tags.replace(',',', ') + '</span></div>')
+        return mark_safe('<div><span class="copy_title"><b>'+truncate_string(str(instance.title or ''),130) +'</b></span><br><span class="copy_tags">'+tags.replace(',',', ') + '</span></div>')
 
     tags_spaced.short_description = 'Tags'
 

@@ -49,7 +49,10 @@ def process_file(file_path,type):
             tags_list = tags_list[0:50]
             title = truncate_string(title, 100)
 
-            appy_exif(dirname, img.title, img.description.strip() if img.description.strip()!='' else img.title, tags_list[0:30])
+            appy_exif(dirname, img.title, 
+                img.description.strip() 
+                    if (img.description or '').strip() != '' 
+                        else img.title, tags_list[0:30])
         except Image.DoesNotExist:
             print(f'***Image {basename} not found***')
 

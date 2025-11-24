@@ -317,14 +317,15 @@ def chatgpt_titles(keywords,image_url):
         'Authorization': f'Bearer {api_key}',
     }
 
-    prompt = f"""Make a caption and keywords for the photo with the image_url and keywords below. 
-No more than 20 words, one sentence.
-Make sure the length of the caption is under 200 characters.\n\n
+    prompt = f"""Make a caption, description and keywords for the photo with the image_url and keywords below. 
+Caption should be no more than 10 words, one sentence. Make sure the length of the caption is under 120 characters.\n\n
+Caption should be no more than 20 words, one or two sentences. Make sure the length of the description is under 300 characters.\n\n
 Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
 Be direct. Put in some emotions, but not too much. Don't use imperative, use narrative. A few keywords are provided, they may contain geographical data, use them if you can.
 Generate more keywords, to have 30-40 keywords in total. Answer in format:
 
 Caption: Some caption text
+Description: Some description text
 Keywords: keyword1, keyword2, keyword3
 ------
 Some known keywords for you\n\n
@@ -365,19 +366,22 @@ Some known keywords for you\n\n
     ic(response['usage'])
 
 
-    pattern = r'\*?\*?Caption:\*?\*?\s*(.*?)\s+\*?\*?Keywords:\*?\*?\s*(.*)'
+    pattern = r'Caption:\s*(.*?)\s+Description:\s*(.*?)\s+Keywords:\s*(.*)'
 
     # Use regex to find the caption and keywords
     match = re.search(pattern, str)
 
     if match:
         caption = match.group(1).strip()
-        keywords = match.group(2).strip()
+        description = match.group(2).strip()
+        keywords = match.group(3).strip()
         ic("Caption:", caption)
+        ic("Description:", description)
         ic("Keywords:", keywords)
     else:
         caption = None
         keywords = None
+        description = None
         ic("No match found.")
 
-    return {'title': caption, 'keywords': keywords}
+    return {'title': caption, 'keywords': keywords, 'description': description}
