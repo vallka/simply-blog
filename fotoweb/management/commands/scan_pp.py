@@ -66,6 +66,14 @@ if os.environ.get('IMAGEKIT_PRIVATE_KEY_4'):
     )
     imagekits.append(imagekit)
 
+if os.environ.get('IMAGEKIT_PRIVATE_KEY_5'):
+    imagekit = ImageKit(
+        private_key=os.environ['IMAGEKIT_PRIVATE_KEY_5'],
+        public_key=os.environ['IMAGEKIT_PUBLIC_KEY_5'],
+        url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT_5'],
+    )
+    imagekits.append(imagekit)
+
 
 #pc = PyCloud(os.environ['P_USERNAME'], os.environ['P_PASSWORD'])
 
@@ -74,7 +82,7 @@ domain = 1
 #p_dir = 'd:/FOTO/Lucas/'
 #domain = 2
 
-root_dir = '/2024/'
+root_dir = '/'
 
 #start_dir = '24-01 Cullera and Cullera Castle'
 #start_dir = '24-06 Valencia'
@@ -87,7 +95,7 @@ last_album = ''
 albums = []
 
 def get_imagekit_by_slug(slug):
-    return imagekits[4]
+    return imagekits[5]
 
     crc = zlib.crc32(bytes(slug,'utf8'))
     if crc%2:
@@ -125,6 +133,10 @@ def process_image(name,dirname,slug,file_path,file_time,full_size,web,full_size_
         if full_size:
             if full_size_option:
                 print('Needs upload FS')
+                iptc = IPTCInfo(file_path,inp_charset='utf_8',out_charset='utf_8')
+                ximg = XImage(file_path)
+                dt = ximg.get('datetime_original')
+                dt=parser.parse(dt.replace(':','-',2)+'Z',tzinfos={'GMT':gettz('UTC')})
                 options = UploadFileRequestOptions(
                     use_unique_file_name=False,
                     folder=ik_dirname,
@@ -139,9 +151,18 @@ def process_image(name,dirname,slug,file_path,file_time,full_size,web,full_size_
                     )
 
                     print(upload.url)
+                    print(iptc['headline'] or iptc['object name'],iptc['caption/abstract'],iptc['keywords'],dt)
                     img.path_fs=dirname+'/'+name
+                    if not img.path: img.path = img.path_fs
                     img.url_fs=upload.url
+                    if not img.url: img.url = upload.url
                     img.save()
+                    if not img.title: img.title = iptc['headline'] or iptc['object name']
+                    if not img.description: img.description = iptc['caption/abstract']
+                    if not img.tags: img.tags = ','.join(iptc['keywords'])
+                    if img.created_dt != dt:
+                        img.created_dt = dt
+                        img.save()
 
         else:
             if web:
@@ -151,17 +172,9 @@ def process_image(name,dirname,slug,file_path,file_time,full_size,web,full_size_
                 dt = ximg.get('datetime_original')
                 dt=parser.parse(dt.replace(':','-',2)+'Z',tzinfos={'GMT':gettz('UTC')})
 
-                provider = 'google'
                 options = UploadFileRequestOptions(
                     use_unique_file_name=False,
                     folder=ik_dirname,
-                    #extensions=[
-                    #    {
-                    #        "name": f"{provider}-auto-tagging",
-                    #        "maxTags": 25,
-                    #        "minConfidence": 70
-                    #    },
-                    #]
                 )
 
                 with open(file_path, 'rb') as file:
@@ -176,16 +189,9 @@ def process_image(name,dirname,slug,file_path,file_time,full_size,web,full_size_
                     img.path=dirname+'/'+name
                     img.url=upload.url
                     img.created_dt = dt
-                    if not img.title: img.title = iptc['headline']
+                    if not img.title: img.title = iptc['headline'] or iptc['object name']
                     if not img.description: img.description = iptc['caption/abstract']
                     if not img.tags: img.tags = ','.join(iptc['keywords'])
-                    if upload and upload.ai_tags:
-                        tags = []
-                        for tag in upload.ai_tags:
-                            if tag.source==f"{provider}-auto-tagging":
-                                tags.append(tag.name)
-                            img.google_tags = ','.join(tags)   
-                            img.add_auto_tags(','.join(tags))
                     img.save()
                     if img.created_dt != dt:
                         img.created_dt = dt

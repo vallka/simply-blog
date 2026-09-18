@@ -73,7 +73,7 @@ class Command(BaseCommand):
             image_url=i.url+'?tr=f-jpg'
             caption=quote(i.instagram_text)
 
-            url=f'https://graph.facebook.com/v17.0/{ig_id}/media?access_token={token}&image_url={image_url}&caption={caption}'
+            url=f'https://graph.facebook.com/v21.0/{ig_id}/media?access_token={token}&image_url={image_url}&caption={caption}'
             res = requests.post(url)
 
             try:
@@ -96,7 +96,7 @@ class Command(BaseCommand):
                     print (w,h,image_url)
                     if (int(w)<int(h)):
                         image_url += ',ar-4-5,w-'+w
-                        url=f'https://graph.facebook.com/v17.0/{ig_id}/media?access_token={token}&image_url={image_url}&caption={caption}'
+                        url=f'https://graph.facebook.com/v21.0/{ig_id}/media?access_token={token}&image_url={image_url}&caption={caption}'
                         res = requests.post(url)
 
                         try:
@@ -113,7 +113,7 @@ class Command(BaseCommand):
                     return
 
 
-            url=f'https://graph.facebook.com/v17.0/{ig_id}/media_publish?access_token={token}&creation_id={cont_id}'
+            url=f'https://graph.facebook.com/v21.0/{ig_id}/media_publish?access_token={token}&creation_id={cont_id}'
             res = requests.post(url)
 
             try:
@@ -125,7 +125,7 @@ class Command(BaseCommand):
                 logger.error(res.text)
                 return
 
-            url=f'https://graph.facebook.com/v17.0/{img_id}?access_token={token}&fields=timestamp'
+            url=f'https://graph.facebook.com/v21.0/{img_id}?access_token={token}&fields=timestamp'
             res = requests.get(url)
             try:
                 ts=json.loads(res.content)['timestamp']
