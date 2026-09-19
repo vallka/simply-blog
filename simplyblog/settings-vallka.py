@@ -22,7 +22,7 @@ DATABASES = {
 }
 
 
-DEBUG = True
+DEBUG = False
 INTERNAL_IPS = ['127.0.0.1','90.253.213.37','87.74.227.238','88.23.238.60']
 
 LOGGING = {
