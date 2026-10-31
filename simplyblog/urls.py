@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import path
 from django.urls import include, path, re_path
 from django.conf import settings
@@ -21,6 +22,8 @@ from django.conf import settings
 from django.conf.urls.static import static 
 from django.shortcuts import redirect
 from django.contrib.sitemaps.views import sitemap
+
+from markdownx.views import ImageUploadView
 
 from blog.views import BlogPostSitemap, ImageUploadViewEM
 
@@ -36,7 +39,8 @@ urlpatterns = [
     path('photo/', include('fotoweb.urls')),
     path('castles/', include('castles.urls')),
     #path('admin/', admin.site.urls),
-    path('markdownx/upload-em/', ImageUploadViewEM.as_view(), name='markdownx_upload_em'),
+    path('markdownx/upload-em/', staff_member_required(ImageUploadViewEM.as_view()), name='markdownx_upload_em'),
+    path('markdownx/upload/', staff_member_required(ImageUploadView.as_view()), name='markdownx_upload'),
     path('markdownx/', include('markdownx.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,12 +1,9 @@
-import json
-import os
 import re
 import random
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from django.shortcuts import HttpResponseRedirect, render
 import csv
-from icecream import ic
 
 from django.db.models import Q
 from django.contrib import admin
@@ -111,103 +108,6 @@ def make_csv_dreamstime(modeladmin, request, queryset):
     
     return response
 
-@admin.action(description='Get Mykeyworder tags')
-def get_mykeyworder_tags(modeladmin, request, queryset):
-    for q in queryset:
-        print (q.url)
-        q.mykeyworder_tags = q.get_mykeywords()
-        q.add_auto_tags(q.mykeyworder_tags)
-        #q.add_auto_title(q.mykeyworder_tags)
-        q.save()
-
-@admin.action(description='Get Google tags')
-def get_google_tags(modeladmin, request, queryset):
-    for q in queryset:
-        print (q.url)
-        q.google_tags = q.get_imagekit_kw()
-        q.add_auto_tags(q.google_tags)
-        #q.add_auto_title(q.google_tags)
-        q.save()
-
-@admin.action(description='Get AWS tags')
-def get_aws_tags(modeladmin, request, queryset):
-    for q in queryset:
-        print (q.url)
-        q.aws_tags = q.get_imagekit_kw('aws')
-        q.add_auto_tags(q.aws_tags)
-        #q.add_auto_title(q.aws_tags)
-        q.save()
-
-@admin.action(description='Get Scenex Titles')
-def get_scenex_titles(modeladmin, request, queryset):
-    i = 0
-    imgs=[]
-    for q in queryset:
-        imgs.append({'id':q.id,'url':q.url + '?tr=w-600','title':q.title})
-        i+=1
-        print (i,i%8,q.url + '?tr=w-600')
-        if i%8==0:
-            call_scenex(imgs)
-            ic(imgs)
-            for img in imgs:
-                q = Image.objects.get(id=img['id'])
-                q.title = img['title']
-                q.save()
-            imgs=[]
-
-        #q.aws_tags = q.get_imagekit_kw('aws')
-        #q.add_auto_tags(q.aws_tags)
-        #q.save()
-    
-    if imgs:
-        call_scenex(imgs)
-        ic(imgs)
-        for img in imgs:
-            q = Image.objects.get(id=img['id'])
-            q.title = img['title']
-            q.save()
-        imgs=[]
-
-
-def call_scenex(imgs):
-    api_key = os.getenv('SCENEX_KEY')
-    headers = {
-        'Content-Type': 'application/json',
-        "x-api-key": f"token {api_key}",
-    }    
-
-    data = []
-    for img in imgs:
-        ic(img)
-        data.append(            {
-                    'image': img['url'], 
-                    'features': ['opt_out'],
-                    'algorithm': 'Comet',
-                    'languages': ['en'],
-                    'style': 'concise',
-                    'output_length': 199 - (len(img['title']) if img['title'] else 0)
-                },
-        )
-
-    ic ({'data':data})
-    responseobj = requests.post('https://api.scenex.jina.ai/v1/describe', headers=headers, data=json.dumps({'data':data}))
-    ic(responseobj)
-
-    response = responseobj.text
-    ic(response)
-    response = json.loads(responseobj.text)
-
-    for index,img in enumerate(imgs):
-        if not img['title']: img['title'] = ''
-        if img['title'] and not img['title'][-1] in ['.',',','!','?']:
-            img['title'] += '.'
-        
-        if img['title'] and not img['title'][-1]==' ':
-            img['title'] += ' '
-
-        img['title'] = truncate_string(img['title'] + response['result'][index]['text'],200-len(img['title']))
-
-
 def truncate_string(string, max_length):
     if len(string or '') <= max_length:
         return string
@@ -237,21 +137,6 @@ def truncate_string(string, max_length):
         truncated_string = truncated_string[:last_punctuation_index+1]
     
     return truncated_string
-
-
-@admin.action(description='Get ChatGPT Titles')
-def get_chatgpt_titles(modeladmin, request, queryset):
-    for q in queryset:
-        ic(q.tags)
-        ic(q.url + '?tr=w-600')
-
-        r = chatgpt_titles(q.tags,q.url + '?tr=w-512')
-        ic(r)
-        q.add_auto_tags(r["keywords"])
-        q.title = r["title"]
-        q.description = r.get("description",q.title)
-        modeladmin.message_user(request, f'Updated title for image {q.id}')
-        q.save()
 
 
 
@@ -302,9 +187,6 @@ class GellifinstaAdmin(admin.ModelAdmin):
             make_published_pexels,
             make_published_rasfocus,
             update_title,update_tags,
-            #get_mykeyworder_tags,get_google_tags,get_aws_tags,
-            #get_scenex_titles,
-            get_chatgpt_titles
             ]
 
     list_display = ['thumb_tag','id','name','tags_spaced','description_f','instagram_text_wtags','HID','PRIV','IG','AD','SS','DT','PX']

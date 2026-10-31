@@ -1,21 +1,11 @@
-import requests
-import os
 import re
 import random
-import json
-
-
-from icecream import ic
 
 from django.db import models
 from django.db.models import Q
 
 from django.utils.html import mark_safe
 from django.utils.text import slugify
-
-from imagekitio import ImageKit
-from imagekitio.models.ListAndSearchFileRequestOptions import ListAndSearchFileRequestOptions
-from imagekitio.models.UpdateFileRequestOptions import UpdateFileRequestOptions
 
 from simplyblog.search import full_text_search
 
@@ -114,89 +104,6 @@ class Image(models.Model):
         return str(self.id) + ':' + str(self.name)
 
 
-    def get_mykeywords(self):
-        username=os.environ['MYKEYWORDER_USERNAME']
-        key=os.environ['MYKEYWORDER_KEY']
-
-        print(username,key)
-
-        response = requests.get(f'http://mykeyworder.com/api/v1/analyze?url={self.url}?tr=w:600',auth=(username,key))
-
-        print(response)
-        print(response.text)
-
-        res = response.json()
-        print (res)
-        print (res['keywords'])
-        kw = ','.join(res['keywords'])
-        return kw
-
-    def get_imagekit_kw(self,provider='google'):
-        imagekit = ImageKit(
-            private_key=os.environ['IMAGEKIT_PRIVATE_KEY'],
-            public_key=os.environ['IMAGEKIT_PUBLIC_KEY'],
-            url_endpoint=os.environ['IMAGEKIT_URL_ENDPOINT'],
-        )
-
-        options = ListAndSearchFileRequestOptions(
-            path=os.path.dirname(self.path),
-            search_query=f"name='{self.name}'"
-        )
-
-        res = imagekit.list_files(options=options)
-        print(res)
-
-        if res.list and res.list[0]:
-            id = res.list[0].file_id
-
-        if id and res.list[0].ai_tags:
-            tags = []
-            for tag in res.list[0].ai_tags:
-                if tag.source==f"{provider}-auto-tagging":
-                    print (tag)
-                    tags.append(tag.name)
-
-            if tags:
-                return ','.join(tags)
-
-        uoptions = UpdateFileRequestOptions(
-            extensions=[
-                {
-                    "name": f"{provider}-auto-tagging",
-                    "maxTags": 25,
-                    "minConfidence": 50
-                },
-            ]
-        )
-
-        updated_detail = imagekit.update_file_details(id,options=uoptions)
-
-        print("Updated detail-", updated_detail, end="\n\n")
-
-        if updated_detail and updated_detail.ai_tags:
-            tags = []
-            for tag in updated_detail.ai_tags:
-                if tag.source==f"{provider}-auto-tagging":
-                    print (tag)
-                    tags.append(tag.name)
-
-            if tags:
-                return ','.join(tags)
-
-        res = imagekit.list_files(options=options)
-        print(res)
-        if id and res.list[0].ai_tags:
-            tags = []
-            for tag in res.list[0].ai_tags:
-                if tag['source']==f"{provider}-auto-tagging":
-                    print (tag)
-                    tags.append(tag['name'])
-
-            if tags:
-                return ','.join(tags)
-
-        return ''
-
     def add_auto_tags(self,new_tags):
         tags_cf = self.tags.casefold().split(',')
         new_tags = new_tags.split(',')
@@ -205,15 +112,6 @@ class Image(models.Model):
                 self.tags += ',' + t
 
         self.tags = self.tags.strip(',')
-
-    def add_auto_title(self,new_tags):
-        if not self.title:
-            new_tags = new_tags.split(',')
-            self.title = ''
-            for t in new_tags[:6]:
-                self.title += t + ' '
-
-            self.title = self.title.strip(' ')
 
     @property
     def instagram_text(self):
@@ -314,81 +212,3 @@ class Album(models.Model):
             r = r.filter(no_show=0)
         
         return r
-
-        
-
-def chatgpt_titles(keywords,image_url):
-    api_key = os.getenv('OPENAI_API_KEY')
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {api_key}',
-    }
-
-    prompt = f"""Make a caption, description and keywords for the photo with the image_url and keywords below. 
-Caption should be no more than 10 words, one sentence. Make sure the length of the caption is under 120 characters.\n\n
-Caption should be no more than 20 words, one or two sentences. Make sure the length of the description is under 300 characters.\n\n
-Photo will be submitted to a microstock photo websites - Shutterstock and Adobe stock. 
-Be direct. Put in some emotions, but not too much. Don't use imperative, use narrative. A few keywords are provided, they may contain geographical data, use them if you can.
-Generate more keywords, to have 30-40 keywords in total. Answer in format:
-
-Caption: Some caption text
-Description: Some description text
-Keywords: keyword1, keyword2, keyword3
-------
-Some known keywords for you\n\n
-------
-{keywords}
-"""
-    ic(prompt)
-
-    data = {
-        'model': 'gpt-5-nano',
-        'messages': [
-            {'role': 'system', 'content': 'You are a curator for microstock photo submission.'},
-            {'role': 'user', 'content': [
-                {
-                    "type": "text",
-                    "text": prompt
-                },
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": image_url,
-                        "detail": "low"
-                    }
-                }
-            ]}
-        ],
-        'temperature': 1,
-        'n': 1
-    }
-
-    responseobj = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, data=json.dumps(data))
-    response = responseobj.text
-    response = json.loads(responseobj.text)
-
-    ic(response)
-    str = response['choices'][0]['message']['content']
-    ic(str)
-    ic(response['usage'])
-
-
-    pattern = r'Caption:\s*(.*?)\s+Description:\s*(.*?)\s+Keywords:\s*(.*)'
-
-    # Use regex to find the caption and keywords
-    match = re.search(pattern, str)
-
-    if match:
-        caption = match.group(1).strip()
-        description = match.group(2).strip()
-        keywords = match.group(3).strip()
-        ic("Caption:", caption)
-        ic("Description:", description)
-        ic("Keywords:", keywords)
-    else:
-        caption = None
-        keywords = None
-        description = None
-        ic("No match found.")
-
-    return {'title': caption, 'keywords': keywords, 'description': description}

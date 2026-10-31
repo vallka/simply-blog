@@ -88,7 +88,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'fotoweb.context_processors.api_key'
             ],
         },
     },
@@ -165,23 +164,3 @@ MARKDOWNX_IMAGE_MAX_SIZE = { 'size': (1500, 1500), 'quality': 80 }
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'tables','attr_list','fenced_code','md_in_html','nl2br','wikilinks',
 ]
-
-
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'sent-emails' # change this to a proper location
-
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-#EMAIL_TIMEOUT
-#EMAIL_SSL_KEYFILE
-#EMAIL_SSL_CERTFILE
-
-EMAIL_FROM_USER = "info@vallka.com"
-EMAIL_BCC_TO = None
-
-

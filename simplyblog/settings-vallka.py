@@ -34,6 +34,9 @@ LOGGING = {
 }
 
 
+from icecream import ic
+ic.disable()
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 

@@ -9,10 +9,8 @@ dependencies = [
     "django>=5.2,<5.3",
     "django-extensions",
     "django-markdownx",
-    "djangorestframework",
     "gunicorn",
     "icecream",
-    "imagekitio>=3.2,<4",
     "jinja2",
     "markdown",
     "psycopg[binary]",
@@ -27,6 +25,7 @@ dependencies = [
 dev = [
     "django-debug-toolbar",
     "exif",
+    "imagekitio>=3.2,<4",
     "iptcinfo3",
     "pcloud>=1.2,<2",
     "python-dateutil",

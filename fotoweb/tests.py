@@ -83,6 +83,12 @@ class ImageAdminTest(TestCase):
                     '/admin/fotoweb/album/', '/admin/fotoweb/album/add/']:
             self.assertEqual(self.client.get(url).status_code, 200, url)
 
+    def test_edit_page_keeps_tag_tools_without_retired_ones(self):
+        response = self.client.get(f'/admin/fotoweb/image/{self.image.id}/change/')
+        self.assertContains(response, 'btn_add_tags')
+        for retired in ['scenex', 'btn_make_title', 'btn_find_tags']:
+            self.assertNotContains(response, retired)
+
     def test_mark_published_action(self):
         response = self.client.post('/admin/fotoweb/image/', {
             'action': 'make_published_shutter', '_selected_action': [self.image.id],

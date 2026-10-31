@@ -50,6 +50,7 @@ class ImageUploadViewEMTest(TestCase):
     def setUp(self):
         self.media = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, self.media, ignore_errors=True)
+        self.client.force_login(User.objects.create_superuser('admin', password='x'))
 
     def test_returns_path_for_easymde(self):
         image = io.BytesIO()
@@ -62,6 +63,14 @@ class ImageUploadViewEMTest(TestCase):
         self.assertEqual(response.status_code, 200)
         path = response.json()['data']['filePath']
         self.assertTrue(path.startswith('media/markdownx/'), path)
+
+    def test_requires_staff(self):
+        self.client.logout()
+        upload = SimpleUploadedFile('a.png', b'x', content_type='image/png')
+        for url in ['/markdownx/upload-em/', '/markdownx/upload/']:
+            response = self.client.post(url, {'image': upload})
+            self.assertEqual(response.status_code, 302, url)
+            self.assertIn('/admin/login/', response['Location'])
 
     def test_rejects_non_image(self):
         upload = SimpleUploadedFile('a.txt', b'text', content_type='text/plain')

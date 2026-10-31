@@ -1,0 +1,16 @@
+[Unit]
+Description=vallka.com gunicorn
+After=network.target postgresql.service
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/vallka/simply-blog
+ExecStart=/home/ubuntu/vallka/venv/bin/gunicorn simplyblog.wsgi \
+    --bind 127.0.0.1:8001 --workers 2 --threads 4 \
+    --max-requests 1000 --max-requests-jitter 100
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

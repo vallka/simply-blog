@@ -13,44 +13,6 @@
   right: 0;
   rsz-index: 10;
 }
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.loading .spinner {
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #3498db;
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.timer {
-  color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 44px; /* You can change the font size as needed */
-  font-weight: bold;
-
-}
 </style>
 {% endblock %}
 
@@ -81,16 +43,10 @@ tagy['shutter'] = new Tagify(input_shutter);
 tagy['tags'] = new Tagify(input_tags);
 
 django.jQuery(function(){
-    //django.jQuery('.submit-row').append('<input type="button" value="Preview" id="btn-preview">')
-    //django.jQuery('.submit-row').append('<input type="button" value="Send Test" id="btn-send-test">')
-    //django.jQuery('.submit-row').append('<input type="button" value="Stats" id="btn-stats">')
-
-
     django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_add_tags" data-name="mykeyworder" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_mykeyworder_tags]').append('<button class="button btn_copy_tags" data-name="mykeyworder" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_add_tags" data-name="adobe" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_adobe_tags]').append('<button class="button btn_copy_tags" data-name="adobe" style="display: block;"> Copy</button>');
-    django.jQuery('label[for=id_google_tags]').append('<button class="button btn_find_tags" data-name="google" style="display: block;"> Find</button>');
     django.jQuery('label[for=id_google_tags]').append('<button class="button btn_add_tags" data-name="google" style="display: block;"> Add to Tags</button>');
     django.jQuery('label[for=id_google_tags]').append('<button class="button btn_copy_tags" data-name="google" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_aws_tags]').append('<button class="button btn_add_tags" data-name="aws" style="display: block;"> Add to Tags</button>');
@@ -99,40 +55,6 @@ django.jQuery(function(){
     django.jQuery('label[for=id_shutter_tags]').append('<button class="button btn_copy_tags" data-name="shutter" style="display: block;"> Copy</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_sort_tags" data-name="tags" style="display: block;"> Sort</button>');
     django.jQuery('label[for=id_tags]').append('<button class="button btn_copy_tags" data-name="tags" style="display: block;"> Copy</button>');
-    django.jQuery('label[for=id_description]').append('<button class="button btn_find_description" style="display: block;"> Find</button>');
-    django.jQuery('label[for=id_description]').append('<button class="button btn_make_title" style="display: block;"> Make Title</button>');
-    django.jQuery('label[for=id_title]').append('<button class="button btn_find_title" style="display: block;"> Find</button>');
-
-    django.jQuery('.btn_find_description').click(function(e){
-        spinner_on();
-        e.preventDefault();
-        console.log(document.querySelector('.field-url .readonly').innerText);
-        find_description(document.querySelector('.field-url .readonly').innerText)
-    });
-
-    django.jQuery('.btn_find_title').click(function(e){
-        spinner_on();
-        e.preventDefault();
-        console.log(document.querySelector('.field-url .readonly').innerText);
-        find_title(document.querySelector('.field-url .readonly').innerText)
-    });
-
-    django.jQuery('.btn_make_title').click(function(e){
-        spinner_on();
-        e.preventDefault();
-        const tagstr = untagify(tagy['tags'].value,', ');
-        console.log(django.jQuery('textarea[name=description]').val(),tagstr);
-        make_title(django.jQuery('textarea[name=description]').val(),tagstr,django.jQuery('.field-img_tag img').attr('src'));
-    });
-
-    django.jQuery('.btn_find_tags').click(function(e){
-        spinner_on();
-        e.preventDefault();
-        console.log(django.jQuery(this).attr('data-name'));
-        console.log(django.jQuery('input[name=name]').val());
-        find_tags(django.jQuery('input[name=name]').val(),django.jQuery(this).attr('data-name'));
-    });
-
 
     django.jQuery('.btn_add_tags').click(function(e){
         e.preventDefault();
@@ -222,188 +144,6 @@ function copyTextToClipboard(text) {
   }
 
   document.body.removeChild(textArea);
-}
-
-function find_title(url) {
-    resp = fetch('https://us-central1-causal-diffusion.cloudfunctions.net/describe', {
-        headers: {
-            'x-api-key': 'token {{ api_key }}',
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            data: [
-                {
-                    image: url + '?tr=w-200', 
-                    features: ['opt_out'],
-                    //algorithm: 'Jelly',
-                    algorithm: 'Comet',
-                    languages: ['en'],
-                    style: 'concise',
-                    output_length: '200'
-                },
-            ]
-        }),
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        document.getElementById('id_title').value = data.result[0].i18n.en;
-        spinner_off();
-    });
-}
-
-function find_description(url) {
-    resp = fetch('https://api.scenex.jina.ai/v1/describe', {
-        headers: {
-            'x-api-key': 'token {{ api_key }}',
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            data: [
-                {
-                    image: url + '?tr=w-200', 
-                    features: ['opt_out'],
-                    //algorithm: 'Jelly',
-                    algorithm: 'Comet',
-                    languages: ['en'],
-                    style: 'prompt',
-                    output_length: '500'
-                },
-            ]
-        }),
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        document.getElementById('id_description').value = data.result[0].i18n.en;
-        spinner_off();
-    });
-}
-
-function make_title(descr,keywords,img_url) {
-    fetch('/photo/api/maketitle/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
-        body: JSON.stringify({description: descr,keywords: keywords,image_url: img_url}),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.title,data.keywords);
-        //alert('Done');
-        document.getElementById('id_title').value = data.title;
-        tagy['tags'].addTags(data.keywords);
-        
-        //data.title = data.title.replace('w/','with').replace('&','and');
-        /*
-        for (let i=0; i<data.title.length; ++i) {
-            data.title[i] = data.title[i].replace('w/','with')
-                          .replace('&','and')
-                          .trim()
-                          .replace(/"/g, '');
-            console.log(data.title[i])
-            setTimeout(() => {
-                document.getElementById('id_title').value = data.title[i];
-                document.getElementById('id_title').focus();
-                document.getElementById('id_title').select();
-                document.execCommand('copy');
-            }, 500 * i);
-        
-        }
-
-        document.getElementById('id_title').value = data.title[0]
-        */
-        spinner_off();
-    })
-    .catch(error => {
-        alert('Error: ' + error);
-        spinner_off();
-        // Handle the error here
-        console.error('Error:', error);
-        // Show an alert or perform any other necessary action
-    });
-}
-
-
-function find_tags(name,provider='') {
-    fetch('/photo/api/findtags/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
-        body: JSON.stringify({name: name}),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.tags);
-        tagy['google'].addTags(data.tags);
-        spinner_off();
-    });
-}
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
-        }
-        }
-    }
-    return cookieValue;
-}
-
-var timerInterval; // Will be used to keep track of the interval that updates the timer
-var startTime; // Will store the time when the spinner was created
-var formattedTime;
-
-function spinner_on() {
-  // create the loading spinner element
-  var spinner = document.createElement("div");
-  spinner.className = "loading";
-  spinner.innerHTML = `
-    <div class="spinner"></div>
-    <div class="timer">00:00</div>
-  `;
-
-  // append the spinner to the body
-  document.body.appendChild(spinner);
-
-  // Start the timer
-  startTime = new Date(); // Capture the start time
-  if (timerInterval) {
-    clearInterval(timerInterval); // Clear any existing interval to avoid multiple timers running
-  }
-  timerInterval = setInterval(updateTimer, 1000); // Update the timer every second
-}
-
-function updateTimer() {
-  var currentTime = new Date();
-  var elapsedTime = currentTime - startTime; // Time elapsed in milliseconds
-  var seconds = Math.floor(elapsedTime / 1000) % 60; // Convert to seconds
-  var minutes = Math.floor(elapsedTime / (1000 * 60)); // Convert to minutes
-
-  // Format time to always show two digits
-  formattedTime = (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
-
-  // Update the timer element with the new time
-  var timerElement = document.querySelector(".timer");
-  if (timerElement) {
-    timerElement.textContent = formattedTime;
-  }
-}
-
-function spinner_off() {
-  // remove the loading spinner element from the body
-  var spinner = document.querySelector(".loading");
-  if (spinner) {
-    spinner.parentNode.removeChild(spinner);
-  }
-  
-  // Stop the timer
-  clearInterval(timerInterval);
 }
 </script>
 {% endblock %}

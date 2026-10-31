@@ -1,7 +1,4 @@
 import re
-import requests
-import os
-import json
 
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
@@ -10,12 +7,7 @@ from django.forms.models import model_to_dict
 from django.db.models import Q
 from django.contrib.sites.shortcuts import get_current_site
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
 from icecream import ic
-
-#import openai
 
 from .models import *
 
@@ -187,55 +179,3 @@ def view_img(request):
     #logger.error(ic.format(path))
 
     return redirect(path)
-
-@api_view(['POST'])
-def findtags(request):
-    img_name = request.data['name']
-    img = Image.objects.get(name=img_name)
-    tags = img.get_imagekit_kw()
-
-    #ic (tags)
-    return Response({'tags': tags})
-
-@api_view(['POST'])
-def maketitle(request):
-    api_key = os.getenv('OPENAI_API_KEY')
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {api_key}',
-    }
-
-    description = request.data['description']
-    keywords = request.data['keywords']
-    image_url = request.data['image_url']
-
-    r = chatgpt_titles(keywords,image_url)
-    ic(r)
-
-    return Response({'title': r['title'], 'keywords': r['keywords']})
-
-    return Response({'title': [
-        response['choices'][0]['message']['content'],
-        response['choices'][1]['message']['content'],
-        response['choices'][2]['message']['content'],
-        response['choices'][3]['message']['content'],
-        response['choices'][4]['message']['content'],
-            ]})    
-
-
-    #logger.info(prompt)
-    #logger.error(resp)
-
-    #ic (tags)
-    return Response({'title': resp.choices[0].message.content.strip(' "')})    
-
-@api_view(['POST'])
-def getdescription(request):
-    url = request.data['url']
-
-
-    ic (url)
-
-
-
-    return Response({'url': url })    
