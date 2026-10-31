@@ -3,8 +3,8 @@ import os
 import re
 import random
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from django.shortcuts import HttpResponseRedirect, render
-import pytz
 import csv
 from icecream import ic
 
@@ -48,23 +48,23 @@ def set_non_private(modeladmin, request, queryset):
 @admin.action(description='Mark selected as Abobed')
 def make_published_adobe(modeladmin, request, queryset):
     queryset.filter(adobe=False).update(adobe=True)
-    queryset.filter(adobe_dt__isnull=True).update(adobe_dt=datetime.now(pytz.timezone('Europe/London')))
+    queryset.filter(adobe_dt__isnull=True).update(adobe_dt=datetime.now(ZoneInfo('Europe/London')))
 
 @admin.action(description='Mark selected as Shutterstocked')
 def make_published_shutter(modeladmin, request, queryset):
     queryset.filter(shutter=False).update(shutter=True)
-    queryset.filter(shutter_dt__isnull=True).update(shutter_dt=datetime.now(pytz.timezone('Europe/London')))
+    queryset.filter(shutter_dt__isnull=True).update(shutter_dt=datetime.now(ZoneInfo('Europe/London')))
     modeladmin.message_user(request,"Changed status on {} images".format(queryset.count()))
 
 @admin.action(description='Mark selected as Pexelled')
 def make_published_pexels(modeladmin, request, queryset):
     queryset.filter(pexels=False).update(pexels=True)
-    queryset.filter(pexels_dt__isnull=True).update(pexels_dt=datetime.now(pytz.timezone('Europe/London')))
+    queryset.filter(pexels_dt__isnull=True).update(pexels_dt=datetime.now(ZoneInfo('Europe/London')))
 
 @admin.action(description='Mark selected as Dreamstimed')
 def make_published_rasfocus(modeladmin, request, queryset):
     queryset.filter(rasfocus=False).update(rasfocus=True)
-    queryset.filter(rasfocus_dt__isnull=True).update(rasfocus_dt=datetime.now(pytz.timezone('Europe/London')))
+    queryset.filter(rasfocus_dt__isnull=True).update(rasfocus_dt=datetime.now(ZoneInfo('Europe/London')))
 
 @admin.action(description='Make CSV for Shutterstock')
 def make_csv_shutter(modeladmin, request, queryset):
@@ -282,7 +282,7 @@ class GellifinstaAdmin(admin.ModelAdmin):
     @admin.action(description='Mark selected as Instagrammed')
     def make_published_insta(self, request, queryset):
         queryset.filter(instagram=Image.InstaStatus.NONE).update(instagram=Image.InstaStatus.POSTED)
-        queryset.filter(instagram_dt__isnull=True).update(instagram_dt=datetime.now(pytz.timezone('Europe/London')))
+        queryset.filter(instagram_dt__isnull=True).update(instagram_dt=datetime.now(ZoneInfo('Europe/London')))
 
     @admin.action(description='Mark selected as non Instagrammed')
     def make_published_not_insta(self, request, queryset):
@@ -454,17 +454,10 @@ class GellifinstaAdmin(admin.ModelAdmin):
 
         queryset, may_have_duplicates = super().get_search_results(request, queryset, search_term)
 
-        sql = "SELECT id from fotoweb_image"
-        sql += " where match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode) limit 0,1000"
+        s = list(image_search(self.model.objects.all(),search_term).order_by('-rank').values_list('id',flat=True)[:1000])
 
-        queryset2 = self.model.objects.raw(sql,[search_term])
-
-        print( len(queryset2),len(queryset))
-        if len(queryset2)>0:
-            s=[]
-            for row in queryset2:
-                s.append(row.id)
-
+        print( len(s),len(queryset))
+        if len(s)>0:
             queryset3 = self.model.objects.filter(id__in=s)
             return queryset & queryset3, may_have_duplicates
 

@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
-import django
-from django.utils.encoding import force_str
-django.utils.encoding.force_text = force_str
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,12 +35,8 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'blog',
-    'newsletter',
-    'gellifinsta',
     'fotoweb',
-    'mycovidash',
     'castles',
-    'weather',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    'django.contrib.postgres',
     'markdownx',
     'django_extensions',
     'django.contrib.sites',
@@ -64,12 +56,10 @@ MIDDLEWARE = [
     #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'simplyblog.autologin.AutoLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'simplyblog.urls'
@@ -120,6 +110,8 @@ DATABASES = {
     },
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -148,8 +140,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 

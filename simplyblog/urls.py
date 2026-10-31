@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.shortcuts import redirect
 from django.contrib.sitemaps.views import sitemap
 
-from blog.views import BlogPostSitemap
+from blog.views import BlogPostSitemap, ImageUploadViewEM
 
 sitemaps = {
    'blog': BlogPostSitemap, 
@@ -32,13 +32,11 @@ urlpatterns = [
     #path('', lambda request: redirect('blog/')),
     path('', lambda request: redirect('photo/')),
     path('admin/', admin.site.urls),
-    path('blog/newsletter/', include('newsletter.urls')),
     path('blog/', include('blog.urls')),
     path('photo/', include('fotoweb.urls')),
-    path('mycovidash/', include('mycovidash.urls')),
     path('castles/', include('castles.urls')),
-    path('weather/', include('weather.urls')),
     #path('admin/', admin.site.urls),
+    path('markdownx/upload-em/', ImageUploadViewEM.as_view(), name='markdownx_upload_em'),
     path('markdownx/', include('markdownx.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,21 +4,28 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['*']
 
+# Local PostgreSQL, the password comes from %APPDATA%\postgresql\pgpass.conf
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'vallka',
-        'USER': 'vallkadotcom',
-        'PASSWORD': os.environ['DB_PASSWORD'],
+        'USER': 'vallka',
         'HOST': 'localhost',
-        'PORT': 3307,
-        'OPTIONS': {'charset': 'utf8mb4'},
     },
 }
 
 
 DEBUG = True
 INTERNAL_IPS = ['127.0.0.1']
+
+INSTALLED_APPS += ['debug_toolbar']
+MIDDLEWARE.insert(
+    MIDDLEWARE.index('django.middleware.csrf.CsrfViewMiddleware'),
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
+# Dev only: anything from 127.0.0.1 becomes admin, never use it behind a proxy
+MIDDLEWARE += ['simplyblog.autologin.AutoLoginMiddleware']
 
 
 #sentry_sdk.init(

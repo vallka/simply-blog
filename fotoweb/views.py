@@ -109,14 +109,9 @@ class ImageSearchView(generic.ListView):
     def get_queryset(self):
         self.q = self.request.GET.get('q')
 
-        sql = Image.objects.filter(no_show=0).query
-        sql = re.sub('ORDER BY.*$','',str(sql))
-        sql += " and match(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags) against (%s in boolean mode)"
-        sql += " and domain=%s"
-        #logger.error(ic.format(sql))
-
-        posts = Image.objects.raw(sql,[self.q,get_current_domain(self.request)])
-        self.len = len(posts)
+        posts = Image.objects.filter(no_show=0,domain=get_current_domain(self.request))
+        posts = image_search(posts,self.q).order_by('-rank','-name')
+        self.len = posts.count()
         return posts
         #return Image.objects.filter(no_show=0).order_by('-name')
 

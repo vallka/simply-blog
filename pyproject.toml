@@ -1,0 +1,36 @@
+[project]
+name = "simply-blog"
+version = "0.1.0"
+description = "vallka.com - photo portfolio, blog and castles map"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "beautifulsoup4",
+    "django>=5.2,<5.3",
+    "django-extensions",
+    "django-markdownx",
+    "djangorestframework",
+    "gunicorn",
+    "icecream",
+    "imagekitio>=3.2,<4",
+    "jinja2",
+    "markdown",
+    "psycopg[binary]",
+    "python-dotenv",
+    "requests",
+    "sentry-sdk",
+]
+
+[dependency-groups]
+# Local only: the debug toolbar, and the photo commands that run on the PC
+# (scan_pp).
+dev = [
+    "django-debug-toolbar",
+    "exif",
+    "iptcinfo3",
+    "pcloud>=1.2,<2",
+    "python-dateutil",
+]
+
+[tool.uv]
+package = false

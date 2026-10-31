@@ -1,7 +1,12 @@
 import re
+from django.http import JsonResponse
 from django.utils import timezone
 from django.views import generic
+from django.views.generic.edit import BaseFormView
 from django.contrib.sitemaps import Sitemap
+from markdownx.forms import ImageForm
+
+from simplyblog.search import full_text_search
 
 from .models import *
 
@@ -114,22 +119,10 @@ class SearchView(generic.ListView):
         
         self.q = self.request.GET.get('q')
 
-        #sql = Post.objects.filter(blog_start_dt__lte="'"+str(timezone.now())+"'",blog=True,).query
-        sql = Post.objects.filter(blog=True,).query
-        sql = re.sub('ORDER BY.*$','',str(sql))
-
-        #posts = Post.objects.filter(blog_start_dt__lte=timezone.now(),blog=True,title__contains=q)
-
-        # sql = "select * from blog_post where match(title,text) against (%s in boolean mode) and blog=1 and blog_start_dt<=%s"
-        sql += "and match(title,text) against (%s in boolean mode) and blog_start_dt<=now()"
-        print(sql)
-
-
-        posts = Post.objects.raw(sql,[self.q])
-        self.len = len(posts)
+        posts = Post.objects.filter(blog_start_dt__lte=timezone.now(),blog=True,)
+        posts = full_text_search(posts,['title','text'],self.q).order_by('-rank','-blog_start_dt')
+        self.len = posts.count()
         return posts
-
-        return None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -167,6 +160,19 @@ class SearchView(generic.ListView):
         context['breadcrumb'] = f'Search: {self.q} ({self.len})' 
         context['page_title'] = context['breadcrumb']
         return context        
+
+
+class ImageUploadViewEM(BaseFormView):
+    """Image upload for EasyMDE in the blog post admin, which expects data.filePath"""
+    form_class = ImageForm
+    success_url = '/'
+
+    def form_invalid(self, form):
+        return JsonResponse(form.errors, status=400)
+
+    def form_valid(self, form):
+        image_path = form.save(commit=True)
+        return JsonResponse({"data": {"filePath": image_path[1:]}})
 
 
 class BlogPostSitemap(Sitemap):

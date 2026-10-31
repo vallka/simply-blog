@@ -10,6 +10,6 @@ class Migration(migrations.Migration):
         ('blog', '0012_auto_20211011_1927'),
     ]
 
+    # Was a MySQL FULLTEXT index, search is now in simplyblog/search.py
     operations = [
-        migrations.RunSQL("ALTER TABLE blog_post ADD FULLTEXT(title, text)")
     ]

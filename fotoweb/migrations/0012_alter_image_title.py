@@ -9,8 +9,7 @@ class Migration(migrations.Migration):
         ('fotoweb', '0011_image_aws_tags'),
     ]
 
+    # Was a MySQL FULLTEXT index, search is now in simplyblog/search.py
     operations = [
-        migrations.RunSQL("ALTER TABLE fotoweb_image ADD FULLTEXT" +
-            "(name,path,mykeyworder_tags,adobe_tags,google_tags,aws_tags,shutter_tags,title,description,tags)")
     ]
 

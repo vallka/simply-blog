@@ -17,6 +17,8 @@ from imagekitio import ImageKit
 from imagekitio.models.ListAndSearchFileRequestOptions import ListAndSearchFileRequestOptions
 from imagekitio.models.UpdateFileRequestOptions import UpdateFileRequestOptions
 
+from simplyblog.search import full_text_search
+
 # Create your models here.
 class Image(models.Model):
     name = models.CharField('name',max_length=100, unique=True)
@@ -235,8 +237,13 @@ class Image(models.Model):
         tags = ' '.join(tags)
         info = 'Support me at https://ko-fi.com/vallka and download full resolution photos'
         return str(self.title or '') + '\n\n' + info + '\n\n' +tags + '\n\n' + self.name
-    
 
+
+
+def image_search(queryset,q):
+    return full_text_search(queryset,
+        ['name','path','mykeyworder_tags','adobe_tags','google_tags','aws_tags','shutter_tags','title','description','tags'],
+        q)
 
 
 class Album(models.Model):

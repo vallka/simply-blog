@@ -7,17 +7,16 @@ SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+# nginx terminates TLS, without this SECURE_SSL_REDIRECT loops
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vallka',
-        'USER': os.environ['POLLS_DB_USER'],
-        'PASSWORD': os.environ['POLLS_DB_PASSWORD'],
-        'HOST': 'localhost',
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'unix_socket': '/opt/bitnami/mariadb/tmp/mysql.sock'
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
     },
 }
 
