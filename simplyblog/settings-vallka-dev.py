@@ -5,12 +5,14 @@ SECRET_KEY = os.environ['SECRET_KEY']
 ALLOWED_HOSTS = ['*']
 
 # Local PostgreSQL, the password comes from %APPDATA%\postgresql\pgpass.conf
+# DB_PORT=5433 is the LIVE database through ssh -L 5433:127.0.0.1:5432 vpn (for scan_pp)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'vallka',
         'USER': 'vallka',
         'HOST': 'localhost',
+        'PORT': os.environ.get('DB_PORT', ''),
     },
 }
 
