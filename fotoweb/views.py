@@ -1,6 +1,11 @@
+import hmac
+import json
 import re
 
+from django.conf import settings
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.shortcuts import render,redirect
 from django.views import generic
 from django.forms.models import model_to_dict
@@ -10,6 +15,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from icecream import ic
 
 from .models import *
+from .ingest import ManifestError, ingest
 
 
 import logging
@@ -179,3 +185,29 @@ def view_img(request):
     #logger.error(ic.format(path))
 
     return redirect(path)
+
+
+@csrf_exempt
+@require_POST
+def ingest_view(request):
+    """POST an album manifest from tools/imagekit_uploader.py.
+
+    Auth: "Authorization: Bearer <INGEST_TOKEN>". ?dry_run=1 reports without
+    writing. Disabled (404) when INGEST_TOKEN is not set.
+    """
+    token = getattr(settings, 'INGEST_TOKEN', '')
+    if not token:
+        return JsonResponse({'error': 'not found'}, status=404)
+    auth = request.headers.get('Authorization', '')
+    if not hmac.compare_digest(auth.encode(), f'Bearer {token}'.encode()):
+        return JsonResponse({'error': 'forbidden'}, status=403)
+    try:
+        manifest = json.loads(request.body)
+    except ValueError:
+        return JsonResponse({'error': 'body is not JSON'}, status=400)
+    dry_run = request.GET.get('dry_run') in ('1', 'true', 'yes')
+    try:
+        report = ingest(manifest, dry_run=dry_run)
+    except ManifestError as e:
+        return JsonResponse({'error': str(e)}, status=400)
+    return JsonResponse(report)

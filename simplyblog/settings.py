@@ -111,6 +111,10 @@ DATABASES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+# Bearer token for fotoweb's /photo/api/ingest/ (tools/imagekit_uploader.py).
+# Empty = endpoint disabled.
+INGEST_TOKEN = os.environ.get('INGEST_TOKEN', '')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

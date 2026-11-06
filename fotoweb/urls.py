@@ -9,6 +9,7 @@ urlpatterns = [
     path('i/', view_img, name='image_view'),
     path('images/', ImageListView.as_view(), name='images'),
     path('search/', ImageSearchView.as_view(), name='search'),
+    path('api/ingest/', ingest_view, name='ingest'),
     path('<str:album>/', AlbumListView.as_view(), name='album'),
     path('s/<str:album>/', ImageListView.as_view(), name='album-photos'),
     path('image/<int:pk>/<str:par>', ImageView.as_view(), name='image-w-par'),
